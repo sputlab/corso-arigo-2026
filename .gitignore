@@ -1,9 +1,13 @@
-# Deployed site (generated from corso-radioamatore-arigo-2026-v150.html)
-/index.html
+# Deployed images (served from assets/)
 /assets/
 
-# macOS
-.DS_Store
+# Image sources and archives (kept locally only)
+/immagini-compressed/
+/immagini-uncompressed/
+/immagini-placeholder-v150.zip
 
 # Previous versions (kept locally only)
 /old/
+
+# macOS
+.DS_Store
