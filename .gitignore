@@ -4,3 +4,6 @@
 
 # macOS
 .DS_Store
+
+# Previous versions (kept locally only)
+/old/
