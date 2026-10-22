@@ -3,6 +3,6 @@
 Dispensa del corso per la preparazione all'esame da radioamatore (ARIGO 2026).
 
 - Pagina: `index.html`
-- Versione attuale: **1.5.1** (versionamento semantico `MAJOR.MINOR.PATCH`)
+- Versione attuale: **1.5.2** (versionamento semantico `MAJOR.MINOR.PATCH`)
 
 Le immagini dei diagrammi (JPG) sono in `assets/images/` e sono versionate insieme alla pagina.

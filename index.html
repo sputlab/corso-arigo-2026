@@ -25,10 +25,9 @@
           è solo una convenzione, non un vincolo): punteggio persistente e
           "pulse" lo riconoscono automaticamente.
        4. Per ogni immagine/diagramma nuovo, usa lo schema descritto nel
-          blocco CSS "DIAGRAMMI / IMMAGINI INLINE" e genera anche il relativo
-          file segnaposto in immagini/ (stesso script Python usato per questa
-          versione: vedi la cartella "immagini/" allegata) così il layout
-          resta pulito finché non hai il file definitivo.
+          blocco CSS "DIAGRAMMI / IMMAGINI INLINE" e aggiungi il relativo
+          file JPG in assets/images/ (il layout resta comunque pulito anche
+          finché il file non c'è, grazie ad "aspect-ratio").
        5. Per ogni nuovo termine tecnico, aggiungi una coppia <dt>/<dd> nel
           glossario: il primo utilizzo del termine nel testo verrà collegato
           da solo (vedi initGlossaryLinks() in fondo allo <script>).
@@ -37,7 +36,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corso Base di Elettronica e Radiotecnica — v1.5.1</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.5.2</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -443,18 +442,13 @@
                <div class="diagram-caption">Testo della didascalia</div>
            </div>
 
-       Le immagini "immagini/NOME-FILE.png" sono per ora dei placeholder
-       generici (creati con lo script di generazione, vedi cartella
-       immagini/ accanto a questo file): quando avrai l'immagine
-       definitiva basta SOVRASCRIVERE il file con lo stesso nome nella
-       cartella immagini/, senza toccare l'HTML.
+       Le immagini sono file JPG nella cartella assets/images/ (percorso
+       relativo a questo file, es. "assets/images/NOME-FILE.jpg").
 
        Per aggiungere una NUOVA figura in una sezione futura, copia il
        blocco sopra, scegli un nome file coerente (minuscolo, parole
-       separate da trattini) e crea/genera anche il relativo dummy in
-       immagini/ così il layout non si rompe finché non hai il file
-       vero. I segnaposto generati sono tutti 640×360 (16:9): se generi
-       nuovi dummy con lo stesso script, mantieni questo rapporto per
+       separate da trattini) e metti il relativo JPG in assets/images/.
+       Le immagini sono pensate in 16:9: mantieni questo rapporto per
        coerenza con "aspect-ratio" qui sotto.
 
        DIMENSIONE: le immagini sono mostrate volutamente PICCOLE nel
@@ -860,7 +854,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.5.1</span>
+        <span class="version-badge">v1.5.2</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -1042,7 +1036,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.5.1</strong> — immagini in formato JPG nella cartella <code>assets/images/</code>. Novità della 1.5.0: tre nuovi moduli: Trasmettitori (Modulo 6), Ricevitori (Modulo 7) e Strumenti di misura (Modulo 8), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 50 a 80 domande e ora copre anche resistori, operazionali, oscillatori e i nuovi moduli. Normativa e Pratica operativa diventano Moduli 9 e 10.</p>
+            <p>Versione attuale: <strong>1.5.2</strong> — immagini in formato JPG nella cartella <code>assets/images/</code>. Novità della 1.5.0: tre nuovi moduli: Trasmettitori (Modulo 6), Ricevitori (Modulo 7) e Strumenti di misura (Modulo 8), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 50 a 80 domande e ora copre anche resistori, operazionali, oscillatori e i nuovi moduli. Normativa e Pratica operativa diventano Moduli 9 e 10.</p>
         </div>
     </div>
 </section>
@@ -9184,12 +9178,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.5.1</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.5.2</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.5.2</strong> — Pulizia dei commenti di sviluppo nel codice: aggiornati i riferimenti alla cartella <code>assets/images/</code> e al formato JPG.</p>
         <p><strong>v1.5.1</strong> — Le immagini dei diagrammi sono ora in formato JPG e si trovano nella cartella <code>assets/images/</code>, inclusa nel repository; aggiornati di conseguenza tutti i collegamenti nella pagina.</p>
         <p><strong>v1.5.0</strong> — Integrati nel corso quattro nuovi argomenti, mantenendo lo stesso schema delle altre sezioni
         (introduzione, spiegazione, box "Da ricordare", tabelle, segnaposto immagine). <strong>Modulo 6 — Trasmettitori</strong>:
