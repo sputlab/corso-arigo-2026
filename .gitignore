@@ -1,0 +1,6 @@
+# Deployed site (generated from corso-radioamatore-arigo-2026-v150.html)
+/index.html
+/assets/
+
+# macOS
+.DS_Store
