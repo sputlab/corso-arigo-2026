@@ -36,7 +36,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Corso Base di Elettronica e Radiotecnica — v1.5.3</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.6.0</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -854,7 +854,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.5.3</span>
+        <span class="version-badge">v1.6.0</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -939,13 +939,35 @@
             <a href="#rx-dsp-sdr">DSP, SDR e ricetrasmettitori</a>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">Modulo 8 — Strumenti di misura</div>
+            <div class="nav-section-title">Modulo 8 — Linee di trasmissione</div>
+            <a href="#lt-generalita">Generalità e linee bifilari</a>
+            <a href="#lt-coassiali">Cavi coassiali e connettori</a>
+            <a href="#lt-parametri">Fattore di velocità e impedenza</a>
+            <a href="#lt-adattamento">Adattamento e carta di Smith</a>
+            <a href="#lt-onde-stazionarie">Onde stazionarie, ROS e return loss</a>
+            <a href="#lt-perdite">Attenuazione ed effetto pelle</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Modulo 9 — Antenne</div>
+            <a href="#ant-generalita">Definizione, link RF e tipi</a>
+            <a href="#ant-radiazione">Diagramma di radiazione e direttività</a>
+            <a href="#ant-risonanza">Risonanza e onda progressiva</a>
+            <a href="#ant-parametri">Caratteristiche delle antenne</a>
+            <a href="#ant-polarizzazione">Polarizzazione</a>
+            <a href="#ant-tipi">Dipolo, loop e long wire</a>
+            <a href="#ant-verticali">Monopolo e ground plane</a>
+            <a href="#ant-direttive">Yagi, parabola e Beverage</a>
+            <a href="#ant-adattamento">Adattamento: stub, gamma, omega</a>
+            <a href="#ant-balun">Balun e accordatore</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Modulo 10 — Strumenti di misura</div>
             <a href="#str-frequenza">Misure di frequenza</a>
             <a href="#str-oscilloscopio">L'oscilloscopio</a>
             <a href="#str-spettro">L'analizzatore di spettro</a>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">Modulo 9 — Normativa</div>
+            <div class="nav-section-title">Modulo 11 — Normativa</div>
             <a href="#itu">ITU e Radio Regulations</a>
             <a href="#cept">Raccomandazioni CEPT</a>
             <a href="#codice">Codice delle Comunicazioni</a>
@@ -953,7 +975,7 @@
             <a href="#bande">Bande di frequenza</a>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">Modulo 10 — Pratica</div>
+            <div class="nav-section-title">Modulo 12 — Pratica</div>
             <a href="#codici">Codici e abbreviazioni</a>
             <a href="#logbook">Logbook</a>
             <a href="#qsl">QSL</a>
@@ -963,7 +985,7 @@
         <div class="nav-section">
             <div class="nav-section-title">Appendici</div>
             <a href="#glossario">Glossario</a>
-            <a href="#quiz-finale">Quiz finale (80)</a>
+            <a href="#quiz-finale">Quiz finale (100)</a>
         </div>
     </div>
 </nav>
@@ -1036,7 +1058,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.5.3</strong> — immagini in formato JPG nella cartella <code>assets/images/</code>. Novità della 1.5.0: tre nuovi moduli: Trasmettitori (Modulo 6), Ricevitori (Modulo 7) e Strumenti di misura (Modulo 8), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 50 a 80 domande e ora copre anche resistori, operazionali, oscillatori e i nuovi moduli. Normativa e Pratica operativa diventano Moduli 9 e 10.</p>
+            <p>Versione attuale: <strong>1.6.0</strong> — due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
         </div>
     </div>
 </section>
@@ -6556,7 +6578,1548 @@
     </details>
 </section>
 
-<h2 id="modulo-strumenti">Modulo 8 — Strumenti di misura</h2>
+<h2 id="modulo-linee">Modulo 8 — Linee di trasmissione</h2>
+
+<section id="lt-generalita">
+    <div class="intro-box">
+        <h2>Le linee di trasmissione</h2>
+        <p>
+            Per far arrivare il segnale dal trasmettitore all'antenna, o dall'antenna al ricevitore, serve un collegamento che lo trasporti con la <strong>minima perdita</strong> e senza farlo disperdere nello spazio: è la <strong>linea di trasmissione</strong>. Capire come funziona è il primo passo per capire perché le antenne vanno <strong>adattate</strong> e che cosa significa un cattivo <strong>ROS</strong>.
+        </p>
+        <div class="analogy">
+            <strong>Analogia.</strong> Una linea di trasmissione è come un tubo per l'acqua: se il diametro del tubo cambia bruscamente o il rubinetto non è adatto al tubo, una parte del flusso torna indietro. Il tubo ideale porta tutta l'acqua a destinazione senza perdite lungo il percorso.
+        </div>
+    </div>
+    <div class="card">
+        <h3>Che cos'è una linea di trasmissione</h3>
+        <p>
+            Per trasferire un segnale a radiofrequenza tra due punti di un circuito serve un <strong>collegamento elettrico</strong>. A differenza dei segnali a bassa frequenza e delle correnti continue o di alimentazione, i segnali RF si propagano non solo come <strong>correnti</strong> ma anche sotto forma di <strong>onde elettromagnetiche</strong>: dove ci sono cariche in movimento (campo elettrico) si genera inevitabilmente anche un corrispondente campo magnetico. Il circuito di collegamento prende il nome di <strong>linea di trasmissione</strong>.
+        </p>
+        <p>
+            Qualsiasi collegamento che trasporta radiofrequenza si comporta da linea di trasmissione: <strong>piste dei circuiti stampati, cavi, connettori</strong> e gli stessi componenti possono condurre campi elettromagnetici. La linea deve trasferire il segnale dal generatore all'utilizzatore con la <strong>minima perdita di potenza</strong> e la massima efficienza.
+        </p>
+        <p>
+            Ogni conduttore di lunghezza apprezzabile rispetto alla <strong>lunghezza d'onda</strong> del segnale <strong>irradia</strong>: per questo le linee devono impedire l'irraggiamento. Lo si ottiene con <strong>due conduttori</strong>, percorsi da correnti uguali e opposte, in modo che il campo emesso dal primo bilanci quello emesso dal secondo e l'emissione risulti, in teoria, nulla.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-linea-bilanciata-campi.jpg" alt="Linea di trasmissione a due conduttori con correnti opposte" loading="lazy">
+            <div class="diagram-caption">Linea a due conduttori: le correnti I1 e I2 sono uguali e opposte, quindi i campi elettromagnetici emessi dai due conduttori si compensano. Sopra la versione intrecciata, sotto quella parallela.</div>
+        </div>
+        <p>
+            Nel campo radio si usano soprattutto le <strong>linee bifilari</strong> e i <strong>cavi coassiali</strong>; sui circuiti stampati le <strong>microstrip</strong>, le <strong>guide d'onda coplanari</strong> e le <strong>stripline</strong>. Nei collegamenti tra circuiti si adoperano <strong>linee corte</strong>, per evitare un irraggiamento apprezzabile. Il campo di lavoro va praticamente dalla corrente continua a circa <strong>30 GHz</strong>.
+        </p>
+        <h4>Le linee bifilari</h4>
+        <p>
+            Una <strong>linea bifilare</strong> (piattina o scaletta) è composta da due conduttori paralleli tenuti assieme da un supporto isolante. Il campo elettromagnetico di un conduttore è bilanciato da quello del secondo, quindi il campo emesso nello spazio circostante è nullo. La <strong>distanza tra i conduttori deve essere la più piccola possibile</strong> (in pratica non oltre l'<strong>1%</strong> della massima lunghezza d'onda impiegata); il valore reale dipende dal dielettrico, dalla frequenza e dal diametro dei conduttori.
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Tipo di linea bifilare</th><th>Impedenza caratteristica</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Scaletta</strong> (linea bifilare in aria con distanziatori)</td><td>500-600 Ω (con conduttori più spessi e distanza minore, fino a circa 200 Ω)</td></tr>
+                    <tr><td><strong>Piattina isolata</strong> (twin-lead)</td><td>75, 300 Ω</td></tr>
+                    <tr><td><strong>Linea a finestre</strong> (window line)</td><td>450 Ω</td></tr>
+                </tbody>
+            </table>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-linee-bifilari-tipi.jpg" alt="Tipi di linee bifilari" loading="lazy">
+            <div class="diagram-caption">Linee bifilari: scaletta in aria con distanziatori isolanti (500-600 Ω) e piattine isolate in polietilene da 300 Ω, 75 Ω e a finestre da 450 Ω.</div>
+        </div>
+        <div class="remember">
+            <p>Una linea di trasmissione ha <strong>due conduttori</strong> con correnti opposte: i campi si compensano e l'irraggiamento è teoricamente nullo.</p>
+            <p>Ogni collegamento RF (cavi, piste, connettori) si comporta da <strong>linea di trasmissione</strong>.</p>
+            <p>Linee bifilari: impedenza tipica <strong>75-600 Ω</strong>; distanza tra i conduttori non oltre l'<strong>1%</strong> di λ.</p>
+        </div>
+    </div>
+</section>
+
+<section id="lt-coassiali">
+    <div class="card">
+        <h3>Cavi coassiali, linee sul circuito stampato e connettori</h3>
+        <h4>I cavi coassiali</h4>
+        <p>
+            La <strong>linea coassiale</strong> (o concentrica, più comunemente <strong>cavo coassiale</strong>) è il tipo di linea più diffuso. È formata da un <strong>conduttore isolato</strong> racchiuso in uno <strong>schermo</strong> a calza. La corrente che scorre nel conduttore interno è controbilanciata da una corrente uguale e opposta che scorre nella calza esterna. I cavi coassiali di oggi hanno quasi tutti una <strong>doppia schermatura</strong>: calza, foglio di alluminio oppure metallo rigido (rame).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-cavo-coassiale-struttura.jpg" alt="Struttura di un cavo coassiale e tipi di schermatura" loading="lazy">
+            <div class="diagram-caption">Cavo coassiale: conduttore centrale, dielettrico isolante, calza di schermo e guaina; a destra i tipi a doppia calza, hardline (schermo rigido) ed elicoidale (schermo ondulato).</div>
+        </div>
+        <p>
+            Le impedenze caratteristiche vanno da <strong>50 a 75 Ω</strong>. La tabella riporta l'attenuazione di alcuni cavi (valori indicativi, in dB ogni 100 piedi, circa 30 m):
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Cavo</th><th>Z<sub>0</sub> [Ω]</th><th>1 MHz</th><th>10 MHz</th><th>100 MHz</th><th>1000 MHz</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>RG-8</strong></td><td>50</td><td>0,1</td><td>0,4</td><td>1,2</td><td>4,0</td></tr>
+                    <tr><td><strong>RG-213</strong></td><td>50</td><td>0,2</td><td>0,6</td><td>1,9</td><td>8,0</td></tr>
+                    <tr><td><strong>RG-8X</strong></td><td>50</td><td>0,3</td><td>0,9</td><td>3,1</td><td>11,2</td></tr>
+                    <tr><td><strong>RG-59</strong></td><td>75</td><td>0,3</td><td>0,9</td><td>2,6</td><td>8,5</td></tr>
+                    <tr><td><strong>RG-142B</strong></td><td>50</td><td>0,3</td><td>1,1</td><td>3,9</td><td>13,5</td></tr>
+                    <tr><td><strong>RG-58C</strong></td><td>50</td><td>0,4</td><td>1,4</td><td>4,9</td><td>21,5</td></tr>
+                    <tr><td><strong>RG-174</strong></td><td>50</td><td>0,6</td><td>2,0</td><td>6,5</td><td>21,3</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            In generale, più il cavo è sottile e più la frequenza è alta, maggiore è l'attenuazione: per le linee lunghe o per le frequenze elevate conviene un cavo più grosso (RG-213 al posto di RG-58, o addirittura <em>hardline</em>).
+        </p>
+        <h4>Linee sui circuiti stampati</h4>
+        <p>
+            Nei circuiti stampati la linea è realizzata con una <strong>pista di rame</strong> la cui larghezza, lo spessore e la costante dielettrica del supporto fissano l'impedenza. Le tre forme più comuni sono la <strong>microstrip</strong> (pista sopra il dielettrico con il piano di massa sotto), la <strong>guida d'onda coplanare</strong> (pista centrale con due piste di massa sullo stesso lato) e la <strong>stripline</strong> (pista inglobata tra due piani di massa).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-linee-circuiti-stampati.jpg" alt="Microstrip, guida d'onda coplanare e stripline" loading="lazy">
+            <div class="diagram-caption">Linee sui circuiti stampati: microstrip, guida d'onda coplanare e stripline, con le grandezze geometriche che ne determinano l'impedenza (W larghezza, H spessore, εr).</div>
+        </div>
+        <h4>Guide d'onda e fibre ottiche</h4>
+        <p>
+            La <strong>guida d'onda</strong> è un mezzo fisico che usa delimitatori in materiale conduttore per guidare i segnali elettromagnetici. Per il suo particolare modo di propagazione è utilizzabile solo ad <strong>altissime frequenze</strong>, indicativamente oltre i 3 GHz. Nel campo delle frequenze ottiche una guida d'onda è spesso una <strong>guida dielettrica</strong> in un materiale trasparente (per esempio il quarzo): ne sono un esempio le <strong>fibre ottiche</strong>.
+        </p>
+        <h4>I connettori coassiali</h4>
+        <p>
+            La terminazione delle linee avviene con <strong>connettori</strong> di dimensioni adatte al cavo. Anche il connettore ha una <strong>impedenza caratteristica</strong>, uguale a quella del cavo corrispondente.
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Connettore</th><th>Impiego tipico</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>UHF</strong> (PL-259)</td><td>Comune per l'<strong>HF</strong> e per le potenze elevate.</td></tr>
+                    <tr><td><strong>N</strong></td><td>Sempre più usato, fino a <strong>18 GHz</strong> (VHF, UHF, microonde).</td></tr>
+                    <tr><td><strong>BNC</strong> (a baionetta)</td><td>Bassa potenza e alta frequenza (VHF, UHF), strumentazione.</td></tr>
+                    <tr><td><strong>SMA</strong></td><td>Bassa potenza, dimensioni ridotte, microonde.</td></tr>
+                </tbody>
+            </table>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-connettori-coassiali.jpg" alt="Connettori coassiali: UHF, N, BNC e SMA" loading="lazy">
+            <div class="diagram-caption">Connettori coassiali più comuni: UHF (PL-259) per l'HF, N per VHF/UHF e microonde, BNC a baionetta e SMA per piccole potenze e alta frequenza.</div>
+        </div>
+        <div class="remember">
+            <p>Il cavo coassiale è la linea più diffusa: Z<sub>0</sub> di <strong>50 o 75 Ω</strong>, schermo a calza (spesso doppio).</p>
+            <p>Sui circuiti stampati si usano <strong>microstrip, guide coplanari e stripline</strong>.</p>
+            <p>Le <strong>guide d'onda</strong> servono ad altissima frequenza (oltre qualche GHz); le <strong>fibre ottiche</strong> sono guide dielettriche.</p>
+            <p>Connettori: <strong>UHF (PL-259)</strong> per HF, <strong>N</strong> fino a 18 GHz, <strong>BNC</strong> e <strong>SMA</strong> per bassa potenza.</p>
+        </div>
+    </div>
+</section>
+
+<section id="lt-parametri">
+    <div class="card">
+        <h3>Fattore di velocità, lunghezza d'onda e impedenza caratteristica</h3>
+        <h4>Il fattore di velocità</h4>
+        <p>
+            I campi elettrici e magnetici generati in una linea non si localizzano nello spazio in modo istantaneo ma si propagano a una <strong>velocità ben definita</strong>. Nell'aria è all'incirca quella della luce nello spazio libero (300000 km/s); in una linea di trasmissione è <strong>inferiore</strong> e dipende dai materiali che circondano i conduttori, principalmente dalla <strong>costante dielettrica</strong> dell'isolante.
+        </p>
+        <p>
+            Il ritardo viene espresso in termini di velocità della luce (come frazione o come percentuale) ed è il <strong>fattore di velocità</strong> (o velocità di propagazione, <strong>VF</strong>):
+        </p>
+        <div class="formula">
+            VF = 1 / √ε
+            <span class="label">ε = costante dielettrica relativa dell'isolante; nel vuoto ε = 1 e VF = 1</span>
+        </div>
+        <h4>La lunghezza d'onda</h4>
+        <p>
+            La lunghezza d'onda nello spazio libero è:
+        </p>
+        <div class="formula">
+            λ = c / f [m]
+            <span class="label">c = 300000000 m/s, f = frequenza in Hz</span>
+        </div>
+        <p>
+            La lunghezza d'onda <strong>in una linea è sempre inferiore</strong> a quella nel vuoto: la lunghezza elettrica λ in metri a una frequenza f in Hz è
+        </p>
+        <div class="formula">
+            λ<sub>linea</sub> = VF · 3·10<sup>8</sup> / f
+            <span class="label">Valori tipici di VF: RG-8/U 85 % · RG-58C/U 66 % · RG-213/U 66 %</span>
+        </div>
+        <div class="deep-dive">
+            <p>
+                <strong>Esempio.</strong> Un tratto di RG-58C (VF = 0,66) lungo un quarto d'onda a 145 MHz: λ nel vuoto = 300/145 ≈ 2,07 m; nel cavo λ = 2,07 · 0,66 ≈ 1,37 m; quindi il quarto d'onda <strong>elettrico</strong> misura 1,37/4 ≈ <strong>34 cm</strong>, non 52 cm.
+            </p>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-linea-induttanze-capacita.jpg" alt="Linea come serie di induttanze e capacità distribuite" loading="lazy">
+            <div class="diagram-caption">Modello di una linea: induttanze in serie e capacità in parallelo ripetute lungo tutta la lunghezza; un impulso deve caricare in sequenza le capacità, per questo la velocità è inferiore a quella della luce.</div>
+        </div>
+        <p>
+            Si può immaginare la linea come una <strong>serie di induttanze e capacità distribuite</strong> lungo tutta la sua lunghezza: un impulso, per raggiungere il carico, deve caricare in sequenza tutte le capacità attraversando le induttanze, e ciò richiede tempo.
+        </p>
+        <h4>L'impedenza caratteristica</h4>
+        <p>
+            In una linea priva di perdite l'<strong>impedenza caratteristica</strong> Z<sub>0</sub> è la radice quadrata del rapporto tra l'induttanza complessiva e la capacità, prese su una lunghezza unitaria:
+        </p>
+        <div class="formula">
+            Z<sub>0</sub> = √(L / C)
+        </div>
+        <p>
+            Il valore è specifico di ogni tipo di linea e dipende dai parametri fisici: nella linea bifilare dal <strong>diametro</strong> e dalla <strong>distanza</strong> dei conduttori; nel cavo coassiale dal <strong>rapporto tra il diametro della calza e quello del conduttore interno</strong>; in entrambi dal dielettrico. Z<sub>0</sub> <strong>non</strong> dipende dalla lunghezza del cavo e non è una resistenza che si possa misurare con un tester.
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Linea</th><th>Z<sub>0</sub> tipica</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Cavo coassiale</strong></td><td>50 - 75 Ω</td></tr>
+                    <tr><td><strong>Linea bifilare</strong></td><td>300 - 450 Ω (scaletta 500 - 600 Ω)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="remember">
+            <p>Il <strong>fattore di velocità</strong> è VF = 1/√ε ed è sempre minore di 1 in un cavo (es. 0,66 per RG-58 e RG-213).</p>
+            <p>Su una linea la lunghezza d'onda è λ<sub>linea</sub> = <strong>VF · λ</strong>: gli spezzoni a λ/4 o λ/2 vanno accorciati.</p>
+            <p>Z<sub>0</sub> = √(L/C): dipende da <strong>geometria e dielettrico</strong>, non dalla lunghezza.</p>
+        </div>
+    </div>
+</section>
+
+<section id="lt-adattamento">
+    <div class="card">
+        <h3>L'adattamento di impedenza</h3>
+        <p>
+            In elettrotecnica il <strong>massimo trasferimento di potenza</strong> dal generatore al carico si ha quando R<sub>L</sub> = R<sub>S</sub> (la potenza sul carico è allora metà di quella erogata dal generatore, il resto si dissipa nella sua resistenza interna). <strong>Adattare</strong> significa quindi trasferire il massimo della potenza. A radiofrequenza l'adattamento di impedenza permette il massimo trasferimento di segnale: se è perfetto il carico assorbe tutta la potenza che gli arriva; in caso contrario la parte non assorbita <strong>ritorna verso il generatore</strong> sotto forma di <strong>onda riflessa</strong>, che con l'onda diretta forma l'<strong>onda stazionaria</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-adattamento-massimo-trasferimento.jpg" alt="Adattamento e onda riflessa" loading="lazy">
+            <div class="diagram-caption">Generatore, linea e carico: la tensione diretta VF e la corrente IF viaggiano verso il carico; se il carico non è adattato una parte (VR, IR) torna indietro verso il generatore.</div>
+        </div>
+        <p>
+            Si può considerare l'adattamento come <strong>accoppiamento</strong> (riferito al segnale) o <strong>disaccoppiamento</strong> (riferito all'alimentazione). L'<strong>adattatore</strong> è il circuito che permette il collegamento tra due circuiti con perdite trascurabili: la sua impedenza di ingresso è uguale a quella di uscita del blocco che lo precede e quella di uscita è uguale a quella di ingresso del blocco che lo segue. È di tipo <strong>attivo</strong> se guadagna in potenza, <strong>passivo</strong> se attenua il segnale.
+        </p>
+        <h4>Adattamento con trasformatore</h4>
+        <p>
+            Un trasformatore mette in relazione le impedenze viste ai suoi terminali secondo il <strong>quadrato del rapporto spire</strong>:
+        </p>
+        <div class="formula">
+            Z<sub>1</sub> = Z<sub>2</sub> · (N<sub>1</sub> / N<sub>2</sub>)<sup>2</sup>
+        </div>
+        <p>
+            Vantaggi: <strong>simmetria</strong>, eliminazione dei disturbi elettrici, <strong>separazione delle masse</strong>. La curva di risposta presenta una gobba dovuta alla risonanza del trasformatore.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-adattamento-trasformatore.jpg" alt="Adattamento di impedenza con trasformatore" loading="lazy">
+            <div class="diagram-caption">Un trasformatore adatta le impedenze secondo il quadrato del rapporto spire (Z1 = Z2 · (N1/N2)²); la risposta in frequenza ha una gobba dovuta alla risonanza.</div>
+        </div>
+        <h4>Adattamento con quadripolo reattivo</h4>
+        <p>
+            Se si adatta con componenti passivi <strong>resistivi</strong> si ha una perdita di potenza (almeno circa 6 dB); si usano quindi componenti <strong>reattivi</strong> (capacità e induttanze), che in teoria non dissipano. Una rete simmetrica richiede almeno <strong>tre componenti</strong>.
+        </p>
+        <ul>
+            <li><strong>Rete a T</strong>: una capacità in parallelo e due induttanze in serie, oppure una induttanza in parallelo e due capacità in serie.</li>
+            <li><strong>Rete a π</strong>: due capacità in parallelo e una induttanza in serie, oppure due induttanze in parallelo e una capacità in serie.</li>
+        </ul>
+        <p>
+            Ponendo X<sub>L</sub> = X<sub>C</sub> = X si ottiene la relazione
+        </p>
+        <div class="formula">
+            R<sub>i</sub> · R<sub>L</sub> = X<sup>2</sup>
+            <span class="label">La condizione X<sub>L</sub> = X<sub>C</sub> comporta che l'adattamento è effettivo solo alla risonanza f<sub>0</sub> = 1 / (2π√(LC))</span>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-adattamento-reti-t-pi.jpg" alt="Reti di adattamento a T e a pi greco" loading="lazy">
+            <div class="diagram-caption">Quadripoli reattivi di adattamento: rete a T (due elementi in serie e uno in parallelo) e rete a π (due in parallelo e uno in serie), con induttanze e condensatori.</div>
+        </div>
+        <h4>Adattamento di una linea</h4>
+        <p>
+            Se la linea è terminata su un carico di impedenza uguale a Z<sub>0</sub> la <strong>linea è adattata</strong>: non c'è nessuna riflessione di potenza e il rapporto tensione/corrente lungo la linea vale ovunque Z<sub>0</sub> = V/I. Grazie a questa proprietà il carico viene "visto" dal generatore senza perdite, <strong>qualunque sia la lunghezza della linea</strong> (a meno dell'attenuazione del cavo).
+        </p>
+        <h4>La carta di Smith</h4>
+        <p>
+            La <strong>carta di Smith</strong> è un <strong>sistema grafico</strong> per il calcolo delle impedenze. È di particolare aiuto nello studio degli adattamenti perché consente di leggere a colpo d'occhio i valori di <strong>resistenza, reattanza, ROS e return loss</strong>. Programmi di simulazione RF come RFSim99 e JJSmith ne fanno ampio uso.
+        </p>
+        <p>
+            Le impedenze sono <strong>normalizzate</strong> (divise per Z<sub>0</sub>, di solito 50 Ω): il centro (z = 1) è l'<strong>adattamento</strong> (Γ = 0); l'estremo sinistro è il <strong>corto circuito</strong> (z = 0, Γ = -1); l'estremo destro è il <strong>circuito aperto</strong> (z → ∞, Γ = +1); il bordo è il cerchio |Γ| = 1. Il semipiano <strong>superiore</strong> corrisponde a reattanze <strong>induttive</strong>, quello <strong>inferiore</strong> a reattanze <strong>capacitive</strong>; i punti con lo stesso ROS stanno su un cerchio centrato sul centro della carta.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-carta-smith.jpg" alt="Carta di Smith con i punti notevoli" loading="lazy">
+            <div class="diagram-caption">Carta di Smith: al centro l'adattamento (z = 1), a sinistra il corto circuito, a destra il circuito aperto; semipiano superiore induttivo, inferiore capacitivo; il bordo è il cerchio |Γ| = 1.</div>
+        </div>
+        <div class="deep-dive">
+            <p>
+                <strong>Esempio a 7 MHz.</strong> Carico 45 - j50 Ω, induttanza serie da 2 µH (X = 2π · 7·10<sup>6</sup> · 2·10<sup>-6</sup> ≈ +j88 Ω) e condensatore in parallelo da 220 pF (X ≈ -j103 Ω). Dopo l'induttanza si ha 45 - j50 + j88 = <strong>45 + j38 Ω</strong>; il condensatore in parallelo porta l'impedenza vista dal generatore a circa <strong>76 + j7 Ω</strong>, cioè un ROS di circa 1,5 rispetto a 50 Ω. Sulla carta di Smith ogni elemento corrisponde a un arco di cerchio: l'induttanza serie ruota il punto in senso orario lungo il cerchio a resistenza costante, il condensatore parallelo lungo il cerchio a conduttanza costante.
+            </p>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-smith-esempio-rete-lc.jpg" alt="Esempio di rete LC studiata sulla carta di Smith" loading="lazy">
+            <div class="diagram-caption">Esempio a 7 MHz: carico 45 - j50 Ω, induttanza serie da 2 µH e capacità parallelo da 220 pF; sulla carta di Smith il percorso porta il punto di carico verso l'impedenza vista dal generatore.</div>
+        </div>
+        <div class="remember">
+            <p>Adattare = <strong>massimo trasferimento di potenza</strong>: R<sub>L</sub> = R<sub>S</sub>; senza adattamento la potenza ritorna al generatore come <strong>onda riflessa</strong>.</p>
+            <p>Trasformatore: Z<sub>1</sub> = Z<sub>2</sub>·(N<sub>1</sub>/N<sub>2</sub>)<sup>2</sup>; reti <strong>T e π</strong> usano L e C e adattano solo alla risonanza.</p>
+            <p>Linea adattata (carico = Z<sub>0</sub>): <strong>nessuna riflessione</strong>, carico visto dal generatore senza perdite.</p>
+            <p>Carta di Smith: centro = <strong>adattamento</strong>, sinistra = <strong>corto</strong>, destra = <strong>aperto</strong>, metà alta induttiva, metà bassa capacitiva.</p>
+        </div>
+    </div>
+</section>
+
+<section id="lt-onde-stazionarie">
+    <div class="card">
+        <h3>Coefficiente di riflessione, onde stazionarie e ROS</h3>
+        <h4>Il coefficiente di riflessione</h4>
+        <p>
+            Se il carico <strong>non è uguale a Z<sub>0</sub></strong>, parte della potenza trasmessa viene riflessa verso il generatore: il carico richiede un nuovo valore di V/I e, quanto più differisce da Z<sub>0</sub>, tanto maggiore è la riflessione. Si definisce <strong>coefficiente di riflessione Γ</strong> (gamma) il rapporto tra la tensione riflessa V<sub>R</sub> e la tensione diretta V<sub>F</sub>, ovvero il rapporto tra la differenza e la somma delle impedenze di carico e di linea:
+        </p>
+        <div class="formula">
+            Γ = V<sub>R</sub> / V<sub>F</sub> = (Z<sub>L</sub> - Z<sub>0</sub>) / (Z<sub>L</sub> + Z<sub>0</sub>)
+        </div>
+        <p>
+            Il modulo di Γ va da 0 (adattamento perfetto) a 1 (riflessione totale). La frazione di <strong>potenza riflessa</strong> è Γ<sup>2</sup>.
+        </p>
+        <h4>Le onde stazionarie nei casi limite</h4>
+        <p>
+            Per studiare l'andamento di tensione e corrente in una linea non adattata si esaminano i <strong>casi limite</strong>: linea in corto circuito, linea aperta, carico resistivo, carico reattivo.
+        </p>
+        <p>
+            <strong>Linea in corto circuito.</strong> La potenza è <strong>totalmente riflessa</strong>: nel punto di corto c'è una corrente molto forte e una tensione nulla. La corrente riflessa si somma vettorialmente a quella diretta, creando punti con corrente nulla e punti con corrente raddoppiata. Questi minimi e massimi si chiamano <strong>nodi</strong> e <strong>ventri</strong>; le variazioni di intensità lungo la linea sono le <strong>onde stazionarie</strong>.
+        </p>
+        <p>
+            <strong>Linea aperta.</strong> La potenza è ugualmente riflessa tutta: all'estremità c'è tutta la tensione e <strong>corrente nulla</strong>. Ventri e nodi sono <strong>scambiati</strong> rispetto alla linea in corto.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-onde-stazionarie-corto-aperto.jpg" alt="Onde stazionarie di tensione e corrente su linea in corto e aperta" loading="lazy">
+            <div class="diagram-caption">Distribuzione di tensione e corrente lungo una linea in corto circuito e lungo una linea aperta: ventri e nodi si alternano ogni λ/4 e sono scambiati tra i due casi.</div>
+        </div>
+        <p>
+            Misurando la distanza dal carico, la linea si comporta così:
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Distanza dal carico</th><th>Linea in corto circuito</th><th>Linea aperta</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>tra 0 e λ/4</td><td>induttiva</td><td>capacitiva</td></tr>
+                    <tr><td><strong>λ/4</strong></td><td>impedenza <strong>infinita</strong></td><td>impedenza <strong>zero</strong></td></tr>
+                    <tr><td>tra λ/4 e λ/2</td><td>capacitiva</td><td>induttiva</td></tr>
+                    <tr><td><strong>λ/2</strong></td><td>impedenza <strong>zero</strong></td><td>impedenza <strong>infinita</strong></td></tr>
+                    <tr><td>tra λ/2 e 3λ/4</td><td>induttiva</td><td>capacitiva</td></tr>
+                    <tr><td><strong>3λ/4</strong></td><td>impedenza infinita</td><td>impedenza zero</td></tr>
+                    <tr><td>tra 3λ/4 e λ</td><td>capacitiva</td><td>induttiva</td></tr>
+                    <tr><td><strong>λ</strong></td><td>impedenza zero</td><td>impedenza infinita</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            Per questo uno spezzone in corto lungo meno di λ/4 si comporta come un'<strong>induttanza</strong> e uno spezzone aperto come un <strong>condensatore</strong>: le linee possono sostituire L e C, ma solo alla frequenza per cui sono state dimensionate.
+        </p>
+        <p>
+            <strong>Carico resistivo.</strong> La potenza è <strong>parzialmente riflessa</strong> e sul carico se ne dissipa meno. Se Z<sub>R</sub> &lt; Z<sub>0</sub> il carico presenta una corrente maggiore (e tensione minore); se Z<sub>R</sub> &gt; Z<sub>0</sub> una tensione maggiore.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-onde-stazionarie-carico-resistivo.jpg" alt="Onde stazionarie su carico resistivo diverso da Z0" loading="lazy">
+            <div class="diagram-caption">Carico resistivo diverso da Z0: tensione e corrente presentano massimi e minimi che si alternano ogni λ/4; se ZR < Z0 sul carico c'è un massimo di corrente, se ZR > Z0 un massimo di tensione.</div>
+        </div>
+        <p>
+            <strong>Carico reattivo.</strong> Una reattanza pura riflette <strong>tutta</strong> la potenza (lo sfasamento tra corrente e tensione impedisce l'assorbimento). Un carico con componente reattiva produce in generale <strong>più onde stazionarie</strong> di un carico puramente resistivo di pari modulo.
+        </p>
+        <h4>Il rapporto di onde stazionarie (ROS)</h4>
+        <p>
+            Il <strong>ROS</strong> (in inglese <strong>SWR</strong>, Standing Wave Ratio) è il rapporto tra la tensione massima V<sub>MAX</sub> e quella minima V<sub>MIN</sub> presenti lungo una linea non adattata:
+        </p>
+        <div class="formula">
+            ROS = V<sub>MAX</sub> / V<sub>MIN</sub> = (V<sub>F</sub> + V<sub>R</sub>) / (V<sub>F</sub> - V<sub>R</sub>) = (1 + |Γ|) / (1 - |Γ|)
+            <span class="label">V<sub>MAX</sub> = V<sub>F</sub> + V<sub>R</sub>, V<sub>MIN</sub> = V<sub>F</sub> - V<sub>R</sub></span>
+        </div>
+        <p>
+            Per un carico <strong>resistivo</strong> si può calcolare direttamente dalle impedenze, mettendo al numeratore la maggiore:
+        </p>
+        <div class="formula">
+            ROS = Z<sub>L</sub> / Z<sub>0</sub> (se Z<sub>L</sub> &gt; Z<sub>0</sub>) &nbsp;&nbsp;&nbsp; ROS = Z<sub>0</sub> / Z<sub>L</sub> (se Z<sub>0</sub> &gt; Z<sub>L</sub>)
+            <span class="label">Il ROS è sempre maggiore o uguale a 1 (1:1 = adattamento perfetto)</span>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-ros-vmax-vmin.jpg" alt="Definizione del rapporto di onde stazionarie" loading="lazy">
+            <div class="diagram-caption">Il ROS è il rapporto tra la tensione massima VMAX = VF + VR e la minima VMIN = VF - VR presenti lungo la linea.</div>
+        </div>
+        <div class="deep-dive">
+            <p>
+                <strong>Esempio.</strong> Carico resistivo da 30 Ω su cavo da 50 Ω: Γ = (30 - 50)/(30 + 50) = -0,25; ROS = 50/30 ≈ <strong>1,67</strong>; potenza riflessa Γ<sup>2</sup> = 6,25 %. Con un carico 50 + j30 Ω invece: |Γ| = 30/|100 + j30| ≈ 0,29 e ROS ≈ <strong>1,8</strong>, anche se la parte resistiva è esattamente 50 Ω: la reattanza da sola produce onde stazionarie.
+            </p>
+        </div>
+        <p>
+            Valori di ROS <strong>tollerabili</strong> sono inferiori a <strong>2:1</strong>; per le antenne si accetta talvolta fino a 3:1.
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>ROS</th><th>Coefficiente di riflessione</th><th>Perdita di potenza sul carico</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1:1</td><td>0 %</td><td>0 %</td></tr>
+                    <tr><td>1,5:1</td><td>20 %</td><td>4 %</td></tr>
+                    <tr><td>2:1</td><td>33 %</td><td>11 %</td></tr>
+                    <tr><td>3:1</td><td>50 %</td><td>25 %</td></tr>
+                    <tr><td>5:1</td><td>67 %</td><td>45 %</td></tr>
+                    <tr><td>9:1</td><td>80 %</td><td>64 %</td></tr>
+                    <tr><td>∞</td><td>100 %</td><td>100 %</td></tr>
+                </tbody>
+            </table>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-smith-carichi-notevoli.jpg" alt="Posizione sulla carta di Smith di carichi notevoli" loading="lazy">
+            <div class="diagram-caption">Sulla carta di Smith: un carico resistivo diverso da Z0 descrive un cerchio di ROS costante, un carico reattivo (es. 50 + j30 Ω) un cerchio che non passa dal centro; corto e aperto stanno sul bordo.</div>
+        </div>
+        <h4>Il return loss</h4>
+        <p>
+            Il <strong>return loss</strong> (perdita di ritorno) è l'<strong>attenuazione, in dB, del segnale riflesso</strong> da una linea o da un quadripolo:
+        </p>
+        <div class="formula">
+            RL [dB] = 10 · log<sub>10</sub>(P<sub>F</sub> / P<sub>R</sub>) = -20 · log<sub>10</sub>|Γ|
+        </div>
+        <p>
+            Un <strong>buon adattamento</strong> ha un return loss <strong>alto</strong>: valori ottimi sono 20 o 30 dB (corrispondono a un ROS di circa 1,2 e 1,06).
+        </p>
+        <h4>Riepilogo</h4>
+        <ul>
+            <li>Con carico puramente resistivo <strong>uguale a Z<sub>0</sub></strong> tensione e corrente viaggiano lungo la linea e si ha la massima dissipazione di potenza sul carico.</li>
+            <li>Se il carico <strong>differisce da Z<sub>0</sub></strong> la potenza è in parte riflessa, tensione e corrente variano lungo la linea (onde stazionarie) e il carico dissipa meno potenza.</li>
+            <li><strong>Adattare l'impedenza non significa raggiungere la risonanza.</strong> Un adattatore al lato del generatore adatta il sistema <em>linea + carico</em>; è meglio adattare <strong>direttamente al carico</strong> (all'antenna).</li>
+        </ul>
+        <div class="remember">
+            <p>Γ = (Z<sub>L</sub> - Z<sub>0</sub>)/(Z<sub>L</sub> + Z<sub>0</sub>); ROS = (1 + |Γ|)/(1 - |Γ|) ≥ 1.</p>
+            <p>Corto e aperto riflettono <strong>tutta</strong> la potenza; ogni λ/4 l'impedenza passa da zero a infinito (e viceversa).</p>
+            <p>ROS tollerabile: <strong>sotto 2:1</strong>. A 2:1 si riflette il 33 % della tensione e l'11 % della potenza.</p>
+            <p>Return loss alto = buon adattamento (<strong>20-30 dB</strong>).</p>
+        </div>
+    </div>
+</section>
+
+<section id="lt-perdite">
+    <div class="card">
+        <h3>Attenuazione, perdite ed effetto pelle</h3>
+        <p>
+            Le linee reali non sono ideali: oltre alle componenti capacitive e induttive hanno anche <strong>componenti resistive</strong> in serie e in parallelo, e ciò provoca l'<strong>attenuazione</strong> del segnale lungo la linea, espressa in <strong>dB per unità di lunghezza</strong>. Le cause sono:
+        </p>
+        <ul>
+            <li>la <strong>caduta nelle componenti resistive</strong> dei conduttori;</li>
+            <li>la <strong>perdita nel dielettrico</strong>;</li>
+            <li>l'<strong>irraggiamento</strong>.</li>
+        </ul>
+        <p>
+            Quanto <strong>minore</strong> è Z<sub>0</sub>, tanto maggiori sono le perdite nei conduttori (più corrente); quanto <strong>maggiore</strong> è Z<sub>0</sub>, tanto maggiori quelle nel dielettrico (più tensione). Le perdite <strong>aumentano con la frequenza</strong>. Ogni conduttore percorso da corrente alternata irradia parte della propria energia: i cavi reali non sono perfetti, quindi la compensazione dei campi non è mai totale, e l'irraggiamento cresce con la potenza trasportata e con il ROS. Un piccolo <strong>sbilanciamento</strong> del carico rispetto alla linea irradia però più di un ROS alto (da qui l'uso del balun).
+        </p>
+        <p>
+            La tabella mostra l'attenuazione di alcuni cavi a 50 MHz su 100 m e la potenza che arriva al carico partendo da 100 W, secondo la relazione P<sub>out</sub> = P<sub>in</sub> · 10<sup>-A/10</sup>:
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Cavo</th><th>Attenuazione a 50 MHz su 100 m</th><th>Potenza al carico (su 100 W)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>RG-178</strong></td><td>34,5 dB</td><td>0,035 W</td></tr>
+                    <tr><td><strong>RG-174</strong></td><td>21,7 dB</td><td>0,68 W</td></tr>
+                    <tr><td><strong>RG-58</strong></td><td>10,8 dB</td><td>8,3 W</td></tr>
+                    <tr><td><strong>RG-8 / RG-213</strong></td><td>4,27 dB</td><td>37,4 W</td></tr>
+                    <tr><td><strong>RG-217</strong></td><td>3,28 dB</td><td>47,0 W</td></tr>
+                    <tr><td><strong>RG-218</strong></td><td>2,03 dB</td><td>62,7 W</td></tr>
+                    <tr><td><strong>RG-220</strong></td><td>1,48 dB</td><td>71,1 W</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <h4>Linee con perdite e ROS</h4>
+        <p>
+            In una linea a basse perdite l'impedenza vista dal generatore cambia di poco con la lunghezza; in una linea con alte perdite è fortemente alterata. Poiché la potenza riflessa deve percorrere la linea due volte, in una linea con perdite elevate la parte che ritorna al generatore è <strong>ridotta</strong>: il ROS <strong>cambia lungo la linea</strong> ed è <strong>più alto al carico</strong> che al generatore. Una linea lunga e con forte attenuazione si comporta quindi come se l'adattamento al carico fosse <strong>migliore di quello che è realmente</strong>: per giudicare un'antenna conviene misurare il ROS il più vicino possibile all'antenna.
+        </p>
+        <h4>L'effetto pelle</h4>
+        <p>
+            Quando in un conduttore scorre una corrente alternata, il flusso magnetico generato induce una <strong>forza elettromotrice</strong> che fa <strong>diminuire la densità di corrente all'interno</strong> del conduttore e la fa aumentare all'esterno. Questo fenomeno, detto <strong>effetto pelle</strong>, diventa più importante <strong>al crescere della frequenza</strong> (nel rame a 1 MHz lo strato utile è spesso circa 0,07 mm).
+        </p>
+        <p>
+            Nei cavi coassiali la corrente alternata si concentra sulle <strong>superfici che si affacciano nella linea</strong>, cioè tra la superficie esterna del conduttore centrale e quella interna della calza, con il dielettrico in mezzo. Per questo, ad alta frequenza, conta la <strong>qualità della superficie</strong> più che la sezione totale del metallo.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-effetto-pelle-coassiale.jpg" alt="Effetto pelle in un cavo coassiale" loading="lazy">
+            <div class="diagram-caption">Effetto pelle: ad alta frequenza la corrente si concentra sulle superfici affacciate nella linea, cioè sulla superficie esterna del conduttore centrale e su quella interna della calza.</div>
+        </div>
+        <div class="remember">
+            <p>Le perdite di una linea dipendono da <strong>resistenza dei conduttori, dielettrico e irraggiamento</strong> e crescono con la <strong>frequenza</strong>.</p>
+            <p>Più il cavo è sottile e lungo, maggiore l'attenuazione: a 50 MHz, 100 m di <strong>RG-58 perdono quasi 11 dB</strong> (arriva circa l'8 % della potenza).</p>
+            <p>Con cavi molto lossy il ROS misurato al <strong>generatore</strong> appare migliore di quello reale al <strong>carico</strong>.</p>
+            <p><strong>Effetto pelle</strong>: ad alta frequenza la corrente scorre solo sulla superficie dei conduttori.</p>
+        </div>
+    </div>
+
+    <details class="module-quiz">
+        <summary>✏️ Quiz Modulo 8 — Linee di trasmissione (20 domande)</summary>
+        <div class="quiz-content">
+
+            <div class="quiz">
+                <div class="question">1. Perché una linea di trasmissione è formata da due conduttori?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Per raddoppiare la potenza trasportata</li>
+                    <li onclick="checkAnswer(this, true)">B) Perché i campi emessi dai due conduttori, percorsi da correnti opposte, si compensano e l'irraggiamento è teoricamente nullo</li>
+                    <li onclick="checkAnswer(this, false)">C) Per avere un'impedenza infinita</li>
+                    <li onclick="checkAnswer(this, false)">D) Per rendere la linea più flessibile</li>
+                </ul>
+                <div class="answer">Con correnti uguali e opposte i campi dei due conduttori si <strong>bilanciano</strong> e l'emissione verso lo spazio è in teoria nulla.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">2. La distanza tra i due conduttori di una linea bifilare non dovrebbe superare indicativamente:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 10 volte la lunghezza d'onda</li>
+                    <li onclick="checkAnswer(this, false)">B) Metà lunghezza d'onda</li>
+                    <li onclick="checkAnswer(this, true)">C) L'1 % della massima lunghezza d'onda impiegata</li>
+                    <li onclick="checkAnswer(this, false)">D) Un quarto della lunghezza d'onda</li>
+                </ul>
+                <div class="answer">La distanza deve essere la più piccola possibile, in pratica non oltre l'<strong>1 %</strong> di λ.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">3. Quale impedenza è tipica di una scaletta bifilare in aria?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Circa 5 Ω</li>
+                    <li onclick="checkAnswer(this, false)">B) 50 Ω</li>
+                    <li onclick="checkAnswer(this, false)">C) Circa 75 Ω</li>
+                    <li onclick="checkAnswer(this, true)">D) 500-600 Ω</li>
+                </ul>
+                <div class="answer">La scaletta ha un'impedenza di <strong>500-600 Ω</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">4. I cavi coassiali di uso radioamatoriale hanno normalmente impedenza caratteristica di:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) 50 o 75 Ω</li>
+                    <li onclick="checkAnswer(this, false)">B) 300 o 450 Ω</li>
+                    <li onclick="checkAnswer(this, false)">C) 5 o 10 Ω</li>
+                    <li onclick="checkAnswer(this, false)">D) 600 Ω o più</li>
+                </ul>
+                <div class="answer">Le linee coassiali hanno Z<sub>0</sub> da <strong>50 a 75 Ω</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">5. Quale connettore è tipicamente usato per l'HF e le potenze elevate?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) SMA</li>
+                    <li onclick="checkAnswer(this, false)">B) BNC</li>
+                    <li onclick="checkAnswer(this, true)">C) UHF (PL-259)</li>
+                    <li onclick="checkAnswer(this, false)">D) Nessuno, si salda direttamente il cavo</li>
+                </ul>
+                <div class="answer">Il connettore <strong>UHF o PL-259</strong> è il tipo comune per l'HF.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">6. Quale tra questi è un connettore usato fino a 18 GHz?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Il PL-259</li>
+                    <li onclick="checkAnswer(this, true)">B) Il connettore N</li>
+                    <li onclick="checkAnswer(this, false)">C) Lo spinotto banana</li>
+                    <li onclick="checkAnswer(this, false)">D) Il jack da 6,3 mm</li>
+                </ul>
+                <div class="answer">Il connettore <strong>N</strong> si adopera per frequenze fino a 18 GHz.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">7. Il fattore di velocità di un cavo dipende principalmente da:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Dalla lunghezza del cavo</li>
+                    <li onclick="checkAnswer(this, false)">B) Dalla potenza trasmessa</li>
+                    <li onclick="checkAnswer(this, true)">C) Dalla costante dielettrica dell'isolante</li>
+                    <li onclick="checkAnswer(this, false)">D) Dal colore della guaina</li>
+                </ul>
+                <div class="answer">VF = 1/√ε: dipende dalla <strong>costante dielettrica</strong> dell'isolante.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">8. Un cavo coassiale con fattore di velocità 0,66 viene usato per realizzare uno spezzone lungo λ/4 a una certa frequenza. Rispetto alla lunghezza calcolata nel vuoto, il tratto dovrà essere:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Più lungo</li>
+                    <li onclick="checkAnswer(this, false)">B) Uguale</li>
+                    <li onclick="checkAnswer(this, false)">C) Doppio</li>
+                    <li onclick="checkAnswer(this, true)">D) Più corto, moltiplicando per 0,66</li>
+                </ul>
+                <div class="answer">La lunghezza d'onda nella linea è λ·VF, quindi lo spezzone va <strong>accorciato</strong> secondo VF.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">9. L'impedenza caratteristica di una linea priva di perdite vale:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) Z<sub>0</sub> = √(L/C)</li>
+                    <li onclick="checkAnswer(this, false)">B) Z<sub>0</sub> = L·C</li>
+                    <li onclick="checkAnswer(this, false)">C) Z<sub>0</sub> = 1/(L·C)</li>
+                    <li onclick="checkAnswer(this, false)">D) Z<sub>0</sub> = √(L·C)</li>
+                </ul>
+                <div class="answer">Z<sub>0</sub> è la radice del rapporto tra induttanza e capacità per unità di lunghezza.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">10. L'impedenza caratteristica di un cavo coassiale dipende da:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Dalla sua lunghezza</li>
+                    <li onclick="checkAnswer(this, true)">B) Dal rapporto tra i diametri di calza e conduttore interno e dal dielettrico</li>
+                    <li onclick="checkAnswer(this, false)">C) Dalla frequenza del generatore soltanto</li>
+                    <li onclick="checkAnswer(this, false)">D) Dalla potenza applicata</li>
+                </ul>
+                <div class="answer">Dipende dalla <strong>geometria</strong> (rapporto dei diametri) e dal <strong>dielettrico</strong>, non dalla lunghezza.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">11. Si ha il massimo trasferimento di potenza dal generatore al carico quando:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) La resistenza di carico è zero</li>
+                    <li onclick="checkAnswer(this, false)">B) La resistenza di carico è molto maggiore di quella del generatore</li>
+                    <li onclick="checkAnswer(this, false)">C) La linea è lunga un multiplo di λ</li>
+                    <li onclick="checkAnswer(this, true)">D) La resistenza di carico è uguale a quella del generatore</li>
+                </ul>
+                <div class="answer">Il massimo trasferimento di potenza si ha per <strong>R<sub>L</sub> = R<sub>S</sub></strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">12. Un trasformatore con rapporto spire N<sub>1</sub>/N<sub>2</sub> = 2 collega due impedenze: tra Z<sub>1</sub> e Z<sub>2</sub> vale la relazione:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) Z<sub>1</sub> = 4 Z<sub>2</sub></li>
+                    <li onclick="checkAnswer(this, false)">B) Z<sub>1</sub> = 2 Z<sub>2</sub></li>
+                    <li onclick="checkAnswer(this, false)">C) Z<sub>1</sub> = Z<sub>2</sub>/2</li>
+                    <li onclick="checkAnswer(this, false)">D) Z<sub>1</sub> = Z<sub>2</sub></li>
+                </ul>
+                <div class="answer">Z<sub>1</sub> = Z<sub>2</sub>(N<sub>1</sub>/N<sub>2</sub>)<sup>2</sup> = 4 Z<sub>2</sub>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">13. Perché per adattare si usano componenti reattivi (L e C) e non resistenze?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Perché le resistenze costano di più</li>
+                    <li onclick="checkAnswer(this, true)">B) Perché le resistenze introducono perdita di potenza</li>
+                    <li onclick="checkAnswer(this, false)">C) Perché L e C amplificano il segnale</li>
+                    <li onclick="checkAnswer(this, false)">D) Perché le resistenze non lavorano in RF</li>
+                </ul>
+                <div class="answer">Un adattatore resistivo dissipa potenza (almeno circa 6 dB); L e C in teoria <strong>non dissipano</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">14. Una rete di adattamento a T o a π con X<sub>L</sub> = X<sub>C</sub> adatta in modo effettivo:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) A qualsiasi frequenza</li>
+                    <li onclick="checkAnswer(this, false)">B) Solo a frequenza zero</li>
+                    <li onclick="checkAnswer(this, true)">C) Solo alla frequenza di risonanza f<sub>0</sub> = 1/(2π√LC)</li>
+                    <li onclick="checkAnswer(this, false)">D) Solo a frequenze molto alte</li>
+                </ul>
+                <div class="answer">La condizione X<sub>L</sub> = X<sub>C</sub> vale solo alla <strong>risonanza</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">15. Nella carta di Smith, il centro rappresenta:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Il corto circuito</li>
+                    <li onclick="checkAnswer(this, false)">B) Il circuito aperto</li>
+                    <li onclick="checkAnswer(this, false)">C) Un'induttanza pura</li>
+                    <li onclick="checkAnswer(this, true)">D) L'adattamento (impedenza uguale a Z<sub>0</sub>)</li>
+                </ul>
+                <div class="answer">Al centro z = 1 (Γ = 0): <strong>adattamento</strong> perfetto.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">16. Nella carta di Smith, il semipiano superiore indica impedenze con reattanza:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) Induttiva</li>
+                    <li onclick="checkAnswer(this, false)">B) Capacitiva</li>
+                    <li onclick="checkAnswer(this, false)">C) Nulla</li>
+                    <li onclick="checkAnswer(this, false)">D) Infinita</li>
+                </ul>
+                <div class="answer">Parte superiore = <strong>induttiva</strong>, parte inferiore = <strong>capacitiva</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">17. Il coefficiente di riflessione Γ di un carico Z<sub>L</sub> su una linea di impedenza Z<sub>0</sub> è:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) (Z<sub>L</sub> + Z<sub>0</sub>)/(Z<sub>L</sub> - Z<sub>0</sub>)</li>
+                    <li onclick="checkAnswer(this, true)">B) (Z<sub>L</sub> - Z<sub>0</sub>)/(Z<sub>L</sub> + Z<sub>0</sub>)</li>
+                    <li onclick="checkAnswer(this, false)">C) Z<sub>L</sub> · Z<sub>0</sub></li>
+                    <li onclick="checkAnswer(this, false)">D) Z<sub>L</sub>/Z<sub>0</sub></li>
+                </ul>
+                <div class="answer">Γ = V<sub>R</sub>/V<sub>F</sub> = (Z<sub>L</sub> - Z<sub>0</sub>)/(Z<sub>L</sub> + Z<sub>0</sub>).</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">18. Una linea da 50 Ω è chiusa su un carico resistivo da 100 Ω. Il ROS vale:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 1:1</li>
+                    <li onclick="checkAnswer(this, false)">B) 5:1</li>
+                    <li onclick="checkAnswer(this, false)">C) 1,5:1</li>
+                    <li onclick="checkAnswer(this, true)">D) 2:1</li>
+                </ul>
+                <div class="answer">ROS = Z<sub>L</sub>/Z<sub>0</sub> = 100/50 = <strong>2:1</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">19. Una linea di trasmissione in corto circuito, a distanza λ/4 dal corto, presenta impedenza:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Zero</li>
+                    <li onclick="checkAnswer(this, false)">B) Uguale a Z<sub>0</sub></li>
+                    <li onclick="checkAnswer(this, true)">C) Infinita</li>
+                    <li onclick="checkAnswer(this, false)">D) Capacitiva pura</li>
+                </ul>
+                <div class="answer">A λ/4 da un corto l'impedenza è <strong>infinita</strong> (inversione di impedenza).</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">20. Con un ROS di 2:1 la potenza riflessa è circa:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Il 50 %</li>
+                    <li onclick="checkAnswer(this, true)">B) L'11 %</li>
+                    <li onclick="checkAnswer(this, false)">C) Il 33 %</li>
+                    <li onclick="checkAnswer(this, false)">D) Lo 0 %</li>
+                </ul>
+                <div class="answer">Con ROS 2:1 Γ = 33 % in tensione, quindi Γ<sup>2</sup> ≈ <strong>11 %</strong> in potenza.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+        </div>
+    </details>
+</section>
+
+
+<h2 id="modulo-antenne">Modulo 9 — Antenne</h2>
+
+<section id="ant-generalita">
+    <div class="intro-box">
+        <h2>Le antenne</h2>
+        <p>
+            L'<strong>antenna</strong> è l'elemento che trasforma il segnale elettrico della linea di trasmissione in un'<strong>onda elettromagnetica</strong> che si propaga nello spazio, e viceversa. È la parte del sistema radio che influisce di più sui risultati: un'ottima antenna vale spesso più di un trasmettitore più potente.
+        </p>
+        <div class="analogy">
+            <strong>Analogia.</strong> L'antenna è come l'altoparlante di una radio: trasforma il segnale elettrico in un'onda (sonora nel caso dell'altoparlante, elettromagnetica nel caso dell'antenna). E come l'orecchio fa il lavoro inverso, l'antenna ricevente "ascolta" l'onda e la riporta nel circuito.
+        </div>
+    </div>
+    <div class="card">
+        <h3>Definizione, reciprocità e link RF</h3>
+        <p>
+            L'antenna è definita dall'<strong>IEEE Standard Definitions of Terms for Antennas</strong> (IEEE STD 145-1983) come <em>"un mezzo per trasmettere e ricevere onde radio"</em>.
+        </p>
+        <ul>
+            <li>Un'antenna <strong>trasmittente</strong> è un <strong>trasduttore</strong> che collega i circuiti radio allo spazio libero, convertendo un segnale presente in una linea di trasmissione in un'<strong>onda elettromagnetica</strong> che si propaga nello spazio libero.</li>
+            <li>Un'antenna <strong>ricevente</strong> converte un'onda EM dallo spazio libero in un segnale su una linea di trasmissione e quindi nel circuito di ricezione.</li>
+        </ul>
+        <h4>Reciprocità</h4>
+        <p>
+            Per il principio di <strong>reciprocità</strong> un'antenna funziona ugualmente bene in <strong>trasmissione e in ricezione</strong>. Un'antenna trasmittente si comporta da <strong>carico</strong>, un'antenna ricevente da <strong>generatore</strong>. In entrambi i casi, per funzionare al meglio, le rispettive <strong>impedenze devono essere adattate</strong> alla linea di trasmissione.
+        </p>
+        <h4>Il link RF</h4>
+        <p>
+            Le antenne di trasmissione e ricezione fanno parte del <strong>link RF</strong>, cioè il percorso tra l'uscita del circuito trasmittente e l'ingresso del circuito ricevente. Di solito include: il cavo dal trasmettitore all'antenna, l'antenna di trasmissione, il percorso di propagazione, l'antenna di ricezione e la linea che collega l'antenna di ricezione al ricevitore.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-link-rf.jpg" alt="Il link RF tra trasmettitore e ricevitore" loading="lazy">
+            <div class="diagram-caption">Il link RF: trasmettitore, linea di trasmissione, antenna trasmittente, percorso di propagazione (distanza d), antenna ricevente, linea e ricevitore.</div>
+        </div>
+        <p>
+            Il segnale ricevuto è <strong>molto più piccolo</strong> di quello trasmesso. La stragrande maggioranza della perdita avviene nel <strong>percorso di propagazione</strong>, perché il segnale si diffonde, diffrange, si riflette ed è parzialmente bloccato da oggetti come colline ed edifici.
+        </p>
+        <h4>Campo elettromagnetico e polarizzazione</h4>
+        <p>
+            Il campo EM prodotto da un conduttore è composto da una <strong>componente elettrica</strong> e da una <strong>componente magnetica</strong>. Essendo vettori, sono <strong>ortogonali</strong> tra loro e alla direzione di propagazione.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-onda-elettromagnetica-e-h.jpg" alt="Campo elettrico e magnetico di un'onda elettromagnetica" loading="lazy">
+            <div class="diagram-caption">Onda elettromagnetica: i vettori del campo elettrico E e del campo magnetico H sono ortogonali tra loro e alla direzione di propagazione.</div>
+        </div>
+        <h4>Tipi di antenne</h4>
+        <p>
+            Le antenne sono di due tipi fondamentali:
+        </p>
+        <ul>
+            <li><strong>Antenne risonanti</strong> (<em>resonant antennas</em>, antenne a onde stazionarie): stabiliscono un'<strong>onda stazionaria di corrente</strong> alla frequenza richiesta. Succede quando l'estensione dell'antenna è pari a <strong>un quarto o mezza lunghezza d'onda</strong>. Sono intrinsecamente a <strong>banda stretta</strong>; esempi: dipolo a mezz'onda, monopolo a un quarto d'onda, antenna patch.</li>
+            <li><strong>Antenne ad onda progressiva</strong> (<em>traveling wave antennas</em>): <strong>ampia larghezza di banda</strong> e grandi dimensioni (vedi più avanti).</li>
+        </ul>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-antenne-risonanti-esempi.jpg" alt="Esempi di antenne risonanti" loading="lazy">
+            <div class="diagram-caption">Antenne risonanti: dipolo a mezz'onda, monopolo a quarto d'onda (con il suo piano di massa) e antenna patch.</div>
+        </div>
+        <div class="remember">
+            <p>L'antenna è un <strong>trasduttore</strong>: converte il segnale della linea in onda EM e viceversa.</p>
+            <p>Per <strong>reciprocità</strong> funziona allo stesso modo in TX e in RX; in TX è un carico, in RX un generatore; l'impedenza va adattata alla linea.</p>
+            <p>Nel link RF la maggior parte della perdita avviene nel <strong>percorso di propagazione</strong>.</p>
+            <p>Antenne <strong>risonanti</strong> (λ/4, λ/2): banda stretta. Antenne ad <strong>onda progressiva</strong>: banda larga e grandi.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-radiazione">
+    <div class="card">
+        <h3>Densità di radiazione, diagramma e direttività</h3>
+        <h4>La densità di radiazione</h4>
+        <p>
+            Le antenne <strong>non irradiano ugualmente in tutte le direzioni</strong>: concentrano la potenza irradiata lungo il <strong>lobo principale</strong>. Questo effetto di focalizzazione è la <strong>direttività</strong>. La potenza in una certa direzione è caratterizzata dalla <strong>densità di radiazione</strong> S<sub>r</sub>, cioè la <strong>potenza per unità di area</strong>, espressa in W/m<sup>2</sup> e massima nel lobo principale:
+        </p>
+        <div class="formula">
+            S<sub>r</sub> = ∂P<sub>r</sub> / ∂A
+            <span class="label">È anche il prodotto vettoriale tra campo elettrico e magnetico: S<sub>r</sub> = E × H. Nello spazio libero diminuisce con il <strong>quadrato della distanza</strong> (1/r²).</span>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-densita-radiazione.jpg" alt="Densità di radiazione" loading="lazy">
+            <div class="diagram-caption">Densità di radiazione Sr: potenza per unità di area, in W/m². Sr = E × H e diminuisce con il quadrato della distanza.</div>
+        </div>
+        <h4>Il diagramma di radiazione</h4>
+        <p>
+            Il <strong>diagramma di radiazione</strong> (<em>radiation pattern</em>) è la rappresentazione grafica di come un'antenna irradia il suo segnale. Esistono tre tipi di radiatori:
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Radiatore</th><th>Caratteristiche</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Isotropico</strong></td><td>Antenna ideale, senza perdite, che irradia uguale in tutte le direzioni: non è realizzabile ma serve da <strong>riferimento</strong> per le antenne reali.</td></tr>
+                    <tr><td><strong>Direzionale</strong></td><td>Trasmette o riceve maggiormente in particolari direzioni.</td></tr>
+                    <tr><td><strong>Omnidirezionale</strong></td><td>Trasmette o riceve in modo uniforme lungo un piano (diagramma a "ciambella").</td></tr>
+                </tbody>
+            </table>
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-isotropico-omnidirezionale.jpg" alt="Radiatore isotropico, omnidirezionale e direzionale" loading="lazy">
+            <div class="diagram-caption">Tre tipi di radiatore: isotropico (sfera), omnidirezionale (a ciambella) e direzionale (lobo principale in una direzione).</div>
+        </div>
+        <p>
+            Per l'antenna isotropica, che non ha perdite, la potenza assorbita è uguale a quella irradiata (P<sub>r</sub> = P<sub>IN</sub>) e S<sub>r</sub> dipende solo dalla distanza r.
+        </p>
+        <h4>I lobi</h4>
+        <p>
+            I <strong>lobi di radiazione</strong> sono porzioni del diagramma formate da aree di intensità omogenea:
+        </p>
+        <ul>
+            <li>il <strong>lobo principale</strong> (<em>main lobe</em>) contiene la maggior parte dell'energia ed è la direzione di maggiore irraggiamento;</li>
+            <li>i <strong>lobi minori o secondari</strong> sono tutti gli altri;</li>
+            <li>il <strong>lobo laterale</strong> (<em>side lobe</em>) è un lobo secondario, di solito adiacente a quello principale;</li>
+            <li>il <strong>lobo posteriore</strong> (<em>back lobe</em>) è il lobo secondario a 180° rispetto al principale.</li>
+        </ul>
+        <p>
+            I lobi secondari sono irraggiamenti in direzioni non volute, quindi <strong>perdite</strong>, e vanno portati al <strong>minimo</strong>. L'ampiezza del lobo principale si misura con la larghezza di fascio a metà potenza (HPBW, i punti a -3 dB).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-lobi-radiazione.jpg" alt="Lobi del diagramma di radiazione" loading="lazy">
+            <div class="diagram-caption">Diagramma di radiazione: lobo principale, lobi laterali, lobo posteriore e lobi minori; larghezza di fascio a metà potenza (HPBW) e tra i primi nulli (FNBW).</div>
+        </div>
+        <h4>Gli spazi di radiazione</h4>
+        <p>
+            Lo spazio attorno all'antenna si suddivide in tre regioni, perché la struttura del campo cambia allontanandosi dal radiatore:
+        </p>
+        <ul>
+            <li><strong>zona reattiva di campo vicino</strong> (<em>near field</em>): predomina la parte reattiva del campo, nelle immediate vicinanze dell'antenna;</li>
+            <li><strong>zona radiante di campo vicino</strong> (<strong>Fresnel</strong>): zona di transizione, in cui la distribuzione angolare del campo dipende ancora dalla distanza;</li>
+            <li><strong>zona di campo lontano</strong> (<strong>Fraunhofer</strong>, <em>far field</em>): la distribuzione angolare non dipende più dalla distanza, la densità di potenza decresce con il quadrato della distanza e l'onda assume la forma di <strong>onda piana</strong>.</li>
+        </ul>
+        <p>
+            Nella pratica si distinguono solo near field e far field, ponendo il confine a circa <strong>tre lunghezze d'onda</strong>. I limiti teorici (con D dimensione massima dell'antenna) sono R<sub>1</sub> = 0,62·√(D<sup>3</sup>/λ) e R<sub>2</sub> = 2D<sup>2</sup>/λ.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-regioni-di-campo.jpg" alt="Regioni di campo attorno a un'antenna" loading="lazy">
+            <div class="diagram-caption">Le tre regioni attorno all'antenna: campo vicino reattivo, campo vicino radiante (zona di Fresnel) e campo lontano (zona di Fraunhofer).</div>
+        </div>
+        <h4>La direttività</h4>
+        <p>
+            La <strong>direttività</strong> è il rapporto tra l'<strong>intensità di radiazione in una data direzione</strong> e l'<strong>intensità di radiazione media</strong> in tutte le direzioni; quest'ultima è la potenza totale irradiata divisa per 4π (irraggiamento sferico). Nella pratica si considera la direzione di maggiore irradiazione, cioè quella del lobo principale.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-direttivita-dipolo.jpg" alt="Direttività del dipolo rispetto al radiatore isotropico" loading="lazy">
+            <div class="diagram-caption">Diagramma polare di un dipolo (a otto) confrontato con il cerchio del radiatore isotropico (D = 1): il dipolo ha un guadagno di 2,15 dBi.</div>
+        </div>
+        <div class="remember">
+            <p>La <strong>densità di radiazione</strong> S<sub>r</sub> (W/m²) è la potenza per unità di area e decresce con <strong>1/r²</strong>.</p>
+            <p>Il radiatore <strong>isotropico</strong> è ideale e fa da riferimento; l'<strong>omnidirezionale</strong> irradia uniformemente su un piano.</p>
+            <p>Lobo principale = maggior irraggiamento; <strong>lobi laterali e posteriori sono perdite</strong>.</p>
+            <p>Campo vicino (reattivo e Fresnel) e <strong>campo lontano</strong> (Fraunhofer, onda piana); confine pratico a circa 3 λ.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-risonanza">
+    <div class="card">
+        <h3>Come funziona un'antenna: risonanza e onda progressiva</h3>
+        <h4>Le antenne risonanti</h4>
+        <p>
+            Quando si applica una <strong>tensione sinusoidale</strong> al conduttore di un'antenna, le cariche (gli elettroni liberi) <strong>accelerano e decelerano</strong> sotto l'influenza della sorgente, che in genere arriva da una linea di trasmissione. Accelerando producono un <strong>campo EM</strong> che si irradia lontano dall'antenna. In ogni punto dell'antenna c'è quindi una <strong>corrente sinusoidale</strong> nel tempo e l'accelerazione delle cariche, anch'essa sinusoidale, ha ampiezza proporzionale a quella della corrente.
+        </p>
+        <p>
+            In <strong>risonanza</strong> la corrente è forte, quindi forte è l'accelerazione di carica e <strong>intensi i campi EM irradiati</strong>. Viceversa, quando un campo EM investe un conduttore fa accelerare le cariche e <strong>induce una tensione</strong> che si propaga lungo l'antenna e poi alla linea collegata: valgono gli stessi principi della trasmissione (reciprocità).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-funzionamento-risonanza.jpg" alt="Funzionamento di un'antenna risonante e campo vicino" loading="lazy">
+            <div class="diagram-caption">Una tensione sinusoidale fa accelerare le cariche nel filo: la corrente I(t) produce un campo EM irradiato; la somma dei contributi di ogni tratto dz crea nel campo vicino zone di campo forte e debole.</div>
+        </div>
+        <p>
+            Considerando i contributi di piccoli tratti dz di antenna, il campo emesso da un filo risulta dalla <strong>somma vettoriale</strong> dei singoli contributi, che crea "pieni" e "vuoti" attorno al filo. Questa propagazione avviene nel <strong>campo vicino</strong>.
+        </p>
+        <h4>L'onda stazionaria di corrente</h4>
+        <p>
+            Per avere un'antenna risonante <strong>efficiente</strong> tutta la corrente dovrebbe andare nella <strong>stessa direzione</strong> in un dato istante. Lo si ottiene stabilendo un'<strong>onda stazionaria</strong>: all'estremità aperta, per riflessione, la corrente totale è <strong>nulla</strong>; le onde di corrente diretta e riflessa si combinano formando l'onda stazionaria. Se l'antenna è abbastanza corta tutta la corrente totale va nello stesso verso: la lunghezza ottimale è di circa <strong>mezza lunghezza d'onda</strong>. Se il filo è più lungo, i contributi dei segmenti con corrente opposta si annullano in parte. Antenne lunghe multipli di λ/2 sono dette <strong>antenne risonanti in armonica</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-onda-stazionaria-corrente.jpg" alt="Onde stazionarie di corrente su un'antenna a mezz'onda e su un filo lungo" loading="lazy">
+            <div class="diagram-caption">Corrente diretta, riflessa e totale: nell'antenna da λ/2 la corrente totale ha un solo verso e il campo irradiato si somma; in un filo lungo i tratti con corrente opposta annullano il campo.</div>
+        </div>
+        <h4>Le antenne ad onda progressiva</h4>
+        <p>
+            Hanno <strong>ampia larghezza di banda</strong> e <strong>grandi dimensioni</strong>. Iniziano come una struttura di linea di trasmissione che <strong>si allarga lentamente</strong>, offrendo una transizione a <strong>bassa riflessione</strong> dalla linea allo spazio libero: la larghezza di banda dipende soprattutto dalla gradualità della transizione. Esempi sono la <strong>tromba</strong> e la <strong>Beverage</strong>, un filo lungo diverse λ con resistenza di terminazione.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-onda-progressiva-esempi.jpg" alt="Antenne ad onda progressiva: tromba e Beverage" loading="lazy">
+            <div class="diagram-caption">Esempi di antenne ad onda progressiva: la tromba (struttura che si allarga lentamente) e la Beverage con la resistenza di terminazione.</div>
+        </div>
+        <p>
+            Tra le antenne ad onda progressiva più interessanti c'è l'<strong>antenna Vivaldi</strong>, un prolungamento di una <em>slotline</em> (campi EM confinati tra due lamiere sullo stesso piano) la cui spaziatura <strong>aumenta gradualmente in modo esponenziale</strong>, come la forma di un violino, su una distanza di una lunghezza d'onda o più. È modellata come una <strong>cascata di molte linee</strong> di impedenza caratteristica Z<sub>0</sub> lentamente crescente: la progressione graduale dà basse riflessioni verso la linea di trasmissione.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-vivaldi.jpg" alt="Antenna Vivaldi" loading="lazy">
+            <div class="diagram-caption">Antenna Vivaldi: slotline che si allarga in modo graduale, modellata come cascata di linee di impedenza crescente per ottenere basse riflessioni verso la linea.</div>
+        </div>
+        <div class="remember">
+            <p>Cariche accelerate dalla tensione sinusoidale → <strong>campo EM irradiato</strong>; in risonanza la corrente e il campo sono massimi.</p>
+            <p>Alla fine aperta la corrente è <strong>nulla</strong> (riflessione): si forma un'<strong>onda stazionaria</strong>; lunghezza ottimale circa <strong>λ/2</strong>.</p>
+            <p>Onda progressiva: <strong>banda larga</strong>, dimensioni grandi, transizione graduale (Beverage, tromba, Vivaldi).</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-parametri">
+    <div class="card">
+        <h3>Caratteristiche delle antenne</h3>
+        <h4>Calcolo delle dimensioni</h4>
+        <p>
+            In un'antenna, come nelle linee di trasmissione, induttanza, capacità e resistenza sono <strong>distribuite quasi uniformemente</strong> lungo il filo. Supponendo che il segnale si propaghi alla velocità della luce, la distanza percorsa in un ciclo è la <strong>lunghezza d'onda</strong>:
+        </p>
+        <div class="formula">
+            λ = c / f
+            <span class="label">c = 300000 km/s (300000000 m/s), f in Hz</span>
+        </div>
+        <p>
+            L'impedenza al punto di alimentazione dipende dal rapporto Z = V/I e cambia da 0 a infinito a seconda della lunghezza del conduttore; quando la lunghezza è <strong>λ/2</strong> si ha la risonanza, ossia una <strong>pura resistenza</strong>. La lunghezza totale teorica di un'antenna risonante a mezz'onda è quindi
+        </p>
+        <div class="formula">
+            l = 300000000 / (2 · f) &nbsp; [m, con f in Hz]
+        </div>
+        <p>
+            Spostando il punto di alimentazione verso l'estremità l'impedenza aumenta fino a valori molto alti. I valori usuali sono <strong>50 Ω</strong> (e anche 75 Ω o 300 Ω). Nella pratica però i valori teorici si ottengono raramente: dipendono da fattori esterni come la <strong>distanza dal suolo</strong>, la vicinanza di ostacoli, i fenomeni atmosferici.
+        </p>
+        <p>
+            Inoltre la lunghezza elettrica di un'antenna filare <strong>non coincide con quella fisica</strong>: dipende dal dielettrico che isola il filo, dal materiale e dal rapporto tra lunghezza e diametro. La lunghezza reale va corretta con un <strong>fattore di accorciamento k minore di 1</strong> (di solito circa 0,95):
+        </p>
+        <div class="formula">
+            l = k · λ / 2
+            <span class="label">Per un dipolo in filo: l [m] ≈ 143 / f [MHz]; per un monopolo λ/4: l [m] ≈ 71,5 / f [MHz]</span>
+        </div>
+        <div class="deep-dive">
+            <p>
+                <strong>Esempio.</strong> Dipolo per i 40 m a 7,1 MHz: l = 143/7,1 ≈ <strong>20,1 m</strong> in totale, cioè circa 10 m per ramo. Per i 2 m (145 MHz) un monopolo a quarto d'onda è lungo 71,5/145 ≈ 49 cm.
+            </p>
+        </div>
+        <h4>Guadagno ed efficienza</h4>
+        <p>
+            Il <strong>guadagno</strong> di un'antenna è di solito definito come <strong>guadagno assoluto</strong>, riferito al radiatore isotropico (dBi), in una data direzione; il massimo corrisponde al lobo principale. Nelle misure è spesso riferito a un'<strong>antenna di riferimento</strong> con caratteristiche note, come il dipolo (dBd). L'<strong>efficienza</strong> tiene conto anche delle <strong>perdite</strong> (disadattamento con la linea, materiali impiegati).
+        </p>
+        <h4>Apertura efficace</h4>
+        <p>
+            Un'antenna ha una dimensione effettiva <strong>maggiore</strong> di quella fisica, perché influenza i campi EM che la circondano. L'<strong>apertura efficace</strong> (<em>effective aperture size</em>) è l'area che cattura tutta la potenza che la attraversa e la fornisce ai terminali di uscita. Per un'antenna ricevente è legata al guadagno G<sub>R</sub>; nota la densità di potenza P<sub>D</sub>, la potenza ricevuta è P<sub>R</sub>:
+        </p>
+        <div class="formula">
+            A<sub>R</sub> = G<sub>R</sub> · λ<sup>2</sup> / 4π &nbsp;&nbsp; P<sub>R</sub> = P<sub>D</sub> · A<sub>R</sub> = P<sub>D</sub> · G<sub>R</sub> · λ<sup>2</sup> / 4π
+        </div>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-apertura-efficace.jpg" alt="Apertura efficace di un'antenna ricevente" loading="lazy">
+            <div class="diagram-caption">L'area efficace AR è la superficie che cattura la potenza dall'onda incidente: AR = GR·λ²/4π e PR = PD·AR.</div>
+        </div>
+        <h4>Banda passante</h4>
+        <p>
+            Le antenne filari hanno una <strong>banda passante ridotta</strong> a causa della risonanza. La banda passante è l'intervallo di frequenze in cui le caratteristiche dell'antenna non si degradano in modo sostanziale. Poiché dipende da molti fattori (impedenza, diagramma, polarizzazione, guadagno, efficienza, dimensioni) si definisce come <strong>funzione della variazione dell'impedenza di ingresso</strong>: in pratica è l'intervallo in cui il <strong>ROS è minore di 2:1</strong>.
+        </p>
+        <h4>Resistenza di radiazione</h4>
+        <p>
+            L'energia fornita a un'antenna si dissipa in parte sotto forma di <strong>onda elettromagnetica</strong>, in parte come <strong>calore</strong>. In entrambi i casi la potenza è P = I<sup>2</sup>R: nelle perdite R è una resistenza reale, nell'irradiazione è una resistenza <strong>fittizia</strong>, la <strong>resistenza di radiazione</strong> R<sub>0</sub>. La potenza totale è
+        </p>
+        <div class="formula">
+            P = I<sup>2</sup> · (R<sub>0</sub> + R<sub>l</sub>)
+            <span class="label">R<sub>0</sub> = resistenza di radiazione, R<sub>l</sub> = resistenza di perdita; l'efficienza è R<sub>0</sub> / (R<sub>0</sub> + R<sub>l</sub>): riducendo R<sub>l</sub> aumenta la potenza irradiata</span>
+        </div>
+        <h4>ERP ed EIRP</h4>
+        <p>
+            La <strong>ERP</strong> (Effective Radiated Power, potenza effettiva irradiata) è la potenza che dovrebbe irradiare un <strong>dipolo</strong> per avere, nella direzione di massimo campo, lo stesso campo misurato per l'antenna in prova. Si calcola partendo dalla potenza del trasmettitore (PEP), <strong>aggiungendo il guadagno</strong> d'antenna e <strong>sottraendo le perdite</strong> del sistema (linea, connettori, filtri):
+        </p>
+        <div class="formula">
+            ERP [dBW o dBm] = P<sub>TX</sub> + G<sub>d</sub> - perdite &nbsp;&nbsp; ovvero &nbsp; ERP [W] = P<sub>TX</sub> · G
+            <span class="label">G<sub>d</sub> = guadagno in dB rispetto al dipolo; nella forma lineare le perdite entrano come rapporto tra potenze</span>
+        </div>
+        <p>
+            La <strong>EIRP</strong> (Equivalent Isotropic Radiated Power) è la potenza riferita al <strong>radiatore isotropico</strong>: si ottiene con il guadagno in dBi (sottraendo le perdite della linea). Rispetto all'ERP la EIRP è <strong>maggiore di 2,15 dB</strong>, la differenza di guadagno tra dipolo e isotropico: EIRP = ERP + 2,15 dB.
+        </p>
+        <div class="deep-dive">
+            <p>
+                <strong>Esempio.</strong> Trasmettitore da 100 W (50 dBm), cavo con 2 dB di perdita, antenna Yagi con 8 dBd. ERP = 50 - 2 + 8 = 56 dBm ≈ 400 W; EIRP = 56 + 2,15 ≈ 58,2 dBm.
+            </p>
+        </div>
+        <h4>Impedenza dello spazio libero e fattore di antenna</h4>
+        <p>
+            Il rapporto tra campo elettrico E e campo magnetico H in un'onda nello spazio libero è una costante, l'<strong>impedenza dello spazio libero</strong>: <strong>377 Ω</strong>. Il <strong>fattore di antenna</strong> (<em>Antenna Factor</em>, AF) è il rapporto tra il campo elettrico E e la tensione V ai morsetti dell'antenna; si misura in <strong>m<sup>-1</sup></strong>. Conoscendo AF e la tensione si risale al campo (E = AF · V), usato nelle misure di campo.
+        </p>
+        <h4>Effetto del suolo e ground plane</h4>
+        <p>
+            Le prestazioni di un'antenna sono modificate in modo considerevole dal <strong>terreno sottostante</strong>, che si comporta da <strong>immenso riflettore</strong>: le onde riflesse si combinano con quelle dirette in modo diverso secondo l'orientamento dell'antenna, la sua altezza e le caratteristiche del terreno. Si immagina un'<strong>antenna immagine</strong> speculare sotto il suolo. Poiché il suolo non è un buon conduttore, si può simulare un terreno perfettamente conduttore con una <strong>superficie metallica</strong> (una griglia o una serie di fili a raggiera): il <strong>piano di terra</strong> (<em>ground plane</em>).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-effetto-suolo-immagine.jpg" alt="Effetto del suolo e antenna immagine" loading="lazy">
+            <div class="diagram-caption">Il suolo si comporta da riflettore: onde dirette e riflesse si combinano; si può immaginare un'antenna immagine speculare sotto il suolo. Un piano di terra metallico simula un terreno perfettamente conduttore.</div>
+        </div>
+        <div class="remember">
+            <p>Lunghezza di un dipolo: <strong>l ≈ 143 / f(MHz)</strong> m; per il quarto d'onda l ≈ 71,5 / f(MHz). Il fattore k è minore di 1.</p>
+            <p><strong>Banda passante</strong> = intervallo con ROS &lt; 2:1; le antenne risonanti hanno banda stretta.</p>
+            <p>P = I²(R<sub>0</sub> + R<sub>l</sub>): ridurre le perdite <strong>aumenta</strong> la potenza irradiata.</p>
+            <p><strong>EIRP = ERP + 2,15 dB</strong>; impedenza dello spazio libero 377 Ω.</p>
+            <p>Il suolo agisce da <strong>riflettore</strong>: si può sostituirlo con un <strong>ground plane</strong> metallico.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-polarizzazione">
+    <div class="card">
+        <h3>La polarizzazione</h3>
+        <p>
+            La <strong>polarizzazione</strong> di un'antenna in una data direzione coincide con la polarizzazione del <strong>campo elettromagnetico emesso</strong>, riferita al lobo principale. In pratica coincide con il <strong>piano che contiene il campo elettrico</strong>, parallelo al piano contenente il dipolo; il campo magnetico è <strong>ortogonale</strong> (a 90°) a quello elettrico. A distanze sufficienti (campo lontano, onde piane) il campo elettrico ha la direzione del <strong>conduttore dell'antenna</strong>: la polarizzazione coincide quindi con la posizione del campo elettrico rispetto al suolo.
+        </p>
+        <h4>Polarizzazione lineare</h4>
+        <p>
+            Esistono tre tipi: <strong>lineare</strong>, <strong>circolare</strong> ed <strong>ellittica</strong>. La polarizzazione lineare comprende quella <strong>orizzontale</strong> e quella <strong>verticale</strong>: in campo lontano il piano del campo elettrico non cambia.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-polarizzazione-lineare.jpg" alt="Polarizzazione lineare orizzontale e verticale" loading="lazy">
+            <div class="diagram-caption">La polarizzazione coincide con il piano del campo elettrico, parallelo al conduttore: verticale per un'antenna verticale, orizzontale per un dipolo orizzontale.</div>
+        </div>
+        <h4>Polarizzazione circolare ed ellittica</h4>
+        <p>
+            Combinando <strong>due dipoli incrociati</strong> alimentati con uno <strong>sfasamento di 90°</strong>, il campo elettrico <strong>ruota</strong> rispetto al suolo, in senso destrorso o sinistrorso: è la <strong>polarizzazione circolare</strong>. Se l'ampiezza dei due campi incrociati non è uguale si ha la <strong>polarizzazione ellittica</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-polarizzazione-circolare.jpg" alt="Polarizzazione circolare con due dipoli incrociati" loading="lazy">
+            <div class="diagram-caption">Due dipoli incrociati alimentati con sfasamento di 90° generano un campo elettrico che ruota: polarizzazione circolare (ellittica se le ampiezze sono diverse).</div>
+        </div>
+        <h4>Uso della polarizzazione</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Gamma</th><th>Polarizzazione usata</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Onde corte</strong> (HF)</td><td>Indifferentemente <strong>orizzontale o verticale</strong>: nella riflessione ionosferica avvengono continue rotazioni di fase e di polarizzazione.</td></tr>
+                    <tr><td><strong>VHF e superiori</strong>, portata ottica</td><td><strong>Verticale</strong>.</td></tr>
+                    <tr><td><strong>VHF e superiori</strong>, collegamenti DX</td><td><strong>Orizzontale</strong>.</td></tr>
+                    <tr><td><strong>Collegamenti spaziali</strong></td><td><strong>Circolare</strong>, a causa della continua rotazione di fase.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="remember">
+            <p>La polarizzazione è quella del <strong>campo elettrico</strong>, parallelo al conduttore dell'antenna.</p>
+            <p>Lineare (orizzontale o verticale), <strong>circolare</strong> (due dipoli a 90°, sfasati di 90°) o ellittica (ampiezze diverse).</p>
+            <p>VHF e oltre: <strong>verticale</strong> in portata ottica, orizzontale nei DX; collegamenti spaziali: <strong>circolare</strong>.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-tipi">
+    <div class="card">
+        <h3>Dipolo, loop e long wire</h3>
+        <h4>Il dipolo a mezz'onda</h4>
+        <p>
+            Alimentando al centro un filo lungo <strong>mezz'onda</strong> si ottiene alla risonanza il <strong>dipolo a mezz'onda</strong>, composto da due rami uguali. La sua resistenza di radiazione dipende da vari fattori: la <strong>posizione rispetto al suolo</strong>, il rapporto lunghezza/diametro del conduttore, la lunghezza del filo (fuori risonanza compare anche una reattanza e la resistenza aumenta). Teoricamente l'impedenza in risonanza è di circa <strong>73 Ω</strong>.
+        </p>
+        <p>
+            Variando la lunghezza varia la frequenza di risonanza: per bande diverse servono <strong>antenne diverse</strong>. Il dipolo si costruisce con filo o treccia di rame da 1,5-3 mm, isolatori alle estremità e al centro e cavo coassiale da 50 o 75 Ω di lunghezza qualunque.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-dipolo-mezz-onda.jpg" alt="Dipolo a mezz'onda: costruzione e diagramma" loading="lazy">
+            <div class="diagram-caption">Dipolo a mezz'onda alimentato al centro con cavo coassiale; lunghezza totale A + B = 143/f(MHz) metri. Il diagramma è un otto nel piano di polarizzazione e una ciambella nello spazio.</div>
+        </div>
+        <p>
+            L'intensità di radiazione è <strong>maggiore nelle direzioni ad angolo retto con il conduttore</strong>: nel piano di polarizzazione il diagramma è un "<strong>otto</strong>", nello spazio una "<strong>ciambella</strong>". Il guadagno rispetto all'isotropico è di <strong>2,15 dBi</strong> (la "i" indica il riferimento isotropico).
+        </p>
+        <h4>Il dipolo ripiegato</h4>
+        <p>
+            Sono due fili paralleli e distanziati, uniti alle estremità, uno dei quali è un dipolo tradizionale. Nel tratto che unisce i due estremi la corrente circola in modo invertito rispetto al dipolo, come in una linea di trasmissione. L'impedenza risulta di circa <strong>300 Ω</strong> (quattro volte quella del dipolo semplice); il diagramma di radiazione è lo stesso.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-dipolo-ripiegato.jpg" alt="Dipolo a mezz'onda ripiegato" loading="lazy">
+            <div class="diagram-caption">Dipolo ripiegato: due fili paralleli uniti alle estremità; l'impedenza vale circa 300 Ω (quattro volte quella del dipolo semplice) e il diagramma è lo stesso.</div>
+        </div>
+        <h4>La long wire</h4>
+        <p>
+            È un <strong>filo di lunghezza qualunque</strong>, steso in orizzontale o in verticale; per ottenere buoni risultati dovrebbe essere lungo almeno <strong>quattro o cinque lunghezze d'onda</strong>. Servono un <strong>ottimo piano di terra</strong> e un <strong>accordatore</strong>. L'impedenza può variare da pochi ohm a <strong>3-4 kΩ</strong>; il punto di alimentazione è generalmente collegato a un <strong>trasformatore di impedenza 9:1</strong>. Ha una certa direttività e quindi un discreto guadagno ed è il tipo di antenna più semplice da costruire.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-long-wire.jpg" alt="Antenna long wire e diagramma di radiazione" loading="lazy">
+            <div class="diagram-caption">Long wire: filo lungo almeno alcune lunghezze d'onda, con un buon piano di terra e un accordatore; il diagramma ha più lobi, uno più forte nella direzione del filo.</div>
+        </div>
+        <h4>La loop</h4>
+        <p>
+            La <strong>loop</strong> è un'antenna a <strong>circuito chiuso</strong>: il conduttore è disposto in una o più spire in modo che le due estremità siano vicine. Può essere molto più piccola della lunghezza d'onda, realizzata con più spire, oppure avere il <strong>perimetro uguale alla lunghezza d'onda</strong>. L'impedenza delle loop a onda intera è di circa <strong>100 Ω</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-loop.jpg" alt="Antenna loop" loading="lazy">
+            <div class="diagram-caption">Loop ad onda intera: antenna a circuito chiuso con perimetro pari a λ e impedenza di circa 100 Ω; il diagramma ha due lobi massimi perpendicolari al piano della spira.</div>
+        </div>
+        <div class="remember">
+            <p><strong>Dipolo λ/2</strong>: 73 Ω, guadagno 2,15 dBi, diagramma ad otto (ciambella nello spazio), massimo a 90° rispetto al filo.</p>
+            <p><strong>Dipolo ripiegato</strong>: circa 300 Ω. <strong>Long wire</strong>: almeno 4-5 λ, buon piano di terra e accordatore, trasformatore 9:1.</p>
+            <p><strong>Loop a onda intera</strong>: perimetro = λ, impedenza circa 100 Ω.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-verticali">
+    <div class="card">
+        <h3>Antenne verticali: monopolo, antenna caricata e ground plane</h3>
+        <h4>Il monopolo verticale</h4>
+        <p>
+            Per realizzare un monopolo verticale basta mettere in verticale un dipolo, utilizzandone <strong>solo la metà superiore</strong>. Se il dipolo è posto a terra, o su un <strong>piano di terra artificiale</strong>, la metà superiore crea un'<strong>immagine</strong> inferiore nel piano di terra che rende superflua la metà inferiore. L'antenna misura così <strong>λ/4</strong>; la resistenza di radiazione è di circa <strong>30-36 Ω</strong> (metà di quella del dipolo). Il diagramma di radiazione è <strong>circolare nel piano orizzontale</strong> e schiacciato nel piano verticale.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-monopolo-verticale.jpg" alt="Monopolo verticale con piano di terra" loading="lazy">
+            <div class="diagram-caption">Monopolo verticale: metà di un dipolo su un piano di terra; l'antenna immagine sotto il piano completa il dipolo. Lunghezza λ/4, resistenza di radiazione circa 30-36 Ω, diagramma circolare in orizzontale e schiacciato in verticale.</div>
+        </div>
+        <h4>L'antenna caricata</h4>
+        <p>
+            Se il monopolo è <strong>più corto</strong> (o più lungo) della risonanza, si riporta il sistema in risonanza aggiungendo una <strong>reattanza in serie</strong> al conduttore: un'antenna più corta ha reattanza <strong>capacitiva</strong>, quindi si compensa con una <strong>bobina</strong>; una più lunga ha reattanza induttiva. Per il minore rendimento ha però un <strong>guadagno minore</strong> del quarto d'onda corrispondente; il diagramma è simile a quello del monopolo.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-antenna-caricata.jpg" alt="Antenna verticale caricata con bobina" loading="lazy">
+            <div class="diagram-caption">Antenna caricata: un monopolo più corto di λ/4 viene riportato in risonanza con una bobina in serie; l'andamento di corrente e tensione cambia ma il diagramma è simile.</div>
+        </div>
+        <h4>La ground plane</h4>
+        <p>
+            Un piano di terra poco efficiente può essere sostituito da un <strong>sistema di fili</strong> lunghi λ/4 collegati alla base, parte integrante dell'antenna: si ottiene la <strong>ground plane</strong>. Si usa nella parte più alta delle onde corte e dalle <strong>VHF alle UHF</strong>. L'impedenza dipende dall'inclinazione dei radiali: a <strong>90°</strong> rispetto al radiatore è circa <strong>30 Ω</strong>; per avere <strong>50 Ω</strong> l'angolo tra radiatore e radiali deve essere di <strong>120°</strong> (radiali inclinati verso il basso).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-ground-plane.jpg" alt="Antenna ground plane" loading="lazy">
+            <div class="diagram-caption">Ground plane: radiatore verticale λ/4 con radiali di λ/4; con radiali a 90° l'impedenza è circa 30 Ω, con radiali inclinati a 120° circa 50 Ω.</div>
+        </div>
+        <div class="remember">
+            <p><strong>Monopolo λ/4</strong> su piano di terra: l'immagine completa il dipolo; circa 30-36 Ω; irradia in modo omnidirezionale in orizzontale.</p>
+            <p><strong>Antenna caricata</strong>: bobina in serie per accorciare l'antenna; rendimento e guadagno minori.</p>
+            <p><strong>Ground plane</strong>: radiali λ/4; 30 Ω con radiali a 90°, <strong>50 Ω a 120°</strong>.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-direttive">
+    <div class="card">
+        <h3>Antenne direttive: Yagi, parabola e Beverage</h3>
+        <h4>La Yagi</h4>
+        <p>
+            Per aumentare la <strong>direttività</strong> (e quindi il guadagno) di un dipolo si aggiungono <strong>elementi parassiti</strong> davanti e dietro. I <strong>direttori</strong> sono gli elementi <strong>più corti</strong> posti <strong>davanti</strong> al dipolo e aumentano il lobo principale in avanti; il <strong>riflettore</strong> è l'elemento <strong>più lungo</strong> posto <strong>dietro</strong>: riflette il segnale verso il dipolo, sommandolo a quello irradiato, aumenta il lobo principale e riduce quello posteriore.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-yagi.jpg" alt="Antenna Yagi: elementi e guadagno" loading="lazy">
+            <div class="diagram-caption">Yagi: il dipolo (elemento alimentato) è affiancato da un riflettore più lungo, dietro, e da direttori più corti, davanti; il guadagno cresce con il numero di elementi.</div>
+        </div>
+        <p>
+            Il guadagno direzionale è funzione della <strong>distanza tra dipolo ed elementi parassiti</strong>: aumentando la distanza aumenta la resistenza di radiazione; diminuendola aumenta il guadagno a scapito di <strong>impedenza</strong> e <strong>banda passante</strong>, che diminuiscono. Il guadagno rispetto al dipolo è in media di circa <strong>5,8 dB</strong> per una Yagi a <strong>tre elementi</strong> (il riflettore aggiunge circa 3,5 dB, il direttore 2,3 dB) e cresce di circa <strong>1,2 dB per ogni direttore</strong> successivo.
+        </p>
+        <p>
+            Il <strong>rapporto avanti-retro</strong> è il rapporto tra la potenza irradiata nella direzione preferenziale e quella irradiata in direzione opposta; il <strong>rapporto avanti-fianco</strong> usa come riferimento la direzione perpendicolare a quella di massima irradiazione. Più elementi parassiti, maggiore il rapporto avanti-retro: i segnali che arrivano da dietro vengono attenuati.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-yagi-diagramma.jpg" alt="Diagramma di radiazione di una Yagi" loading="lazy">
+            <div class="diagram-caption">Confronto tra il diagramma di un dipolo e di una Yagi a 6 elementi: lobo principale più stretto e più alto, rapporto avanti-retro e avanti-fianco migliori.</div>
+        </div>
+        <h4>L'antenna parabolica</h4>
+        <p>
+            Un'<strong>antenna parabolica</strong> è costituita da un <strong>elemento attivo</strong>, il <strong>feeder</strong> o <strong>illuminatore</strong>, e da una <strong>superficie riflettente</strong> a sezione di paraboloide. L'illuminatore è la sorgente primaria: invia la potenza verso il riflettore che la riflette nella direzione voluta (e, in ricezione, concentra nel fuoco i segnali). Maggiore è la dimensione del riflettore, <strong>maggiore è il guadagno</strong>; si ottiene un'<strong>elevata direttività</strong>.
+        </p>
+        <ul>
+            <li><strong>Prime focus</strong>: il feeder è sul fuoco della parabola; la presenza del feeder e del suo supporto ostruisce il fascio e costituisce un fattore di perdita, quindi il guadagno è <strong>leggermente inferiore</strong>.</li>
+            <li><strong>Offset</strong>: l'illuminatore è spostato dall'asse (usa una porzione del paraboloide) e non ostruisce il segnale: guadagno migliore a parità di diametro.</li>
+        </ul>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-parabola-offset-prime-focus.jpg" alt="Antenna parabolica offset e prime focus" loading="lazy">
+            <div class="diagram-caption">Parabola: illuminatore (feeder) e riflettore parabolico. Nella versione prime focus il feeder è sul fuoco e ostruisce parte del fascio; nella versione offset l'illuminatore è spostato e non ostruisce.</div>
+        </div>
+        <h4>La Beverage</h4>
+        <p>
+            Come esempio di antenna ad onda progressiva c'è la <strong>Beverage</strong>, una <strong>long wire</strong> usata in HF soprattutto per l'<strong>ascolto</strong>. Deve essere lunga <strong>diverse lunghezze d'onda</strong> e va <strong>terminata su un carico</strong> (resistenza di terminazione, riportata al valore della linea, in genere 50 Ω, tramite un trasformatore 9:1); per funzionare bene richiede un <strong>ottimo piano di terra</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-beverage.jpg" alt="Antenna Beverage" loading="lazy">
+            <div class="diagram-caption">Beverage: antenna ad onda progressiva per l'ascolto in HF, lunga diverse lunghezze d'onda, con balun 9:1 al ricevitore e resistenza di terminazione all'altro estremo.</div>
+        </div>
+        <div class="remember">
+            <p><strong>Yagi</strong>: dipolo + <strong>riflettore (più lungo, dietro)</strong> + <strong>direttori (più corti, davanti)</strong>.</p>
+            <p>3 elementi ≈ <strong>5,8 dB</strong> sul dipolo; ogni direttore in più aggiunge circa <strong>1,2 dB</strong>; più elementi, maggiore rapporto avanti-retro.</p>
+            <p><strong>Parabola</strong>: feeder + riflettore; guadagno cresce con il diametro; l'offset non ostruisce il fascio.</p>
+            <p><strong>Beverage</strong>: antenna ad onda progressiva per ascolto in HF, lunga e <strong>terminata</strong> su resistenza.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-adattamento">
+    <div class="card">
+        <h3>Adattare l'antenna alla linea</h3>
+        <p>
+            Nella pratica ci si trova spesso a collegare trasmettitore, linea e antenna con <strong>impedenze diverse</strong>. Senza accorgimenti si generano <strong>onde stazionarie</strong> che, nel caso peggiore, si dissipano negli stadi finali del trasmettitore <strong>danneggiandolo</strong>. Si inseriscono quindi circuiti che fanno "vedere" alla linea l'impedenza giusta.
+        </p>
+        <h4>Il trasformatore a quarto d'onda</h4>
+        <p>
+            Una sezione di linea a <strong>bassa perdita lunga un quarto d'onda</strong> agisce da <strong>invertitore di impedenza</strong>: Z<sub>0</sub> = √(Z<sub>R</sub> · Z<sub>S</sub>), dove Z<sub>S</sub> è l'impedenza vista all'ingresso, Z<sub>0</sub> quella dello spezzone e Z<sub>R</sub> quella del carico. Se lo spezzone è più corto di λ/4, all'altra estremità si vede anche una componente <strong>reattiva</strong>.
+        </p>
+        <div class="formula">
+            Z<sub>0</sub> = √(Z<sub>R</sub> · Z<sub>S</sub>)
+        </div>
+        <div class="deep-dive">
+            <p>
+                <strong>Esempio.</strong> Per adattare una loop da 100 Ω a un cavo da 50 Ω serve uno spezzone λ/4 (elettrico, cioè accorciato con il fattore di velocità) con Z<sub>0</sub> = √(100 · 50) ≈ <strong>71 Ω</strong>, in pratica un cavo da 75 Ω.
+            </p>
+        </div>
+        <h4>Lo stub</h4>
+        <p>
+            Un'antenna non adattata ha una parte reattiva che può essere cancellata da quella di uno <strong>stub</strong> collegato in <strong>parallelo</strong> all'alimentazione. La lunghezza dello stub è inferiore a λ/4 e viene terminato in <strong>corto circuito</strong> o <strong>aperto</strong> secondo che si voglia una reattanza induttiva o capacitiva.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-trasformatore-quarto-onda-stub.jpg" alt="Trasformatore a quarto d'onda e stub" loading="lazy">
+            <div class="diagram-caption">Uno spezzone di linea λ/4 è un invertitore di impedenza (Z0 = √(ZR·ZS)); uno stub aperto o in corto, in parallelo, annulla la parte reattiva.</div>
+        </div>
+        <h4>Hair Pin</h4>
+        <p>
+            L'<strong>Hair Pin</strong> è uno <strong>stub in corto circuito collegato direttamente all'alimentazione del dipolo</strong>, realizzato con un collegamento a U tra i morsetti dell'antenna. Il punto più distante è elettricamente a <strong>potenziale zero</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-hairpin.jpg" alt="Adattamento Hair Pin" loading="lazy">
+            <div class="diagram-caption">Hair Pin: stub in corto circuito, a forma di U, collegato direttamente ai morsetti del dipolo; il punto più lontano è a potenziale zero.</div>
+        </div>
+        <h4>Delta match e T-match</h4>
+        <p>
+            Nel <strong>delta match</strong> si aumenta la distanza tra i punti di alimentazione del dipolo: la presa fuori dal centro presenta un'impedenza diversa; maggiore è la separazione, maggiore è l'impedenza (resistiva se in risonanza). Il <strong>T-match</strong> equivale a uno <strong>stub in corto circuito in serie</strong> all'elemento radiante, lungo meno di λ/4: essendo la parte di linea induttiva, l'adattamento si ottiene <strong>accorciando il dipolo</strong>, che diventa capacitivo. Entrambi si usano per accoppiare un dipolo (circa 75 Ω) a una <strong>linea bilanciata</strong> da 300-600 Ω.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-delta-t-match.jpg" alt="Delta match e T-match" loading="lazy">
+            <div class="diagram-caption">Delta match (collegamento a V alla linea bilanciata) e T-match (stub in corto in serie): adattano un dipolo di circa 75 Ω a una linea bilanciata da 300-600 Ω.</div>
+        </div>
+        <h4>Gamma match, Omega match e J-Pole</h4>
+        <p>
+            Il <strong>gamma match</strong> è una variante del T-match: lo stub, lungo meno di λ/4, viene accordato con un <strong>condensatore variabile</strong>; ne esistono versioni <strong>bilanciata</strong> e <strong>sbilanciata</strong>. Tipico uso in VHF, con antenne in <strong>tubi di rame</strong> saldati. Nell'<strong>omega match</strong> si aggiunge un secondo condensatore variabile <strong>in parallelo</strong> che annulla la parte induttiva dello stub: lo stub può essere più corto e la regolazione è più agevole. Una variante è l'<strong>antenna J-Pole</strong>, usata soprattutto in VHF con <strong>polarizzazione verticale</strong>.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-gamma-omega-match.jpg" alt="Gamma match, Omega match e J-Pole" loading="lazy">
+            <div class="diagram-caption">Gamma match (stub con condensatore variabile), Omega match (con un secondo condensatore in parallelo) e antenna J-Pole in tubi di rame per le VHF.</div>
+        </div>
+        <h4>Adattamento con autotrasformatore</h4>
+        <p>
+            Con i <strong>radiatori verticali</strong> l'alimentazione si collega a un <strong>autotrasformatore</strong>: l'impedenza vista dal trasmettitore dipende dalla <strong>presa</strong> sull'avvolgimento (con la presa a metà, Z<sub>2</sub> = 4·Z<sub>1</sub>).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-autotrasformatore.jpg" alt="Adattamento con autotrasformatore" loading="lazy">
+            <div class="diagram-caption">Autotrasformatore: l'impedenza vista dal trasmettitore dipende dalla presa sull'avvolgimento; con la presa a metà E2 = 2·E1, I2 = I1/2 e Z2 = 4·Z1.</div>
+        </div>
+        <div class="remember">
+            <p><strong>Trasformatore a λ/4</strong>: Z<sub>0</sub> = √(Z<sub>R</sub>·Z<sub>S</sub>); <strong>stub</strong> (corto o aperto, in parallelo) annulla la reattanza.</p>
+            <p><strong>Hair pin</strong>: stub a U in corto ai morsetti del dipolo. <strong>Delta match</strong>: presa a V. <strong>T-match</strong>: stub in serie.</p>
+            <p><strong>Gamma</strong> e <strong>omega match</strong>: stub con condensatori variabili; <strong>J-Pole</strong>: VHF verticale.</p>
+            <p><strong>Autotrasformatore</strong>: l'impedenza dipende dalla presa; con presa a metà Z<sub>2</sub> = 4·Z<sub>1</sub>.</p>
+        </div>
+    </div>
+</section>
+
+<section id="ant-balun">
+    <div class="card">
+        <h3>Il balun e l'accordatore di antenna</h3>
+        <h4>Il balun</h4>
+        <p>
+            Un dipolo, per essere alimentato, richiede una <strong>linea bilanciata</strong>; la linea bilanciata classica è la piattina (linea bifilare). Volendolo alimentare con un <strong>cavo coassiale</strong> si hanno le <strong>correnti di modo comune</strong> del dipolo che scorrono lungo l'esterno della calza e <strong>irradiano energia</strong>. Il motivo è che il cavo schermato è una <strong>linea sbilanciata</strong>. Per rimediare si interpone tra dipolo e cavo un circuito detto <strong>balun</strong> (da <strong>bal</strong>anced - <strong>un</strong>balanced).
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-balun-correnti.jpg" alt="Correnti di modo comune e balun" loading="lazy">
+            <div class="diagram-caption">Alimentando un dipolo con un cavo coassiale, una corrente di modo comune I3 scorre sull'esterno della calza e irradia; un balun (choke, trasformatore bifilare o spezzone di linea) la elimina.</div>
+        </div>
+        <p>
+            Il balun può essere realizzato avvolgendo alcune <strong>spire di cavo coassiale</strong> (<em>choke</em>), con un <strong>trasformatore bifilare</strong> (spesso su toroide di ferrite) o con spezzoni di linea. Oltre a bilanciare, può anche <strong>trasformare l'impedenza</strong> (1:1, 4:1, 9:1).
+        </p>
+        <h4>L'accordatore di antenna</h4>
+        <p>
+            Dal lato del trasmettitore si usa generalmente un <strong>accordatore</strong> costruito con <strong>condensatori e induttori variabili</strong>, di solito configurato a <strong>T o a pi greco</strong>. Va collegato <strong>tra il ricetrasmettitore e la linea di trasmissione</strong>. Il <strong>rosmetro</strong> per misurare le onde stazionarie va collegato <strong>tra la radio e l'accordatore</strong>. Si regola l'accordatore fino al <strong>minimo ROS</strong>, tenendo conto che si sta adattando la <strong>radio al sistema linea + antenna</strong>: l'antenna dovrà essere già portata in risonanza, o meglio al massimo rendimento, agendo su di essa.
+        </p>
+                <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-accordatore-antenna.jpg" alt="Accordatore di antenna e rosmetro" loading="lazy">
+            <div class="diagram-caption">Collegamento: ricetrasmettitore, rosmetro (SWR/wattmetro), accordatore e sistema d'antenna. Schema dell'accordatore a pi greco con due condensatori variabili e una bobina commutata.</div>
+        </div>
+        <div class="remember">
+            <p>Dipolo (bilanciato) + coassiale (sbilanciato) = servono un <strong>balun</strong>, altrimenti la calza irradia con le <strong>correnti di modo comune</strong>.</p>
+            <p>Balun: <strong>choke</strong> di spire di coassiale, trasformatore bifilare o spezzoni di linea.</p>
+            <p>L'<strong>accordatore</strong> (T o π) sta tra radio e linea; il <strong>rosmetro</strong> tra radio e accordatore; si cerca il <strong>minimo ROS</strong>.</p>
+            <p>L'accordatore adatta <strong>radio e linea+antenna</strong>: l'antenna va comunque portata in risonanza.</p>
+        </div>
+    </div>
+
+    <details class="module-quiz">
+        <summary>✏️ Quiz Modulo 9 — Antenne (20 domande)</summary>
+        <div class="quiz-content">
+
+            <div class="quiz">
+                <div class="question">1. Secondo la definizione IEEE, un'antenna è:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Un amplificatore di segnali RF</li>
+                    <li onclick="checkAnswer(this, true)">B) Un mezzo per trasmettere e ricevere onde radio</li>
+                    <li onclick="checkAnswer(this, false)">C) Un filtro passa-banda</li>
+                    <li onclick="checkAnswer(this, false)">D) Un generatore di portante</li>
+                </ul>
+                <div class="answer">L'antenna è <em>"un mezzo per trasmettere e ricevere onde radio"</em>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">2. Per il principio di reciprocità un'antenna:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Funziona bene solo in trasmissione</li>
+                    <li onclick="checkAnswer(this, false)">B) Funziona bene solo in ricezione</li>
+                    <li onclick="checkAnswer(this, true)">C) Può funzionare ugualmente bene in trasmissione e in ricezione</li>
+                    <li onclick="checkAnswer(this, false)">D) Funziona solo a frequenza fissa</li>
+                </ul>
+                <div class="answer">Per <strong>reciprocità</strong> l'antenna si comporta in modo analogo in TX e RX.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">3. Dove si verifica la maggior parte della perdita di segnale nel link RF?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Nel cavo del trasmettitore</li>
+                    <li onclick="checkAnswer(this, false)">B) Nel connettore d'antenna</li>
+                    <li onclick="checkAnswer(this, false)">C) Nel ricevitore</li>
+                    <li onclick="checkAnswer(this, true)">D) Nel percorso di propagazione</li>
+                </ul>
+                <div class="answer">La stragrande maggioranza della perdita è nel <strong>percorso di propagazione</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">4. Le antenne risonanti sono caratterizzate da:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) Banda stretta e dimensioni pari a λ/4 o λ/2</li>
+                    <li onclick="checkAnswer(this, false)">B) Banda molto larga e grandi dimensioni</li>
+                    <li onclick="checkAnswer(this, false)">C) Impedenza sempre di 377 Ω</li>
+                    <li onclick="checkAnswer(this, false)">D) Assenza di onda stazionaria</li>
+                </ul>
+                <div class="answer">Le antenne <strong>risonanti</strong> hanno un'onda stazionaria di corrente: banda stretta, lunghezza λ/4 o λ/2.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">5. Le antenne ad onda progressiva hanno:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Banda stretta</li>
+                    <li onclick="checkAnswer(this, true)">B) Ampia larghezza di banda e grandi dimensioni</li>
+                    <li onclick="checkAnswer(this, false)">C) Solo funzionamento in ricezione</li>
+                    <li onclick="checkAnswer(this, false)">D) Resistenza di radiazione nulla</li>
+                </ul>
+                <div class="answer">Hanno <strong>ampia banda</strong> e <strong>grandi dimensioni</strong> grazie alla transizione graduale.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">6. La densità di radiazione si misura in:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) W</li>
+                    <li onclick="checkAnswer(this, false)">B) dBi</li>
+                    <li onclick="checkAnswer(this, true)">C) W/m²</li>
+                    <li onclick="checkAnswer(this, false)">D) Ω</li>
+                </ul>
+                <div class="answer">S<sub>r</sub> è potenza per unità di area: <strong>W/m²</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">7. Un radiatore isotropico:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) È facilmente realizzabile con un dipolo</li>
+                    <li onclick="checkAnswer(this, true)">B) Irradia uguale in tutte le direzioni ed è un riferimento ideale</li>
+                    <li onclick="checkAnswer(this, false)">C) È un'antenna a banda stretta</li>
+                    <li onclick="checkAnswer(this, false)">D) Irradia solo sul piano orizzontale</li>
+                </ul>
+                <div class="answer">L'isotropico è <strong>ideale</strong> e serve da riferimento.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">8. Il lobo principale di un diagramma di radiazione è:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Il lobo a 180° rispetto alla direzione utile</li>
+                    <li onclick="checkAnswer(this, false)">B) Quello con la minore energia</li>
+                    <li onclick="checkAnswer(this, false)">C) Un lobo secondario</li>
+                    <li onclick="checkAnswer(this, true)">D) Quello che contiene la maggior parte dell'energia, direzione di massimo irraggiamento</li>
+                </ul>
+                <div class="answer">Il <strong>lobo principale</strong> è la direzione di massima radiazione.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">9. I lobi secondari andrebbero:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) Ridotti al minimo, perché sono irraggiamento indesiderato</li>
+                    <li onclick="checkAnswer(this, false)">B) Aumentati il più possibile</li>
+                    <li onclick="checkAnswer(this, false)">C) Resi uguali al lobo principale</li>
+                    <li onclick="checkAnswer(this, false)">D) Ignorati, sono sempre utili</li>
+                </ul>
+                <div class="answer">I lobi secondari sono <strong>perdite</strong>: vanno ridotti.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">10. Il confine pratico tra campo vicino e campo lontano si pone a circa:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Una lunghezza d'onda</li>
+                    <li onclick="checkAnswer(this, false)">B) Mezza lunghezza d'onda</li>
+                    <li onclick="checkAnswer(this, true)">C) Tre lunghezze d'onda</li>
+                    <li onclick="checkAnswer(this, false)">D) Dieci metri</li>
+                </ul>
+                <div class="answer">Nella pratica il confine è a circa <strong>tre lunghezze d'onda</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">11. Quanto vale, teoricamente, l'impedenza di un dipolo a mezz'onda in risonanza?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 300 Ω</li>
+                    <li onclick="checkAnswer(this, true)">B) Circa 73 Ω</li>
+                    <li onclick="checkAnswer(this, false)">C) 50 kΩ</li>
+                    <li onclick="checkAnswer(this, false)">D) Circa 10 Ω</li>
+                </ul>
+                <div class="answer">Circa <strong>73 Ω</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">12. Qual è il guadagno di un dipolo a mezz'onda rispetto al radiatore isotropico?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 0 dBi</li>
+                    <li onclick="checkAnswer(this, false)">B) 5,8 dBi</li>
+                    <li onclick="checkAnswer(this, false)">C) 3 dBi</li>
+                    <li onclick="checkAnswer(this, true)">D) 2,15 dBi</li>
+                </ul>
+                <div class="answer">Il dipolo ha <strong>2,15 dBi</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">13. Un dipolo ripiegato a mezz'onda ha un'impedenza di circa:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) 300 Ω</li>
+                    <li onclick="checkAnswer(this, false)">B) 73 Ω</li>
+                    <li onclick="checkAnswer(this, false)">C) 30 Ω</li>
+                    <li onclick="checkAnswer(this, false)">D) 10 Ω</li>
+                </ul>
+                <div class="answer">È circa <strong>300 Ω</strong>, quattro volte il dipolo semplice.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">14. Un monopolo verticale a quarto d'onda ha una lunghezza fisica pari a:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) λ/2</li>
+                    <li onclick="checkAnswer(this, false)">B) λ/8</li>
+                    <li onclick="checkAnswer(this, true)">C) λ/4</li>
+                    <li onclick="checkAnswer(this, false)">D) 2λ</li>
+                </ul>
+                <div class="answer">Il monopolo misura <strong>λ/4</strong> perché l'immagine nel piano di terra completa il dipolo.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">15. Per avere una ground plane da 50 Ω l'angolo tra il radiatore e i radiali deve essere di circa:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 90°</li>
+                    <li onclick="checkAnswer(this, true)">B) 120°</li>
+                    <li onclick="checkAnswer(this, false)">C) 45°</li>
+                    <li onclick="checkAnswer(this, false)">D) 180°</li>
+                </ul>
+                <div class="answer">A 90° l'impedenza è circa 30 Ω; a <strong>120°</strong> circa 50 Ω.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">16. Nella Yagi il riflettore è:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Più corto del dipolo e posto davanti</li>
+                    <li onclick="checkAnswer(this, false)">B) Uguale al dipolo e a lato</li>
+                    <li onclick="checkAnswer(this, false)">C) Un elemento in serie al cavo</li>
+                    <li onclick="checkAnswer(this, true)">D) Più lungo del dipolo e posto dietro</li>
+                </ul>
+                <div class="answer">Il <strong>riflettore</strong> è l'elemento più lungo, dietro il dipolo.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">17. Una Yagi a 3 elementi guadagna circa, rispetto al dipolo:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 0 dB</li>
+                    <li onclick="checkAnswer(this, true)">B) 5,8 dB</li>
+                    <li onclick="checkAnswer(this, false)">C) 20 dB</li>
+                    <li onclick="checkAnswer(this, false)">D) 1,2 dB</li>
+                </ul>
+                <div class="answer">In media circa <strong>5,8 dB</strong> (riflettore 3,5 dB, direttore 2,3 dB).</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">18. Un dipolo alimentato con cavo coassiale richiede un balun perché:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Il cavo coassiale ha impedenza troppo alta</li>
+                    <li onclick="checkAnswer(this, false)">B) Il balun amplifica il segnale</li>
+                    <li onclick="checkAnswer(this, true)">C) Il cavo è sbilanciato e le correnti di modo comune scorrono sulla calza irradiando</li>
+                    <li onclick="checkAnswer(this, false)">D) Altrimenti non c'è risonanza</li>
+                </ul>
+                <div class="answer">Il balun evita le <strong>correnti di modo comune</strong> sulla calza.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">19. In un impianto con accordatore, il rosmetro va collegato:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Tra l'accordatore e l'antenna</li>
+                    <li onclick="checkAnswer(this, true)">B) Tra la radio e l'accordatore</li>
+                    <li onclick="checkAnswer(this, false)">C) In parallelo all'antenna</li>
+                    <li onclick="checkAnswer(this, false)">D) Direttamente sulla massa</li>
+                </ul>
+                <div class="answer">Il rosmetro va tra <strong>radio e accordatore</strong>; si cerca il minimo ROS.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">20. La polarizzazione circolare si ottiene con due dipoli incrociati alimentati con uno sfasamento di:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) 0°</li>
+                    <li onclick="checkAnswer(this, false)">B) 45°</li>
+                    <li onclick="checkAnswer(this, false)">C) 180°</li>
+                    <li onclick="checkAnswer(this, true)">D) 90°</li>
+                </ul>
+                <div class="answer">Due dipoli incrociati, sfasati di <strong>90°</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+        </div>
+    </details>
+</section>
+
+
+<h2 id="modulo-strumenti">Modulo 10 — Strumenti di misura</h2>
 
 <section id="str-frequenza">
     <div class="intro-box">
@@ -6764,7 +8327,7 @@
     </div>
 
     <details class="module-quiz">
-        <summary>✏️ Quiz Modulo 8 — Strumenti di misura (20 domande)</summary>
+        <summary>✏️ Quiz Modulo 10 — Strumenti di misura (20 domande)</summary>
         <div class="quiz-content">
 
             <div class="quiz">
@@ -7011,7 +8574,7 @@
     </details>
 </section>
 
-<h2 id="modulo6">Modulo 9 — Normativa</h2>
+<h2 id="modulo6">Modulo 11 — Normativa</h2>
 
 <section id="itu">
     <div class="intro-box">
@@ -7232,7 +8795,7 @@
     </div>
 
     <details class="module-quiz">
-        <summary>✏️ Quiz Modulo 9 — Normativa (20 domande)</summary>
+        <summary>✏️ Quiz Modulo 11 — Normativa (20 domande)</summary>
         <div class="quiz-content">
 
             <div class="quiz">
@@ -7485,7 +9048,7 @@
     </section>
 
 <!-- ===================== MODULO 6 ===================== -->
-<h2 id="modulo7">Modulo 10 — Pratica operativa</h2>
+<h2 id="modulo7">Modulo 12 — Pratica operativa</h2>
 
 <section id="codici">
     <div class="intro-box">
@@ -7740,7 +9303,7 @@
     </div>
 
     <details class="module-quiz">
-        <summary>✏️ Quiz Modulo 10 — Pratica operativa (20 domande)</summary>
+        <summary>✏️ Quiz Modulo 12 — Pratica operativa (20 domande)</summary>
         <div class="quiz-content">
 
             <div class="quiz">
@@ -8011,6 +9574,12 @@
                 <dt>Analizzatore di spettro</dt>
                 <dd>Strumento che mostra la distribuzione spettrale di un segnale: analizza il segnale nel dominio della frequenza.</dd>
 
+                <dt>Antenna</dt>
+                <dd>Trasduttore tra la linea di trasmissione e lo spazio libero: converte il segnale della linea in onda elettromagnetica e viceversa.</dd>
+
+                <dt>Balun</dt>
+                <dd>Balanced-unbalanced: circuito che adatta una linea bilanciata (dipolo) a una sbilanciata (cavo coassiale), eliminando le correnti di modo comune sulla calza.</dd>
+
                 <dt>Banda passante</dt>
                 <dd>Intervallo di frequenze in cui un circuito funziona correttamente.</dd>
 
@@ -8022,6 +9591,12 @@
 
                 <dt>BJT</dt>
                 <dd>Bipolar Junction Transistor. Transistor a giunzione bipolare, controllato in corrente.</dd>
+
+                <dt>Carta di Smith</dt>
+                <dd>Diagramma circolare per il calcolo grafico delle impedenze: mostra resistenza, reattanza, ROS e coefficiente di riflessione e semplifica lo studio degli adattamenti.</dd>
+
+                <dt>Coefficiente di riflessione (Γ)</dt>
+                <dd>Rapporto tra tensione riflessa e tensione diretta su una linea: Γ = (Z<sub>L</sub> - Z<sub>0</sub>)/(Z<sub>L</sub> + Z<sub>0</sub>). Vale 0 con adattamento perfetto e 1 con riflessione totale.</dd>
 
                 <dt>Condensatore</dt>
                 <dd>Componente che immagazzina energia sotto forma di campo elettrico.</dd>
@@ -8044,8 +9619,26 @@
                 <dt>Diodo</dt>
                 <dd>Componente che lascia passare la corrente in una sola direzione.</dd>
 
+                <dt>Dipolo</dt>
+                <dd>Antenna filare a mezz'onda alimentata al centro: impedenza circa 73 Ω, guadagno 2,15 dBi, diagramma ad otto.</dd>
+
+                <dt>Direttività</dt>
+                <dd>Rapporto tra l'intensità di radiazione in una direzione e quella media in tutte le direzioni.</dd>
+
                 <dt>DSP</dt>
                 <dd>Digital Signal Processing: elaborazione numerica del segnale, composta da convertitore A/D, processo digitale e convertitore D/A.</dd>
+
+                <dt>Effetto pelle</dt>
+                <dd>Fenomeno per cui, ad alta frequenza, la corrente alternata scorre solo vicino alla superficie del conduttore, aumentando la resistenza e le perdite.</dd>
+
+                <dt>EIRP</dt>
+                <dd>Equivalent Isotropic Radiated Power: potenza irradiata riferita al radiatore isotropico; maggiore di 2,15 dB rispetto all'ERP.</dd>
+
+                <dt>ERP</dt>
+                <dd>Effective Radiated Power: potenza che dovrebbe irradiare un dipolo per avere lo stesso campo nella direzione di massimo.</dd>
+
+                <dt>Fattore di velocità (VF)</dt>
+                <dd>Rapporto tra la velocità di propagazione in una linea e quella della luce: VF = 1/√ε, sempre minore di 1 in un cavo.</dd>
 
                 <dt>FET</dt>
                 <dd>Field Effect Transistor. Transistor a effetto di campo, controllato in tensione.</dd>
@@ -8065,6 +9658,9 @@
                 <dt>Frequenzimetro</dt>
                 <dd>Strumento che misura la frequenza contando i periodi del segnale in una base dei tempi fissa e stabile.</dd>
 
+                <dt>Ground plane</dt>
+                <dd>Piano di terra (o antenna verticale con radiali): superficie o fili a raggiera che simulano un terreno perfettamente conduttore.</dd>
+
                 <dt>Guadagno</dt>
                 <dd>Rapporto tra uscita e ingresso di un amplificatore.</dd>
 
@@ -8076,6 +9672,9 @@
 
                 <dt>Impedenza (Z)</dt>
                 <dd>Opposizione al passaggio di corrente alternata. Si misura in Ohm.</dd>
+
+                <dt>Impedenza caratteristica (Z<sub>0</sub>)</dt>
+                <dd>Impedenza di una linea di trasmissione priva di perdite: Z<sub>0</sub> = √(L/C). Dipende dalla geometria e dal dielettrico, non dalla lunghezza.</dd>
 
                 <dt>Induttore</dt>
                 <dd>Componente che immagazzina energia sotto forma di campo magnetico.</dd>
@@ -8091,6 +9690,9 @@
 
                 <dt>LED</dt>
                 <dd>Light Emitting Diode. Diodo che emette luce.</dd>
+
+                <dt>Linea di trasmissione</dt>
+                <dd>Collegamento a due conduttori che trasporta un segnale RF dal generatore al carico con la minima perdita e irraggiamento.</dd>
 
                 <dt>Logbook</dt>
                 <dd>Registro di stazione. Obbligatorio per legge.</dd>
@@ -8128,6 +9730,9 @@
                 <dt>PLL</dt>
                 <dd>Phase-Locked Loop: circuito che aggancia un oscillatore a un riferimento stabile tramite reazione negativa di fase.</dd>
 
+                <dt>Polarizzazione</dt>
+                <dd>Orientamento del campo elettrico di un'onda rispetto al suolo: lineare (orizzontale o verticale), circolare o ellittica.</dd>
+
                 <dt>PTT</dt>
                 <dd>Push-To-Talk: pulsante che commuta l'apparato in trasmissione.</dd>
 
@@ -8149,11 +9754,17 @@
                 <dt>Resistore</dt>
                 <dd>Componente passivo che introduce una resistenza nota nel circuito; il suo valore è spesso codificato con anelli colorati.</dd>
 
+                <dt>Return loss</dt>
+                <dd>Attenuazione in dB del segnale riflesso da una linea o da un quadripolo: RL = 10·log(P<sub>F</sub>/P<sub>R</sub>). Più è alto, migliore è l'adattamento.</dd>
+
                 <dt>Risonanza</dt>
                 <dd>Condizione in cui X<sub>L</sub> = X<sub>C</sub> in un circuito RLC.</dd>
 
                 <dt>RIT</dt>
                 <dd>Receiver Incremental Tuning: piccola variazione della frequenza di ricezione rispetto a quella di trasmissione.</dd>
+
+                <dt>ROS (SWR)</dt>
+                <dd>Rapporto di onde stazionarie: rapporto tra tensione massima e minima lungo una linea non adattata; vale 1:1 con adattamento perfetto. Valori tollerabili: sotto 2:1.</dd>
 
                 <dt>RST</dt>
                 <dd>Codice di valutazione del segnale ricevuto (Readability, Strength, Tone).</dd>
@@ -8179,6 +9790,9 @@
                 <dt>SSB</dt>
                 <dd>Single Side Band. Modulazione a banda laterale unica.</dd>
 
+                <dt>Stub</dt>
+                <dd>Spezzone di linea, in corto o aperto, usato come reattanza (induttanza o capacità) per l'adattamento di impedenza.</dd>
+
                 <dt>Supereterodina</dt>
                 <dd>Ricevitore che converte il segnale a una frequenza intermedia fissa, dove si filtra e si amplifica.</dd>
 
@@ -8202,6 +9816,9 @@
 
                 <dt>Watt (W)</dt>
                 <dd>Unità di misura della potenza.</dd>
+                <dt>Yagi</dt>
+                <dd>Antenna direttiva composta da dipolo, riflettore (più lungo) e direttori (più corti).</dd>
+
             </dl>
         </div>
     </div>
@@ -8209,10 +9826,10 @@
 
 <!-- ===================== QUIZ FINALE ===================== -->
 <section id="quiz-finale">
-    <h2>Quiz finale — 80 domande</h2>
+    <h2>Quiz finale — 100 domande</h2>
 
     <div class="card">
-        <p>Rispondi a tutte le 80 domande. Clicca sulla risposta per verificarla, poi su "Mostra risposta" per la spiegazione.</p>
+        <p>Rispondi a tutte le 100 domande. Clicca sulla risposta per verificarla, poi su "Mostra risposta" per la spiegazione.</p>
     </div>
 
     <div class="quiz">
@@ -9174,16 +10791,258 @@
         <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
     </div>
 
+    <div class="quiz">
+        <div class="question">81. Qual è la funzione principale di una linea di trasmissione?</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Amplificare il segnale</li>
+            <li onclick="checkAnswer(this, true)">B) Trasferire il segnale RF dal generatore all'utilizzatore con la minima perdita</li>
+            <li onclick="checkAnswer(this, false)">C) Generare la portante</li>
+            <li onclick="checkAnswer(this, false)">D) Filtrare i segnali indesiderati</li>
+        </ul>
+        <div class="answer">La linea deve trasferire il segnale con la <strong>minima perdita di potenza</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">82. Quale tipo di cavo ha un'impedenza caratteristica tipica di 50 Ω?</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) La piattina bifilare da TV</li>
+            <li onclick="checkAnswer(this, false)">B) La scaletta in aria</li>
+            <li onclick="checkAnswer(this, true)">C) Il cavo coassiale RG-213</li>
+            <li onclick="checkAnswer(this, false)">D) La linea a finestre</li>
+        </ul>
+        <div class="answer">Il <strong>RG-213</strong> è un coassiale da 50 Ω.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">83. Il fattore di velocità di un cavo è sempre:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Maggiore di 1</li>
+            <li onclick="checkAnswer(this, true)">B) Minore di 1 (o uguale a 1 nel vuoto)</li>
+            <li onclick="checkAnswer(this, false)">C) Uguale a 1,5</li>
+            <li onclick="checkAnswer(this, false)">D) Uguale alla costante dielettrica</li>
+        </ul>
+        <div class="answer">VF = 1/√ε ≤ 1.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">84. Una linea è adattata quando:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) È lunga un numero intero di λ</li>
+            <li onclick="checkAnswer(this, false)">B) È in corto circuito</li>
+            <li onclick="checkAnswer(this, true)">C) È terminata su un carico di impedenza uguale a Z<sub>0</sub></li>
+            <li onclick="checkAnswer(this, false)">D) Ha attenuazione nulla</li>
+        </ul>
+        <div class="answer">Con carico uguale a Z<sub>0</sub> <strong>non c'è riflessione</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">85. Il ROS può assumere valori:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Da 0 a 1</li>
+            <li onclick="checkAnswer(this, true)">B) Sempre maggiori o uguali a 1</li>
+            <li onclick="checkAnswer(this, false)">C) Solo negativi</li>
+            <li onclick="checkAnswer(this, false)">D) Solo uguali a 1</li>
+        </ul>
+        <div class="answer">ROS = V<sub>MAX</sub>/V<sub>MIN</sub> ≥ 1.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">86. Un ROS di 1:1 indica che:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Tutta la potenza viene riflessa</li>
+            <li onclick="checkAnswer(this, true)">B) Non c'è riflessione, l'adattamento è perfetto</li>
+            <li onclick="checkAnswer(this, false)">C) La linea è aperta</li>
+            <li onclick="checkAnswer(this, false)">D) La linea è in corto</li>
+        </ul>
+        <div class="answer">ROS 1:1 = Γ = 0: <strong>nessuna riflessione</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">87. Un return loss elevato (20-30 dB) indica:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Un cattivo adattamento</li>
+            <li onclick="checkAnswer(this, true)">B) Un buon adattamento di impedenza</li>
+            <li onclick="checkAnswer(this, false)">C) Un cavo molto lungo</li>
+            <li onclick="checkAnswer(this, false)">D) Un'antenna senza guadagno</li>
+        </ul>
+        <div class="answer">Alto return loss = poca potenza riflessa = <strong>buon adattamento</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">88. Per un cavo molto attenuante, il ROS misurato al trasmettitore rispetto a quello al carico appare:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Peggiore</li>
+            <li onclick="checkAnswer(this, false)">B) Uguale</li>
+            <li onclick="checkAnswer(this, true)">C) Migliore del reale</li>
+            <li onclick="checkAnswer(this, false)">D) Infinito</li>
+        </ul>
+        <div class="answer">L'attenuazione riduce la potenza riflessa: al generatore il ROS appare <strong>migliore</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">89. L'effetto pelle consiste nel fatto che, al crescere della frequenza:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, true)">A) La corrente si concentra sulla superficie del conduttore</li>
+            <li onclick="checkAnswer(this, false)">B) La corrente si distribuisce uniformemente</li>
+            <li onclick="checkAnswer(this, false)">C) La resistenza del conduttore diminuisce</li>
+            <li onclick="checkAnswer(this, false)">D) Il campo magnetico scompare</li>
+        </ul>
+        <div class="answer">La densità di corrente diminuisce all'interno e aumenta in <strong>superficie</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">90. Quale connettore è tipicamente usato per bassa potenza, VHF/UHF e strumenti, con innesto a baionetta?</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) PL-259</li>
+            <li onclick="checkAnswer(this, true)">B) BNC</li>
+            <li onclick="checkAnswer(this, false)">C) Tipo N</li>
+            <li onclick="checkAnswer(this, false)">D) Presa RCA</li>
+        </ul>
+        <div class="answer">Il <strong>BNC</strong> è a baionetta ed è usato per bassa potenza.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">91. Come si comporta un'antenna trasmittente rispetto alla linea?</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Da generatore</li>
+            <li onclick="checkAnswer(this, true)">B) Da carico</li>
+            <li onclick="checkAnswer(this, false)">C) Da filtro</li>
+            <li onclick="checkAnswer(this, false)">D) Da amplificatore</li>
+        </ul>
+        <div class="answer">In TX l'antenna è un <strong>carico</strong>, in RX un generatore.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">92. Un'antenna ricevente si comporta da:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Carico</li>
+            <li onclick="checkAnswer(this, false)">B) Resistenza pura</li>
+            <li onclick="checkAnswer(this, true)">C) Generatore</li>
+            <li onclick="checkAnswer(this, false)">D) Interruttore</li>
+        </ul>
+        <div class="answer">In ricezione l'antenna è il <strong>generatore</strong> del segnale.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">93. Che cosa descrive il diagramma di radiazione?</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) La resistenza di perdita dell'antenna</li>
+            <li onclick="checkAnswer(this, true)">B) Come l'antenna irradia il segnale nello spazio</li>
+            <li onclick="checkAnswer(this, false)">C) La lunghezza del cavo</li>
+            <li onclick="checkAnswer(this, false)">D) La banda passante in dB</li>
+        </ul>
+        <div class="answer">È la rappresentazione grafica di <strong>come l'antenna irradia</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">94. La direttività è il rapporto tra:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Potenza irradiata e potenza assorbita</li>
+            <li onclick="checkAnswer(this, true)">B) Intensità di radiazione in una direzione e intensità media in tutte le direzioni</li>
+            <li onclick="checkAnswer(this, false)">C) Tensione e corrente</li>
+            <li onclick="checkAnswer(this, false)">D) Lunghezza fisica ed elettrica</li>
+        </ul>
+        <div class="answer">Direttività = intensità in una direzione / intensità media.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">95. Il fattore di accorciamento k di un'antenna filare è:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Maggiore di 1</li>
+            <li onclick="checkAnswer(this, false)">B) Uguale a 2</li>
+            <li onclick="checkAnswer(this, true)">C) Minore di 1</li>
+            <li onclick="checkAnswer(this, false)">D) Sempre 0</li>
+        </ul>
+        <div class="answer">La lunghezza effettiva va corretta con <strong>k &lt; 1</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">96. La lunghezza approssimata in metri di un dipolo a mezz'onda a 14,2 MHz è circa:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, true)">A) 143/14,2 ≈ 10 m</li>
+            <li onclick="checkAnswer(this, false)">B) 300/14,2 ≈ 21 m</li>
+            <li onclick="checkAnswer(this, false)">C) 14,2/143 ≈ 0,1 m</li>
+            <li onclick="checkAnswer(this, false)">D) 143 · 14,2 ≈ 2030 m</li>
+        </ul>
+        <div class="answer">l ≈ 143/f(MHz) ≈ <strong>10 m</strong> totali.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">97. L'EIRP rispetto all'ERP è maggiore di:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, true)">A) 2,15 dB</li>
+            <li onclick="checkAnswer(this, false)">B) 6 dB</li>
+            <li onclick="checkAnswer(this, false)">C) 0,5 dB</li>
+            <li onclick="checkAnswer(this, false)">D) 10 dB</li>
+        </ul>
+        <div class="answer">EIRP = ERP + <strong>2,15 dB</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">98. L'impedenza dello spazio libero vale:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) 50 Ω</li>
+            <li onclick="checkAnswer(this, true)">B) 377 Ω</li>
+            <li onclick="checkAnswer(this, false)">C) 73 Ω</li>
+            <li onclick="checkAnswer(this, false)">D) 600 Ω</li>
+        </ul>
+        <div class="answer">È una costante: <strong>377 Ω</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">99. Per le VHF in portata ottica si usa normalmente la polarizzazione:</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) Circolare</li>
+            <li onclick="checkAnswer(this, true)">B) Verticale</li>
+            <li onclick="checkAnswer(this, false)">C) Ellittica</li>
+            <li onclick="checkAnswer(this, false)">D) Nessuna in particolare</li>
+        </ul>
+        <div class="answer">VHF e oltre in portata ottica: <strong>verticale</strong>.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+    <div class="quiz">
+        <div class="question">100. Quale antenna è tipicamente usata per l'ascolto in HF ed è ad onda progressiva?</div>
+        <ul class="options">
+            <li onclick="checkAnswer(this, false)">A) La Yagi</li>
+            <li onclick="checkAnswer(this, false)">B) La ground plane</li>
+            <li onclick="checkAnswer(this, true)">C) La Beverage</li>
+            <li onclick="checkAnswer(this, false)">D) La parabola</li>
+        </ul>
+        <div class="answer">La <strong>Beverage</strong> è una long wire terminata su resistenza.</div>
+        <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+    </div>
+
+
 </section>
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.5.3</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.6.0</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.6.0</strong> — Integrati due nuovi moduli, con lo stesso schema degli altri (introduzione, spiegazione, box "Da ricordare", tabelle, immagini). <strong>Modulo 8 — Linee di trasmissione</strong>: generalità e linee bifilari; cavi coassiali, linee su circuito stampato, guide d'onda e connettori; fattore di velocità, lunghezza d'onda e impedenza caratteristica; adattamento (trasformatore, reti a T e π, linea adattata) e carta di Smith; coefficiente di riflessione, onde stazionarie, ROS e return loss; attenuazione, perdite ed effetto pelle. <strong>Modulo 9 — Antenne</strong>: definizione, reciprocità e link RF; densità di radiazione, diagramma, lobi, regioni di campo e direttività; antenne risonanti e ad onda progressiva; dimensioni, guadagno, apertura efficace, banda passante, resistenza di radiazione, ERP ed EIRP, effetto del suolo; polarizzazione; dipolo, dipolo ripiegato, long wire, loop, monopolo, antenna caricata, ground plane, Yagi, parabola, Beverage; adattamento con trasformatore a λ/4, stub, hair pin, delta, T, gamma e omega match, autotrasformatore; balun e accordatore. Aggiunti due quiz da 20 domande, 20 nuove domande al <strong>quiz finale</strong> (da 80 a 100), 18 nuove voci di glossario e 50 nuove immagini. Strumenti di misura, Normativa e Pratica operativa sono rinumerati Moduli 10, 11 e 12; i punteggi dei quiz già salvati restano validi perché gli identificativi interni dei moduli non cambiano. Nell'integrazione sono stati corretti o chiariti alcuni punti del materiale sorgente: la densità di radiazione diminuisce con il <em>quadrato della distanza</em> (non "al diminuire"), la EIRP si calcola <em>sottraendo</em> le perdite della linea, il ROS è sempre maggiore o uguale a 1, la rete a π è C-L-C (due elementi in parallelo e uno in serie), lo stato dell'illuminatore nelle parabole offset/prime focus, e le tabelle di attenuazione dei cavi sono riportate con le unità di misura (dB ogni 100 piedi e dB ogni 100 m).</p>
         <p><strong>v1.5.3</strong> — Aggiunte le immagini definitive dei diagrammi mancanti nei nuovi moduli Trasmettitori, Ricevitori e Strumenti di misura (e dell'oscillatore Clapp a quarzo): sostituiscono i segnaposto e sono incluse nel repository in <code>assets/images/</code>.</p>
         <p><strong>v1.5.2</strong> — Pulizia dei commenti di sviluppo nel codice: aggiornati i riferimenti alla cartella <code>assets/images/</code> e al formato JPG.</p>
         <p><strong>v1.5.1</strong> — Le immagini dei diagrammi sono ora in formato JPG e si trovano nella cartella <code>assets/images/</code>, inclusa nel repository; aggiornati di conseguenza tutti i collegamenti nella pagina.</p>
