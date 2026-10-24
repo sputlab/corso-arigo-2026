@@ -36,7 +36,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Corso Base di Elettronica e Radiotecnica — v1.6.0</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.6.1</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -876,7 +876,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.6.0</span>
+        <span class="version-badge">v1.6.1</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -1081,7 +1081,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.6.0</strong> — due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+            <p>Versione attuale: <strong>1.6.1</strong> — migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
         </div>
     </div>
 </section>
@@ -11059,12 +11059,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer" id="changelog">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.6.0</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.6.1</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.6.1</strong> — <strong>Fix per smartphone</strong>: risolto il contenuto più largo dello schermo che veniva tagliato a destra (il contenitore principale ora si restringe correttamente e gli elementi larghi scorrono nel proprio riquadro, mentre il testo va a capo); testo più grande e leggibile sotto i 900 px di larghezza (da 17 a 19 px in base allo schermo), interlinea più ariosa, margini laterali ridotti e rispetto delle aree sicure di notch e barre del browser. <strong>Nuovo pulsante Changelog</strong> nel menu laterale, sotto Appendici: porta in fondo alla pagina, all'inizio del piè di pagina con ringraziamenti e storico delle versioni. <strong>Immagini</strong>: aggiunte le ultime 5 immagini dei diagrammi del Modulo 9 — Antenne (accordatore, autotrasformatore, correnti di modo comune e balun, delta e T-match, gamma e omega match), così tutte le 50 figure dei moduli 8 e 9 sono presenti.</p>
         <p><strong>v1.6.0</strong> — Integrati due nuovi moduli, con lo stesso schema degli altri (introduzione, spiegazione, box "Da ricordare", tabelle, immagini). <strong>Modulo 8 — Linee di trasmissione</strong>: generalità e linee bifilari; cavi coassiali, linee su circuito stampato, guide d'onda e connettori; fattore di velocità, lunghezza d'onda e impedenza caratteristica; adattamento (trasformatore, reti a T e π, linea adattata) e carta di Smith; coefficiente di riflessione, onde stazionarie, ROS e return loss; attenuazione, perdite ed effetto pelle. <strong>Modulo 9 — Antenne</strong>: definizione, reciprocità e link RF; densità di radiazione, diagramma, lobi, regioni di campo e direttività; antenne risonanti e ad onda progressiva; dimensioni, guadagno, apertura efficace, banda passante, resistenza di radiazione, ERP ed EIRP, effetto del suolo; polarizzazione; dipolo, dipolo ripiegato, long wire, loop, monopolo, antenna caricata, ground plane, Yagi, parabola, Beverage; adattamento con trasformatore a λ/4, stub, hair pin, delta, T, gamma e omega match, autotrasformatore; balun e accordatore. Aggiunti due quiz da 20 domande, 20 nuove domande al <strong>quiz finale</strong> (da 80 a 100), 18 nuove voci di glossario e 50 nuove immagini. Strumenti di misura, Normativa e Pratica operativa sono rinumerati Moduli 10, 11 e 12; i punteggi dei quiz già salvati restano validi perché gli identificativi interni dei moduli non cambiano. Nell'integrazione sono stati corretti o chiariti alcuni punti del materiale sorgente: la densità di radiazione diminuisce con il <em>quadrato della distanza</em> (non "al diminuire"), la EIRP si calcola <em>sottraendo</em> le perdite della linea, il ROS è sempre maggiore o uguale a 1, la rete a π è C-L-C (due elementi in parallelo e uno in serie), lo stato dell'illuminatore nelle parabole offset/prime focus, e le tabelle di attenuazione dei cavi sono riportate con le unità di misura (dB ogni 100 piedi e dB ogni 100 m).</p>
         <p><strong>v1.5.3</strong> — Aggiunte le immagini definitive dei diagrammi mancanti nei nuovi moduli Trasmettitori, Ricevitori e Strumenti di misura (e dell'oscillatore Clapp a quarzo): sostituiscono i segnaposto e sono incluse nel repository in <code>assets/images/</code>.</p>
         <p><strong>v1.5.2</strong> — Pulizia dei commenti di sviluppo nel codice: aggiornati i riferimenti alla cartella <code>assets/images/</code> e al formato JPG.</p>
