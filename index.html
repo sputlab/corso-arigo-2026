@@ -35,7 +35,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Corso Base di Elettronica e Radiotecnica — v1.6.0</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
@@ -156,8 +156,22 @@
     #content {
         margin-left: var(--sidebar-width);
         flex: 1;
+        /* min-width: 0 è fondamentale: <body> è un contenitore flex e, senza
+           questa riga, un figlio flex non si restringe sotto la larghezza
+           del suo contenuto più largo. Il contenuto finiva più largo dello
+           schermo e veniva tagliato a destra su mobile. */
+        min-width: 0;
         padding: 40px 50px;
         max-width: 1100px;
+    }
+    /* Nessun elemento può superare la larghezza del contenitore: gli
+       elementi larghi (tabelle, formule) scorrono dentro il proprio riquadro,
+       il testo lungo va a capo. */
+    #content img, #content svg, #content table, #content .diagram, #content .card,
+    #content .intro-box, #content .quiz, #content .formula { max-width: 100%; }
+    #content p, #content li, #content dd, #content dt, #content h2, #content h3, #content h4,
+    #content .diagram-caption, #content .question, #content .answer, #content .label {
+        overflow-wrap: break-word;
     }
 
     /* ===== TYPOGRAPHY ===== */
@@ -783,13 +797,25 @@
     @media (max-width: 900px) {
         #sidebar { transform: translateX(-100%); }
         #sidebar.open { transform: translateX(0); }
-        #content { margin-left: 0; padding: 20px; padding-top: 70px; }
+        /* Testo più grande su mobile: scala con la larghezza dello schermo
+           (17px sui telefoni stretti, fino a 19px) e interlinea più ariosa;
+           margini laterali ridotti per dare più spazio al testo. */
+        html { font-size: clamp(17px, 4.4vw, 19px); }
+        body { font-size: 1rem; line-height: 1.8; }
+        #content {
+            margin-left: 0;
+            padding: 20px 14px;
+            padding-top: 70px;
+            padding-bottom: calc(40px + env(safe-area-inset-bottom));
+            padding-left: max(14px, env(safe-area-inset-left));
+            padding-right: max(14px, env(safe-area-inset-right));
+        }
         .menu-toggle {
             display: flex;
             align-items: center;
             justify-content: center;
             position: fixed;
-            top: 12px; left: 15px;
+            top: max(12px, env(safe-area-inset-top)); left: max(15px, env(safe-area-inset-left));
             z-index: 1100;
             background: var(--primary);
             color: #fff;
@@ -803,8 +829,8 @@
         h1 { font-size: 1.55rem; }
         h2 { font-size: 1.32rem; margin-top: 38px; }
         h3 { font-size: 1.1rem; }
-        .intro-box, .card { padding: 18px 18px; }
-        .quiz { padding: 14px 16px; }
+        .intro-box, .card { padding: 18px 14px; }
+        .quiz { padding: 14px 14px; }
         table th, table td { padding: 9px 10px; font-size: 0.85rem; }
         .diagram svg { max-width: 100%; }
         /* Tap target più comodi per le opzioni dei quiz su touch */
@@ -812,16 +838,12 @@
         .zoom-hint { font-size: 0.82rem; }
     }
     @media (max-width: 400px) {
-        /* Su schermi molto piccoli (es. iPhone 12 mini) preferiamo un
-           carattere più grande e leggibile piuttosto che stringere
-           ulteriormente il layout: la larghezza resta comunque quella
-           dello schermo (nessuno zoom necessario), cambia solo quanto
-           testo entra per riga/schermata. */
-        html { font-size: 18px; }
-        body { font-size: 18px; }
+        /* Schermi molto piccoli (es. iPhone 12 mini): il carattere è già
+           ingrandito dalla regola fluida (clamp) sopra; qui si stringono
+           solo sidebar e riquadri. */
         #sidebar { width: 88vw; }
-        #content { padding: 16px; padding-top: 68px; }
-        .intro-box, .card { padding: 15px; }
+        #content { padding-top: 68px; }
+        .intro-box, .card { padding: 16px 14px; }
         .diagram { padding: 14px; }
         .diagram-img { width: min(100%, 340px); }
         .quiz { padding: 12px 14px; }
