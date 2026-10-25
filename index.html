@@ -36,7 +36,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Corso Base di Elettronica e Radiotecnica — v1.6.1</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.7.0</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -876,7 +876,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.6.1</span>
+        <span class="version-badge">v1.7.0</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -948,6 +948,7 @@
             <a href="#tx-am">Modulazione di ampiezza (AM)</a>
             <a href="#tx-ssb">Mixer e banda laterale unica (SSB)</a>
             <a href="#tx-fm">Modulazione di frequenza e modi digitali</a>
+            <a href="#tx-classi-emissione">Classi di emissione</a>
             <a href="#tx-frequenza">Aumentare la frequenza di un TX</a>
         </div>
         <div class="nav-section">
@@ -1081,7 +1082,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.6.1</strong> — migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+            <p>Versione attuale: <strong>1.7.0</strong> — nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
         </div>
     </div>
 </section>
@@ -5674,6 +5675,154 @@
     </div>
 </section>
 
+<section id="tx-classi-emissione">
+    <div class="card">
+        <h3>Classi di emissione</h3>
+        <p>
+            Per descrivere in modo univoco un'emissione radio l'<strong>ITU</strong> (Radio Regulations, Art. 2 e Appendice 1) ha definito le <strong>classi di emissione</strong>: l'insieme delle caratteristiche di un'emissione, cioè la <strong>banda passante necessaria</strong>, il <strong>tipo di modulazione</strong>, la <strong>natura del segnale modulante</strong> e il <strong>genere di informazione</strong> trasmessa. La designazione è una sigla composta da una larghezza di banda e da tre simboli: <strong>lettera – numero – lettera</strong>.
+        </p>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/tx-classi-emissione-struttura.jpg" alt="Struttura della designazione di una classe di emissione" loading="lazy">
+            <div class="diagram-caption">Anatomia della designazione 2K70J3E: banda necessaria (2,7 kHz), tipo di modulazione (J), natura del segnale modulante (3) e tipo di informazione (E).</div>
+        </div>
+
+        <h4>Prefisso: larghezza di banda necessaria</h4>
+        <p>
+            La larghezza di banda necessaria è quella appena sufficiente a trasmettere l'informazione alla velocità e con la qualità richieste. Si scrive con <strong>tre cifre e una lettera</strong>; la lettera occupa il posto della <strong>virgola decimale</strong> e indica l'unità di misura: <strong>H</strong> = Hz, <strong>K</strong> = kHz, <strong>M</strong> = MHz, <strong>G</strong> = GHz.
+        </p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Banda</th><th>Codice</th><th>Banda</th><th>Codice</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0,1 Hz</td><td>H100</td><td>150 kHz</td><td>150K</td></tr>
+                    <tr><td>15 Hz</td><td>15H0</td><td>2,25 MHz</td><td>2M25</td></tr>
+                    <tr><td>650 Hz</td><td>650H</td><td>12,5 MHz</td><td>12M5</td></tr>
+                    <tr><td>3,2 kHz</td><td>3K20</td><td>102 MHz</td><td>102M</td></tr>
+                    <tr><td>15,5 kHz</td><td>15K5</td><td>1,25 GHz</td><td>1G25</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/tx-classi-emissione-banda-necessaria.jpg" alt="Codifica della larghezza di banda necessaria" loading="lazy">
+            <div class="diagram-caption">La lettera H, K, M o G sostituisce la virgola decimale: 2,7 kHz diventa 2K70, 12,5 MHz diventa 12M5.</div>
+        </div>
+
+        <h4>Primo simbolo: tipo di modulazione della portante</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Simbolo</th><th>Significato</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>N</strong></td><td>Portante non modulata</td></tr>
+                    <tr><td><strong>A</strong></td><td>Modulazione di ampiezza, doppia banda laterale</td></tr>
+                    <tr><td>H</td><td>Modulazione di ampiezza, banda laterale unica con portante</td></tr>
+                    <tr><td>R</td><td>Modulazione di ampiezza, banda laterale unica, portante ridotta o variabile</td></tr>
+                    <tr><td><strong>J</strong></td><td>Modulazione di ampiezza, banda laterale unica, portante soppressa (SSB)</td></tr>
+                    <tr><td>B</td><td>Modulazione di ampiezza, bande laterali indipendenti</td></tr>
+                    <tr><td>C</td><td>Modulazione di ampiezza, banda laterale vestigiale</td></tr>
+                    <tr><td><strong>F</strong></td><td>Modulazione angolare: modulazione di frequenza</td></tr>
+                    <tr><td><strong>G</strong></td><td>Modulazione angolare: modulazione di fase</td></tr>
+                    <tr><td>D</td><td>Portante modulata sia in ampiezza sia in fase</td></tr>
+                    <tr><td>P, K, L, M, Q, W</td><td>Emissioni a impulsi (non modulati, modulati in ampiezza, in larghezza, in posizione/fase, con modulazione angolare durante l'impulso) e altri casi</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Secondo simbolo: natura del segnale modulante</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Simbolo</th><th>Significato</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>0</td><td>Assenza di segnale modulante</td></tr>
+                    <tr><td><strong>1</strong></td><td>Un solo canale con informazione quantificata o numerica, <strong>senza</strong> sottoportante modulante</td></tr>
+                    <tr><td>2</td><td>Un solo canale con informazione quantificata o numerica, <strong>con</strong> sottoportante modulante</td></tr>
+                    <tr><td><strong>3</strong></td><td>Un solo canale con informazione analogica</td></tr>
+                    <tr><td>7</td><td>Due o più canali con informazione quantificata o numerica</td></tr>
+                    <tr><td>8</td><td>Due o più canali con informazione analogica</td></tr>
+                    <tr><td>9</td><td>Sistema composito: uno o più canali numerici e uno o più canali analogici</td></tr>
+                    <tr><td>X</td><td>Casi non contemplati</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Terzo simbolo: tipo di informazione da trasmettere</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Simbolo</th><th>Significato</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>N</td><td>Nessuna informazione</td></tr>
+                    <tr><td><strong>A</strong></td><td>Telegrafia per ricezione acustica (es. codice Morse)</td></tr>
+                    <tr><td>B</td><td>Telegrafia per ricezione automatica (es. RTTY)</td></tr>
+                    <tr><td>C</td><td>Facsimile (FAX)</td></tr>
+                    <tr><td>D</td><td>Trasmissione dati, telemisura, telecomando</td></tr>
+                    <tr><td><strong>E</strong></td><td>Telefonia (compresa la radiodiffusione sonora)</td></tr>
+                    <tr><td>F</td><td>Televisione (video)</td></tr>
+                    <tr><td>W</td><td>Combinazione dei casi precedenti</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            I simboli in grassetto sono quelli che il radioamatore incontra più spesso. L'Appendice 1 delle Radio Regulations prevede anche, come opzione, un <strong>quarto simbolo</strong> (dettagli del segnale) e un <strong>quinto simbolo</strong> (natura del multiplexing) per descrivere meglio l'emissione.
+        </p>
+
+        <h4>Esempi completi</h4>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Classe</th><th>Emissione</th><th>Banda</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>100HA1A</strong></td><td>Telegrafia (CW)</td><td>100 Hz</td></tr>
+                    <tr><td><strong>2K10A2A</strong></td><td>Telegrafia ottenuta con on/off di una portante modulata da un tono audio</td><td>2,1 kHz</td></tr>
+                    <tr><td><strong>6K00A3E</strong></td><td>Telefonia in AM, doppia banda laterale</td><td>6 kHz</td></tr>
+                    <tr><td><strong>2K70J3E</strong></td><td>Telefonia in SSB (portante soppressa)</td><td>2,7 kHz</td></tr>
+                    <tr><td><strong>6K00F3E</strong></td><td>Telefonia in FM a banda stretta</td><td>6 kHz</td></tr>
+                    <tr><td><strong>180KF3E</strong></td><td>Telefonia in FM, radiodiffusione di voce e musica</td><td>180 kHz</td></tr>
+                    <tr><td><strong>15M0F3W</strong></td><td>Ponte radio in microonde per televisione</td><td>15 MHz</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4>Le denominazioni abbreviate più usate</h4>
+        <p>Nell'uso corrente si omette la banda e si indicano solo i tre simboli:</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr><th>Sigla</th><th>Significato</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>A1A</strong></td><td>Telegrafia (CW)</td></tr>
+                    <tr><td>A2A</td><td>Telegrafia con modulazione di ampiezza</td></tr>
+                    <tr><td><strong>A3E</strong></td><td>Modulazione di ampiezza, fonia</td></tr>
+                    <tr><td>C3F</td><td>Televisione in modulazione di ampiezza con banda laterale vestigiale</td></tr>
+                    <tr><td>F1D</td><td>Trasmissione dati in FM, senza sottoportante modulante</td></tr>
+                    <tr><td>F2D</td><td>Trasmissione dati in FM con sottoportante modulante (packet radio dei radioamatori)</td></tr>
+                    <tr><td><strong>F3E</strong></td><td>Modulazione di frequenza, fonia</td></tr>
+                    <tr><td><strong>J3E</strong></td><td>Fonia in modulazione di ampiezza con portante soppressa (SSB)</td></tr>
+                    <tr><td>B8E</td><td>Fonia in AM con due bande laterali indipendenti, portante soppressa (ISB)</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/tx-classi-emissione-esempi.jpg" alt="Classi di emissione più usate dai radioamatori" loading="lazy">
+            <div class="diagram-caption">Le classi di emissione più usate in radioamatore: CW (A1A), AM (A3E), SSB (J3E) e FM (F3E).</div>
+        </div>
+        <div class="remember">
+            <p>La designazione completa è: <strong>banda necessaria + lettera + numero + lettera</strong> (es. 2K70J3E).</p>
+            <p>Nella banda la lettera <strong>H, K, M, G</strong> prende il posto della virgola decimale.</p>
+            <p><strong>A1A</strong> = CW, <strong>A3E</strong> = AM fonia, <strong>J3E</strong> = SSB fonia, <strong>F3E</strong> = FM fonia, <strong>F2D</strong> = packet radio.</p>
+            <p>Terzo simbolo: <strong>A</strong> telegrafia acustica, <strong>E</strong> telefonia, <strong>D</strong> dati.</p>
+        </div>
+    </div>
+</section>
+
 <section id="tx-frequenza">
     <div class="card">
         <h3>Metodi per aumentare la frequenza di un trasmettitore</h3>
@@ -5716,7 +5865,7 @@
     </div>
 
     <details class="module-quiz">
-        <summary>✏️ Quiz Modulo 6 — Trasmettitori (20 domande)</summary>
+        <summary>✏️ Quiz Modulo 6 — Trasmettitori (24 domande)</summary>
         <div class="quiz-content">
 
             <div class="quiz">
@@ -5956,6 +6105,54 @@
                     <li onclick="checkAnswer(this, false)">D) La 3ª armonica</li>
                 </ul>
                 <div class="answer">50 MHz = 5 × 10 MHz: si isola la <strong>5ª armonica</strong>.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">21. Nella designazione 2K70J3E, che cosa indica la lettera K?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Che la portante è soppressa</li>
+                    <li onclick="checkAnswer(this, true)">B) Che la banda è espressa in kHz e K occupa il posto della virgola</li>
+                    <li onclick="checkAnswer(this, false)">C) Che la modulazione è di frequenza</li>
+                    <li onclick="checkAnswer(this, false)">D) Che il segnale è telegrafico</li>
+                </ul>
+                <div class="answer">La lettera della banda (<strong>H, K, M, G</strong>) indica l'unità di misura e occupa il posto della virgola: 2K70 = 2,7 kHz.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">22. Quale classe di emissione descrive la telefonia in banda laterale unica con portante soppressa?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) A3E</li>
+                    <li onclick="checkAnswer(this, false)">B) F3E</li>
+                    <li onclick="checkAnswer(this, true)">C) J3E</li>
+                    <li onclick="checkAnswer(this, false)">D) A1A</li>
+                </ul>
+                <div class="answer"><strong>J</strong> = banda laterale unica con portante soppressa, <strong>3</strong> = un canale analogico, <strong>E</strong> = telefonia: J3E.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">23. Che cosa indica la sigla A1A?</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Telefonia in AM</li>
+                    <li onclick="checkAnswer(this, true)">B) Telegrafia in onda continua (CW) per ricezione acustica</li>
+                    <li onclick="checkAnswer(this, false)">C) Trasmissione dati in FM</li>
+                    <li onclick="checkAnswer(this, false)">D) Televisione</li>
+                </ul>
+                <div class="answer"><strong>A</strong> = AM a doppia banda laterale, <strong>1</strong> = informazione numerica senza sottoportante, <strong>A</strong> = telegrafia per ricezione acustica: è la CW.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">24. Il terzo simbolo E di una classe di emissione indica:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) Telegrafia automatica</li>
+                    <li onclick="checkAnswer(this, false)">B) Trasmissione dati</li>
+                    <li onclick="checkAnswer(this, true)">C) Telefonia, compresa la radiodiffusione sonora</li>
+                    <li onclick="checkAnswer(this, false)">D) Facsimile</li>
+                </ul>
+                <div class="answer">Il terzo simbolo indica il tipo di informazione: <strong>E</strong> = telefonia, <strong>A</strong> = telegrafia acustica, <strong>D</strong> = dati.</div>
                 <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
             </div>
 
@@ -9621,6 +9818,9 @@
                 <dt>Coefficiente di riflessione (Γ)</dt>
                 <dd>Rapporto tra tensione riflessa e tensione diretta su una linea: Γ = (Z<sub>L</sub> - Z<sub>0</sub>)/(Z<sub>L</sub> + Z<sub>0</sub>). Vale 0 con adattamento perfetto e 1 con riflessione totale.</dd>
 
+                <dt>Classe di emissione</dt>
+                <dd>Sigla ITU che descrive un'emissione: banda necessaria seguita da tre simboli (tipo di modulazione, natura del segnale modulante, tipo di informazione), ad esempio 2K70J3E per la SSB in fonia.</dd>
+
                 <dt>Condensatore</dt>
                 <dd>Componente che immagazzina energia sotto forma di campo elettrico.</dd>
 
@@ -11059,12 +11259,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer" id="changelog">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.6.1</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.7.0</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.7.0</strong> — Integrato il documento sulle <strong>classi di emissione</strong>: nuova sezione nel Modulo 6 — Trasmettitori con la struttura della designazione ITU (banda necessaria + lettera-numero-lettera), la codifica della larghezza di banda con H, K, M, G, le tabelle dei tre simboli (tipo di modulazione, natura del segnale modulante, tipo di informazione), gli esempi completi (100HA1A, 2K70J3E, 6K00F3E…) e le sigle abbreviate più usate (A1A, A3E, J3E, F3E, F2D). Aggiunti 4 quesiti al quiz del Modulo 6 (ora 24 domande) e la voce di glossario. Tre nuove immagini (<code>tx-classi-emissione-*.jpg</code>) da inserire in <code>assets/images/</code>.</p>
         <p><strong>v1.6.1</strong> — <strong>Fix per smartphone</strong>: risolto il contenuto più largo dello schermo che veniva tagliato a destra (il contenitore principale ora si restringe correttamente e gli elementi larghi scorrono nel proprio riquadro, mentre il testo va a capo); testo più grande e leggibile sotto i 900 px di larghezza (da 17 a 19 px in base allo schermo), interlinea più ariosa, margini laterali ridotti e rispetto delle aree sicure di notch e barre del browser. <strong>Nuovo pulsante Changelog</strong> nel menu laterale, sotto Appendici: porta in fondo alla pagina, all'inizio del piè di pagina con ringraziamenti e storico delle versioni. <strong>Immagini</strong>: aggiunte le ultime 5 immagini dei diagrammi del Modulo 9 — Antenne (accordatore, autotrasformatore, correnti di modo comune e balun, delta e T-match, gamma e omega match), così tutte le 50 figure dei moduli 8 e 9 sono presenti.</p>
         <p><strong>v1.6.0</strong> — Integrati due nuovi moduli, con lo stesso schema degli altri (introduzione, spiegazione, box "Da ricordare", tabelle, immagini). <strong>Modulo 8 — Linee di trasmissione</strong>: generalità e linee bifilari; cavi coassiali, linee su circuito stampato, guide d'onda e connettori; fattore di velocità, lunghezza d'onda e impedenza caratteristica; adattamento (trasformatore, reti a T e π, linea adattata) e carta di Smith; coefficiente di riflessione, onde stazionarie, ROS e return loss; attenuazione, perdite ed effetto pelle. <strong>Modulo 9 — Antenne</strong>: definizione, reciprocità e link RF; densità di radiazione, diagramma, lobi, regioni di campo e direttività; antenne risonanti e ad onda progressiva; dimensioni, guadagno, apertura efficace, banda passante, resistenza di radiazione, ERP ed EIRP, effetto del suolo; polarizzazione; dipolo, dipolo ripiegato, long wire, loop, monopolo, antenna caricata, ground plane, Yagi, parabola, Beverage; adattamento con trasformatore a λ/4, stub, hair pin, delta, T, gamma e omega match, autotrasformatore; balun e accordatore. Aggiunti due quiz da 20 domande, 20 nuove domande al <strong>quiz finale</strong> (da 80 a 100), 18 nuove voci di glossario e 50 nuove immagini. Strumenti di misura, Normativa e Pratica operativa sono rinumerati Moduli 10, 11 e 12; i punteggi dei quiz già salvati restano validi perché gli identificativi interni dei moduli non cambiano. Nell'integrazione sono stati corretti o chiariti alcuni punti del materiale sorgente: la densità di radiazione diminuisce con il <em>quadrato della distanza</em> (non "al diminuire"), la EIRP si calcola <em>sottraendo</em> le perdite della linea, il ROS è sempre maggiore o uguale a 1, la rete a π è C-L-C (due elementi in parallelo e uno in serie), lo stato dell'illuminatore nelle parabole offset/prime focus, e le tabelle di attenuazione dei cavi sono riportate con le unità di misura (dB ogni 100 piedi e dB ogni 100 m).</p>
         <p><strong>v1.5.3</strong> — Aggiunte le immagini definitive dei diagrammi mancanti nei nuovi moduli Trasmettitori, Ricevitori e Strumenti di misura (e dell'oscillatore Clapp a quarzo): sostituiscono i segnaposto e sono incluse nel repository in <code>assets/images/</code>.</p>
