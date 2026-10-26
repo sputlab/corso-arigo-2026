@@ -9,3 +9,7 @@
 
 # macOS
 .DS_Store
+
+# Editor workspace and prompt files (kept locally only)
+*.code-workspace
+/prompt-*.md
