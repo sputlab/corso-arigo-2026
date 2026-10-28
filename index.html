@@ -36,7 +36,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Corso Base di Elettronica e Radiotecnica — v1.7.0</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.8.0</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -876,7 +876,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.7.0</span>
+        <span class="version-badge">v1.8.0</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -1006,6 +1006,19 @@
             <a href="#emergenza">Emergenza</a>
         </div>
         <div class="nav-section">
+            <div class="nav-section-title">Riepilogo essenziale</div>
+            <a href="#riep-intro">Il bignami per l'esame</a>
+            <a href="#riep-elettrotecnica">Elettrotecnica</a>
+            <a href="#riep-componenti">Componenti</a>
+            <a href="#riep-amplificatori">Amplificatori e oscillatori</a>
+            <a href="#riep-filtri">Filtri e risonanza</a>
+            <a href="#riep-tx-rx">Trasmettitori e ricevitori</a>
+            <a href="#riep-linee-antenne">Linee e antenne</a>
+            <a href="#riep-strumenti">Strumenti di misura</a>
+            <a href="#riep-normativa">Normativa</a>
+            <a href="#riep-pratica">Pratica operativa</a>
+        </div>
+        <div class="nav-section">
             <div class="nav-section-title">Appendici</div>
             <a href="#glossario">Glossario</a>
             <a href="#quiz-finale">Quiz finale (100)</a>
@@ -1082,7 +1095,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.7.0</strong> — nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+            <p>Versione attuale: <strong>1.8.0</strong> — nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
         </div>
     </div>
 </section>
@@ -9775,6 +9788,472 @@
         </div>
     </section>
 
+<!-- ===================== RIEPILOGO ESSENZIALE ===================== -->
+<h2 id="modulo-riepilogo">Riepilogo essenziale</h2>
+
+<section id="riep-intro">
+    <div class="intro-box">
+        <h2>Il bignami per l'esame</h2>
+        <p>
+            Questa sezione condensa in poche pagine ciò che serve davvero per l'esame da radioamatore:
+            formule, valori e regole da avere <strong>a memoria</strong>. Non sostituisce i moduli
+            (lì c'è il <em>perché</em> di ogni cosa) ma è pensata per il ripasso finale, nei giorni
+            prima della prova.
+        </p>
+        <p>
+            Gli argomenti seguono il programma d'esame: elettrotecnica e radiotecnica, trasmettitori e
+            ricevitori, linee e antenne, misure, normativa nazionale e internazionale, pratica operativa.
+        </p>
+    </div>
+</section>
+
+<!-- ---------- 1. ELETTROTECNICA ---------- -->
+<section id="riep-elettrotecnica">
+    <div class="card">
+        <h3>1. Elettrotecnica di base</h3>
+
+        <h4>Le formule da conoscere</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Cosa</th><th>Formula</th><th>Note</th></tr></thead>
+            <tbody>
+                <tr><td>Legge di Ohm</td><td>V = R × I &nbsp; I = V/R &nbsp; R = V/I</td><td>V in volt, I in ampere, R in ohm</td></tr>
+                <tr><td>Potenza</td><td>P = V × I = R × I² = V²/R</td><td>in watt; energia E = P × t</td></tr>
+                <tr><td>Resistenze in serie</td><td>R = R₁ + R₂ + …</td><td>stessa corrente; R sempre maggiore della maggiore</td></tr>
+                <tr><td>Resistenze in parallelo</td><td>1/R = 1/R₁ + 1/R₂ &nbsp;(due: R₁R₂/(R₁+R₂))</td><td>stessa tensione; R sempre minore della minore</td></tr>
+                <tr><td>Condensatori</td><td>serie: 1/C = 1/C₁ + 1/C₂ &nbsp; parallelo: C = C₁ + C₂</td><td>al contrario delle resistenze</td></tr>
+                <tr><td>Induttanze</td><td>serie: L = L₁ + L₂ &nbsp; parallelo: 1/L = 1/L₁ + 1/L₂</td><td>come le resistenze</td></tr>
+                <tr><td>Partitore di tensione</td><td>V<sub>out</sub> = V<sub>in</sub> × R₂/(R₁+R₂)</td><td>un carico in parallelo a R₂ abbassa l'uscita</td></tr>
+                <tr><td>Kirchhoff</td><td>nodi: ΣI<sub>entranti</sub> = ΣI<sub>uscenti</sub> &nbsp; maglie: ΣV = 0</td><td>valgono in ogni circuito</td></tr>
+                <tr><td>Thévenin</td><td>generatore E<sub>eq</sub> (tensione a vuoto) + R<sub>eq</sub> (generatori spenti)</td><td>modello di qualsiasi rete lineare</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/triangolo-legge-ohm.jpg" alt="📷 Il triangolo della legge di Ohm" loading="lazy">
+            <div class="diagram-caption">Triangolo di Ohm: copri la grandezza che cerchi e leggi la formula rimanente.</div>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/triangolo-potenza.jpg" alt="📷 Il triangolo della potenza" loading="lazy">
+            <div class="diagram-caption">Triangolo della potenza: P = V × I, con le due forme derivate.</div>
+        </div>
+
+        <h4>Corrente alternata</h4>
+        <ul>
+            <li>Frequenza e periodo: <strong>f = 1/T</strong> (Hz = cicli al secondo).</li>
+            <li>Valore efficace: <strong>V<sub>eff</sub> = V<sub>p</sub>/√2 ≈ 0,707 × V<sub>p</sub></strong>; picco-picco V<sub>pp</sub> = 2·V<sub>p</sub>; valore medio ≈ 0,636 × V<sub>p</sub>.</li>
+            <li>Rete domestica: 230 V efficaci (≈ 325 V di picco), 50 Hz.</li>
+            <li>Reattanza capacitiva <strong>X<sub>C</sub> = 1/(2πfC)</strong>: <em>diminuisce</em> con la frequenza; il condensatore blocca la CC e passa la CA.</li>
+            <li>Reattanza induttiva <strong>X<sub>L</sub> = 2πfL</strong>: <em>aumenta</em> con la frequenza; l'induttore passa la CC e blocca le alte frequenze.</li>
+            <li>Impedenza <strong>Z = √(R² + (X<sub>L</sub> − X<sub>C</sub>)²)</strong>.</li>
+        </ul>
+
+        <div class="remember">
+            <p>Prefissi: p = 10⁻¹² · n = 10⁻⁹ · µ = 10⁻⁶ · m = 10⁻³ · k = 10³ · M = 10⁶ · G = 10⁹.</p>
+            <p>Scegli sempre un componente con potenza nominale almeno doppia di quella calcolata.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ---------- 2. COMPONENTI ---------- -->
+<section id="riep-componenti">
+    <div class="card">
+        <h3>2. Componenti elettronici</h3>
+
+        <h4>Resistori e codice colori</h4>
+        <p>
+            Nero 0 · marrone 1 · rosso 2 · arancio 3 · giallo 4 · verde 5 · blu 6 · viola 7 · grigio 8 · bianco 9.
+            Le prime fasce sono le cifre, la penultima il moltiplicatore, l'ultima la tolleranza
+            (oro ±5%, argento ±10%, marrone ±1%).
+            Esempio: giallo-viola-rosso-oro = 47 × 100 = 4,7 kΩ ±5%.
+        </p>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/codice-colori-resistori.jpg" alt="📷 Codice colori dei resistori" loading="lazy">
+            <div class="diagram-caption">Codice colori dei resistori: cifre, moltiplicatore e tolleranza.</div>
+        </div>
+
+        <h4>Condensatori, induttori, trasformatori</h4>
+        <ul>
+            <li><strong>Condensatore</strong>: C = Q/V (farad); energia ½CV²; i <em>elettrolitici sono polarizzati</em> (invertire la polarità li distrugge). Tensione di lavoro 20-30% sopra quella massima del circuito.</li>
+            <li><strong>Induttore</strong>: L in henry; energia ½LI²; il nucleo di ferrite aumenta l'induttanza.</li>
+            <li><strong>Trasformatore</strong> (solo in CA): V<sub>p</sub>/V<sub>s</sub> = N<sub>p</sub>/N<sub>s</sub>; potenza conservata V<sub>p</sub>·I<sub>p</sub> = V<sub>s</sub>·I<sub>s</sub>; elevatore se N<sub>s</sub> &gt; N<sub>p</sub> (tensione sale, corrente scende). Rapporto di impedenze = (N<sub>1</sub>/N<sub>2</sub>)².</li>
+        </ul>
+
+        <h4>Semiconduttori</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Componente</th><th>Da ricordare</th></tr></thead>
+            <tbody>
+                <tr><td>Diodo</td><td>conduce in polarizzazione diretta (anodo +): caduta ≈ 0,7 V silicio, 0,3 V germanio; Schottky 0,2-0,3 V</td></tr>
+                <tr><td>Zener</td><td>lavora in inversa, tensione costante: stabilizzatore</td></tr>
+                <tr><td>LED / fotodiodo</td><td>emette luce / conduce se illuminato</td></tr>
+                <tr><td>Varicap</td><td>capacità variabile con la tensione inversa: sintonia (VCO)</td></tr>
+                <tr><td>BJT</td><td>3 terminali B, E, C; controllato in <em>corrente</em>; I<sub>C</sub> = β·I<sub>B</sub>, I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub>; V<sub>BE</sub> ≈ 0,6-0,7 V</td></tr>
+                <tr><td>JFET</td><td>G, S, D; controllato in <em>tensione</em> (V<sub>GS</sub> negativa); alta impedenza d'ingresso, basso rumore</td></tr>
+                <tr><td>MOSFET</td><td>gate isolato: impedenza d'ingresso elevatissima; sensibile alle scariche elettrostatiche</td></tr>
+                <tr><td>SCR / TRIAC</td><td>SCR conduce anche dopo l'impulso di gate; TRIAC controlla entrambe le semionde (dimmer)</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Zona del BJT</th><th>Giunzione BE</th><th>Giunzione BC</th><th>Funzione</th></tr></thead>
+            <tbody>
+                <tr><td>Attiva</td><td>diretta</td><td>inversa</td><td>amplificatore</td></tr>
+                <tr><td>Saturazione</td><td>diretta</td><td>diretta</td><td>interruttore chiuso</td></tr>
+                <tr><td>Interdizione</td><td>inversa</td><td>inversa</td><td>interruttore aperto</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
+
+<!-- ---------- 3. AMPLIFICATORI E OSCILLATORI ---------- -->
+<section id="riep-amplificatori">
+    <div class="card">
+        <h3>3. Amplificatori e oscillatori</h3>
+
+        <h4>Decibel</h4>
+        <div class="formula">
+            dB = 10·log₁₀(P₂/P₁) &nbsp;&nbsp; dB = 20·log₁₀(V₂/V₁)
+        </div>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>dB</th><th>Rapporto di potenza</th><th>Rapporto di tensione</th></tr></thead>
+            <tbody>
+                <tr><td>+3 dB</td><td>×2</td><td>×1,41</td></tr>
+                <tr><td>+6 dB</td><td>×4</td><td>×2</td></tr>
+                <tr><td>+10 dB</td><td>×10</td><td>×3,16</td></tr>
+                <tr><td>+20 dB</td><td>×100</td><td>×10</td></tr>
+                <tr><td>−3 dB</td><td>×0,5</td><td>×0,707 (limite della banda passante)</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/scala-decibel.jpg" alt="📷 Scala dei decibel" loading="lazy">
+            <div class="diagram-caption">I dB più comuni con il relativo fattore in tensione e in potenza.</div>
+        </div>
+
+        <h4>Classi di amplificazione</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Classe</th><th>Conduzione</th><th>Rendimento</th><th>Uso</th></tr></thead>
+            <tbody>
+                <tr><td>A</td><td>360°</td><td>basso (≤ 50%)</td><td>massima linearità: audio, piccoli segnali</td></tr>
+                <tr><td>AB</td><td>180°-360°</td><td>medio</td><td>audio di potenza, lineari RF; elimina il crossover</td></tr>
+                <tr><td>B</td><td>180°</td><td>fino a 78,5%</td><td>push-pull (distorsione di crossover)</td></tr>
+                <tr><td>C</td><td>&lt; 180°</td><td>molto alto</td><td>solo RF a portante costante (CW, FM), con circuito risonante</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/classi-amplificazione-forme-onda.jpg" alt="📷 Classi di amplificazione" loading="lazy">
+            <div class="diagram-caption">Forme d'onda delle classi A, AB, B e C.</div>
+        </div>
+
+        <h4>Configurazioni del BJT e operazionale</h4>
+        <ul>
+            <li><strong>Emettitore comune (CE)</strong>: la più usata, amplifica tensione e corrente, sfasa di 180°.</li>
+            <li><strong>Base comune (CB)</strong>: per l'RF, non sfasa, guadagno in corrente ≈ 1, Z<sub>in</sub> molto bassa.</li>
+            <li><strong>Collettore comune (CC)</strong>: guadagno di tensione ≈ 1, Z<sub>out</sub> molto bassa: <em>buffer</em> / adattatore di impedenza.</li>
+            <li><strong>Op-amp</strong> con retroazione negativa: invertente A = −R<sub>f</sub>/R₁ (180°); non invertente A = 1 + R<sub>f</sub>/R₁; buffer A = 1. Ideale: guadagno, Z<sub>in</sub> infiniti, Z<sub>out</sub> nulla. L'integratore trasforma l'onda quadra in triangolare.</li>
+            <li>Rendimento η = P<sub>utile</sub>/P<sub>assorbita</sub>. Il punto di lavoro va scelto nella zona attiva, circa a metà della retta di carico.</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/bjt-ce-cb-cc-confronto.jpg" alt="📷 Confronto CE, CB, CC" loading="lazy">
+            <div class="diagram-caption">Le tre configurazioni del BJT a confronto.</div>
+        </div>
+
+        <h4>Oscillatori</h4>
+        <ul>
+            <li><strong>Criterio di Barkhausen</strong>: retroazione <em>positiva</em>, sfasamento nullo e guadagno d'anello Aβ = 1 (per innescare, Aβ &gt; 1).</li>
+            <li>Bassa frequenza (reti R-C): Wien (A<sub>V</sub> = 3, ω = 1/RC), sfasamento (3 celle RC), doppio T.</li>
+            <li>Alta frequenza (L-C, "tre punti"): <strong>Colpitts</strong> = 2 condensatori + 1 induttanza; <strong>Hartley</strong> = 2 induttanze + 1 condensatore (la più usata per i VFO); Clapp = Colpitts con C in serie a L; Meissner = reazione a trasformatore.</li>
+            <li><strong>Quarzo</strong> (effetto piezoelettrico): due risonanze, serie e parallelo; stabilità altissima. <strong>Pierce</strong> = Colpitts con quarzo al posto di L.</li>
+            <li>Oscillatori a rilassamento (multivibratore astabile, 555): onda quadra.</li>
+            <li><strong>VFO</strong> = frequenza variabile con condensatore variabile; <strong>VCO</strong> = con diodo varicap.</li>
+            <li><strong>PLL</strong>: oscillatore di riferimento a quarzo + rivelatore di fase + filtro + VCO + divisore (anello a reazione negativa; agganciato: f<sub>VCO</sub>/N = f<sub>rif</sub>/M). <strong>DDS</strong>: forma d'onda generata numericamente (accumulatore di fase + DAC).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ---------- 4. FILTRI E RISONANZA ---------- -->
+<section id="riep-filtri">
+    <div class="card">
+        <h3>4. Filtri e risonanza</h3>
+        <div class="formula">
+            f<sub>c</sub> = 1/(2πRC) &nbsp;&nbsp; f<sub>0</sub> = 1/(2π√(LC)) &nbsp;&nbsp; Q = f<sub>0</sub>/B
+        </div>
+        <ul>
+            <li><strong>Passa-basso RC</strong>: R in serie, C in parallelo all'uscita. <strong>Passa-alto RC</strong>: C in serie, R in parallelo.</li>
+            <li>Alla frequenza di taglio l'uscita è a <strong>−3 dB</strong> (0,707); sopra il taglio un filtro del primo ordine attenua <strong>20 dB per decade</strong> (fase −45° a f<sub>c</sub>).</li>
+            <li><strong>Risonanza</strong>: X<sub>L</sub> = X<sub>C</sub>; il circuito diventa puramente resistivo. Nel serie l'impedenza è minima, nel parallelo massima.</li>
+            <li><strong>Q alto</strong> = banda stretta = filtro selettivo. Alla risonanza V<sub>L</sub> = V<sub>C</sub> = Q·V<sub>in</sub> (sovratensioni!).</li>
+            <li>Passa-banda: circuito L-C risonante. Filtri a quarzo: selettività altissima (nei ricevitori e nei TX SSB).</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/risposta-frequenza-passa-basso.jpg" alt="📷 Risposta in frequenza di un passa-basso" loading="lazy">
+            <div class="diagram-caption">Risposta di un passa-basso: piatta fino a f<sub>c</sub>, poi −20 dB/decade; −3 dB a f<sub>c</sub>.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ---------- 5. TX E RX ---------- -->
+<section id="riep-tx-rx">
+    <div class="card">
+        <h3>5. Trasmettitori e ricevitori</h3>
+
+        <h4>Modulazioni</h4>
+        <ul>
+            <li>Di una portante si possono variare solo <strong>ampiezza (AM), frequenza (FM) e fase (PM)</strong>. CW = portante interrotta dal tasto.</li>
+            <li>Il prodotto di due sinusoidi genera <strong>somma e differenza</strong> delle frequenze: è il principio del <strong>mixer</strong> (modulatore bilanciato ad anello a diodi).</li>
+            <li><strong>AM</strong>: portante + 2 bande laterali; banda = 2 × f<sub>mod,max</sub> (3 kHz → 6 kHz). Indice di modulazione 0-100%: oltre il 100% c'è sovramodulazione e distorsione. Al 100% ogni banda laterale è a −6 dBc (1/4 della potenza della portante); metà della potenza serve solo alla portante.</li>
+            <li><strong>SSB</strong>: si sopprimono portante (modulatore bilanciato) e una banda laterale (filtro a quarzo). Banda ≈ 2,7-3 kHz, risparmio di almeno il 67% di potenza. Sotto i 10 MHz si usa la <strong>LSB</strong>, sopra la <strong>USB</strong>; i modi digitali (via scheda audio) si fanno in USB.</li>
+            <li><strong>FM</strong>: varia la frequenza in proporzione all'<em>ampiezza</em> del modulante; ampiezza costante, quindi insensibile ai disturbi impulsivi (effetto cattura). Banda secondo <strong>Carson: B = 2·(f<sub>D</sub> + f<sub>M</sub>)</strong>; es. deviazione 5 kHz e audio 3 kHz → 16 kHz. Pre-enfasi in TX, de-enfasi in RX. Narrow FM: deviazione ±3 kHz o meno.</li>
+            <li>Modi digitali: 2-FSK, AFSK (toni audio), PSK (salti di fase di 180°), MSK.</li>
+            <li><strong>PEP</strong> = V<sub>picco</sub>²/(2·R<sub>L</sub>); la <strong>OBW</strong> contiene il 99% della potenza. Un amplificatore non lineare (es. classe C) genera <strong>intermodulazione</strong>.</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/tx-am-spettro-portante-bande-laterali.jpg" alt="📷 Spettro di un segnale AM" loading="lazy">
+            <div class="diagram-caption">Spettro AM: portante e due bande laterali (−6 dBc al 100% di modulazione).</div>
+        </div>
+
+        <h4>Schema di un trasmettitore</h4>
+        <p>
+            Microfono → preamplificatore BF (banda 300-2700 Hz) → modulatore → oscillatore (VFO/PLL) →
+            moltiplicatore/mixer → amplificatore RF di potenza → <strong>filtro passa-basso</strong> (elimina le armoniche)
+            → adattamento → antenna. Per aumentare la frequenza: <strong>conversione</strong> (mixer + filtro: 20 MHz + 30 MHz = 50 MHz)
+            oppure <strong>moltiplicazione</strong> (distorsione + filtro sull'armonica: 10 MHz × 5 = 50 MHz).
+        </p>
+
+        <h4>Classi di emissione (ITU)</h4>
+        <p>
+            Designazione = banda necessaria + <strong>lettera – numero – lettera</strong>. Nella banda la lettera
+            H/K/M/G prende il posto della virgola (2,7 kHz = 2K70; 12,5 MHz = 12M5).
+        </p>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Sigla</th><th>Significato</th></tr></thead>
+            <tbody>
+                <tr><td>A1A</td><td>telegrafia (CW)</td></tr>
+                <tr><td>A3E</td><td>AM, fonia</td></tr>
+                <tr><td>J3E</td><td>SSB, portante soppressa, fonia</td></tr>
+                <tr><td>F3E</td><td>FM, fonia</td></tr>
+                <tr><td>F2D</td><td>dati in FM con sottoportante (packet)</td></tr>
+                <tr><td>1° simbolo</td><td>modulazione: A doppia banda, J SSB portante soppressa, F frequenza, G fase, N non modulata</td></tr>
+                <tr><td>2° simbolo</td><td>segnale modulante: 1-2 digitale, 3 analogico, 7-8 più canali</td></tr>
+                <tr><td>3° simbolo</td><td>informazione: A telegrafia acustica, B telegrafia automatica, C fax, D dati, E telefonia, F televisione</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/tx-classi-emissione-struttura.jpg" alt="📷 Anatomia di una classe di emissione" loading="lazy">
+            <div class="diagram-caption">Anatomia della designazione 2K70J3E.</div>
+        </div>
+
+        <h4>Ricevitori</h4>
+        <ul>
+            <li>Qualità: <strong>sensibilità</strong> (S/N 12 dB, SINAD), <strong>selettività</strong>, <strong>dinamica</strong>. Impedenza d'ingresso 50 Ω.</li>
+            <li>Rumore termico V<sub>N</sub> = √(4kTBR): ridurre la banda riduce il rumore. Cifra di rumore NF = 10·log₁₀(F); NF = 0 dB è l'ideale.</li>
+            <li>Contro i disturbi: <em>noise blanker</em> e ANL (impulsivi), <em>notch</em> (battimenti), <em>squelch</em> (silenzia sotto soglia). <strong>AGC</strong>: Fast per CW, Medium/Slow per SSB e digitali.</li>
+            <li>IMD di terzo ordine: +1 dB dei segnali interferenti = +3 dB dei prodotti di intermodulazione.</li>
+            <li>Struttura: <strong>front-end</strong> (adattamento, filtro, preamplificatore) → sintonia → demodulatore → BF.</li>
+            <li><strong>Supereterodina</strong>: converte tutto a una frequenza intermedia (IF) fissa, dove si ottiene la selettività. IF tipiche: 455-470 kHz, 9 MHz / 35 MHz, <strong>10,7 MHz (FM)</strong>. La <strong>frequenza immagine</strong> dista 2 × IF dal segnale utile: più alta la IF, più lontana l'immagine. Doppia conversione per ricevitori migliori.</li>
+            <li>Demodulatori: AM = diodo rivelatore + filtro; SSB = <strong>BFO</strong> / rivelatore a prodotto; FM = discriminatore, rivelatore in quadratura o <strong>PLL</strong>; limitatore nei ricevitori FM.</li>
+            <li><strong>DSP</strong> = convertitore A/D + elaborazione digitale + D/A; componenti <strong>I/Q</strong> sfasate di 90°; <strong>SDR</strong> = filtraggio e demodulazione via software (FPGA/ASIC). Programmi digitali: FLDigi, WSJT-X.</li>
+            <li>Altoparlante: 4 o 8 Ω, bobina mobile. Microfono: tipicamente 600 Ω, PTT per trasmettere.</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/rx-supereterodina.jpg" alt="📷 Ricevitore supereterodina" loading="lazy">
+            <div class="diagram-caption">Supereterodina: mixer con oscillatore locale, filtro e amplificatore a IF fissa, rivelatore e BF.</div>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/rx-frequenza-immagine.jpg" alt="📷 Frequenza immagine" loading="lazy">
+            <div class="diagram-caption">Frequenza immagine: simmetrica al segnale rispetto all'oscillatore locale, a distanza 2 × IF.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ---------- 6. LINEE E ANTENNE ---------- -->
+<section id="riep-linee-antenne">
+    <div class="card">
+        <h3>6. Linee di trasmissione e antenne</h3>
+
+        <h4>Onde e lunghezza d'onda</h4>
+        <div class="formula">
+            λ = c / f &nbsp;&nbsp; λ[m] = 300 / f[MHz] &nbsp;&nbsp; c = 300 000 km/s
+            <span class="label">es.: 20 MHz → 15 m; 145 MHz → 2,07 m</span>
+        </div>
+
+        <h4>Linee</h4>
+        <ul>
+            <li>Due conduttori con correnti opposte → campi che si compensano (irraggiamento nullo). Coassiale: 50 o 75 Ω; bifilare: 300-600 Ω.</li>
+            <li><strong>Z₀ = √(L/C)</strong>: dipende da geometria e dielettrico, <em>non dalla lunghezza</em> e non si misura col tester.</li>
+            <li><strong>Fattore di velocità VF = 1/√ε</strong> &lt; 1 (≈ 0,66 per RG-58/RG-213): in un cavo λ<sub>linea</sub> = VF · λ, quindi gli spezzoni λ/4 e λ/2 vanno accorciati.</li>
+            <li>Attenuazione: cresce con la frequenza e col cavo sottile (RG-58 &gt; RG-213). Effetto pelle: ad alta frequenza la corrente scorre sulla superficie.</li>
+            <li>Connettori: <strong>PL-259 (UHF)</strong> per HF, <strong>N</strong> fino a 18 GHz, BNC e SMA per bassa potenza.</li>
+        </ul>
+
+        <h4>Adattamento, ROS, return loss</h4>
+        <div class="formula">
+            Γ = (Z<sub>L</sub> − Z₀)/(Z<sub>L</sub> + Z₀) &nbsp;&nbsp; ROS = (1+|Γ|)/(1−|Γ|) = V<sub>MAX</sub>/V<sub>MIN</sub> &nbsp;&nbsp; RL = −20·log|Γ|
+        </div>
+        <ul>
+            <li>Massimo trasferimento di potenza: R<sub>L</sub> = R<sub>S</sub>. Carico = Z₀ → nessuna riflessione, ROS = 1:1.</li>
+            <li>Per un carico resistivo: <strong>ROS = Z<sub>maggiore</sub>/Z<sub>minore</sub></strong> (es. 100 Ω su 50 Ω → 2:1). Potenza riflessa = Γ².</li>
+            <li>Corto circuito e circuito aperto riflettono <strong>tutta</strong> la potenza; ogni λ/4 l'impedenza passa da zero a infinito. Spezzone in corto &lt; λ/4 = induttanza; aperto = condensatore.</li>
+            <li>ROS accettabile &lt; 2:1 (a 2:1 si riflette l'11% della potenza). Return loss alto = buon adattamento.</li>
+            <li><strong>Carta di Smith</strong>: centro = adattamento, sinistra = corto, destra = aperto, semipiano alto induttivo, basso capacitivo.</li>
+            <li>Trasformatore: Z₁ = Z₂·(N₁/N₂)²; trasformatore λ/4: <strong>Z₀ = √(Z<sub>R</sub>·Z<sub>S</sub>)</strong>; reti a T e π con L e C (adattano alla risonanza). Un cavo molto lossy fa apparire il ROS migliore al generatore che al carico.</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/lt-ros-vmax-vmin.jpg" alt="📷 ROS" loading="lazy">
+            <div class="diagram-caption">ROS = V<sub>MAX</sub>/V<sub>MIN</sub> con V<sub>MAX</sub> = V<sub>F</sub> + V<sub>R</sub> e V<sub>MIN</sub> = V<sub>F</sub> − V<sub>R</sub>.</div>
+        </div>
+
+        <h4>Antenne</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Antenna</th><th>Caratteristiche chiave</th></tr></thead>
+            <tbody>
+                <tr><td>Isotropica</td><td>ideale, irradia uguale in tutte le direzioni (riferimento, dBi)</td></tr>
+                <tr><td>Dipolo λ/2</td><td>l ≈ 143/f(MHz) m; 73 Ω; guadagno 2,15 dBi; diagramma a "otto", massimo a 90° dal filo; alimentato col coassiale richiede un balun</td></tr>
+                <tr><td>Dipolo ripiegato</td><td>≈ 300 Ω (4 volte il dipolo)</td></tr>
+                <tr><td>Monopolo λ/4</td><td>l ≈ 71,5/f(MHz) m; 30-36 Ω; usa il piano di terra come immagine; omnidirezionale in orizzontale</td></tr>
+                <tr><td>Ground plane</td><td>radiali λ/4: 30 Ω a 90°, 50 Ω se inclinati a 120°</td></tr>
+                <tr><td>Loop a onda intera</td><td>perimetro = λ, ≈ 100 Ω</td></tr>
+                <tr><td>Long wire</td><td>almeno 4-5 λ; serve accordatore e buona terra</td></tr>
+                <tr><td>Yagi</td><td>dipolo + riflettore (più lungo, dietro) + direttori (più corti, davanti); 3 elementi ≈ 5,8 dB sul dipolo; più elementi = maggior rapporto avanti-retro</td></tr>
+                <tr><td>Parabola</td><td>guadagno cresce col diametro; offset = illuminatore non ostruisce</td></tr>
+                <tr><td>Beverage</td><td>onda progressiva, lunga, terminata su resistenza: ascolto in HF</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-dipolo-mezz-onda.jpg" alt="📷 Dipolo a mezz'onda" loading="lazy">
+            <div class="diagram-caption">Dipolo a mezz'onda alimentato al centro: l = 143/f(MHz) m.</div>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/ant-yagi.jpg" alt="📷 Antenna Yagi" loading="lazy">
+            <div class="diagram-caption">Yagi: riflettore, elemento alimentato e direttori.</div>
+        </div>
+        <ul>
+            <li><strong>Reciprocità</strong>: stessa antenna e stesse caratteristiche in TX e RX. Antenne risonanti (λ/4, λ/2) = banda stretta; ad onda progressiva = banda larga.</li>
+            <li><strong>Polarizzazione</strong> = direzione del campo elettrico (parallelo al conduttore): lineare (orizzontale/verticale), circolare (due dipoli sfasati di 90°), ellittica. VHF/UHF in portata ottica: verticale; HF: indifferente; satelliti: circolare.</li>
+            <li>Campo vicino / campo lontano: confine pratico a circa 3 λ; la densità di potenza decresce con 1/r².</li>
+            <li>Banda passante dell'antenna = intervallo con ROS &lt; 2:1. Efficienza = R<sub>rad</sub>/(R<sub>rad</sub> + R<sub>perdita</sub>).</li>
+            <li><strong>ERP</strong> (riferita al dipolo, dBd) e <strong>EIRP</strong> (riferita all'isotropico): EIRP = ERP + 2,15 dB. Esempio: 100 W, cavo −2 dB, Yagi 8 dBd → ERP ≈ 400 W. Guadagno = riferimento in dBi o dBd.</li>
+            <li>Adattamenti: stub (cancella la reattanza), hair pin, delta match e T-match, gamma/omega match (condensatore variabile), autotrasformatore (presa a metà: Z × 4).</li>
+            <li><strong>Balun</strong> (balanced-unbalanced): collega dipolo e coassiale, impedisce le correnti di modo comune sulla calza; rapporti 1:1, 4:1, 9:1. <strong>Accordatore</strong> tra radio e linea; rosmetro tra radio e accordatore; si cerca il minimo ROS (l'antenna va comunque portata in risonanza).</li>
+            <li>Impedenza dello spazio libero 377 Ω.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ---------- 7. STRUMENTI ---------- -->
+<section id="riep-strumenti">
+    <div class="card">
+        <h3>7. Strumenti di misura</h3>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Strumento</th><th>Dominio</th><th>Da ricordare</th></tr></thead>
+            <tbody>
+                <tr><td>Oscilloscopio</td><td>tempo</td><td>forma d'onda; controlli: sensibilità verticale, base dei tempi, trigger, DC/AC; puntale 1:1 / 10:1 (il 10:1 attenua ma carica meno il circuito)</td></tr>
+                <tr><td>Analizzatore di spettro</td><td>frequenza</td><td>analisi di Fourier; frequenza centrale, span, reference level, risoluzione; misura armoniche e occupazione di banda</td></tr>
+                <tr><td>Frequenzimetro</td><td>numerico</td><td>conta i periodi in una base dei tempi fissa (1 s → risoluzione 1 Hz); basato su contatori a flip-flop</td></tr>
+                <tr><td>Ondametro (grid-dip)</td><td>frequenza (analogico)</td><td>ad assorbimento: "dip" dell'indicatore quando è in risonanza</td></tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+</section>
+
+<!-- ---------- 8. NORMATIVA ---------- -->
+<section id="riep-normativa">
+    <div class="card">
+        <h3>8. Normativa</h3>
+        <ul>
+            <li><strong>ITU</strong> (Ginevra): coordina lo spettro; le Radio Regulations sono aggiornate dalle WRC ogni 3-4 anni. Tre Regioni: <strong>l'Italia è nella Regione 1</strong> (Europa, Africa, Russia asiatica, Mongolia). Le onde smorzate sono vietate (RR art. 3.15).</li>
+            <li><strong>CEPT</strong>: TR 61-01 = operare temporaneamente in altri paesi senza licenza aggiuntiva, con il proprio nominativo preceduto dal prefisso del paese (S5/IK1AAA); TR 61-02 = certificato <strong>HAREC</strong> armonizzato.</li>
+            <li><strong>Codice delle Comunicazioni Elettroniche</strong> (D.Lgs. 259/2003), articoli <strong>134-144</strong>: definizione, autorizzazione, patente (136), requisiti (137, età minima <strong>14 anni</strong>), nominativo (139), attività all'estero (140), calamità (141), manifestazioni sportive (142), ripetitori (143).</li>
+            <li>Attività <strong>esclusivamente personale, senza scopo di lucro</strong>; vietati nominativi falsi; obbligatorio il registro di stazione (logbook).</li>
+            <li><strong>Classe A</strong> (CEPT T/R 61-01): tutte le bande, max <strong>500 W p.e.p.</strong>. <strong>Classe N</strong> (novizio): bande e potenze ridotte — verifica i dettagli aggiornati sul sito del Ministero o dell'ARI.</li>
+            <li><strong>Nominativo</strong>: prefisso (I + lettera) + cifra della regione + suffisso di 1-3 lettere (IK3XYZ). Suffissi: /P portatile, /M mobile. Va pronunciato all'inizio e alla fine della trasmissione e almeno ogni 10 minuti.</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/mappa-regioni-itu.jpg" alt="📷 Regioni ITU" loading="lazy">
+            <div class="diagram-caption">Le tre Regioni ITU: l'Italia è nella Regione 1.</div>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/anatomia-nominativo-italiano.jpg" alt="📷 Anatomia del nominativo" loading="lazy">
+            <div class="diagram-caption">Prefisso, cifra di regione e suffisso di un nominativo italiano.</div>
+        </div>
+
+        <h4>Bande di frequenza</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Banda</th><th>Frequenza</th><th>Lunghezza d'onda</th></tr></thead>
+            <tbody>
+                <tr><td>LF</td><td>30-300 kHz</td><td>10-1 km</td></tr>
+                <tr><td>MF</td><td>300-3000 kHz</td><td>1000-100 m</td></tr>
+                <tr><td>HF (onde corte)</td><td>3-30 MHz</td><td>100-10 m</td></tr>
+                <tr><td>VHF</td><td>30-300 MHz</td><td>10-1 m</td></tr>
+                <tr><td>UHF</td><td>300-3000 MHz</td><td>1 m-10 cm</td></tr>
+                <tr><td>SHF (microonde)</td><td>3-30 GHz</td><td>10-1 cm</td></tr>
+                <tr><td>EHF</td><td>30-300 GHz</td><td>10-1 mm</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p>Lo spettro radio va da 9 kHz a 300 GHz; i radioamatori in Italia dispongono di bande da 135,7 kHz a 250 GHz.</p>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/spettro-bande-radioamatoriali.jpg" alt="📷 Bande radioamatoriali" loading="lazy">
+            <div class="diagram-caption">Le bande assegnate ai radioamatori italiani lungo lo spettro.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ---------- 9. PRATICA OPERATIVA ---------- -->
+<section id="riep-pratica">
+    <div class="card">
+        <h3>9. Pratica operativa</h3>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Codice</th><th>Significato</th></tr></thead>
+            <tbody>
+                <tr><td>QRA</td><td>nome (nominativo) della stazione</td></tr>
+                <tr><td>QRB</td><td>distanza</td></tr>
+                <tr><td>QRG</td><td>frequenza esatta</td></tr>
+                <tr><td>QRL</td><td>sono occupato / frequenza occupata</td></tr>
+                <tr><td>QRM</td><td>interferenze (disturbi artificiali)</td></tr>
+                <tr><td>QRN</td><td>disturbi atmosferici</td></tr>
+                <tr><td>QRO / QRP</td><td>aumenta / diminuisci la potenza</td></tr>
+                <tr><td>QRT</td><td>chiudo le trasmissioni</td></tr>
+                <tr><td>QRZ</td><td>chi mi chiama?</td></tr>
+                <tr><td>QSL</td><td>confermo / ricevuto</td></tr>
+                <tr><td>QSO</td><td>collegamento radio</td></tr>
+                <tr><td>QSY</td><td>cambia frequenza</td></tr>
+                <tr><td>QTH</td><td>posizione / località</td></tr>
+                <tr><td>QTR</td><td>ora esatta</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <ul>
+            <li><strong>RST</strong>: R comprensibilità (1-5), S intensità (1-9), T tono (1-9, solo telegrafia). <strong>73</strong> = saluti cordiali, <strong>88</strong> = affettuosi, <strong>CQ</strong> = chiamata generale, <strong>DX</strong> = stazione lontana, <strong>SK</strong> = fine contatto.</li>
+            <li><strong>Alfabeto fonetico ICAO</strong>: Alfa, Bravo, Charlie, Delta, Echo, Foxtrot, Golf, Hotel, India, Juliett, Kilo, Lima, Mike, November, Oscar, Papa, Quebec, Romeo, Sierra, Tango, Uniform, Victor, Whiskey, X-ray, Yankee, Zulu.</li>
+            <li><strong>Logbook</strong>: obbligatorio e consultabile in caso di controllo; data e ora (UTC), frequenza, modo, potenza, nominativo, rapporto RS(T), QTH. <strong>QSL</strong>: cartolina (o eQSL, LoTW) che conferma il collegamento.</li>
+            <li><strong>Codice del radioamatore</strong> (Paul Segal, 1928): gentiluomo, leale, progressista, cortese, equilibrato, altruista. Argomenti da evitare in QSO: religione, politica, affari, commenti offensivi. Non monopolizzare i ripetitori.</li>
+            <li><strong>Emergenza</strong>: segnali di soccorso <strong>May Day</strong> (fonia) e <strong>S.O.S.</strong> (telegrafia); l'uso improprio è punito con arresto fino a 6 mesi o ammenda (fino a 670 €). La Risoluzione ITU-R 640 disciplina l'uso delle bande radioamatoriali in caso di catastrofe; in calamità l'Autorità può autorizzare collegamenti speciali (art. 141).</li>
+            <li>Frequenze di emergenza italiane: coordinamento interno <strong>7.045 kHz</strong> (giorno) e <strong>3.643,5 kHz</strong> (notte); esterno <strong>7.065 kHz</strong> (giorno) e <strong>3.647 kHz</strong> (notte).</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/mappa-frequenze-emergenza.jpg" alt="📷 Frequenze di emergenza italiane" loading="lazy">
+            <div class="diagram-caption">Frequenze di coordinamento interno ed esterno, diurne e notturne, per le comunicazioni di emergenza in Italia.</div>
+        </div>
+    </div>
+</section>
+
 <!-- ===================== GLOSSARIO ===================== -->
 <section id="glossario">
     <h2>Glossario</h2>
@@ -11259,12 +11738,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer" id="changelog">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.7.0</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.8.0</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.8.0</strong> — Nuova sezione finale <strong>Riepilogo essenziale</strong>, dopo il Modulo 12: un bignami concentrato con formule, valori, tabelle e regole più importanti per l'esame, organizzato in nove sottosezioni (elettrotecnica, componenti, amplificatori e oscillatori, filtri, trasmettitori e ricevitori, linee e antenne, strumenti, normativa, pratica operativa) e con le immagini già presenti più utili al ripasso.</p>
         <p><strong>v1.7.0</strong> — Integrato il documento sulle <strong>classi di emissione</strong>: nuova sezione nel Modulo 6 — Trasmettitori con la struttura della designazione ITU (banda necessaria + lettera-numero-lettera), la codifica della larghezza di banda con H, K, M, G, le tabelle dei tre simboli (tipo di modulazione, natura del segnale modulante, tipo di informazione), gli esempi completi (100HA1A, 2K70J3E, 6K00F3E…) e le sigle abbreviate più usate (A1A, A3E, J3E, F3E, F2D). Aggiunti 4 quesiti al quiz del Modulo 6 (ora 24 domande) e la voce di glossario. Tre nuove immagini (<code>tx-classi-emissione-*.jpg</code>) da inserire in <code>assets/images/</code>.</p>
         <p><strong>v1.6.1</strong> — <strong>Fix per smartphone</strong>: risolto il contenuto più largo dello schermo che veniva tagliato a destra (il contenitore principale ora si restringe correttamente e gli elementi larghi scorrono nel proprio riquadro, mentre il testo va a capo); testo più grande e leggibile sotto i 900 px di larghezza (da 17 a 19 px in base allo schermo), interlinea più ariosa, margini laterali ridotti e rispetto delle aree sicure di notch e barre del browser. <strong>Nuovo pulsante Changelog</strong> nel menu laterale, sotto Appendici: porta in fondo alla pagina, all'inizio del piè di pagina con ringraziamenti e storico delle versioni. <strong>Immagini</strong>: aggiunte le ultime 5 immagini dei diagrammi del Modulo 9 — Antenne (accordatore, autotrasformatore, correnti di modo comune e balun, delta e T-match, gamma e omega match), così tutte le 50 figure dei moduli 8 e 9 sono presenti.</p>
         <p><strong>v1.6.0</strong> — Integrati due nuovi moduli, con lo stesso schema degli altri (introduzione, spiegazione, box "Da ricordare", tabelle, immagini). <strong>Modulo 8 — Linee di trasmissione</strong>: generalità e linee bifilari; cavi coassiali, linee su circuito stampato, guide d'onda e connettori; fattore di velocità, lunghezza d'onda e impedenza caratteristica; adattamento (trasformatore, reti a T e π, linea adattata) e carta di Smith; coefficiente di riflessione, onde stazionarie, ROS e return loss; attenuazione, perdite ed effetto pelle. <strong>Modulo 9 — Antenne</strong>: definizione, reciprocità e link RF; densità di radiazione, diagramma, lobi, regioni di campo e direttività; antenne risonanti e ad onda progressiva; dimensioni, guadagno, apertura efficace, banda passante, resistenza di radiazione, ERP ed EIRP, effetto del suolo; polarizzazione; dipolo, dipolo ripiegato, long wire, loop, monopolo, antenna caricata, ground plane, Yagi, parabola, Beverage; adattamento con trasformatore a λ/4, stub, hair pin, delta, T, gamma e omega match, autotrasformatore; balun e accordatore. Aggiunti due quiz da 20 domande, 20 nuove domande al <strong>quiz finale</strong> (da 80 a 100), 18 nuove voci di glossario e 50 nuove immagini. Strumenti di misura, Normativa e Pratica operativa sono rinumerati Moduli 10, 11 e 12; i punteggi dei quiz già salvati restano validi perché gli identificativi interni dei moduli non cambiano. Nell'integrazione sono stati corretti o chiariti alcuni punti del materiale sorgente: la densità di radiazione diminuisce con il <em>quadrato della distanza</em> (non "al diminuire"), la EIRP si calcola <em>sottraendo</em> le perdite della linea, il ROS è sempre maggiore o uguale a 1, la rete a π è C-L-C (due elementi in parallelo e uno in serie), lo stato dell'illuminatore nelle parabole offset/prime focus, e le tabelle di attenuazione dei cavi sono riportate con le unità di misura (dB ogni 100 piedi e dB ogni 100 m).</p>
