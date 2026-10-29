@@ -35,8 +35,10 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Corso Base di Elettronica e Radiotecnica — v1.8.0</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.9.0</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -115,6 +117,7 @@
         border-bottom: 1px solid rgba(255,255,255,0.15);
         margin-bottom: 15px;
     }
+    .sidebar-logo { display: block; width: 72px; height: 72px; border-radius: 16px; margin: 0 0 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.35); }
     .sidebar-header h1 { font-size: 1.15rem; font-weight: 600; line-height: 1.4; color: #fff; }
     .sidebar-header h1 span { display: block; font-size: 0.78rem; font-weight: 400; color: rgba(255,255,255,0.7); margin-top: 4px; }
     .version-badge {
@@ -873,10 +876,11 @@
 <!-- ===================== SIDEBAR ===================== -->
 <nav id="sidebar">
     <div class="sidebar-header">
+        <img class="sidebar-logo" src="assets/icon.png" alt="Corso Radioamatore 2026 — ARI Gorizia">
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.8.0</span>
+        <span class="version-badge">v1.9.0</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -971,7 +975,7 @@
             <a href="#lt-perdite">Attenuazione ed effetto pelle</a>
         </div>
         <div class="nav-section">
-            <div class="nav-section-title">Modulo 9 — Antenne</div>
+            <div class="nav-section-title">Modulo 9 — Antenne e propagazione</div>
             <a href="#ant-generalita">Definizione, link RF e tipi</a>
             <a href="#ant-radiazione">Diagramma di radiazione e direttività</a>
             <a href="#ant-risonanza">Risonanza e onda progressiva</a>
@@ -982,6 +986,12 @@
             <a href="#ant-direttive">Yagi, parabola e Beverage</a>
             <a href="#ant-adattamento">Adattamento: stub, gamma, omega</a>
             <a href="#ant-balun">Balun e accordatore</a>
+            <a href="#prop-generalita">Propagazione: tipi e mezzo</a>
+            <a href="#prop-terra-diretta">Onda di terra, guida d'onda e diretta</a>
+            <a href="#prop-troposfera">Propagazione troposferica</a>
+            <a href="#prop-ionosfera">Propagazione ionosferica</a>
+            <a href="#prop-altri-modi">Es, meteor scatter, aurorale, TEP</a>
+            <a href="#prop-disturbi-previsioni">Disturbi, indici e previsioni</a>
         </div>
         <div class="nav-section">
             <div class="nav-section-title">Modulo 10 — Strumenti di misura</div>
@@ -1014,6 +1024,7 @@
             <a href="#riep-filtri">Filtri e risonanza</a>
             <a href="#riep-tx-rx">Trasmettitori e ricevitori</a>
             <a href="#riep-linee-antenne">Linee e antenne</a>
+            <a href="#riep-propagazione">Propagazione</a>
             <a href="#riep-strumenti">Strumenti di misura</a>
             <a href="#riep-normativa">Normativa</a>
             <a href="#riep-pratica">Pratica operativa</a>
@@ -1095,7 +1106,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.8.0</strong> — nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+            <p>Versione attuale: <strong>1.9.0</strong> — nuova sezione <strong>Propagazione</strong> nel Modulo 9, che diventa «Antenne e propagazione», e logo del corso. Novità della 1.8.0: nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
         </div>
     </div>
 </section>
@@ -7530,7 +7541,7 @@
 </section>
 
 
-<h2 id="modulo-antenne">Modulo 9 — Antenne</h2>
+<h2 id="modulo-antenne">Modulo 9 — Antenne e propagazione</h2>
 
 <section id="ant-generalita">
     <div class="intro-box">
@@ -8102,10 +8113,367 @@
             <p>L'accordatore adatta <strong>radio e linea+antenna</strong>: l'antenna va comunque portata in risonanza.</p>
         </div>
     </div>
+</section>
+
+<!-- ===================== PROPAGAZIONE (Modulo 9) ===================== -->
+<section id="prop-generalita">
+    <div class="intro-box">
+        <h2>La propagazione dei segnali radio</h2>
+        <p>
+            La <strong>propagazione</strong> è tutto ciò che accade ai segnali radio dopo che hanno lasciato la nostra antenna:
+            il processo per il quale le onde elettromagnetiche si trasferiscono da un luogo all'altro.
+            Inizia quando mandiamo una corrente in un'antenna: un campo elettromagnetico si irradia subito nello spazio,
+            pressappoco alla velocità della luce.
+        </p>
+        <div class="analogy">
+            <strong>Analogia.</strong> Il segnale è come un viaggiatore: nel vuoto percorre una strada dritta e libera,
+            sulla Terra incontra montagne, edifici, pioggia e "specchi" in cielo. Conoscere la strada permette di scegliere il mezzo
+            giusto (la frequenza) e l'ora giusta per partire.
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Le grandezze del campo e il mezzo ideale</h3>
+        <p>Il campo elettromagnetico irradiato ha cinque caratteristiche: <strong>ampiezza</strong> (la forza del campo),
+        <strong>direzione</strong>, <strong>lunghezza d'onda</strong>, <strong>polarizzazione</strong> e <strong>velocità</strong>.</p>
+        <p>
+            Nello spazio vuoto la propagazione è "ideale": il mezzo è <strong>lineare</strong> (conduce le onde allo stesso modo lungo
+            il percorso), <strong>isotropico</strong> (nessuna direzionalità), <strong>nondispersivo</strong> (la polarizzazione non conta)
+            e <strong>omogeneo e indipendente dal tempo</strong> (stesse proprietà dielettriche ovunque e sempre).
+        </p>
+        <p>
+            Lungo la superficie terrestre e nell'atmosfera questo non accade mai: la Terra è una colossale barriera per la maggior parte
+            dei segnali, che interagiscono con molecole d'aria, pulviscolo, montagne, alberi, costruzioni e fenomeni atmosferici.
+        </p>
+
+        <h4>I tipi di propagazione</h4>
+        <p>Per un collegamento riuscito servono due cose: la <strong>frequenza di lavoro</strong> e la <strong>natura del mezzo</strong>
+        attraversato. Non esiste un mezzo generico, e i radioamatori hanno bande da 137 kHz a 250 GHz.</p>
+        <ul>
+            <li>per <strong>onda di terra</strong> (superficie);</li>
+            <li>per <strong>guida d'onda Terra/Ionosfera</strong>;</li>
+            <li>per <strong>onda diretta</strong> (portata ottica);</li>
+            <li>per <strong>scatter troposferico</strong> e per <strong>duct troposferico</strong>;</li>
+            <li><strong>ionosferica</strong>;</li>
+            <li>per <strong>meteor scatter</strong>;</li>
+            <li><strong>aurorale</strong> (e transequatoriale);</li>
+            <li>via <strong>spazio</strong> (satelliti e Luna).</li>
+        </ul>
+
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/prop-sistemi-propagazione.jpg" alt="📷 Sistemi di propagazione delle onde elettromagnetiche" loading="lazy">
+            <div class="diagram-caption">Sistemi di propagazione: onda di superficie, onda ottica, onda riflessa dalla ionosfera e onda spaziale verso un satellite.</div>
+        </div>
+    </div>
+</section>
+
+<section id="prop-terra-diretta">
+    <div class="card">
+        <h3>Onda di terra, guida d'onda e onda diretta</h3>
+
+        <h4>Onda di terra (o di superficie)</h4>
+        <p>
+            Fu Marconi a scoprirne le potenzialità, collegando una stazione costiera con una nave oltre l'orizzonte ottico.
+            Funziona bene alle <strong>frequenze basse o medie</strong>, difficilmente oltre <strong>3-5 MHz</strong>, per brevi o medie distanze;
+            non dipende da costruzioni, non ha evanescenza né dipende dai fenomeni solari, e va solo un po' oltre l'orizzonte ottico.
+            Il meccanismo è la presenza di una controparte speculare del segnale sotto terra, che resta in opposizione di fase con l'onda
+            di superficie: con la distanza gli sfasamenti aumentano e il segnale si attenua.
+        </p>
+        <p>
+            Per i radioamatori è utilizzabile sulla banda dei <strong>137 kHz</strong> e, di giorno, su <strong>160 m (1,8 MHz)</strong> e <strong>80 m (3,6 MHz)</strong>
+            (di notte prevale la ionosfera). Per sfruttarla servono <strong>potenze elevate</strong>, un <strong>buon piano di massa</strong> e un
+            suolo con <strong>buona conducibilità</strong>.
+        </p>
+
+        <h4>Guida d'onda Terra / Ionosfera</h4>
+        <p>
+            Usata soprattutto in <strong>ELF</strong> (3-30 kHz) e <strong>VLF</strong> (30-300 kHz): servono due superfici riflettenti affacciate, qui la
+            <strong>crosta terrestre</strong> e la <strong>base della ionosfera</strong> (distanza circa 90 km, corrispondente a 3 kHz). La copertura teorica è
+            globale, ma la banda è strettissima e le velocità bassissime: si usano FSK a bassa deviazione, OOK (Morse) lento e modi come JT65, JT9, FT4, FT8.
+            In Italia la banda <strong>da 0 a 8,3 kHz non è attribuita</strong> (gestita da MISE e Ministero della Difesa) e le eventuali utilizzazioni sotto 8,3 kHz non devono
+            causare disturbi ai servizi sopra tale frequenza.
+        </p>
+
+        <h4>Onda diretta e orizzonte radio</h4>
+        <p>
+            Oltre l'orizzonte ottico i segnali vengono diffratti: la portata è circa il <strong>15% maggiore</strong> di quella della luce.
+            Alzando le antenne aumenta la portata:
+        </p>
+        <div class="formula">
+            d<sub>r</sub> ≈ 4,12 · (√h₁ + √h₂)
+            <span class="label">d<sub>r</sub> in km, altezze h delle due antenne in metri</span>
+        </div>
+
+        <h4>Scatter terrestre e multipath fading</h4>
+        <p>
+            Dalle VHF in su gli ostacoli riflettono i segnali in modo caotico: <strong>minore la lunghezza d'onda, maggiore la riflessione</strong>.
+            I percorsi multipli, sommandosi vettorialmente al ricevitore, causano <strong>evanescenze e distorsioni</strong> (<em>multipath fading</em>).
+        </p>
+
+        <h4>Zona di Fresnel e diffrazione a lama di coltello</h4>
+        <p>
+            Tra le antenne e nelle loro vicinanze non devono esserci ostacoli: si definisce <strong>zona di Fresnel</strong> quella in cui le riflessioni non disturbano la propagazione.
+            Il suo raggio è
+        </p>
+        <div class="formula">
+            R<sub>f</sub> = ½ · √(λ·d) · 0,6
+            <span class="label">d = distanza dall'antenna più vicina</span>
+        </div>
+        <p>
+            Oltre uno spigolo (<em>knife edge</em>) le onde si diffondono con uno schema di interferenza (Huygens): dietro l'ostacolo c'è ancora
+            una zona di possibile ricezione, anche se gran parte del segnale si perde.
+        </p>
+
+        <h4>Link budget e formula di Friis</h4>
+        <p>
+            Per dimensionare un collegamento in portata ottica servono apparati, linee, antenne e percorso in aria.
+            Il <strong>link budget</strong> è la differenza in dB tra la potenza massima trasmessa e la sensibilità del ricevitore, antenne e cavi compresi:
+        </p>
+        <div class="formula">
+            Link Budget = P<sub>trasm1</sub> + G<sub>ant1</sub> + G<sub>ant2</sub> − Sens<sub>2</sub>
+            <span class="label">tutto in dB o dBm</span>
+        </div>
+        <p>L'<strong>attenuazione di tratta</strong> in aria si calcola con la <strong>formula di Friis</strong>:</p>
+        <div class="formula">
+            A<sub>t</sub> = 32,4 + 20·log₁₀(f) + 20·log₁₀(D<sub>r</sub>)
+            <span class="label">A<sub>t</sub> in dB, f in MHz, D<sub>r</sub> in km</span>
+        </div>
+
+        <div class="remember">
+            <p><strong>Onda di terra</strong>: fino a 3-5 MHz, brevi/medie distanze, nessun fading; 137 kHz, 160 m e 80 m (di giorno).</p>
+            <p><strong>Guida d'onda Terra-Ionosfera</strong>: ELF/VLF, banda strettissima, velocità bassissime.</p>
+            <p><strong>Onda diretta</strong>: oltre l'orizzonte ottico di circa il 15%; antenne più alte = più portata; ostacoli → multipath fading.</p>
+            <p>Friis: A<sub>t</sub> = 32,4 + 20·log f(MHz) + 20·log D(km).</p>
+        </div>
+    </div>
+</section>
+
+<section id="prop-troposfera">
+    <div class="card">
+        <h3>Propagazione troposferica</h3>
+        <p>
+            La <strong>troposfera</strong> è lo strato più basso dell'atmosfera, fino a circa <strong>11 km</strong> alle nostre latitudini; vi avvengono tutti i fenomeni meteorologici.
+            Se l'aria è ben mescolata, temperatura e umidità diminuiscono regolarmente con la quota, ma è una situazione rara.
+        </p>
+
+        <h4>Inversione di temperatura</h4>
+        <p>
+            Con <strong>alta pressione</strong> (belle giornate, poco vento) aria più calda, asciutta e leggera si dispone sopra aria più fresca, umida e pesante.
+            Nella zona di contatto temperatura e umidità cambiano di colpo: è l'<strong>inversione di temperatura</strong>.
+            I segnali che la colpiscono vengono <strong>rifratti verso la superficie</strong>, in modo simile al DX ionosferico: ottima occasione di DX sulle <strong>onde ultracorte</strong>,
+            soprattutto in <strong>autunno e inverno</strong>.
+        </p>
+        <ul>
+            <li>Efficace oltre i <strong>20 MHz</strong>, pienamente dai <strong>100 MHz</strong> in su; altezza d'inversione fino a 8 km.</li>
+            <li>Servono antenne ad almeno <strong>2-3 lunghezze d'onda</strong> di altezza (4-6 m in 2 m).</li>
+            <li>Portata teorica circa 800 km, in pratica raramente oltre 300 km, ma bastano <strong>1 W</strong>, antenne poco direttive e un ricevitore semplice. Si riconosce da una <strong>evanescenza lenta e poco profonda</strong>.</li>
+        </ul>
+
+        <h4>Duct troposferico</h4>
+        <p>
+            Con inversioni molto estese (soprattutto su <strong>mari e grandi laghi</strong>) avvengono rifrazioni multiple dell'inversione e riflessioni multiple della superficie: i segnali viaggiano in un
+            <strong>canale (duct)</strong>, a salto doppio o multiplo. Serve un'altezza tra inversione e suolo di almeno <strong>50 volte la lunghezza d'onda</strong> (100 m o più per i 2 m).
+            Si superano <strong>1000 km, fin oltre 2000 km</strong>, ma servono potenze elevate, antenne molto direttive e ricevitori molto sensibili.
+        </p>
+
+        <h4>Tropo-scatter e altre forme di scatter</h4>
+        <p>
+            Il <strong>tropo-scatter</strong> è dovuto a turbolenze al limite superiore della troposfera che generano continue inversioni: è possibile <strong>in qualsiasi momento</strong>,
+            con buone apparecchiature e antenne efficaci. Portate fino a <strong>300 km</strong> (a volte il doppio o il triplo), frequenze circa <strong>100-500 MHz</strong>,
+            segnali riconoscibili da <strong>profonde evanescenze oscillanti</strong>.
+        </p>
+        <p>Altre forme meteorologiche, dai 30 MHz in su: <strong>rain scatter</strong> (pioggia sotto nube temporalesca, UHF e oltre), <strong>hail scatter</strong> (grandine),
+        <strong>sleet scatter</strong> (nevischio), <strong>lightning scatter</strong> (ionizzazione dei fulmini), <strong>aircraft scatter</strong> (aerei in volo, dalle basse VHF in su).</p>
+
+        <div class="remember">
+            <p>Inversione di temperatura → rifrazione verso il suolo → DX in <strong>VHF/UHF</strong>, più frequente in autunno e inverno.</p>
+            <p>Duct: salti multipli, anche oltre 1000-2000 km, serve potenza. Tropo-scatter: sempre disponibile, fino a ~300 km, evanescenza profonda.</p>
+        </div>
+    </div>
+</section>
+
+<section id="prop-ionosfera">
+    <div class="card">
+        <h3>Propagazione ionosferica</h3>
+        <p>
+            Quattro grandi sistemi interagiscono: il <strong>Sole</strong>, il <strong>campo magnetico terrestre</strong>, la <strong>bassa atmosfera</strong> e la <strong>ionosfera</strong> stessa.
+            La ionosfera si estende da circa <strong>40 km a 1600 km</strong> di altezza; l'aria è rarefattissima (la parte più bassa è un milione di volte meno densa di quella che respiriamo).
+        </p>
+
+        <h4>Ionizzazione e ricombinazione</h4>
+        <p>
+            Le radiazioni solari ionizzanti (ultravioletti, X, gamma) staccano elettroni dalle molecole d'aria (ioni) e vengono assorbite prima di raggiungerci.
+            In un ambiente così rarefatto gli elettroni si ricombinano poco: nasce un ambiente <strong>ricco di elettroni liberi</strong> che riflette le onde.
+            Di <strong>giorno prevale la ionizzazione, di notte la ricombinazione</strong>; più basso è lo strato, più veloce è la ricombinazione.
+            Il tasso di ionizzazione dipende da ora, stagione e attività solare (macchie solari e flusso solare).
+        </p>
+
+        <h4>Gli strati</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Strato</th><th>Altezza</th><th>Comportamento</th></tr></thead>
+            <tbody>
+                <tr><td>D</td><td>60-90 km</td><td>quasi nessuna riflessione o rifrazione: <strong>assorbe</strong> le onde più lunghe; solo di giorno, massimo a mezzogiorno locale</td></tr>
+                <tr><td>E</td><td>100-115 km</td><td>solo di giorno, massimo a mezzogiorno locale</td></tr>
+                <tr><td>F1</td><td>circa 160 km</td><td>solo di giorno</td></tr>
+                <tr><td>F2</td><td>210-420 km</td><td>attivo giorno e notte (massima efficacia poco dopo mezzogiorno); massimo nei mesi invernali</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/prop-strati-ionosferici.jpg" alt="📷 Strati della ionosfera di giorno e di notte" loading="lazy">
+            <div class="diagram-caption">Strati della ionosfera: di giorno D, E, F1 e F2; di notte resta sostanzialmente lo strato F (F1 e F2 si fondono).</div>
+        </div>
+
+        <h4>Cicli solari</h4>
+        <p>
+            L'efficacia degli strati segue il ciclo delle macchie solari, di circa <strong>11 anni</strong> (9-13). Gli anni di <strong>massimo di macchie</strong> sono i migliori per il DX in HF alta;
+            il numero relativo di macchie R aumenta → aumentano le possibilità di DX. Dal 1750 si sono registrati cicli successivi; oggi siamo nel <strong>25° ciclo</strong>.
+        </p>
+
+        <h4>LUF, MUF, frequenza critica e frequenza ottimale</h4>
+        <ul>
+            <li><strong>LUF</strong> (<em>Lowest Usable Frequency</em>): sotto questa frequenza i segnali non vengono rifratti al suolo ma si perdono (assorbiti dallo strato D o dispersi). Esiste solo di giorno; può valere 10-15 MHz e si abbassa aumentando la potenza (con ~100 W circa 5-8 MHz). Sotto la LUF resta solo l'onda di terra, oppure si sale di frequenza.</li>
+            <li><strong>MUF</strong> (<em>Maximum Usable Frequency</em>): la frequenza più alta che viene ancora rifratta, per un dato angolo di incidenza. Oltre la MUF i segnali attraversano lo strato e vanno nello spazio.</li>
+            <li><strong>Frequenza critica</strong>: la massima frequenza riflessa per un segnale che arriva <em>verticalmente</em>; dipende dalla densità di elettroni. Indicativamente E 2-4 MHz, F1 3-6 MHz, F2 3-14 MHz. La MUF è <strong>maggiore</strong> della frequenza critica perché l'onda arriva con angolo inferiore a 90°.</li>
+            <li><strong>OWF</strong>, frequenza di lavoro ottimale: circa l'<strong>85% della MUF</strong>.</li>
+        </ul>
+        <p>Il collegamento DX sicuro è possibile nell'intervallo <strong>LUF-MUF</strong>: frequenze che attraversano due volte lo strato D, vengono riflesse da E o F e arrivano con intensità sufficiente.</p>
+
+        <h4>Angolo d'irradiazione e zona d'ombra (skip)</h4>
+        <p>
+            Abbassando l'angolo di emissione la MUF cresce: con angoli prossimi a zero può arrivare a <strong>3-5 volte</strong> la frequenza critica; più piatto è l'angolo, più alta può essere la frequenza di esercizio.
+            Lo svantaggio è la <strong>zona d'ombra (skip)</strong> attorno al trasmettitore, dove il segnale non si riceve: cresce con la frequenza e corrisponde pressappoco alla portata del salto.
+            La zona d'ombra non esiste per frequenze fino alla MUF verticale se l'angolo d'irradiazione dell'antenna è abbastanza alto.
+        </p>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/prop-zona-ombra-skip.jpg" alt="📷 Zona d'ombra" loading="lazy">
+            <div class="diagram-caption">Il segnale riflesso dallo strato F2 ricade lontano dal trasmettitore, lasciando una zona d'ombra (skip) intorno ad esso.</div>
+        </div>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/prop-salti-multipli.jpg" alt="📷 Riflessione e salti multipli" loading="lazy">
+            <div class="diagram-caption">Riflessioni multiple tra ionosfera e Terra: a bassi angoli si formano nuove zone d'ombra, meno marcate della prima; i segnali troppo verticali si perdono nello spazio.</div>
+        </div>
+        <p>
+            Le portate dipendono dall'altezza dello strato e dall'angolo d'irradiazione (generalmente circa 15° di elevazione per l'antenna). Con un salto singolo (strato F2) si arriva raramente oltre
+            <strong>2500 km</strong>; per distanze maggiori servono salti multipli. Per ricevere il segnale riflesso l'angolo dell'antenna ricevente deve essere simile a quello della trasmittente.
+        </p>
+
+        <h4>Le bande HF, una per una</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Banda</th><th>Comportamento</th></tr></thead>
+            <tbody>
+                <tr><td>160 e 80 m (1,8-3,8 MHz)</td><td>DX quasi solo di <strong>notte</strong> (manca lo strato D, si raggiunge F2); meglio nelle <strong>notti invernali</strong> e con <strong>poche macchie solari</strong> (meno rumore); la zona d'ombra quasi non esiste</td></tr>
+                <tr><td>60 m (fino a ~6 MHz)</td><td>come le bande più basse, ma ogni tanto buone portate anche di giorno; zona d'ombra fino a 200 km di raggio</td></tr>
+                <tr><td>40 e 30 m (6-10 MHz)</td><td>caratteristiche notturne, ma più possibilità di giorno; le migliori occasioni all'<strong>alba e al tramonto (gray line)</strong>; zona d'ombra molto estesa</td></tr>
+                <tr><td>20 e 15 m (10-20 MHz)</td><td>tipicamente <strong>diurne</strong>; di notte ancora sfruttabili in estate; frequenze tipicamente DX, si collega tutto il mondo; zona d'ombra molto estesa</td></tr>
+                <tr><td>12 e 10 m (20-30 MHz)</td><td>utili al DX solo durante un <strong>massimo di macchie solari</strong>; segnali sulla parte diurna del globo; zona d'ombra enorme, talvolta intercontinentale</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="remember">
+            <p>Strati: <strong>D</strong> (60-90 km) assorbe; <strong>E</strong> (100-115 km), <strong>F1</strong> (~160 km), <strong>F2</strong> (210-420 km) riflettono. Di notte resta sostanzialmente lo strato F.</p>
+            <p><strong>Giorno</strong> = ionizzazione; <strong>notte</strong> = ricombinazione. Ciclo solare ≈ 11 anni; ora 25° ciclo.</p>
+            <p><strong>LUF</strong> &lt; frequenza di lavoro &lt; <strong>MUF</strong>; OWF ≈ 85% MUF; MUF &gt; frequenza critica.</p>
+            <p>Regola generale: sotto ~10 MHz onde <strong>notturne</strong>; sopra ~10 MHz onde <strong>diurne</strong>.</p>
+        </div>
+    </div>
+</section>
+
+<section id="prop-altri-modi">
+    <div class="card">
+        <h3>Altri modi di propagazione</h3>
+
+        <h4>Strato E sporadico (Es)</h4>
+        <p>
+            Attorno ai 100 km, occasionalmente e in uno spazio limitato, si forma uno strato che riflette frequenze fino a circa <strong>200 MHz</strong>.
+            Non è correlato al ciclo delle macchie solari ma sembra legato agli <strong>sciami meteorici</strong>; ha massimi nei mesi <strong>maggio-luglio</strong> (e dicembre-gennaio), nella tarda mattinata e nelle prime ore serali.
+            Può aprire il DX su bande altrimenti precluse, ma nel traffico quotidiano è un <strong>disturbo</strong>: riflette i segnali che altrimenti andrebbero agli strati F, accorciando le portate (più salti, più potenza)
+            e spostando i punti di riflessione, che a volte però permettono di collegare punti normalmente in zona d'ombra.
+        </p>
+
+        <h4>Meteor scatter</h4>
+        <p>
+            Ogni anno circa 50.000 tonnellate di meteore entrano nell'atmosfera, a velocità altissima. Ognuna lascia una <strong>scia di gas ionizzati</strong>, soprattutto all'altezza dello strato E,
+            che riflette segnali nelle bande <strong>10, 6 e 2 metri</strong>. La ricombinazione è veloce: il collegamento dura da pochi secondi a qualche minuto.
+        </p>
+
+        <h4>Magnetosfera e propagazione aurorale</h4>
+        <p>
+            La Terra è un enorme magnete: le sue linee di forza sono perturbate dal <strong>vento solare</strong>. In quiete poche particelle (protoni ed elettroni) penetrano e vengono catturate dai poli;
+            con forte attività solare il vento è più veloce e numeroso, la magnetosfera cambia forma aprendo un <em>cusp</em> dove vengono catturate molte particelle, che il campo elettrico terrestre accelera generando le <strong>aurore polari</strong>.
+            La ionosfera polare, ricca di elettroni, <strong>cancella i segnali HF</strong> sui percorsi sopra i poli, mentre per frequenze da <strong>6 a 2 metri</strong> offre una intensa riflessione: collegamenti oltre <strong>1000 km</strong>.
+        </p>
+
+        <h4>Propagazione transequatoriale (TEP)</h4>
+        <p>
+            Collega località a medie latitudini, circa alla stessa distanza nord-sud dall'equatore (magnetico, non coincidente con quello geografico). Si verifica nel <strong>tardo pomeriggio e in serata</strong>,
+            è massima nei <strong>massimi solari</strong>, sui <strong>6 metri</strong> (la sera anche 2 m e 70 cm), con portate da 300 a 7500 km. I meccanismi non sono del tutto noti.
+        </p>
+
+        <h4>Collegamenti spaziali</h4>
+        <p>
+            Usano come riflettore i <strong>satelliti amatoriali (AMSAT)</strong> e la <strong>Luna</strong> (EME): il collegamento avviene a vista del mezzo, la portata dipende dall'altezza del riflettore.
+            I segnali attraversano due volte l'atmosfera: oltre all'attenuazione di tratta si hanno <strong>rotazioni di fase</strong> (da cui la polarizzazione circolare), <strong>ritardi</strong> ed <strong>effetto Doppler</strong>.
+            Dalle VHF in su, con antenne e apparati performanti.
+        </p>
+
+        <div class="remember">
+            <p><strong>Es</strong>: riflette fino a ~200 MHz, maggio-luglio, legato agli sciami meteorici.</p>
+            <p><strong>Meteor scatter</strong>: 10, 6 e 2 m, scie ionizzate in strato E, durata secondi/minuti.</p>
+            <p><strong>Aurorale</strong>: HF cancellate sui poli, 6-2 m riflessi (&gt;1000 km). <strong>TEP</strong>: 6 m, sera, massimo solare.</p>
+            <p><strong>Spaziale</strong>: satelliti e Luna; Doppler, ritardi, rotazioni di fase.</p>
+        </div>
+    </div>
+</section>
+
+<section id="prop-disturbi-previsioni">
+    <div class="card">
+        <h3>Disturbi, indici solari e previsioni</h3>
+
+        <h4>Disturbi della propagazione</h4>
+        <ul>
+            <li><strong>SID</strong> (<em>Sudden Ionospheric Disturbance</em>): aumento improvviso dell'attenuazione dello strato D, solo sull'<strong>emisfero illuminato</strong> e ovunque contemporaneamente; da minuti a ore, inizio rapido e fine lenta; colpisce soprattutto onde medio-corte e corte basse; frequente nei massimi di macchie.</li>
+            <li><strong>Polar Blackout</strong> (due tipi): il primo, raro, nei massimi di macchie e per diversi giorni; il secondo, più frequente, con le fasi principali delle aurore (marzo e settembre), da ore a giorni. Interrompono i collegamenti che attraversano latitudini di 60° e oltre.</li>
+            <li><strong>Cancellazione di fase</strong>: all'alba e al tramonto, mentre lo strato D si forma o si scioglie, al ricevitore giungono sia l'onda di terra sia quella riflessa: percorsi diversi → differenze di fase → evanescenza (nota nelle onde medie commerciali).</li>
+            <li>Scale NOAA di intensità: <strong>R</strong> (<em>radio blackout</em>), <strong>S</strong> (<em>solar radiation storms</em>), <strong>G</strong> (<em>geomagnetic storm</em>), da 1 a 5.</li>
+        </ul>
+
+        <h4>Indici dell'attività solare</h4>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Indice</th><th>Significato</th></tr></thead>
+            <tbody>
+                <tr><td>SFI (flusso solare)</td><td>radiazione solare a <strong>2800 MHz (10,7 cm)</strong>, valori da 62,5 a 300; più è alto, maggiore è la ionizzazione dello strato F e la frequenza utilizzabile; misurato 3 volte al giorno</td></tr>
+                <tr><td>SN (macchie solari)</td><td>numero di macchie, R = k·(10g + s) (Wolf, 1848): g gruppi, s macchie totali; correlato vagamente all'SFI; aggiornato una volta al giorno</td></tr>
+                <tr><td>Indice A</td><td>da 0 a 400, instabilità del campo geomagnetico; media di 8 letture dell'indice K ogni 3 ore</td></tr>
+                <tr><td>Indice K</td><td>da 0 a 9, disturbo della componente orizzontale del campo magnetico (misurato in nT, ogni 3 ore); alti K con bassi A = breve interruzione HF e aurore</td></tr>
+                <tr><td>Bz e SW</td><td>Bz = campo magnetico interplanetario (se negativo il campo terrestre si indebolisce); SW = velocità del vento solare, oltre <strong>500 km/s</strong> pesa sulle comunicazioni HF</td></tr>
+                <tr><td>X-Ray, 304A, flussi di protoni ed elettroni</td><td>quantità di particelle e radiazioni nel vento solare, misurate dai satelliti NOAA</td></tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h4>Beacon e strumenti di previsione</h4>
+        <ul>
+            <li><strong>Beacon NCDXF/IARU</strong>: rete di <strong>18 trasmettitori</strong> nel mondo, tutti sulle stesse frequenze (<strong>14100, 18110, 21150, 24930, 28200 kHz</strong>), coordinati a rotazione: nominativo in Morse e quattro toni da 1 secondo a 100, 10, 1 e 0,1 W.</li>
+            <li><strong>Reverse Beacon</strong> (stazioni che riportano sul web come ricevono il nostro Morse), <strong>WebSDR</strong> (ricevitori in streaming) e <strong>PSKReporter</strong> (rapporti FT8 su mappa) mostrano dove arriva il proprio segnale.</li>
+            <li>Previsioni: NOAA e NASA, UKMO, siti come SolarHam, SpaceWeather, HamQSL (banner con le condizioni di VHF e HF), <strong>Radio Mobile</strong> (copertura da 20 MHz a 20 GHz), <strong>DXLab Suite / PropView</strong> e simili, basati sugli algoritmi <strong>VOACAP</strong>. Non dicono come è la propagazione <em>ora</em>, ma come sarà <em>più o meno</em> nel breve periodo.</li>
+        </ul>
+
+        <div class="remember">
+            <p><strong>SID</strong>: solo lato diurno, improvvisa; <strong>Polar Blackout</strong>: latitudini ≥ 60°; <strong>cancellazione di fase</strong>: alba e tramonto.</p>
+            <p><strong>SFI</strong> alto = più ionizzazione = frequenze più alte; <strong>K</strong> alto = disturbo geomagnetico; <strong>SW</strong> &gt; 500 km/s disturba l'HF.</p>
+            <p>Beacon IARU: 14100, 18110, 21150, 24930, 28200 kHz.</p>
+        </div>
+    </div>
 
     <details class="module-quiz">
-        <summary>✏️ Quiz Modulo 9 — Antenne (20 domande)</summary>
+        <summary>✏️ Quiz Modulo 9 — Antenne e propagazione (24 domande)</summary>
         <div class="quiz-content">
+
 
             <div class="quiz">
                 <div class="question">1. Secondo la definizione IEEE, un'antenna è:</div>
@@ -8347,9 +8715,57 @@
                 <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
             </div>
 
+            <div class="quiz">
+                <div class="question">21. Lo strato ionosferico che assorbe le onde più lunghe, senza riflettere in modo utile, è lo strato:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) E</li>
+                    <li onclick="checkAnswer(this, false)">B) F1</li>
+                    <li onclick="checkAnswer(this, true)">C) D</li>
+                    <li onclick="checkAnswer(this, false)">D) F2</li>
+                </ul>
+                <div class="answer">Lo strato <strong>D</strong> (60-90 km) assorbe le onde più lunghe e compare solo di giorno; E, F1 e F2 riflettono.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">22. La frequenza più alta che viene ancora rifratta verso il suolo, per un dato angolo di incidenza, è la:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) LUF</li>
+                    <li onclick="checkAnswer(this, true)">B) MUF</li>
+                    <li onclick="checkAnswer(this, false)">C) Frequenza di taglio</li>
+                    <li onclick="checkAnswer(this, false)">D) Frequenza immagine</li>
+                </ul>
+                <div class="answer">È la <strong>MUF</strong> (Maximum Usable Frequency); oltre la MUF i segnali attraversano lo strato e vanno nello spazio. La frequenza di lavoro ottimale è circa l'85% della MUF.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">23. La propagazione per inversione di temperatura (troposferica) offre soprattutto DX:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, false)">A) In HF, di notte</li>
+                    <li onclick="checkAnswer(this, true)">B) Sulle onde ultracorte (VHF/UHF), più spesso in autunno e inverno</li>
+                    <li onclick="checkAnswer(this, false)">C) Solo sulle onde lunghe</li>
+                    <li onclick="checkAnswer(this, false)">D) Solo con potenze elevatissime</li>
+                </ul>
+                <div class="answer">Le inversioni di temperatura rifrangono i segnali verso la superficie e offrono ottime occasioni di DX sulle <strong>onde ultracorte</strong>, soprattutto in autunno e inverno, anche con 1 W.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
+
+            <div class="quiz">
+                <div class="question">24. L'attenuazione di tratta in spazio libero secondo la formula di Friis, con f in MHz e D in km, vale:</div>
+                <ul class="options">
+                    <li onclick="checkAnswer(this, true)">A) 32,4 + 20·log f + 20·log D</li>
+                    <li onclick="checkAnswer(this, false)">B) 32,4 + 10·log f + 10·log D</li>
+                    <li onclick="checkAnswer(this, false)">C) 20·log f − 20·log D</li>
+                    <li onclick="checkAnswer(this, false)">D) 10·log f + 32,4·log D</li>
+                </ul>
+                <div class="answer">A<sub>t</sub> = <strong>32,4 + 20·log₁₀(f) + 20·log₁₀(D)</strong> dB, con f in MHz e D in km.</div>
+                <button class="btn-show" onclick="toggleAnswer(this)">Mostra risposta</button>
+            </div>
         </div>
     </details>
 </section>
+
 
 
 <h2 id="modulo-strumenti">Modulo 10 — Strumenti di misura</h2>
@@ -10152,10 +10568,44 @@
     </div>
 </section>
 
+<!-- ---------- 6bis. PROPAGAZIONE ---------- -->
+<section id="riep-propagazione">
+    <div class="card">
+        <h3>7. Propagazione</h3>
+        <div class="table-wrapper">
+        <table>
+            <thead><tr><th>Tipo</th><th>Da ricordare</th></tr></thead>
+            <tbody>
+                <tr><td>Onda di terra</td><td>fino a 3-5 MHz, brevi/medie distanze, nessun fading; 137 kHz, 160 m e 80 m (di giorno); servono potenza, buona terra, suolo conduttivo</td></tr>
+                <tr><td>Guida d'onda Terra-Ionosfera</td><td>ELF/VLF, banda strettissima, velocità bassissime</td></tr>
+                <tr><td>Onda diretta</td><td>portata ottica +15% (d ≈ 4,12·(√h₁+√h₂) km); ostacoli e riflessioni → multipath fading; zona di Fresnel libera</td></tr>
+                <tr><td>Troposfera</td><td>inversione di temperatura → DX in VHF/UHF (autunno-inverno, fino a ~300 km); duct oltre 1000 km su mare; tropo-scatter 100-500 MHz sempre disponibile</td></tr>
+                <tr><td>Ionosfera</td><td>strati D (assorbe), E, F1, F2 (riflettono); giorno = ionizzazione, notte = ricombinazione; di notte resta F</td></tr>
+                <tr><td>Es, meteor scatter</td><td>Es fino a ~200 MHz (maggio-luglio); meteor scatter su 10, 6 e 2 m, durata secondi/minuti</td></tr>
+                <tr><td>Aurorale, TEP, spaziale</td><td>aurore: HF cancellate sui poli, 6-2 m riflessi; TEP su 6 m di sera; satelliti/Luna: Doppler e rotazioni di fase</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <ul>
+            <li><strong>LUF</strong> &lt; frequenza di lavoro &lt; <strong>MUF</strong>; OWF ≈ 85% della MUF; la MUF è maggiore della frequenza critica (angolo &lt; 90°).</li>
+            <li>Angolo d'irradiazione basso → MUF più alta (fino a 3-5 volte la critica) ma <strong>zona d'ombra (skip)</strong> più ampia.</li>
+            <li>Regola generale: sotto ~10 MHz onde <strong>notturne</strong>, sopra ~10 MHz onde <strong>diurne</strong>; 12-10 m utili solo con massimo di macchie solari; gray line (alba/tramonto) ottima in 40-30 m.</li>
+            <li>Ciclo solare ≈ 11 anni (oggi 25° ciclo): più macchie solari = migliore DX in HF alta. SFI alto = più ionizzazione; K alto = disturbo geomagnetico.</li>
+            <li>Disturbi: <strong>SID</strong> (solo lato diurno, improvvisa), <strong>Polar Blackout</strong> (≥ 60° di latitudine), cancellazione di fase (alba/tramonto).</li>
+            <li>Friis: <strong>A<sub>t</sub> = 32,4 + 20·log f(MHz) + 20·log D(km)</strong>; link budget = P<sub>tx</sub> + G<sub>ant1</sub> + G<sub>ant2</sub> − Sens<sub>rx</sub>.</li>
+            <li>Beacon NCDXF/IARU: 14100, 18110, 21150, 24930, 28200 kHz.</li>
+        </ul>
+        <div class="diagram">
+            <img class="diagram-img" src="assets/images/prop-strati-ionosferici.jpg" alt="📷 Strati della ionosfera" loading="lazy">
+            <div class="diagram-caption">Strati della ionosfera di giorno e di notte.</div>
+        </div>
+    </div>
+</section>
+
 <!-- ---------- 7. STRUMENTI ---------- -->
 <section id="riep-strumenti">
     <div class="card">
-        <h3>7. Strumenti di misura</h3>
+        <h3>8. Strumenti di misura</h3>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Strumento</th><th>Dominio</th><th>Da ricordare</th></tr></thead>
@@ -10173,7 +10623,7 @@
 <!-- ---------- 8. NORMATIVA ---------- -->
 <section id="riep-normativa">
     <div class="card">
-        <h3>8. Normativa</h3>
+        <h3>9. Normativa</h3>
         <ul>
             <li><strong>ITU</strong> (Ginevra): coordina lo spettro; le Radio Regulations sono aggiornate dalle WRC ogni 3-4 anni. Tre Regioni: <strong>l'Italia è nella Regione 1</strong> (Europa, Africa, Russia asiatica, Mongolia). Le onde smorzate sono vietate (RR art. 3.15).</li>
             <li><strong>CEPT</strong>: TR 61-01 = operare temporaneamente in altri paesi senza licenza aggiuntiva, con il proprio nominativo preceduto dal prefisso del paese (S5/IK1AAA); TR 61-02 = certificato <strong>HAREC</strong> armonizzato.</li>
@@ -10217,7 +10667,7 @@
 <!-- ---------- 9. PRATICA OPERATIVA ---------- -->
 <section id="riep-pratica">
     <div class="card">
-        <h3>9. Pratica operativa</h3>
+        <h3>10. Pratica operativa</h3>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Codice</th><th>Significato</th></tr></thead>
@@ -10284,6 +10734,9 @@
 
                 <dt>Barkhausen (criterio di)</dt>
                 <dd>Condizione di oscillazione Aβ = 1: guadagno d'anello unitario e sfasamento nullo a una certa frequenza.</dd>
+
+                <dt>Beacon</dt>
+                <dd>Stazione-faro che trasmette in continuo il proprio nominativo, usata per verificare lo stato della propagazione (rete NCDXF/IARU su 14100, 18110, 21150, 24930 e 28200 kHz).</dd>
 
                 <dt>BFO</dt>
                 <dd>Beat Frequency Oscillator: oscillatore a battimento che ricostruisce la portante per demodulare i segnali SSB.</dd>
@@ -10360,6 +10813,9 @@
                 <dt>Frequenzimetro</dt>
                 <dd>Strumento che misura la frequenza contando i periodi del segnale in una base dei tempi fissa e stabile.</dd>
 
+                <dt>Fresnel (zona di)</dt>
+                <dd>Zona attorno al collegamento a vista che deve restare libera da ostacoli per evitare riflessioni e multipath fading.</dd>
+
                 <dt>Ground plane</dt>
                 <dd>Piano di terra (o antenna verticale con radiali): superficie o fili a raggiera che simulano un terreno perfettamente conduttore.</dd>
 
@@ -10384,6 +10840,9 @@
                 <dt>Intermodulazione (IMD)</dt>
                 <dd>Disturbo prodotto dalla non linearità di uno stadio in presenza di più segnali: compaiono somme e differenze delle frequenze.</dd>
 
+                <dt>Ionosfera</dt>
+                <dd>Regione dell'alta atmosfera (circa 40-1600 km) ionizzata dal Sole, che riflette le onde corte; è divisa negli strati D, E, F1 e F2.</dd>
+
                 <dt>ITU</dt>
                 <dd>International Telecommunication Union. Organizzazione internazionale delle telecomunicazioni.</dd>
 
@@ -10407,6 +10866,15 @@
 
                 <dt>MOSFET</dt>
                 <dd>Metal-Oxide Semiconductor FET. Transistor a effetto di campo con gate isolato.</dd>
+
+                <dt>LUF</dt>
+                <dd>Lowest Usable Frequency: frequenza minima utilizzabile in propagazione ionosferica; sotto di essa i segnali sono assorbiti o dispersi.</dd>
+
+                <dt>MUF</dt>
+                <dd>Maximum Usable Frequency: frequenza massima che la ionosfera rifrange verso il suolo per un dato angolo di incidenza; oltre di essa i segnali escono nello spazio.</dd>
+
+                <dt>Multipath fading</dt>
+                <dd>Evanescenza dovuta alla somma, al ricevitore, di segnali giunti per percorsi multipli (riflessioni su ostacoli).</dd>
 
                 <dt>Nominativo</dt>
                 <dd>Identificativo univoco di una stazione radioamatoriale.</dd>
@@ -10483,14 +10951,23 @@
                 <dt>Sensibilità</dt>
                 <dd>Misura del più piccolo segnale ricevibile con un dato rapporto segnale/rumore (SINAD di 12 dB per i segnali analogici).</dd>
 
+                <dt>SID</dt>
+                <dd>Sudden Ionospheric Disturbance: improvviso aumento dell'assorbimento dello strato D sull'emisfero illuminato, con blackout temporaneo delle onde corte.</dd>
+
                 <dt>SINAD</dt>
                 <dd>Signal to Noise And Distortion ratio: rapporto usato per esprimere la sensibilità di un ricevitore.</dd>
+
+                <dt>Skip (zona d'ombra)</dt>
+                <dd>Zona attorno al trasmettitore, non raggiunta né dall'onda di terra né da quella ionosferica, dove il segnale non si riceve.</dd>
 
                 <dt>Squelch</dt>
                 <dd>Soppressione del rumore di fondo: silenzia l'audio quando il segnale è sotto una soglia impostabile.</dd>
 
                 <dt>SSB</dt>
                 <dd>Single Side Band. Modulazione a banda laterale unica.</dd>
+
+                <dt>Strato E sporadico (Es)</dt>
+                <dd>Strato occasionale a circa 100 km che riflette frequenze fino a circa 200 MHz e apre al DX bande normalmente precluse.</dd>
 
                 <dt>Stub</dt>
                 <dd>Spezzone di linea, in corto o aperto, usato come reattanza (induttanza o capacità) per l'adattamento di impedenza.</dd>
@@ -10503,6 +10980,9 @@
 
                 <dt>Transistor</dt>
                 <dd>Componente a semiconduttore usato per amplificare o commutare segnali.</dd>
+
+                <dt>Troposfera</dt>
+                <dd>Strato più basso dell'atmosfera (fino a circa 11 km), sede dei fenomeni meteorologici e delle inversioni che permettono il DX in VHF/UHF.</dd>
 
                 <dt>UTC</dt>
                 <dd>Universal Time Coordinated. Tempo universale coordinato.</dd>
@@ -11738,12 +12218,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer" id="changelog">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.8.0</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.9.0</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.9.0</strong> — Integrata la lezione sulla <strong>propagazione dei segnali radio</strong> (IV3ONZ Andrea / A.R.I.) nel Modulo 9, che diventa <strong>Antenne e propagazione</strong>: sei nuove sezioni (tipi di propagazione, onda di terra, guida d'onda e onda diretta con orizzonte radio, zona di Fresnel, link budget e formula di Friis; propagazione troposferica; ionosfera, strati, LUF/MUF, zona d'ombra e bande HF; Es, meteor scatter, aurorale, TEP e collegamenti spaziali; disturbi, indici solari, beacon e previsioni), quattro schemi (<code>prop-*.jpg</code>), quattro quesiti (il quiz del Modulo 9 passa a 24 domande) e dieci voci di glossario. Il <strong>Riepilogo essenziale</strong> ha ora anche la sottosezione Propagazione. Aggiunto il <strong>logo del corso</strong> (sidebar, favicon, README).</p>
         <p><strong>v1.8.0</strong> — Nuova sezione finale <strong>Riepilogo essenziale</strong>, dopo il Modulo 12: un bignami concentrato con formule, valori, tabelle e regole più importanti per l'esame, organizzato in nove sottosezioni (elettrotecnica, componenti, amplificatori e oscillatori, filtri, trasmettitori e ricevitori, linee e antenne, strumenti, normativa, pratica operativa) e con le immagini già presenti più utili al ripasso.</p>
         <p><strong>v1.7.0</strong> — Integrato il documento sulle <strong>classi di emissione</strong>: nuova sezione nel Modulo 6 — Trasmettitori con la struttura della designazione ITU (banda necessaria + lettera-numero-lettera), la codifica della larghezza di banda con H, K, M, G, le tabelle dei tre simboli (tipo di modulazione, natura del segnale modulante, tipo di informazione), gli esempi completi (100HA1A, 2K70J3E, 6K00F3E…) e le sigle abbreviate più usate (A1A, A3E, J3E, F3E, F2D). Aggiunti 4 quesiti al quiz del Modulo 6 (ora 24 domande) e la voce di glossario. Tre nuove immagini (<code>tx-classi-emissione-*.jpg</code>) da inserire in <code>assets/images/</code>.</p>
         <p><strong>v1.6.1</strong> — <strong>Fix per smartphone</strong>: risolto il contenuto più largo dello schermo che veniva tagliato a destra (il contenitore principale ora si restringe correttamente e gli elementi larghi scorrono nel proprio riquadro, mentre il testo va a capo); testo più grande e leggibile sotto i 900 px di larghezza (da 17 a 19 px in base allo schermo), interlinea più ariosa, margini laterali ridotti e rispetto delle aree sicure di notch e barre del browser. <strong>Nuovo pulsante Changelog</strong> nel menu laterale, sotto Appendici: porta in fondo alla pagina, all'inizio del piè di pagina con ringraziamenti e storico delle versioni. <strong>Immagini</strong>: aggiunte le ultime 5 immagini dei diagrammi del Modulo 9 — Antenne (accordatore, autotrasformatore, correnti di modo comune e balun, delta e T-match, gamma e omega match), così tutte le 50 figure dei moduli 8 e 9 sono presenti.</p>
