@@ -38,7 +38,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Corso Base di Elettronica e Radiotecnica — v1.9.0</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.9.1</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -133,14 +133,18 @@
     }
 
     .sidebar-nav { padding: 0 10px; }
-    .sidebar-nav .nav-section { margin-bottom: 6px; }
+    .sidebar-nav .nav-section { margin: 14px 0 6px; }
     .sidebar-nav .nav-section-title {
-        font-size: 0.72rem;
+        font-size: 0.86rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        color: rgba(255,255,255,0.5);
-        padding: 12px 12px 4px;
-        font-weight: 600;
+        letter-spacing: 0.9px;
+        color: #fff;
+        background: rgba(255,255,255,0.10);
+        border-left: 4px solid var(--accent);
+        border-radius: 0 8px 8px 0;
+        padding: 9px 12px;
+        margin: 0 0 4px;
+        font-weight: 700;
     }
     .sidebar-nav a {
         display: block;
@@ -880,7 +884,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.9.0</span>
+        <span class="version-badge">v1.9.1</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -1106,7 +1110,7 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.9.0</strong> — nuova sezione <strong>Propagazione</strong> nel Modulo 9, che diventa «Antenne e propagazione», e logo del corso. Novità della 1.8.0: nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+            <p>Versione attuale: <strong>1.9.1</strong> — titoli dei moduli più evidenti nel menu laterale. Novità della 1.9.0: nuova sezione <strong>Propagazione</strong> nel Modulo 9, che diventa «Antenne e propagazione», e logo del corso. Novità della 1.8.0: nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
         </div>
     </div>
 </section>
@@ -12218,12 +12222,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer" id="changelog">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.9.0</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.9.1</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.9.1</strong> — <strong>Menu laterale</strong>: i titoli dei moduli sono ora molto più evidenti (testo più grande e bianco, in grassetto, su una fascia evidenziata con barra arancione a sinistra) e le sezioni sono meglio distanziate.</p>
         <p><strong>v1.9.0</strong> — Integrata la lezione sulla <strong>propagazione dei segnali radio</strong> (IV3ONZ Andrea / A.R.I.) nel Modulo 9, che diventa <strong>Antenne e propagazione</strong>: sei nuove sezioni (tipi di propagazione, onda di terra, guida d'onda e onda diretta con orizzonte radio, zona di Fresnel, link budget e formula di Friis; propagazione troposferica; ionosfera, strati, LUF/MUF, zona d'ombra e bande HF; Es, meteor scatter, aurorale, TEP e collegamenti spaziali; disturbi, indici solari, beacon e previsioni), quattro schemi (<code>prop-*.jpg</code>), quattro quesiti (il quiz del Modulo 9 passa a 24 domande) e dieci voci di glossario. Il <strong>Riepilogo essenziale</strong> ha ora anche la sottosezione Propagazione. Aggiunto il <strong>logo del corso</strong> (sidebar, favicon, README).</p>
         <p><strong>v1.8.0</strong> — Nuova sezione finale <strong>Riepilogo essenziale</strong>, dopo il Modulo 12: un bignami concentrato con formule, valori, tabelle e regole più importanti per l'esame, organizzato in nove sottosezioni (elettrotecnica, componenti, amplificatori e oscillatori, filtri, trasmettitori e ricevitori, linee e antenne, strumenti, normativa, pratica operativa) e con le immagini già presenti più utili al ripasso.</p>
         <p><strong>v1.7.0</strong> — Integrato il documento sulle <strong>classi di emissione</strong>: nuova sezione nel Modulo 6 — Trasmettitori con la struttura della designazione ITU (banda necessaria + lettera-numero-lettera), la codifica della larghezza di banda con H, K, M, G, le tabelle dei tre simboli (tipo di modulazione, natura del segnale modulante, tipo di informazione), gli esempi completi (100HA1A, 2K70J3E, 6K00F3E…) e le sigle abbreviate più usate (A1A, A3E, J3E, F3E, F2D). Aggiunti 4 quesiti al quiz del Modulo 6 (ora 24 domande) e la voce di glossario. Tre nuove immagini (<code>tx-classi-emissione-*.jpg</code>) da inserire in <code>assets/images/</code>.</p>
