@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quiz Radiotecnica 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1f4; --surface:#ffffff; --text:#14202b; --muted:#566574; --border:#d5dce3;
+  --accent:#0b5d75; --accent-text:#ffffff; --accent-soft:#e3f1f5;
+  --ok:#17733a; --ok-bg:#e5f4ea; --ok-border:#8fcba3;
+  --ko:#b3261e; --ko-bg:#fcebea; --ko-border:#eeaaa5;
+  --na:#7a5b00; --na-bg:#fff4d6; --na-border:#e6c868;
+  --overlay:rgba(10,20,30,.55);
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e151b; --surface:#17212a; --text:#e8eef3; --muted:#9aabb9; --border:#2a3946;
+    --accent:#5cc0dc; --accent-text:#08202a; --accent-soft:#16303b;
+    --ok:#6fd38f; --ok-bg:#12301d; --ok-border:#2f6d45;
+    --ko:#ff8a80; --ko-bg:#3a1917; --ko-border:#7a3531;
+    --na:#f0c95a; --na-bg:#352b0b; --na-border:#7a6420;
+    --overlay:rgba(0,0,0,.65);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e151b; --surface:#17212a; --text:#e8eef3; --muted:#9aabb9; --border:#2a3946;
+  --accent:#5cc0dc; --accent-text:#08202a; --accent-soft:#16303b;
+  --ok:#6fd38f; --ok-bg:#12301d; --ok-border:#2f6d45;
+  --ko:#ff8a80; --ko-bg:#3a1917; --ko-border:#7a3531;
+  --na:#f0c95a; --na-bg:#352b0b; --na-border:#7a6420;
+  --overlay:rgba(0,0,0,.65);
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.5;
+}
+body.modal-open{overflow:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:30}
+
+/* ---------- Sticky header ---------- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+  background:var(--surface); border-bottom:1px solid var(--border);
+}
+.bar{max-width:720px;margin:0 auto;padding:8px 12px}
+.bar-stats{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:8px;align-items:center}
+.bar-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.bar-sim{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center}
+.stat{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.stat-label{font-size:12px;color:var(--muted);white-space:nowrap}
+.stat-value{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat-value small{font-size:12px;font-weight:400;color:var(--muted)}
+.stat.ok .stat-value{color:var(--ok)}
+.stat.ko .stat-value{color:var(--ko)}
+.timer{font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.timer.warn{color:var(--ko)}
+.btn{
+  font:inherit; font-weight:500; min-height:44px; padding:0 16px; border-radius:10px;
+  border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer;
+}
+.btn.sm{min-height:40px;padding:0 10px;font-size:15px}
+.btn:hover{background:var(--accent-soft)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
+.btn-primary:hover{background:var(--accent);filter:brightness(1.08)}
+.progress{height:3px;background:var(--border)}
+.progress>div{height:100%;width:0;background:var(--accent);transition:width .25s ease}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ---------- Contenuto ---------- */
+main{max-width:720px;margin:0 auto;padding:14px 12px 24px}
+.intro{margin:4px 2px 14px;color:var(--muted);font-size:14px}
+.intro strong{color:var(--text);font-weight:600}
+.card{
+  background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:16px 14px 14px; margin-bottom:14px; scroll-margin-top:calc(84px + env(safe-area-inset-top,0px));
+}
+.card-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:6px}
+.card h2,.card h3{font-size:17px;line-height:1.4;font-weight:600;margin:0 0 12px}
+.options{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.opt{
+  width:100%; display:flex; gap:10px; align-items:flex-start; text-align:left;
+  font:inherit; color:var(--text); background:var(--surface);
+  border:1.5px solid var(--border); border-radius:10px; padding:11px 12px; min-height:48px;
+}
+button.opt{cursor:pointer}
+button.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt-letter{
+  flex:none; width:26px; height:26px; border-radius:50%; border:1.5px solid var(--border);
+  display:grid; place-items:center; font-size:13px; font-weight:600; color:var(--muted); margin-top:-1px;
+}
+.opt-text{flex:1;min-width:0;overflow-wrap:anywhere}
+.opt-text .tag{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+button.opt:disabled{cursor:default}
+button.opt:disabled:not(.is-correct):not(.is-wrong):not(.is-picked){opacity:.55}
+.opt.is-correct{border-color:var(--ok-border);background:var(--ok-bg)}
+.opt.is-correct .opt-letter{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+.opt.is-wrong{border-color:var(--ko-border);background:var(--ko-bg)}
+.opt.is-wrong .opt-letter{background:var(--ko);border-color:var(--ko);color:var(--surface)}
+.opt.is-picked{border-color:var(--accent);background:var(--accent-soft);opacity:1}
+.opt.is-picked .opt-letter{background:var(--accent);border-color:var(--accent);color:var(--accent-text)}
+.opt.is-correct,.opt.is-wrong{opacity:1;color:var(--text)}
+.summary{
+  background:var(--accent-soft); border:1px solid var(--accent); border-radius:14px; padding:16px; text-align:center;
+}
+.summary h2{margin:0 0 4px;font-size:18px}
+.summary p{margin:0 0 12px;color:var(--muted)}
+.footer{max-width:720px;margin:0 auto;padding:0 12px 28px;text-align:center;font-size:13px;color:var(--muted)}
+
+/* ---------- Simulazione ---------- */
+.sim-card h2{font-size:19px}
+.sim-hint{margin:12px 2px 0;font-size:13px;color:var(--muted);text-align:center}
+.result-head{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px}
+.result-head h2{margin:0 0 2px;font-size:20px}
+.result-head .reason{margin:0 0 14px;color:var(--muted);font-size:14px}
+.score{font-size:34px;font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums}
+.score small{font-size:16px;font-weight:400;color:var(--muted)}
+.score-pct{margin:0 0 14px;color:var(--muted)}
+.stats4{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.stat-box{border:1px solid var(--border);border-radius:10px;padding:8px 10px}
+.stat-box .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat-box .l{font-size:13px;color:var(--muted)}
+.stat-box.ok .n{color:var(--ok)} .stat-box.ko .n{color:var(--ko)} .stat-box.na .n{color:var(--na)}
+.actions{display:grid;gap:8px}
+@media (min-width:480px){.actions{grid-template-columns:1fr 1fr}.stats4{grid-template-columns:repeat(4,1fr)}}
+.badge{font-size:13px;font-weight:600;padding:2px 10px;border-radius:99px;border:1px solid}
+.badge.ok{color:var(--ok);background:var(--ok-bg);border-color:var(--ok-border)}
+.badge.ko{color:var(--ko);background:var(--ko-bg);border-color:var(--ko-border)}
+.badge.na{color:var(--na);background:var(--na-bg);border-color:var(--na-border)}
+.res .opt{min-height:0}
+.res-expl{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+.res-expl .t{font-size:13px;color:var(--muted);margin:0 0 2px}
+.res-expl p{margin:0}
+
+/* ---------- Modali ---------- */
+.overlay{
+  position:fixed; inset:0; z-index:40; background:var(--overlay);
+  display:flex; align-items:flex-end; justify-content:center;
+}
+.modal{
+  width:100%; max-width:560px; max-height:88vh; max-height:88dvh; overflow:auto;
+  background:var(--surface); border-radius:18px 18px 0 0; padding:20px 18px calc(18px + env(safe-area-inset-bottom,0px));
+  animation:sheet .18s ease-out;
+}
+@keyframes sheet{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.modal{animation:none}.progress>div{transition:none}}
+@media (min-width:600px){
+  .overlay{align-items:center;padding:16px}
+  .modal{border-radius:18px}
+}
+.verdict{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+.verdict-icon{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  font-size:19px;font-weight:700;color:var(--surface);flex:none
+}
+.verdict h3{margin:0;font-size:22px;font-weight:600}
+.modal.ok .verdict-icon{background:var(--ok)} .modal.ok h3{color:var(--ok)}
+.modal.ko .verdict-icon{background:var(--ko)} .modal.ko h3{color:var(--ko)}
+.answer-box{border:1px solid var(--ok-border);background:var(--ok-bg);border-radius:10px;padding:10px 12px;margin-bottom:12px}
+.answer-box .lbl{font-size:13px;color:var(--muted);display:block;margin-bottom:2px}
+.explain{margin:0 0 16px;color:var(--text)}
+.explain-title{font-size:13px;color:var(--muted);margin:0 0 2px}
+.modal .btn{width:100%}
+.dlg-title{margin:0 0 10px;font-size:22px;font-weight:600}
+.dlg-body{margin:0 0 16px}
+.dlg-body p{margin:0 0 8px}
+.dlg-body ul{margin:0;padding-left:20px}
+.dlg-body li{margin-bottom:6px}
+.dlg-actions{display:grid;gap:8px}
+.stat-value small{margin-left:3px}
+.stat-box .n small{font-size:13px;font-weight:400;color:var(--muted);margin-left:4px}
+.theme-row{margin:0 0 8px}
+.theme{display:inline-block;font-size:13px;font-weight:500;color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent);border-radius:99px;padding:1px 10px;line-height:1.5}
+.course{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;text-align:left;color:var(--text)}
+.course p{margin:0 0 6px}
+.course-title{font-weight:600;font-size:16px}
+.course-link{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:10px;background:var(--accent);color:var(--accent-text);font-weight:500;text-decoration:none}
+.course-link:hover{filter:brightness(1.08)}
+.footer p{margin:0}
+.btn.icon{width:44px;padding:0;display:grid;place-items:center}
+.menu-overlay{align-items:stretch;justify-content:flex-end;padding:0}
+.drawer{
+  width:min(340px,88vw);height:100%;overflow:auto;background:var(--surface);
+  border-left:1px solid var(--border);display:flex;flex-direction:column;gap:14px;
+  padding:calc(14px + env(safe-area-inset-top,0px)) 16px calc(14px + env(safe-area-inset-bottom,0px));
+  animation:drawer .2s ease-out
+}
+@keyframes drawer{from{transform:translateX(24px);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.drawer{animation:none}}
+.drawer-head{display:flex;align-items:center;justify-content:space-between}
+.drawer-head h3{margin:0;font-size:20px;font-weight:600}
+.drawer-actions{display:grid;gap:8px}
+.drawer .course{margin:0;background:var(--bg)}
+.btn.support{display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text)}
+.menu-ver{margin:auto 0 0;padding-top:8px;text-align:center;font-size:13px;color:var(--muted)}
+.footer a{color:var(--accent);font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="bar" id="barStudy">
+    <div class="bar-stats">
+      <div class="stat" aria-label="Risposte totali date"><span class="stat-label">Date</span><span class="stat-value" id="cTotal">0</span></div>
+      <div class="stat ok" title="Percentuale calcolata sulle risposte date"><span class="stat-label">Corrette</span><span class="stat-value" id="cOk">0<small>0%</small></span></div>
+      <div class="stat ko" title="Percentuale calcolata sulle risposte date"><span class="stat-label">Errate</span><span class="stat-value" id="cKo">0<small>0%</small></span></div>
+      <button class="btn icon" id="btnMenu" type="button" aria-label="Apri il menu" aria-haspopup="dialog" aria-expanded="false" aria-controls="drawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="bar" id="barSim" hidden>
+    <div class="bar-sim">
+      <div class="stat"><span class="stat-label" id="simLabel">Simulazione</span><span class="stat-value" id="simTitle"></span></div>
+      <span class="timer" id="simTimer" role="timer" aria-label="Tempo rimasto">60:00</span>
+      <button class="btn sm" id="btnAbandon" type="button">Abbandona</button>
+    </div>
+  </div>
+  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+</header>
+
+<main id="study">
+  <p class="intro"><strong>Quiz Radiotecnica 1 e 2.</strong> Le domande seguono l’ordine dei PDF e ognuna riporta il suo tema: “Teoria generale” oppure “Componenti – Circuiti – Ricevitori – Trasmettitori”. Tocca una risposta per vedere subito se è corretta: una volta data, non si può cambiare. Con “Mescola Ordine” cambi l’ordine, con “Simulazione” provi un test a tempo.</p>
+  <div id="quiz"></div>
+</main>
+
+<main id="simView" hidden>
+  <div id="simContent"></div>
+</main>
+
+<footer class="footer">
+  <p>Made with love by <a href="https://sputlab.com" target="_blank" rel="noopener">Sputlab.com</a> – <span id="ver"></span></p>
+</footer>
+
+<!-- Menu -->
+<div class="overlay menu-overlay" id="menuOverlay" hidden>
+  <nav class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
+    <div class="drawer-head">
+      <h3 id="menuTitle">Menu</h3>
+      <button class="btn icon" id="btnMenuClose" type="button" aria-label="Chiudi il menu">✕</button>
+    </div>
+    <div class="drawer-actions">
+      <button class="btn btn-primary" id="btnSim" type="button">Simulazione</button>
+      <button class="btn" id="btnShuffle" type="button">Mescola Ordine</button>
+      <button class="btn" id="btnReset" type="button">Reset</button>
+    </div>
+    <aside class="course">
+      <p class="course-title">Corso online per radioamatori</p>
+      <p>Per approfondire gli argomenti di questi quiz trovi il Corso Base di Elettronica e Radiotecnica, con le dispense per aspiranti radioamatori.</p>
+      <a class="course-link" href="https://sputlab.github.io/corso-arigo-2026/" target="_blank" rel="noopener">Apri il corso online</a>
+    </aside>
+    <a class="btn support" href="https://sputlab.com" target="_blank" rel="noopener">Supporta Sputlab.com</a>
+    <p class="menu-ver" id="menuVer"></p>
+  </nav>
+</div>
+
+<!-- Feedback risposta (modalità studio) -->
+<div class="overlay" id="overlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="verdict"><span class="verdict-icon" id="mIcon" aria-hidden="true"></span><h3 id="mTitle"></h3></div>
+    <div class="answer-box"><span class="lbl">Risposta esatta</span><span id="mAnswer"></span></div>
+    <p class="explain-title">Spiegazione</p>
+    <p class="explain" id="mExplain"></p>
+    <button class="btn btn-primary" id="mNext" type="button">Continua</button>
+  </div>
+</div>
+
+<!-- Dialogo generico (introduzione simulazione, conferma abbandono) -->
+<div class="overlay" id="dlgOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
+    <h3 class="dlg-title" id="dlgTitle"></h3>
+    <div class="dlg-body" id="dlgBody"></div>
+    <div class="dlg-actions" id="dlgActions"></div>
+  </div>
+</div>
+
+<script>
+const VERSION = "1.3.0";
+
+/* Formato: "domanda|A|B|C|D|indice risposta esatta (0-3)|spiegazione" */
+const SECTIONS = [
+  { sec: 1, theme: "Teoria generale" },
+  { sec: 2, theme: "Componenti – Circuiti – Ricevitori – Trasmettitori" }
+];
+const RAW1 = [
+"Un segnale di frequenza f = 1 kHz che periodo T ha?|T = 1000 s|T = 10 ms|T = 1 ms|T = 100 ms|2|Il periodo è l'inverso della frequenza: T = 1/f = 1/1000 Hz = 0,001 s = 1 ms.",
+"Collegando tre resistenze in serie rispettivamente da 15, 24 e 37 ohm; la resistenza totale sarà di:|76 ohm.|15 ohm.|7,38 ohm.|37 ohm.|0|In serie le resistenze si sommano: 15 + 24 + 37 = 76 Ω.",
+"Qual è l'unità di misura della reattanza?|Siemens|Ampere|L'ohm|Mho|2|La reattanza, come la resistenza e l'impedenza, si misura in ohm (Ω). Siemens e mho sono unità di conduttanza/ammettenza.",
+"Un amplificatore in classe B è caratterizzato da:|Alto rendimento ma alta dissipazione anodica in assenza di pilotaggio.|Basso rendimento e alta dissipazione anodica in assenza di pilotaggio.|Basso rendimento ma minima dissipazione anodica in assenza di pilotaggio.|Alto rendimento e minima dissipazione anodica in assenza di pilotaggio.|3|In classe B ciascun dispositivo conduce per mezzo periodo: in assenza di segnale di pilotaggio la corrente a riposo è quasi nulla (dissipazione minima) e il rendimento è alto (circa 60-65%).",
+"L'intensità di corrente si misura in:|watt|coulomb|ampere|volt|2|L'intensità di corrente si misura in ampere (A). Il watt misura la potenza, il coulomb la carica, il volt la tensione.",
+"Se una batteria da 12 V eroga 0,25 A in un circuito qual è la resistenza del circuito?|48 ohm|3 ohm|0,25 ohm|12 ohm|0|Legge di Ohm: R = V / I = 12 / 0,25 = 48 Ω.",
+"Se in un circuito alimentato con una corrente di intensità costante si raddoppia la resistenza:|la tensione si dimezza|la corrente si dimezza|la tensione si raddoppia|la corrente si raddoppia|2|Con I costante, V = R × I: se R raddoppia, raddoppia anche la tensione ai capi della resistenza.",
+"Aumentando la superficie delle piastre di un condensatore come varia la capacità?|Diminuisce|Aumenta|Resta invariata|Si annulla|1|La capacità è C = ε·S/d: è direttamente proporzionale alla superficie S delle armature, quindi aumenta.",
+"Quale è la resistenza di una lampadina alimentata con una tensione efficace di 220 V ed una corrente efficace di 11 A?|231 ohm|2420 ohm|4400 ohm|20 ohm|3|R = V / I = 220 / 11 = 20 Ω.",
+"Cosa si intende per banda laterale superiore (USB)?|La parte di un segnale a banda laterale unica che si trova al di sopra della frequenza della portante|La parte di un segnale a banda laterale unica che si trova al di sotto della frequenza della portante|Qualunque frequenza al di sopra di 10 MHz|La frequenza della portante di un segnale a banda laterale unica|0|USB (Upper Side Band) è la banda laterale che occupa le frequenze superiori a quella della portante.",
+"Quanta potenza eroga una batteria da 12 V collegata ad un trasmettitore che assorbe 2 A?|6 W|24 W|14 W|240 W|1|P = V × I = 12 × 2 = 24 W.",
+"Se si raddoppia la frequenza, la corrispondente lunghezza d'onda:|resta circa costante|si quadruplica|si raddoppia|si dimezza|3|λ = c / f: lunghezza d'onda e frequenza sono inversamente proporzionali, quindi raddoppiando f la λ si dimezza.",
+"Il metodo di misura volt-amperometrico richiede l'impiego di:|Un voltmetro.|Un amperometro.|Un voltmetro ed un amperometro.|Un voltmetro ed un wattmetro.|2|Si misurano contemporaneamente tensione e corrente e si ricava la resistenza con R = V/I: servono quindi voltmetro e amperometro.",
+"Che cosa è la reattanza?|La scintilla prodotta nel contatto in apertura dall'interruzione del flusso di corrente in una bobina.|La grandezza, dovuta ai resistori, che si oppone al flusso della corrente continua.|Il comportamento caratteristico di un resistore ideale in un circuito in corrente alternata.|La grandezza, dovuta alle bobine ed ai condensatori, che si oppone al flusso di corrente alternata.|3|La reattanza è l'opposizione al passaggio della corrente alternata dovuta a induttori (XL) e condensatori (XC); a differenza della resistenza non dissipa potenza.",
+"Due generatori di tensione in serie equivalgono ad un unico generatore il cui valore è:|La somma dei due|La media fra i due|Uguale a quello di valore più alto|Il prodotto dei due|0|In serie le f.e.m. si sommano (se collegati con la stessa polarità), come avviene per le pile in una batteria.",
+"In una grandezza sinusoidale la differenza tra il valore massimo ed il valore minimo assunto nel periodo viene definito come:|Valore medio.|Valore picco - picco.|Valore efficace.|Valore quadratico.|1|Il valore picco-picco è la distanza tra il massimo positivo e il massimo negativo; per una sinusoide vale il doppio del valore di picco.",
+"Un condensatore accumula energia sotto forma di:|campo elettrico|calore|energia chimica|campo magnetico|0|Il condensatore immagazzina energia nel campo elettrico (elettrostatico) tra le sue armature; l'induttore invece la accumula nel campo magnetico.",
+"La corrente alternata è:|un flusso di elettroni bidirezionale e di intensità costante|un flusso di elettroni bidirezionale e di intensità variabile|un flusso di elettroni unidirezionale e di intensità costante|un flusso di atomi ionizzati|1|Nella corrente alternata gli elettroni cambiano periodicamente verso e anche l'intensità varia nel tempo (ad esempio con andamento sinusoidale).",
+"Qual è uno degli scopi dell'impiego delle capacità nei circuiti?|Bloccare il flusso della corrente alternata e lasciar passare la corrente continua|Cambiare la costante di tempo alla tensione applicata|Trasformare la corrente alternata in corrente continua|Bloccare il flusso della corrente continua e lasciar passare la corrente alternata|3|Un condensatore a regime è un circuito aperto per la corrente continua, mentre lascia passare la alternata (la sua reattanza diminuisce con la frequenza): è l'uso tipico come condensatore di accoppiamento.",
+"Se un segnale compie dieci milioni di cicli nell'arco di un secondo, quale è la sua frequenza?|10 kHz|100 MHz|10 MHz|20 kHz|2|La frequenza è il numero di cicli al secondo: 10.000.000 Hz = 10 MHz.",
+"Se in un resistore sottoposto ad una tensione di 90 V scorre una corrente di 3 A quale è il valore della resistenza?|30 ohm.|3 ohm.|270 ohm.|93 ohm.|0|R = V / I = 90 / 3 = 30 Ω.",
+"Collegando in parallelo tre pile da 1,5 V si ottiene una batteria da:|4,5 V|3,375 V|1,5 V|15 V|2|In parallelo la tensione resta quella di una singola pila (1,5 V); aumenta invece la capacità, cioè la corrente erogabile.",
+"L'effetto pelle interessa:|conduttori attraversati da corrente continua|resistori riscaldati oltre la temperatura critica|condensatori attraversati da correnti variabili|conduttori attraversati da corrente alternata|3|L'effetto pelle (skin effect) riguarda i conduttori percorsi da corrente alternata: al crescere della frequenza la corrente si concentra verso la superficie.",
+"Il rapporto tra ampiezza del segnale e ampiezza della portante è:|il rendimento di trasmissione|l'indice di modulazione FM|l'ingombro di banda SSB|la profondità di modulazione AM|3|In AM la profondità (o indice) di modulazione è m = Vmodulante / Vportante.",
+"Quale valore espresso in MHz ha la frequenza 7125 kHz.|712,5000 MHz|7,125 MHz|71,25 MHz|0,007125 MHz|1|1 MHz = 1000 kHz, quindi 7125 kHz / 1000 = 7,125 MHz.",
+"Il gigahertz è un'unità di misura di:|reattanza|lunghezza d'onda|impedenza|frequenza|3|Il gigahertz (GHz) è un multiplo dell'hertz: 1 GHz = 10⁹ Hz, ed è un'unità di frequenza.",
+"Un guadagno di potenza di 1000 corrisponde a:|3000 dB|30 dB|1000 dB|200 dB|1|G(dB) = 10·log₁₀(1000) = 10 × 3 = 30 dB.",
+"Se si raddoppia la corrente che attraversa una reattanza, la tensione ai suoi capi:|si dimezza|resta invariata|si raddoppia|raddoppia lo sfasamento|2|V = X × I: a reattanza costante la tensione è proporzionale alla corrente, quindi raddoppia.",
+"Se si raddoppia la tensione applicata ai capi di un resistore, la corrente che gli scorre attraverso:|raddoppia|si dimezza|si quadruplica|resta costante|0|Legge di Ohm: I = V / R. Con R costante, raddoppiando V raddoppia I.",
+"Come si calcola il valore della tensione V ai capi di una resistenza R attraversata da una corrente I?|V=I²xR|V=I:R|V=IxR|V=R:I|2|Legge di Ohm: V = I × R.",
+"La reattanza X di un condensatore di capacità C alimentato da una tensione sinusoidale di frequenza f vale:|X = 1 / (6,28 x f x C)|X = f x C / 6,28|X = 6,28 / (f x C)|X = 6,28 x f x C|0|XC = 1/(ωC) = 1/(2π·f·C), con 2π ≈ 6,28. La reattanza capacitiva diminuisce all'aumentare di f e di C.",
+"Collegando in serie due condensatori di uguale capacità qual è il valore di capacità risultante?|E' pari al quadrato del valore di capacità del singolo condensatore|E' pari alla metà della capacità del singolo condensatore|E' uguale al valore di capacità del singolo condensatore|E' pari al doppio del valore di capacità del singolo condensatore|1|In serie 1/Ct = 1/C + 1/C = 2/C, quindi Ct = C/2: la capacità si dimezza.",
+"L'indice di modulazione della AM può superare il 100%?|Sempre|No perché si abbasserebbe il rendimento del modulatore|Solo se poi si amplifica con circuiti in classe AB|No perché si introdurrebbe distorsione e quindi armoniche indesiderate|3|Oltre il 100% (sovramodulazione) la portante si annulla in certi istanti e l'inviluppo viene deformato: si generano distorsione, armoniche e splatter fuori banda.",
+"Un segnale vocale con banda di 4 kHz se fosse modulato in AM quanta banda occuperebbe?|4 kHz|0,8 kHz|8 kHz|40 kHz|2|In AM si formano due bande laterali: la banda occupata è il doppio della massima frequenza modulante, 2 × 4 kHz = 8 kHz.",
+"La resistenza totale di due resistori di valore R1 ed R2 collegati in serie è:|R1 x R2 / (R1 + R2)|R2 / R1|R1 + R2|R1 / R2|2|In serie le resistenze si sommano: Rt = R1 + R2. La prima formula è invece quella del parallelo.",
+"Un'onda elettromagnetica avente lunghezza d'onda pari a 400 m viene classificata come:|Microonda.|Onda lunga.|Onda ultracorta.|Onda media.|3|f = 300/λ(m) MHz = 300/400 = 0,75 MHz = 750 kHz, che rientra nella gamma delle onde medie (circa 300 kHz - 3 MHz).",
+"Collegando in parallelo un condensatore da 10 mF con uno da 3 mF, si ottiene un condensatore di capacità totale di:|13 mF|4 mF|1,7 mF|2,3 mF|0|In parallelo le capacità si sommano: 10 + 3 = 13 mF.",
+"Una batteria da 10 Ah è in grado di erogare:|una corrente da 10 A per un periodo di 2 ore|una corrente da 1 A per un periodo di 100 ore|una corrente da 1 A per un periodo di 10 ore|una corrente da 10 A per un periodo di 10 ore|2|La capacità in Ah è corrente × tempo: 10 Ah = 1 A × 10 h (oppure 10 A × 1 h).",
+"Perché la modulazione di frequenza è il sistema migliore per trasmettere segnali radiotelefonici in banda VHF/UHF?|Perché l'audio non è disturbato dai rumori generati da macchine elettriche|Perché la portante ha una migliore stabilità in frequenza rispetto alla modulazione d'ampiezza|Perché è meno sensibile alle distorsioni introdotte dai segnali riflessi|Perché non è influenzata dall'ampiezza della portante|0|I disturbi impulsivi (macchine elettriche, motori, accensioni) agiscono soprattutto sull'ampiezza del segnale; il ricevitore FM, grazie al limitatore, li elimina, quindi l'audio resta pulito.",
+"Collegando un condensatore da 20 pF in parallelo ad un altro condensatore da 20 pF, si ottiene una capacità totale di:|400 pF|20 pF|40 pF|10 pF|2|In parallelo le capacità si sommano: 20 + 20 = 40 pF.",
+"Una resistenza è attraversata da una corrente di 2 A ed ai suoi capi è localizzata una tensione di 12 V. Quanto vale la resistenza?|12 ohm|6 ohm|24 ohm|0,17 ohm|1|R = V / I = 12 / 2 = 6 Ω.",
+"Che tipo di circuito elettrico si viene a creare a seguito della bruciatura di un fusibile?|Un circuito chiuso|Un circuito di by-pass|Un circuito aperto|Un corto circuito|2|Quando il fusibile fonde il conduttore si interrompe: il circuito diventa aperto e la corrente non può più circolare.",
+"Che cosa succede in una resistenza attraversata da corrente?|La resistenza accumula energia elettrica|La corrente viene sfasata|La resistenza si raffredda|La resistenza si scalda|3|Il resistore dissipa energia elettrica sotto forma di calore (effetto Joule, P = R·I²), quindi si scalda.",
+"Che cosa accade quando l'impedenza del carico è uguale all'impedenza interna del generatore?|Si ha il massimo trasferimento di energia dal generatore al carico|Si ha il minimo trasferimento di energia dal generatore al carico|Il carico viene visto dal generatore come un corto circuito|Non si ha passaggio di corrente nel circuito|0|È il teorema del massimo trasferimento di potenza: la potenza ceduta al carico è massima quando l'impedenza di carico è adattata a quella interna del generatore.",
+"Il milliampere è un'unità di misura di:|resistenza|corrente|tensione|campo elettrico|1|Il milliampere (mA) è un sottomultiplo dell'ampere: 1 mA = 0,001 A. Misura la corrente.",
+"Aumentando la spaziatura fra le piastre di un condensatore come varia la capacità?|Aumenta|Si annulla|Resta invariata|Diminuisce|3|C = ε·S/d: la capacità è inversamente proporzionale alla distanza d, quindi allontanando le piastre diminuisce.",
+"Una resistenza da 500 ohm collegata in serie ad una da 200 ohm corrispondono ad una resistenza da:|100 ohm|143 ohm|700 ohm|100 kohm|2|In serie le resistenze si sommano: 500 + 200 = 700 Ω.",
+"In un semiconduttore drogato di tipo N le cariche libere sono:|elettroni|ioni negativi|lacune|protoni|0|Il drogaggio di tipo N (con atomi donatori) fornisce elettroni liberi in eccesso: gli elettroni sono i portatori maggioritari.",
+"Cosa indica la portata di uno strumento:|La più piccola variazione che è possibile rilevare.|Il grado di precisione.|Il valore massimo misurabile della grandezza.|Se può essere usato in alternata od in continua.|2|La portata (fondo scala) è il massimo valore della grandezza che lo strumento può misurare nella posizione selezionata.",
+"Collegando in serie cinque reattanze capacitive da -10 ohm si ottiene una reattanza totale di:|-2 ohm|-50 ohm|2 ohm|50 ohm|1|In serie le reattanze si sommano algebricamente: 5 × (-10) = -50 Ω. Il segno negativo indica reattanza capacitiva.",
+"In un canale radiofonico modulato in ampiezza la trasmissione di un segnale con fmax=4500 Hz occuperà una banda di larghezza pari a:|4500 Hz.|45 kHz.|90 kHz.|9.000 Hz.|3|In AM la banda occupata è 2 × fmax = 2 × 4500 = 9000 Hz.",
+"Ad una frequenza di 144 MHz corrisponde una lunghezza d'onda di:|circa 0,5 metri|circa 3 metri|circa 2 metri|circa 20 metri|2|λ = 300 / f(MHz) = 300 / 144 ≈ 2,08 m: è la banda dei 2 metri.",
+"In un induttore alimentato da corrente alternata, la corrente rispetto alla tensione è sfasata di:|90 gradi in anticipo|180 gradi|45 gradi in anticipo|90 gradi in ritardo|3|In un induttore ideale la corrente è in ritardo di 90° rispetto alla tensione (nel condensatore è invece in anticipo di 90°).",
+"Alimentando una lampadina con 220 V ed 2 A, si dissipano:|440 W|220 kWh|48400 W|220 W|0|P = V × I = 220 × 2 = 440 W. I kWh sono un'unità di energia, non di potenza.",
+"La tensione si misura in:|ampere|ohm|volt|watt|2|La tensione elettrica si misura in volt (V).",
+"Tra le seguenti cifre di rumore qual è la migliore?|0,8 dB|5 dB|1 dB|8 dB|0|La cifra di rumore indica quanto rumore aggiunge un dispositivo: più è bassa, migliore è il ricevitore o l'amplificatore. Il valore più basso è 0,8 dB.",
+"Qual è uno scopo per l'utilizzo dei resistore nei circuiti?|Aumentare la tensione nel circuito|Controllare l'intensità della corrente prodotta da una tensione|Bloccare il passaggio della corrente continua e consentire il passaggio della corrente alternata|Bloccare il passaggio della corrente alternata e consentire il passaggio della corrente continua|1|Il resistore limita e regola la corrente (I = V/R) e permette di ottenere partizioni di tensione. Non amplifica la tensione e non discrimina tra continua e alternata.",
+"La barriera di potenziale in una giunzione P-N è una forza che:|Crea atomi donatori e accettori.|Impedisce la ricombinazione fra gli ioni.|Favorisce la ricombinazione degli elettroni con le lacune.|Impedisce la totale ricombinazione degli elettroni con le lacune.|3|Il campo elettrico creato dagli ioni fissi nella zona di svuotamento si oppone alla diffusione dei portatori: la ricombinazione si arresta quando si raggiunge l'equilibrio.",
+"Un segnale audio con frequenza massima di 15 kHz quanta banda occupa se viene modulato in AM?|15 kHz|30 kHz|150 kHz|7,5 kHz|1|Banda AM = 2 × fmax = 2 × 15 kHz = 30 kHz.",
+"Se ad un amplificatore con 60 dB di guadagno si collega in cascata un attenuatore da 25 dB si ottiene un guadagno totale di:|85 dB|-35 dB|1500 dB|35 dB|3|In cascata i guadagni in dB si sommano algebricamente: un attenuatore da 25 dB vale -25 dB, quindi 60 - 25 = 35 dB.",
+"Se un resistore da 50 ohm viene attraversato da una corrente di 2 A quale sarà la tensione ai suoi capi?|200 V|100 V|10 V|25 V|1|V = R × I = 50 × 2 = 100 V.",
+"Su quale principio si basa la modulazione di ampiezza:|L'ampiezza del segnale portante viene variato dal segnale modulante.|La frequenza del segnale portante si sottrae a quella del segnale modulante.|La frequenza del segnale portante si somma a quella del segnale modulante.|L'ampiezza del segnale modulante viene variato dal segnale portante.|0|In AM è il segnale modulante (informazione) a far variare l'ampiezza della portante, mentre la frequenza della portante resta costante.",
+"Che tipo di emissione produce il trasmettitore a modulazione di frequenza se il microfono non funziona?|Una portante modulata i frequenza|Una portante modulata in fase|Una portante non modulata|Una portante modulata in ampiezza|2|Senza segnale modulante la frequenza non viene deviata: il trasmettitore emette la sola portante non modulata.",
+"Quale valore espresso in kHz ha la frequenza 3,525 MHz.|3525 kHz|0,003525 kHz|35,25 kHz.|3525000 kHz|0|1 MHz = 1000 kHz, quindi 3,525 MHz = 3525 kHz.",
+"Se un circuito dissipa solo potenza attiva ha un fattore di potenza pari a:|0|0,5|0,707|1|3|Il fattore di potenza è cosφ = P attiva / P apparente. Se c'è solo potenza attiva (circuito puramente resistivo) i due valori coincidono e cosφ = 1.",
+"In un circuito composto da un generatore e da diversi rami resistivi in parallelo qual è la corrente totale riferita alla corrente di un ramo?|E' uguale alla somma della caduta di tensione di ciascun resistore moltiplicata per il numero totale dei resistori|E' uguale alla somma delle correnti nei vari rami|E' uguale alle media delle correnti nei vari rami|Diminuisce via via che si aggiungono altri rami resistivi in parallelo|1|Primo principio di Kirchhoff: la corrente totale che esce dal generatore è la somma delle correnti nei singoli rami in parallelo.",
+"Come si chiama la distanza percorsa da un'onda elettromagnetica in un ciclo completo?|Lunghezza d'onda|Velocità dell'onda|Propagazione dell'onda|Forma d'onda|0|La lunghezza d'onda λ è lo spazio percorso dall'onda durante un periodo: λ = c·T = c/f.",
+"In quale circuito elettrico non scorre corrente?|In un circuito completo|In un circuito chiuso|In un circuito aperto|In un corto circuito|2|In un circuito aperto il percorso è interrotto e la corrente non può circolare.",
+"La corrente continua in un circuito statico è:|un flusso di elettroni bidirezionale e di intensità costante|un flusso di atomi ionizzati|un flusso di elettroni bidirezionale e di intensità variabile|un flusso di elettroni unidirezionale e di intensità costante|3|La corrente continua scorre sempre nello stesso verso (unidirezionale) e, a regime, con intensità costante.",
+"Un resistore attraversato da corrente continua:|accumula energia elettrica sotto forma di campo elettrico|dissipa energia elettrica emettendo calore|accumula energia elettrica sotto forma di campo magnetico|dissipa energia elettrica emettendo luce|1|Un resistore non accumula energia: la trasforma in calore per effetto Joule.",
+"La capacità totale di tre condensatori uguali collegati in serie è:|il prodotto delle tre capacità|la somma delle tre capacità|minore di quella di un singolo condensatore|maggiore di quella di un singolo condensatore|2|In serie la capacità totale è sempre minore della più piccola: con tre condensatori uguali vale C/3.",
+"Se in un segnale AM con profondità di modulazione pari al 100% la portante ha una potenza di 200 W, quanta è la potenza totale bande laterali comprese?|300 W|250 W|100 W|400 W|0|Ptot = Pportante × (1 + m²/2). Con m = 1: 200 × 1,5 = 300 W (200 W di portante + 100 W nelle due bande laterali).",
+"Nella formula P=VI cosφ come viene definito 'cosφ'?|Valore di quadratura.|Fattore di fase.|Fattore di potenza.|Valore efficace.|2|cosφ è il fattore di potenza: il rapporto tra la potenza attiva e la potenza apparente.",
+"Come si calcola il fattore di potenza cosφ ?|Come potenza potenza apparente / attiva|Come media tra la potenza apparente e quella attiva|Come potenza apparente x potenza attiva|Come potenza attiva / potenza apparente|3|cosφ = P attiva (W) / P apparente (VA). Vale 1 nei circuiti puramente resistivi e 0 in quelli puramente reattivi.",
+"Quale tra le seguenti grandezze non si misura in volt?|Potenza|Forza elettro motrice|Differenza di potenziale|Caduta di tensione|0|La potenza si misura in watt. Forza elettromotrice, differenza di potenziale e caduta di tensione sono tutte tensioni, misurate in volt.",
+"Quale potenza viene impiegata da una lampadina ad incandescenza che assorbe 0.2 A a 12 V?|60 W|2.4 W|6 W|24 W|1|P = V × I = 12 × 0,2 = 2,4 W.",
+"Un induttore da 1 mH alimentato da una tensione alternata di frequenza pari a 1 kHz ha una reattanza di:|6,28 ohm|100 ohm|1000 ohm|62,8 ohm|0|XL = 2π·f·L = 6,28 × 1000 Hz × 0,001 H = 6,28 Ω.",
+"Quale grandezza non è espressa nella corretta unità di misura:|Corrente elettrica: ampere|Potenza elettrica: Joule|Resistenza specifica: ohm · metro|Capacità elettrica: farad|1|La potenza si misura in watt (W). Il joule è l'unità di energia (1 J = 1 W·s).",
+"Quanta tensione è presente ai capi di un resistore da 100 ohm attraversato da una corrente di 3 A?|33,33 V|100 V|10 V|300 V|3|V = R × I = 100 × 3 = 300 V.",
+"Quale termine descrive la combinazione di un segnale contenente un'informazione e un segnale a radiofrequenza?|Sovrapposizione|Modulazione|Inversione di fase|Demodulazione|1|La modulazione è il processo con cui l'informazione (modulante) varia un parametro della portante a radiofrequenza. La demodulazione è l'operazione inversa.",
+"Che operazione logica esegue una porta AND?|Produce un livello logico '0' in uscita solo se entrambi gli ingressi sono a livello logico '1'.|Produce un livello logico '1' in uscita solo se solo uno degli ingressi è a livello logico '1'.|Produce un livello logico '1' in uscita solo se entrambi gli ingressi sono a livello logico '0'.|Produce un livello logico '1' in uscita solo se entrambi gli ingressi sono a livello logico '1'.|3|La porta AND ha uscita a '1' solo quando tutti gli ingressi sono a '1'. La prima opzione descrive la NAND.",
+"Quale tipo di emissioni produce un trasmettitore che usa un modulatore a reattanza?|Telegrafia|Telefonia a modulazione di fase|Telefonia a banda laterale unica con portante soppressa|Segnali di prova|1|Il modulatore a reattanza varia la reattanza (e quindi la fase/frequenza) dell'oscillatore: produce telefonia a modulazione di fase (e per estensione di frequenza).",
+"Il valore efficace di una tensione sinusoidale è:|circa il 70% del valore massimo della tensione|pari al valore massimo della tensione|circa il 64% del valore massimo della tensione|zero|0|Veff = Vpicco / √2 ≈ 0,707 × Vpicco, cioè circa il 70%. Il 64% (0,637) è invece il valore medio di una semionda.",
+"Qual è la larghezza di banda di una trasmissione FM avente deviazione pari a 5 kHz e frequenza modulante pari a 3 kHz?|5 kHz|16 kHz|3 kHz|8 kHz|1|Regola di Carson: B = 2 × (Δf + fmod) = 2 × (5 + 3) = 16 kHz.",
+"La potenza apparente è data da:|P = V x I x cosφ|P = Z x I|P = V x I|P = V / I|2|La potenza apparente è il prodotto delle tensione e corrente efficaci, S = V × I, e si misura in voltampere (VA). Moltiplicata per cosφ dà la potenza attiva.",
+"L'induttanza totale L di un gruppo di induttori L1, L2, L3... collegati in serie e non accoppiati tra loro è:|L = L1 + L2 + L3|L = L1 x L2 x L3|1/L = 1/L1 + 1/L2 + 1/L3 + ...|L = L1 /L2 + L3 / L1|0|Per gli induttori non accoppiati vale la stessa regola dei resistori: in serie le induttanze si sommano.",
+"Qual è uno degli scopi dell'impiego delle induttanze nei circuiti?|Bloccare la corrente continua e permettere il passaggio della corrente alternata|Limitare il passaggio della corrente alternata lasciando scorrere la corrente continua|Trasformare la corrente alternata in corrente continua|Cambiare costante di tempo alla tensione applicata|1|L'induttore si oppone alle variazioni di corrente: la sua reattanza cresce con la frequenza, quindi limita la alternata e lascia passare la continua (impedenza di blocco, filtri).",
+"Un resistore da 30 kiloohm collegato in parallelo ad un resistore da 15 kiloohm equivalgono ad un resistore da:|45 kiloohm|30 kiloohm|8 kiloohm|10 kiloohm|3|Rp = (R1·R2)/(R1+R2) = (30 × 15)/(30 + 15) = 450/45 = 10 kΩ.",
+"Che cosa determina la capacità di un condensatore?|Il numero di piastre e la spaziatura fra di esse.|Il materiale delle piastre e la loro superficie, la spaziatura fra i terminali.|Il materiale fra le piastre, la superficie della piastra, il numero di piastre e la distanza fra le piastre.|Il materiale fra le piastre, la superficie delle piastre e la sezione dei terminali collegati alle piastre.|2|La capacità dipende dal dielettrico tra le armature (ε), dalla superficie, dal numero di piastre e dalla loro distanza: C = ε·S/d.",
+"Come si calcola la resistenza totale R di un circuito formato da tre resistenze R1, R2 ed R3 collegate in parallelo?|1/R = 1/R1 + 1/R2 + 1/R3|R = R1 x R2 x R3|R = 1/R1 + 1/R2 + 1/R3|R = R1 + R2 + R3|0|In parallelo si sommano gli inversi delle resistenze (le conduttanze): 1/R = 1/R1 + 1/R2 + 1/R3.",
+"In un condensatore ideale alimentato da corrente alternata, la corrente rispetto alla tensione è sfasata di:|180 gradi|90 gradi in anticipo|45 gradi in anticipo|90 gradi in ritardo|1|Nel condensatore la corrente è in anticipo di 90° sulla tensione (mnemonico: ICE - nel condensatore C la corrente I precede la tensione E).",
+"Se f1 ed f2 sono le frequenze che delimitano la banda passante di un filtro passabanda quale dovrebbe essere il suo comportamento teorico:|Attenuare le frequenze superiori a f1.|Attenuare le frequenze comprese tra f1 e f2.|Attenuare le frequenze inferiori a f2.|Attenuare le frequenze inferiori a f1 e superiori a f2.|3|Il passabanda lascia passare le frequenze tra f1 e f2 e attenua quelle fuori banda, cioè inferiori a f1 e superiori a f2.",
+"Collegando in parallelo due resistenze qual è il valore che ne risulta?|E' sempre minore del minore dei valori delle due resistenze|E' pari alla differenza fra i valori delle due resistenze|E' pari alla somma dei valori delle due resistenze|E' pari al prodotto dei valori delle due resistenze|0|In parallelo si aggiungono percorsi per la corrente: la resistenza equivalente è sempre minore della più piccola delle resistenze collegate.",
+"Qual è il valore dell'indice di modulazione di un segnale a modulazione di frequenza con deviazione pari a 75 kHz e frequenza massima del segnale modulante pari a 15 kHz?|375.|90.|5.|60.|2|In FM l'indice di modulazione è m = Δf / fmod = 75 / 15 = 5.",
+"Collegando tre condensatori in serie rispettivamente da 15, 24 e 37 µF la capacità totale sarà di:|7,38 µF.|37 µF.|76 µF.|9,26 µF.|0|1/Ct = 1/15 + 1/24 + 1/37 ≈ 0,0667 + 0,0417 + 0,0270 = 0,1354, quindi Ct ≈ 7,38 µF.",
+"Quale differenza si nota fra la ricezione di un segnale radiotelefonico a modulazione di fase e uno a modulazione di frequenza|I segnali a modulazione di fase non possono essere ricevuti dai ricevitori amatoriali|I due segnali sono identici|I segnali a modulazione di fase sono più difficili da sintonizzare di quelli a modulazione di frequenza|I segnali a modulazione di fase hanno un suono meno chiaro di quelli a modulazione di frequenza|3|Un ricevitore FM demodula un segnale in fase con una risposta in frequenza non corretta (le alte frequenze audio risultano enfatizzate/distorte): l'audio risulta meno chiaro.",
+"Se un resistore da 4,8 kiloohm è sottoposto alla tensione di 12 V qual è il valore della corrente che lo attraversa?|25 mA|400 A|40 A|2,5 mA|3|I = V / R = 12 / 4800 = 0,0025 A = 2,5 mA.",
+"La legge di ohm in corrente alternata è:|V = I / Z|V = Z / I|V = Z x I|I = V x Z|2|In alternata la resistenza è sostituita dall'impedenza Z: V = Z × I (da cui I = V/Z).",
+"Per effetto del battimento due suoni di frequenze leggermente diverse f1 e f2 (f2>f1) vengono percepiti dal nostro orecchio come un unico suono di frequenza :|f2-f1|f2+f1|f2/f1|f2*f1|0|Il battimento produce una pulsazione di ampiezza alla frequenza differenza f2 - f1.",
+"La reattanza degli induttori:|diminuisce aumentando l'induttanza|non dipende dall'induttanza|aumenta aumentando l'induttanza|dipende solo dalla frequenza di alimentazione|2|XL = 2π·f·L: la reattanza è proporzionale sia alla frequenza sia all'induttanza, quindi aumenta all'aumentare di L.",
+"Che cosa è una portante RF?|Un segnale a radiofrequenza che viene modulato per produrre un segnale radiotelefonico|Una modulazione che trasforma un segnale a radiofrequenza in un segnale radiotelefonico|La parte del trasmettitore che porta il segnale all'antenna|La parte del ricevitore che porta il segnale dall'antenna al rivelatore|0|La portante è un segnale a radiofrequenza di ampiezza e frequenza costanti che, venendo modulato dall'informazione, la trasporta fino al ricevitore.",
+"In una modulazione AM, se il segnale modulante ha ampiezza pari ad 1 V e la portante ha ampiezza pari a 4 V la profondità di modulazione è:|0,0025|0,4|0,25|0,04|2|m = Vmodulante / Vportante = 1 / 4 = 0,25 (25%).",
+"Tra le varie modulazioni quale sfrutta al meglio la potenza del trasmettitore?|SSB|AM|DSB|FM|0|In SSB la portante è soppressa e c'è una sola banda laterale: tutta la potenza è concentrata nell'informazione utile.",
+"Collegando tre resistenze in parallelo rispettivamente da 15, 24 e 37 ohm la resistenza totale sarà di:|13,86 ohm.|7,38 ohm.|76 ohm.|37 ohm.|1|1/R = 1/15 + 1/24 + 1/37 ≈ 0,1354 S, quindi R ≈ 7,38 Ω. È minore della resistenza più piccola (15 Ω), come atteso in un parallelo.",
+"Una pila da 1,5 V collegata ad una resistenza da 1,5 ohm eroga:|0,5 A|150 mA|2,25 A|1A|3|I = V / R = 1,5 / 1,5 = 1 A.",
+"La potenza assorbita dall'impedenza Z e dissipata dalla sua parte reale R viene definita:|Potenza apparente.|Potenza resistiva.|Potenza attiva.|Potenza reattiva.|2|La potenza dissipata dalla parte resistiva (reale) dell'impedenza è la potenza attiva, misurata in watt: P = V·I·cosφ.",
+"Quale tra i seguenti valori può essere la reattanza di un induttore?|59 ohm|- 5 ohm|-0,05 ohm|- 100 ohm|0|La reattanza induttiva è sempre positiva (XL = 2πfL); quella capacitiva è negativa. L'unico valore positivo è 59 Ω.",
+"Che cosa fa un'induttanza?|Immagazzina energia elettrostatica opponendosi alle variazioni di tensione|Immagazzina energia elettromeccanica opponendosi alle variazioni di tensione|Immagazzina energia elettromagnetica opponendosi alle variazioni di corrente|Immagazzina energia elettrochimica opponendosi alle variazioni di corrente|2|L'induttore accumula energia nel campo magnetico e si oppone alle variazioni della corrente che lo attraversa (legge di Lenz).",
+"Trasmettendo un segnale AM con una potenza totale di 150 W, come sono distribuite le potenze tra portante e bande laterali?|75 W sulla portante e 75 W sulle due bande laterali|50 W sulla portante e 50 W su ciascuna banda laterale|100 W sulla portante e 25 W su ciascuna banda laterale|circa 150 W sulla portante e circa 0 W su ciascuna banda laterale|2|Con modulazione al 100% Ptot = 1,5 × Pportante, quindi Pportante = 100 W. I restanti 50 W si dividono in 25 W per ciascuna banda laterale.",
+"Qual è il principale vantaggio della FM rispetto alla AM?|Maggiore facilità di demodulazione|Maggiore immunità ai disturbi|Frequenze di portante più elevate|Minore ingombro di banda|1|La FM è poco sensibile ai disturbi di ampiezza (rumore, scariche) e garantisce una qualità audio migliore, a prezzo di una banda più larga.",
+"Qual è il nome di una corrente che scorre solo in un verso?|Corrente alternata|Corrente continua|Corrente normale|Corrente smorzata|1|La corrente continua (DC) scorre in un solo verso.",
+"La quantità di carica Q è misurata in:|Ampere|Joule|Volt|Coulomb|3|La carica elettrica si misura in coulomb (C). 1 C = 1 A × 1 s.",
+"Che cosa si intende per percentuale di modulazione.|Il rapporto dell'ampiezza del segnale trasmesso e di quello ricevuto.|Il rapporto tra l'ampiezza della modulante e quella della portante.|Per m=1 l'ampiezza dei segnali modulati varia tra 0 e il valore massimo della portante.|Il rapporto tra l'ampiezza della tensione portante e quella della modulante.|1|La percentuale di modulazione è m × 100, con m = Vmodulante / Vportante.",
+"La capacità dei condensatori si misura in:|farad|amperora|henry|kilowattora|0|La capacità si misura in farad (F). L'amperora è l'unità di capacità delle batterie, l'henry dell'induttanza.",
+"Come è definita la capacità di immagazzinare energia in un campo magnetico?|Capacità|Ammettenza|Induttanza|Resistenza|2|L'induttanza (L, in henry) esprime la capacità di un componente di immagazzinare energia nel campo magnetico.",
+"Come si calcola la resistenza R di un circuito quando sono note la tensione V e la corrente I?|R=IxV|R=V²:I|R=I:V|R=V:I|3|Dalla legge di Ohm: R = V / I.",
+"La profondità di modulazione viene ridotta dal 100% al 50%; di quanto si riduce la potenza irradiata.|Del 100%.|Del 25%.|Del 50%.|Del 75%.|1|Ptot = Pp × (1 + m²/2). Con m = 1: 1,5·Pp; con m = 0,5: 1,125·Pp. La riduzione è (1,5 - 1,125)/1,5 = 25%.",
+"Quanto vale il valore efficace di una tensione alternata che ha valore di picco pari a 1 V?|0,636 V|0,5 V|1,41 V|0,707 V|3|Veff = Vpicco / √2 = 1 / 1,414 ≈ 0,707 V.",
+"A quanti microfarad corrispondono 1.000.000 pF?|1000 µF|1 µF|1.000.000.000 µF|0,001 µF|1|1 µF = 10⁶ pF, quindi 1.000.000 pF = 1 µF.",
+"Che cosa è l'impedenza?|La grandezza che si oppone allo scorrere della corrente alternata in un circuito|La carica elettrica immagazzinata in un condensatore|La forza di repulsione fra due cariche elettriche aventi lo stesso segno|La grandezza che si oppone allo scorrere della corrente alternata in un circuito composto di soli condensatori|0|L'impedenza Z (in ohm) è l'opposizione totale di un circuito alla corrente alternata: combina resistenza e reattanza.",
+"Un generatore reale di tensione può essere rappresentato come:|Un generatore ideale di tensione con due resistenze interne, una in serie ed una in parallelo|Un generatore ideale di tensione con in serie una resistenza interna|Un generatore ideale di tensione con in parallelo una resistenza interna|Un generatore ideale di tensionecon in serie un diodo|1|Il modello di un generatore reale di tensione è un generatore ideale con in serie la sua resistenza interna, che causa la caduta di tensione quando eroga corrente.",
+"Un resistore da 200 ohm attraversato da una corrente di 3 A, quanta potenza dissipa?|9 W|33 W|600 W|1800 W|3|P = R × I² = 200 × 3² = 200 × 9 = 1800 W.",
+"Il coefficiente di potenza (cosφ) è pari al rapporto:|potenza attiva / potenza apparente|potenza apparente / potenza attiva|sfasamento / potenza apparente|potenza apparente / sfasamento|0|cosφ = potenza attiva / potenza apparente.",
+"Tra le seguenti affermazioni quale è falsa?|La AM occupa il doppio della banda rispetto alla SSB|La FM occupa una banda piuttosto larga|La FM è più sensibile al rumore rispetto alla AM|La SSB sfrutta la potenza del trasmettitore meglio delle altre modulazioni|2|È falsa la terza: la FM è meno sensibile al rumore rispetto alla AM. Le altre tre affermazioni sono vere.",
+"Una pila da 1,5 V collegata ad un carico che assorbe 2 A dovrebbe erogare una potenza di:|3 W|1,5 W|1,5 mW|2,25 W|0|P = V × I = 1,5 × 2 = 3 W.",
+"Perché è importante il preciso accoppiamento delle impedenze fra generatore e carico?|Perché in tal modo il carico assorbe la minima corrente dal generatore|Perché in tal modo il generatore può fornire la massima energia al carico|Per assicurare che vi sia meno resistenza che reattanza nel circuito|Per rendere uguali la resistenza e la reattanza del circuito|1|Con impedenze adattate si ha il massimo trasferimento di potenza dal generatore al carico (ad esempio dal trasmettitore all'antenna).",
+"Collegando un condensatore con reattanza di 100 ohm in serie ad un induttore con reattanza di 300 ohm si ottiene una reattanza totale di:|-200 ohm|3 kohm|200 ohm|750 ohm|2|XC = -100 Ω e XL = +300 Ω: in serie X = 300 - 100 = +200 Ω (prevale la parte induttiva).",
+"Quale delle seguenti affermazioni è errata. Controreazionando un amplificatore si ottiene:|Maggiore linearità.|Riduzione del rumore.|Aumento del guadagno.|Allargamento della banda.|2|La controreazione (retroazione negativa) riduce il guadagno in cambio di maggiore linearità, minor rumore/distorsione e banda più larga. Il guadagno quindi non aumenta.",
+"Collegando un induttore con reattanza XL = 50 ohm in serie con un condensatore con reattanza XC = 25 ohm si ottiene una reattanza totale di:|-50 ohm|75 ohm|-25 ohm|25 ohm|3|X = XL - XC = 50 - 25 = +25 Ω.",
+"Collegando in serie due resistori uno da 1 ohm e l'altro da 2 ohm, si ottiene una resistenza totale di:|0,67 ohm|3 ohm|0,5 ohm|2 ohm|1|In serie le resistenze si sommano: 1 + 2 = 3 Ω. Il valore 0,67 Ω è quello del parallelo.",
+"Il prodotto tensione per corrente ( V x I ) è:|la resistenza di un circuito|la quantità di carica accumulata in un condensatore|la reattanza di un circuito|la potenza assorbita da un circuito|3|P = V × I è la potenza assorbita da un circuito, misurata in watt.",
+"Che effetto ha una resistenza in un circuito elettrico?|Immagazzina energia in un campo elettrico|Si oppone al flusso di elettroni|Fornisce elettroni mediante una reazione chimica|Immagazzina energia in un campo magnetico|1|La resistenza si oppone al passaggio della corrente (flusso di elettroni) e dissipa energia sotto forma di calore.",
+"A basse frequenze la reattanza degli induttori è:|ridotta|media|elevata|la stessa che si avrebbe alle alte frequenze|0|XL = 2π·f·L: a bassa frequenza la reattanza induttiva è piccola (alla frequenza zero, cioè in continua, è nulla).",
+"Il fenomeno della mutua induzione a cosa è dovuto?|Ad un accoppiamento magnetico tra circuiti diversi|Ad un circuito di messa a terra poco efficiente|Al fenomeno della risonanza|Ad un accoppiamento elettrostatico tra circuiti diversi|0|La mutua induzione nasce quando il flusso magnetico variabile di un circuito si concatena con un altro: è il principio del trasformatore.",
+"Che funzione ha un condensatore?|Immagazzina energia elettromagnetica opponendosi alle variazioni di corrente|Immagazzina energia elettrostatica opponendosi alle variazioni di tensione|Immagazzina energia elettrochimica opponendosi alle variazioni di corrente|Immagazzina energia elettromeccanica opponendosi alle variazioni di tensione|1|Il condensatore accumula energia nel campo elettrostatico e si oppone alle variazioni di tensione ai suoi capi.",
+"In un resistore alimentato da una corrente alternata:|la tensione è 90 gradi in anticipo rispetto alla corrente|la tensione e la corrente sono in controfase|la tensione e la corrente sono in fase|la tensione è 90 gradi in ritardo rispetto alla corrente|2|In un resistore ideale non c'è sfasamento: tensione e corrente sono in fase (φ = 0°).",
+"Una profondità di modulazione del 100% si ottiene quando:|l'ampiezza del segnale modulante è uguale a quella della portante|l'ampiezza del segnale modulante è molto grande rispetto a quella della portante|l'ampiezza del segnale modulante è il doppio di quella della portante|l'ampiezza del segnale modulante è molto piccola rispetto a quella della portante|0|m = Vmodulante / Vportante: m = 100% quando le due ampiezze sono uguali.",
+"Uno stadio RF finale da 100 W alimentato a 20 V quanta corrente assorbe?|meno di 5 A|più di 5 A|5A|0,2 A|1|I 100 W sono la potenza RF in uscita. Con P = V × I si avrebbero 5 A solo con rendimento del 100%; poiché il rendimento è sempre inferiore, la potenza assorbita è maggiore di 100 W e la corrente supera i 5 A.",
+"Su quale principio si basa la modulazione di frequenza:|La frequenza del segnale portante si somma a quella del segnale modulante.|La frequenza del segnale portante si sottrae a quella del segnale modulante.|L'ampiezza del segnale modulante viene variato dal segnale portante.|La frequenza del segnale portante viene variato dall'ampiezza del segnale modulante.|3|In FM la frequenza della portante varia (devia) in funzione dell'ampiezza istantanea del segnale modulante; l'ampiezza della portante resta costante.",
+"Quale valore ha la corrente che attraversa un resistore da 100 ohm sottoposto alla tensione di 200 V?|2A|200 mA|2000 µA|20 A|0|I = V / R = 200 / 100 = 2 A.",
+"Che cos'è il Farad?|L'unità di misura dell'induttanza|L'unità di misura della capacità|L'unità di misura della resistenza|L'unità di misura dell'ammettenza|1|Il farad (F) è l'unità di misura della capacità elettrica.",
+"Il voltampere è un'unità di misura di:|energia|potenza attiva|potenza reattiva|potenza apparente|3|Il voltampere (VA) misura la potenza apparente. La potenza attiva si misura in watt (W), quella reattiva in var.",
+"Perché i resistori talvolta diventano caldi durante il funzionamento?|Assorbono energia magnetica che li riscalda|Parte dell'energia elettrica che li attraversa viene dispersa sotto forma di calore|La loro reattanza produce calore|Risentono del calore prodotto da componenti vicini|1|Per effetto Joule l'energia elettrica dissipata dal resistore si trasforma in calore.",
+"La resistenza totale di un gruppo di resistori collegati in serie è:|il prodotto dei valori delle singole resistenze|la somma dei valori delle singole resistenze|l'inverso della somma dei valori inversi delle singole resistenze|la media dei valori delle singole resistenze|1|In serie le resistenze si sommano. La terza opzione descrive invece il collegamento in parallelo.",
+"Se un resistore da 4800 ohm è sottoposto alla tensione di 120 V qual è il valore della corrente che lo attraversa?|4A|25 A|40 mA|25 mA|3|I = V / R = 120 / 4800 = 0,025 A = 25 mA.",
+"Quale tra le seguenti grandezze è attinente solo ed esclusivamente a segnali in corrente alternata?|Corrente|Fase|Potenza|Tensione|1|Corrente, tensione e potenza esistono anche in continua. La fase (e lo sfasamento) ha senso solo per grandezze alternate.",
+"Qual è l'unità di misura dell'impedenza?|Ampere|Coulomb|L'ohm|Volt|2|L'impedenza si misura in ohm (Ω), come resistenza e reattanza.",
+"Quanta banda occupa un segnale vocale di banda pari a 2,5 kHz se viene modulato in SSB?|2,5 kHz|10 kHz|5 kHz|500 Hz|0|In SSB si trasmette una sola banda laterale: la banda occupata è uguale alla banda del segnale modulante, 2,5 kHz.",
+"Una batteria converte:|forza elettromotrice in campo magnetico|energia elettrica in energia termica|energia termica in energia elettrica|energia chimica in energia elettrica|3|In una batteria le reazioni chimiche trasformano energia chimica in energia elettrica.",
+"L'induttanza totale di un gruppo di diverse induttanze collegate in parallelo e non accoppiate fra loro:|è maggiore della maggiore delle induttanze|è la somma delle induttanze|è minore della minore delle induttanze|è la media delle induttanze|2|In parallelo 1/L = 1/L1 + 1/L2 + ...: il risultato è sempre minore della più piccola delle induttanze, come per i resistori.",
+"Un resistore da 1 kohm collegato in serie ad un resistore da 3 kohm equivale ad un resistore da:|1,5 kohm|4 kohm|2 megaohm|0,66 kohm|1|In serie si sommano: 1 + 3 = 4 kΩ.",
+"Che operazione logica esegue una porta OR?|Produce un livello logico '0' in uscita se tutti gli ingressi sono a livello logico '0'.|Produce un livello logico '1' in uscita se tutti gli ingressi sono a livello logico '0'.|Produce un livello logico '0' in uscita solo se tutti gli ingressi sono a livello logico '1'.|Produce un livello logico '1' in uscita se uno o più ingressi sono a livello logico '1'.|3|La porta OR ha uscita a '1' se almeno un ingresso è a '1'; l'uscita è '0' solo quando tutti gli ingressi sono a '0'.",
+"L'induttanza si misura in:|weber|tesla|henry|ampere|2|L'induttanza si misura in henry (H). Weber e tesla misurano flusso e induzione magnetica.",
+"Quanta potenza deve erogare un generatore di tensione continua per mantenere una tensione di 10 V ai capi di un resistore da 5 ohm?|20 Watt|100 Watt|50 Watt|0,5 Watt|0|P = V² / R = 10² / 5 = 100 / 5 = 20 W.",
+"Uno strumento di misura composto da magnete fisso e bobina mobile si basa su principio di funzionamento:|Termico.|Elettrodinamico.|Elettromagnetico.|Ad induzione.|2|Nello strumento a bobina mobile e magnete permanente (magnetoelettrico) la coppia deriva dall'interazione tra il campo del magnete e la corrente nella bobina: tra le opzioni offerte la più vicina è il principio elettromagnetico.",
+"Qual è il valore efficace di una tensione sinusoidale con valore di picco pari a 17 V?|8.5 V|24 V|12 V|34 V|2|Veff = Vp / √2 = 17 / 1,414 ≈ 12 V.",
+"Il condensatore accumula:|resistenza|calore|campi magnetici|cariche elettriche|3|Il condensatore immagazzina cariche elettriche sulle sue armature (e quindi energia nel campo elettrico).",
+"Se un resistore da 48 kiloohm è sottoposto alla tensione di 120 V qual è il valore della corrente che lo attraversa?|40 A|25 mA|2,5 mA|400 A|2|I = V / R = 120 / 48000 = 0,0025 A = 2,5 mA.",
+"In un trasmettitore da 3 kW come si distribuisce la potenza tra portante e bande laterali nel caso di modulazione d'ampiezza?|1 kW sulla portante e 2 kW sulle bande laterali|1,5 kW sulla portante e 1,5 kW sulle bande laterali|2 kW sulla portante e 1 kW sulle bande laterali|2 kW sulla portante e 2 kW sulle bande laterali|2|Con modulazione al 100% Ptot = 1,5 × Pp, quindi Pp = 3/1,5 = 2 kW. Il resto, 1 kW, è nelle due bande laterali.",
+"Quale è la quarta armonica di un segnale a 7.160 kHz|28.160 kHz.|28.640 kHz.|1.790 kHz.|35.800 kHz.|1|La n-esima armonica è n volte la frequenza fondamentale: 4 × 7160 = 28.640 kHz.",
+"Una lunghezza d'onda di 1 metro corrisponde ad una frequenza di:|1 GHz|100 MHz|10 MHz|300 MHz|3|f = c / λ ≈ 300 000 000 / 1 = 300 MHz (in formula pratica f(MHz) = 300 / λ(m)).",
+"Collegando in serie due resistori qual è il valore che ne risulta?|Sempre minore del minore dei valori delle due resistenze|E' pari al prodotto dei valori delle due resistenze|E' pari alla somma dei valori delle due resistenze|E' pari alla differenza fra i valori delle due resistenze|2|In serie le resistenze si sommano: Rt = R1 + R2.",
+"Un resistenza da 200 kohm è maggiore di una resistenza da:|1 Mohm|200 Mohm|0,5 Mohm|100 kohm|3|Per confrontare conviene portare tutto alla stessa unità: 200 kΩ è maggiore di 100 kΩ; 1 MΩ = 1000 kΩ, 0,5 MΩ = 500 kΩ e 200 MΩ sono tutti maggiori.",
+"Qual è l'unità di misura dell'induttanza?|L'ohm|L'Henry|Il Farad|Il Coulomb|1|L'induttanza si misura in henry (H).",
+"La corrente elettrica è un flusso di:|elettroni|protoni|atomi|ioni|0|Nei conduttori metallici la corrente elettrica è un flusso ordinato di elettroni (cariche negative).",
+"Un segnale di periodo pari ad un microsecondo ha frequenza pari a:|100 kHz|10 MHz|1 MHz|3 MHz|2|f = 1/T = 1 / 10⁻⁶ s = 10⁶ Hz = 1 MHz.",
+"Collegando in serie tre condensatori da 10 mF, 40 mF ed 8 mF si ottiene una capacità equivalente di:|10 mF|7,5 mF|58 mF|4 mF|3|1/Ct = 1/10 + 1/40 + 1/8 = 0,1 + 0,025 + 0,125 = 0,25, quindi Ct = 4 mF.",
+"Un valore di resistenza di 10 megaohm è:|minore di una resistenza da 1 kiloohm|maggiore di una resistenza da 1 kiloohm|uguale ad una resistenza da 0,1 gigaohm|uguale ad una resistenza da 1000 ohm|1|10 MΩ = 10.000.000 Ω, molto maggiore di 1 kΩ (1000 Ω). 0,1 GΩ equivale invece a 100 MΩ.",
+"La carica elettrica si misura in:|weber|farad|coulomb|henry|2|La carica elettrica si misura in coulomb (C).",
+"Come si calcola la corrente I che scorre in una resistenza R con applicata una tensione V?|I=V:R|I=R:V|I=V²:R|I=RxV|0|Legge di Ohm: I = V / R.",
+"qual è l'unità di misura della forza elettromotrice (f.e.m.)|L'ohm|Volt|Ampere|Coulomb|1|La forza elettromotrice è una tensione e si misura in volt (V).",
+"Lo sfasamento tra tensione e corrente nei resistori è:|45 gradi in ritardo|90 gradi in anticipo|0 gradi|90 gradi in ritardo|2|Nei resistori tensione e corrente sono in fase: lo sfasamento è 0°.",
+"Quale è la definizione di 1 ohm?|La resistenza di un circuito in cui scorre una corrente di 1 mA quando la tensione applicata è 1V|La reattanza di un circuito in cui un'induttanza da 1 mH risuona alle frequenza di 1 MHz|La resistenza di un circuito in cui scorre una corrente di 1A quando la tensione applicata è 1V|La reattanza di un circuito in cui un condensatore da 1µF risuona alle frequenza di 1 MHz|2|Un ohm è la resistenza attraverso la quale, con una tensione di 1 V, scorre una corrente di 1 A (R = V/I).",
+"Collegando in parallelo due condensatori da 15 pF si ottiene un condensatore equivalente da:|225 pF|15 pF|7,5 pF|30 pF|3|In parallelo le capacità si sommano: 15 + 15 = 30 pF.",
+"Nella modulazione FM:|varia l'ampiezza di picco ma non la frequenza della portante|varia la frequenza ma non l'ampiezza di picco della portante|l'ampiezza di picco e la frequenza della portante non variano, cambia la fase|la frequenza e la fase della portante non variano, cambia solo l'ampiezza di picco|1|In FM l'informazione varia la frequenza istantanea della portante, mentre l'ampiezza di picco rimane costante.",
+"Quale grandezza esprime la velocità con cui viene impiegata l'energia elettrica?|La potenza|La tensione|La corrente|La resistenza|0|La potenza è l'energia utilizzata (o trasferita) nell'unità di tempo: P = E / t, in watt.",
+"Che operazione logica esegue una porta NAND?|Produce un livello logico '0' in uscita solo se qualcuno degli ingressi, ma non tutti, è a livello logico '1'.|Produce un livello logico '0' in uscita solo se tutti gli ingressi sono a livello logico '1'.|Produce un livello logico '1' in uscita solo se tutti gli ingressi sono a livello logico '1'.|Produce un livello logico '0' in uscita solo se tutti gli ingressi sono a livello logico '0'.|1|La NAND è una AND negata: l'uscita è '0' solo quando tutti gli ingressi sono a '1', altrimenti è '1'.",
+"Quale deviazione di frequenza occorre attuare mediante un oscillatore a 12,21 MHz modulato a reattanza per ottenere una trasmissione a 146,52 MHz con deviazione di 5 kHz?|5 kHz|416,7 Hz|12 kHz|41,7 Hz|1|Il fattore di moltiplicazione è 146,52 / 12,21 = 12. La deviazione viene moltiplicata per lo stesso fattore, quindi all'oscillatore serve 5 kHz / 12 ≈ 416,7 Hz.",
+"Collegando in serie tre accumulatori da 2 V si ottiene una batteria da:|6 V|0,66 V|8 V|4 V|0|In serie le tensioni si sommano: 2 + 2 + 2 = 6 V.",
+"La potenza si misura in:|amperora|joule|watt|volt|2|La potenza si misura in watt (W).",
+"In un circuito con corrente e tensione sfasate tra loro di 45 gradi si ha:|sia potenza attiva che potenza apparente|né potenza attiva, né potenza apparente|solo potenza apparente|solo potenza attiva|0|Con φ = 45° è cosφ ≈ 0,707: c'è potenza attiva (P = V·I·cosφ) e la potenza apparente (V·I) è maggiore di quella attiva; c'è anche potenza reattiva.",
+"Quale tra le seguenti frequenze appartiene alla gamma UHF?|18 MHz|850 MHz|18 GHz|104 MHz|1|La gamma UHF va da 300 MHz a 3 GHz: 850 MHz vi rientra. 18 MHz è HF, 104 MHz è VHF, 18 GHz è SHF.",
+"La legge di Ohm è la seguente:|V = R / I|V = I / R|V = R + I|V = R * I|3|Legge di Ohm: V = R × I.",
+"La legge di ohm per le impedenze dice che:|l'impedenza è pari al rapporto corrente su tensione|la tensione è il prodotto tra impedenza e corrente|il prodotto tra corrente e tensione è pari all'impedenza|la tensione è la somma tra impedenza e corrente|1|In alternata V = Z × I, cioè Z = V / I.",
+"La corrente nei semiconduttori è costituita da:|Un movimento degli elettroni liberi in una stessa direzione.|Un movimento di tutti gli atomi nella stessa direzione.|Un movimento di tutti gli elettroni di ogni atomo nella stessa direzione.|Un movimento disordinato degli elettroni liberi in direzioni diverse.|0|La corrente è un moto ordinato di cariche libere (elettroni e lacune) in una direzione, determinata dal campo elettrico applicato.",
+"Raddoppiando la superficie delle piastre di un condensatore come varia la capacità?|Diventa 1/4|Raddoppia|Quadruplica|Si dimezza|1|C = ε·S/d: la capacità è direttamente proporzionale alla superficie, quindi raddoppiando S raddoppia C.",
+"Un circuito formato da tre induttori, non accoppiati tra loro, di valore rispettivamente pari a 1 mH, 2,5 mH, 3 mH collegati in parallelo ha un valore di induttanza totale di:|1 mH|2 µH|6,5 mH|0,58 mH|3|1/L = 1/1 + 1/2,5 + 1/3 = 1 + 0,4 + 0,333 = 1,733, quindi L ≈ 0,577 mH ≈ 0,58 mH.",
+"L'amperora è l'unità di misura:|della corrente elettrica|della capacità dei condensatori|della capacità delle batterie|della potenza dei generatori di tensione|2|L'amperora (Ah) misura la capacità di una batteria, cioè la carica che può erogare.",
+"Quanta potenza dissipa un resistore da 10 ohm attraversato da una corrente di 2 A?|10 W|2 W|40 W|20 W|2|P = R × I² = 10 × 2² = 10 × 4 = 40 W.",
+"Se una batteria da 12 V eroga 0,15 A in un circuito qual è la resistenza del circuito?|80 ohm|12 ohm|1,8 ohm|0,15 ohm|0|R = V / I = 12 / 0,15 = 80 Ω.",
+"Una resistenza attraversata da corrente elettrica:|si deforma|si scalda|accumula elettroni|si raffredda|1|Per effetto Joule la resistenza dissipa potenza e si scalda.",
+"Quale è l'unità di misura della capacità delle batterie?|Watt|Kilowattora|Farad|Amperora|3|La capacità delle batterie si esprime in amperora (Ah).",
+"In un trasformatore il rapporto di trasformazione N=V1/V2 è:|Sempre uguale ad 1.|Proporzionale al rapporto spire tra primario e secondario.|Proporzionale al rapporto spire tra secondario e primario.|Costante.|1|In un trasformatore ideale V1/V2 = N1/N2: il rapporto delle tensioni è uguale al rapporto spire tra primario e secondario.",
+"La reattanza si misura in:|ohm|ms|voltampere|kHz|0|La reattanza si misura in ohm (Ω).",
+"Tra le seguenti affermazioni quale è corretta?|La SSB è peggiore della AM perché occupa meno banda|La SSB è migliore della AM perché occupa meno banda|La SSB è migliore della AM perché occupa meno banda e sfrutta meglio la potenza del trasmettitore|La SSB è migliore della AM perché occupa più banda e sfrutta meglio la potenza del trasmettitore|2|La SSB occupa metà banda della AM e, sopprimendo portante e una banda laterale, concentra la potenza sull'informazione utile.",
+"Un segnale a 30 MHz ha lunghezza d'onda pari a:|100 m|10 m|30 m|300 m|1|λ = 300 / f(MHz) = 300 / 30 = 10 m.",
+"Una lampadina da 220 W alimentata a 220 V assorbe una corrente di:|0,22 A|440 A|1A|0,1 A|2|I = P / V = 220 / 220 = 1 A.",
+"Per modulare in AM una portante che parametro deve modificarne un segnale modulante?|La potenza di picco|La fase|L'ampiezza|La frequenza|2|In AM il segnale modulante varia l'ampiezza della portante.",
+"In quale condizione un generatore fornisce la massima energia al carico?|Quando l'impedenza del carico è uguale all'impedenza interna del generatore|Quando la resistenza di carico è infinita|Quando l'impedenza di carico è puramente resistiva|Quando l'impedenza di carico è puramente reattiva|0|Teorema del massimo trasferimento di potenza: si ha quando l'impedenza di carico è adattata a quella interna del generatore.",
+"Come si calcola la potenza dissipata da una resistenza?|P = R x I²|P = V x R|P = R x C|P = R / V²|0|La potenza dissipata da una resistenza è P = R × I² (equivalente a V × I oppure V²/R).",
+"Collegando in parallelo un condensatore da 10 mF ed uno da 20 mF si ottiene una capacità totale di:|30 mF|15 mF|6,7 mF|200 mF|0|In parallelo le capacità si sommano: 10 + 20 = 30 mF.",
+"A quale percentuale della tensione di alimentazione si carica il condensatore di un circuito RC dopo un tempo pari a due costanti di tempo?|95%.|86,5%.|63,2%.|36,8%.|1|Vc = V·(1 - e^(-t/τ)): per t = 2τ si ha 1 - e⁻² ≈ 0,865, cioè 86,5%. Dopo 1τ si arriva al 63,2%.",
+"Se si raddoppia la corrente che attraversa una resistenza, la tensione ai suoi capi:|aumenta del 20 %|si raddoppia|si dimezza|resta invariata|1|V = R × I: a R costante, V è proporzionale a I e quindi raddoppia.",
+"Ad una lunghezza d'onda di 10 metri corrisponde una frequenza di:|100 MHz|30 MHz|300 MHz|10 MHz|1|f = 300 / λ(m) = 300 / 10 = 30 MHz.",
+"Collegando in serie due condensatori da 8 pF si ottiene una capacità di:|1,2 pF|16 pF|6 pF|4 pF|3|Per due condensatori uguali in serie la capacità si dimezza: 8 / 2 = 4 pF.",
+"Collegando in parallelo due condensatori di uguale capacità qual è il valore di capacità risultante?|E' pari al doppio della capacità del singolo condensatore.|E' uguale al valore di capacità del singolo condensatore.|E' pari alla metà della capacità del singolo condensatore.|E' pari al quadrato del valore della capacità del singolo condensatore.|0|In parallelo le capacità si sommano: C + C = 2C.",
+"A parità di segnale modulante, la larghezza di banda di un'emissione SSB è:|un quarto di quella di un'emissione AM|uguale a quella di un'emissione AM|la metà di quella di un'emissione AM|doppia di quella di un'emissione AM|2|L'AM occupa 2 × fmod (due bande laterali), la SSB solo fmod (una banda laterale): la metà.",
+"Qual è l'effetto della sovradeviazione in una trasmissione a modulazione di frequenza?|Insufficiente soppressione della portante|Aumento della portata del trasmettitore|Aumento della potenza trasmessa|Emissioni fuori dal canale|3|Una deviazione eccessiva allarga la banda occupata oltre quella assegnata al canale, provocando interferenze sui canali adiacenti.",
+"In quale altro modo si può indicare la frequenza di un segnale radio a 1.500.000 Hz?|15 GHz|1.500 kHz|150 kHz|1.500 MHz|1|1.500.000 Hz / 1000 = 1500 kHz (= 1,5 MHz).",
+"Collegando in serie due bobine non accoppiate di uguale valore qual è il valore di induttanza risultante?|E' pari al doppio del valore di induttanza della singola bobina|E' pari alla metà del valore di induttanza della singola bobina|E' uguale al valore di induttanza della singola bobina|E' pari al quadrato del valore di induttanza della singola bobina|0|In serie le induttanze non accoppiate si sommano: L + L = 2L.",
+"Un raddoppio della potenza a cosa corrisponde in dB?|Ad un aumento di 6 dB|Ad un aumento di 3 dB|Ad un aumento di 12 dB|Ad un aumento di 1 dB|1|10·log₁₀(2) ≈ 3 dB. (Per le tensioni il raddoppio varrebbe 6 dB.)",
+"Collegando un condensatore con reattanza di 300 ohm in serie ad un induttore con reattanza di 100 ohm si ottiene una reattanza totale di:|200 ohm|-100 ohm|750 ohm|-200 ohm|3|XC = -300 Ω e XL = +100 Ω: X = 100 - 300 = -200 Ω (prevale la parte capacitiva).",
+"Quale è l'unità di misura dello sfasamento?|voltampere|gradi|kilowattora|watt|1|Lo sfasamento è un angolo e si misura in gradi (o radianti).",
+"Quanti Watt vengono forniti ad un resistore da 800 ohm da un generatore in corrente continua da 400 V?|200 W|320 W|400 W|0.5 W|0|P = V² / R = 400² / 800 = 160.000 / 800 = 200 W.",
+"Perché la corrente alternata scorre sull'esterno dei conduttori?|Per via della legge di Ohm|A causa della non perfetta conducibilità dei metalli|Per via dell'effetto pelle|A causa del campo elettrico|2|È l'effetto pelle (skin effect): in alternata, e sempre di più al crescere della frequenza, la corrente si addensa verso la superficie del conduttore.",
+"La frequenza si misura in:|metri|hertz|henry|ampere|1|La frequenza si misura in hertz (Hz), cioè cicli al secondo.",
+"In una bobina quale grandezza si oppone al flusso di corrente alternata?|La reattanza|La riluttanza|La resistenza|L'ammettenza|0|La reattanza induttiva XL = 2πfL è l'opposizione di una bobina al passaggio della corrente alternata.",
+"Quale è il principale svantaggio della modulazione FM?|La scarsa qualità audio|La grande larghezza di banda occupata|L'eccessiva profondità di modulazione|La scarsa immunità al rumore|1|La FM garantisce alta qualità e buona immunità ai disturbi, ma occupa molta più banda rispetto a AM e SSB.",
+"In un'onda elettromagnetica la frequenza e la lunghezza d'onda sono legate dalla relazione:|λ = c / f|λ = f / c|λ = c x f|λ = c x f²|0|La lunghezza d'onda è il rapporto tra la velocità della luce e la frequenza: λ = c / f.",
+"20 dB corrispondono ad un guadagno di potenza di:|5844|100|20|1 / 100|1|G(dB) = 10·log₁₀(rapporto): 20 dB = 10·log₁₀(100), quindi il rapporto di potenza è 100.",
+"La legge di Ohm dice che:|I = V / R|I = R x V|V = R / I|V = I / R|0|Legge di Ohm: I = V / R (e quindi V = R × I).",
+"A quanti nF corrispondono 10.000 pF?|0,1 nF|10 nF|0,01 nF|1 nF|1|1 nF = 1000 pF, quindi 10.000 pF = 10 nF.",
+"A quanti Farad corrispondono 500.000 µF?|0,5 F|0,0005 F|5 F|500 F|0|1 F = 1.000.000 µF, quindi 500.000 µF = 0,5 F.",
+"Quale legge esprime la relazione fra la tensione, la resistenza e la corrente in un circuito?|La legge di Tesla|La legge di Murphy|La legge di Ohm|La legge di Ampere|2|È la legge di Ohm: V = R × I.",
+"Come varia il guadagno di un amplificatore operazionale ideale al variare della frequenza|Non varia al variare della frequenza.|Diminuisce con legge logaritmica all'aumentare della frequenza.|Aumenta linearmente all'aumentare della frequenza.|Diminuisce linearmente all'aumentare della frequenza.|0|Un amplificatore operazionale ideale ha banda infinita: il guadagno è costante a tutte le frequenze (negli operazionali reali invece diminuisce ad alta frequenza).",
+"La capacità di un condensatore a facce piane parallele:|dipende dal tipo di conduttore impiegato per costruire le facce|diminuisce all'aumentare della superficie delle facce|aumenta all'aumentare della distanza delle facce|aumenta al diminuire della distanza delle facce|3|C = ε·S/d: la capacità cresce con la superficie e con la costante dielettrica, mentre diminuisce all'aumentare della distanza. Quindi aumenta riducendo la distanza.",
+"Quale è il guadagno complessivo di tre amplificatori collegati in cascata se ciascuno di essi guadagna 10 dB?|1000 dB|30 dB|13 dB|10 dB|1|In cascata i guadagni espressi in dB si sommano: 10 + 10 + 10 = 30 dB.",
+"Che cos'è l'Henry?|L'unità di misura dell'induttanza|L'unità di misura dell'ammettenza|L'unità di misura della resistenza|L'unità di misura della capacità|0|L'henry (H) è l'unità di misura dell'induttanza.",
+"Un induttore da 3 mH ed uno da 5 mH collegati in serie e non accoppiati danno un'induttanza totale di:|1,88 mH|3 mH|8 mH|15 mH|2|In serie le induttanze si sommano: 3 + 5 = 8 mH.",
+"Qual è l'unità di misura della resistenza?|L'ohm|Il watt|Il resistore|Il farad|0|La resistenza si misura in ohm (Ω).",
+"In un condensatore che cosa si oppone al flusso della corrente alternata?|La reattanza|La resistenza|L'ammettenza|La riluttanza|0|In un condensatore l'opposizione alla corrente alternata è la reattanza capacitiva XC = 1/(2πfC).",
+"In un segnale sinusoidale di frequenza f la pulsazione ω è data da:|ω = π x f|ω = 2 x π x f|ω = π x f²|ω = π / f|1|La pulsazione (velocità angolare) è ω = 2πf, espressa in radianti al secondo.",
+"Come si comporta una bobina nei confronti della corrente alternata?|La reattanza diminuisce all'aumentare della ampiezza della tensione alternata applicata|La reattanza aumenta all'aumentare della ampiezza della tensione alternata applicata|La reattanza aumenta all'aumentare della frequenza della tensione alternata applicata|La reattanza diminuisce all'aumentare della frequenza della tensione alternata applicata|2|XL = 2πfL: la reattanza della bobina aumenta all'aumentare della frequenza e non dipende dall'ampiezza della tensione.",
+"Quale termine indica il numero di volte al secondo in cui una corrente alternata inverte la propria direzione?|Frequenza|Velocità|Lunghezza d'onda|Lunghezza dell'impulso|0|La frequenza è il numero di cicli al secondo, ciascuno dei quali comprende due inversioni di direzione della corrente.",
+"Per fare condurre un transistor NPN è necessario che:|La base sia negativa rispetto al collettore e all'emettitore.|La base sia positiva rispetto all'emettitore e negativa rispetto al collettore.|La base sia positiva rispetto al collettore e negativa rispetto all'emettitore.|La base sia l'elemento più negativo.|1|Un NPN conduce se la giunzione base-emettitore è polarizzata direttamente (base positiva rispetto all'emettitore) e il collettore è più positivo della base (giunzione base-collettore inversa).",
+"Tra le seguenti modulazioni quale è quella che occupa meno banda?|FM|DSB|AM|SSB|3|La SSB trasmette una sola banda laterale senza portante: è la modulazione che occupa meno banda.",
+"Qual è l'unità di misura della capacità?|Il Volt|Il Farad|L'Henry|L'ohm|1|La capacità si misura in farad (F).",
+"Collegando in serie quattro induttori, non accoppiati tra loro, rispettivamente da 10 µH, 5 µH, 90 µH e 2 µH si ottiene un'induttanza totale di:|1,23 µH|26,75 µH|1,5 µH|107 µH|3|In serie le induttanze si sommano: 10 + 5 + 90 + 2 = 107 µH.",
+"Collegando in parallelo due bobine non accoppiate di uguale valore qual è il valore di induttanza risultante?|E' pari al doppio del valore di induttanza della singola bobina|E' pari alla metà del valore di induttanza della singola bobina|E' uguale al valore di induttanza della singola bobina|E' pari al quadrato del valore della singola bobina|1|In parallelo per due induttanze uguali L/2: 1/Lt = 1/L + 1/L = 2/L, quindi Lt = L/2.",
+"Quale altro nome può identificare un segnale a radiofrequenza di ampiezza costante?|Sottoportante|Portante|Frequenza intermedia|Modulante|1|Un segnale RF non modulato, di ampiezza e frequenza costanti, è la portante.",
+"Qual è il valore picco-picco di un'onda sinusoidale con valore efficace di 120 V?|339.4 V|169.7 V|204.8 V|84.8 V|0|Vp = Veff × √2 = 120 × 1,414 = 169,7 V. Picco-picco = 2 × Vp = 339,4 V.",
+"In una grandezza sinusoidale il tempo che intercorre tra due valori massimi si definisce:|Ampiezza.|Periodo.|Frequenza.|Fase.|1|Il periodo T è la durata di un ciclo completo, cioè il tempo tra due massimi consecutivi.",
+"La reattanza di un'induttanza da 1 uH alimentata a 10 MHz vale:|6,28 ohm|300 kohm|62,8 ohm|6,28 kohm|2|XL = 2π·f·L = 6,28 × 10 × 10⁶ Hz × 1 × 10⁻⁶ H = 62,8 Ω.",
+"Quale valore espresso in Hz ha la frequenza 3725 kHz|3725 Hz|3,725 Hz|37,25 Hz|3725000 Hz|3|1 kHz = 1000 Hz, quindi 3725 kHz = 3.725.000 Hz.",
+"La profondità di modulazione viene ridotta dal 100% al 50%; di quanto si riduce la potenza irradiata sulle bande laterali.|Del 25%.|Del 50%.|Del 75%.|Del 100%.|2|La potenza delle bande laterali è proporzionale a m²: con m = 1 vale P_bl, con m = 0,5 vale 0,25 · P_bl. Si riduce quindi del 75%.",
+"Che cos'è la gamma di cattura di un PLL?|La gamma di frequenze nella quale il circuito può agganciare.|Il tempo che impiega il circuito per agganciare.|La gamma di tensione nella quale il circuito può agganciare.|La gamma di impedenza di ingresso nella quale il circuito può agganciare.|0|La gamma di cattura (capture range) è l'intervallo di frequenze di ingresso entro cui il PLL, partendo da sganciato, riesce ad agganciarsi al segnale.",
+"La reattanza di un condensatore sottoposto ad una tensione sinusoidale di frequenza variabile:|diminuisce al diminuire della frequenza|aumenta al diminuire della frequenza|è indipendente dalla frequenza|non varia più del 63%|1|XC = 1/(2πfC) è inversamente proporzionale alla frequenza: diminuendo f, la reattanza aumenta.",
+"Il segnale a radiofrequenza scorre essenzialmente:|Sulla superficie del conduttore|In modo impulsivo|Dall'alto verso il basso|All'nterno del conduttore|0|Per effetto pelle, alle radiofrequenze la corrente si concentra sulla superficie esterna del conduttore.",
+"Collegando in parallelo due resistori da 28 megaohm si ottiene una resistenza totale di:|14 megaohm|28 megaohm|16 megaohm|56 megaohm|0|Due resistori uguali in parallelo danno metà del valore: 28 / 2 = 14 MΩ.",
+"Quale tra le seguenti unità di misura rappresenta una frequenza?|kJ|GHz|GW|kohm|1|Il gigahertz (GHz) è un'unità di frequenza. kJ misura l'energia, GW la potenza, kΩ la resistenza.",
+"Se un resistore da 48 kiloohm è sottoposto alla tensione di 12 V qual è il valore della corrente che lo attraversa?|250 mA|4000 µA|250 µA|4000 mA|2|I = V / R = 12 / 48000 = 0,00025 A = 0,25 mA = 250 µA.",
+"Collegando tre condensatori in parallelo rispettivamente da 15, 24 e 37 µF; la capacità totale sarà di:|76 µF.|9,26 µF.|37 µF.|7,38 µF.|0|In parallelo le capacità si sommano: 15 + 24 + 37 = 76 µF.",
+"A quale valore di tensione alternata deve corrispondere una tensione continua per produrre lo stesso riscaldamento in un carico puramente resistivo?|Il valore di picco|Il valore efficace|Il valore medio|Il valore picco-picco|1|Il valore efficace è per definizione il valore di tensione continua che produce la stessa potenza (calore) sullo stesso carico resistivo.",
+"Quanti Watt vengono dissipati in un resistore da 1.25 kiloohm attraversato da una corrente di 7.0 mA?|Circa 61 mW|Circa 9 mW|Circa 39 mW|Circa 11 mW|0|P = R × I² = 1250 × (0,007)² = 1250 × 0,000049 ≈ 0,0613 W ≈ 61 mW.",
+"Come si chiama la capacità di immagazzinare energia in un campo elettrico?|Capacità|Tolleranza|Induttanza|Resistenza|0|La capacità (misurata in farad) esprime l'attitudine a immagazzinare energia nel campo elettrico.",
+"Quale delle seguenti trasmissioni somiglia alla modulazione di fase?|La modulazione di frequenza|La modulazione d'ampiezza|La modulazione ad impulsi|La modulazione a banda laterale unica|0|Modulazione di fase e di frequenza sono modulazioni angolari: variando la fase si varia anche la frequenza istantanea, quindi si assomigliano molto.",
+"Se una portante viene modulata da un segnale sinusoidale con profondità di modulazione del 50% a quanto corrisponde il grado di modulazione:|m=0,05.|m=0,5.|m=50.|m=5.|1|Il grado di modulazione m è la profondità espressa come numero decimale: 50% = 0,5.",
+"Quale circuito elettrico assorbe troppa corrente?|Un circuito chiuso|Un corto circuito|Un circuito morto|Un circuito aperto|1|Un corto circuito ha resistenza quasi nulla, quindi la corrente cresce a valori molto elevati (I = V/R).",
+"Quanta corrente di griglia è ammessa in un amplificatore in classe A senza che si produca distorsione?|1 A.|Dipende dal tubo termoionico.|Nulla.|Circa 10 mA con una resistenza catodica di 300 ohm e un potenziale di griglia (-Vg) = 3 V.|2|In classe A la griglia è sempre negativa rispetto al catodo: non c'è corrente di griglia (se compare, il segnale viene distorto).",
+"Collegando in serie tre resistori rispettivamente da 14 ohm, 90 ohm ed 75 ohm si ottiene una resistenza totale di:|10,43 ohm|8,2 ohm|179 ohm|185 ohm|2|In serie si sommano: 14 + 90 + 75 = 179 Ω.",
+"Un condensatore da 1 mF può accumulare meno carica rispetto ad un condensatore da:|0,5 mF|4,7 mF|33 nF|100 pF|1|Q = C × V: a parità di tensione la carica è proporzionale alla capacità. Tra i valori proposti solo 4,7 mF è maggiore di 1 mF.",
+"Un resistore dissipa l'energia elettrica sotto forma di:|campo elettromagnetico|calore|campo magnetico|energia chimica|1|Il resistore dissipa l'energia elettrica sotto forma di calore (effetto Joule).",
+"Nelle trasmissioni radiofoniche si ottiene una maggiore fedeltà nella riproduzione dei suoni in modulazione di frequenza o di ampiezza:|Di ampiezza.|Di frequenza.|Leggermente superiore in quella di ampiezza.|Uguale in entrambe.|1|La FM offre fedeltà superiore grazie alla maggiore banda audio utilizzabile e alla minore sensibilità ai disturbi di ampiezza."
+];
+const RAW2 = [
+"L'amplificatore che offre il maggior rendimento è:|l'amplificatore a collettore comune|l'amplificatore a classe C|l'amplificatore in classe A|l'amplificatore a catodo comune|1|La classe C conduce per meno di mezzo periodo e dissipa poco: ha il rendimento più alto (fino a circa 80%), a prezzo di una forte distorsione. Si usa con carichi risonanti, ad esempio per CW e FM.",
+"In un circuito risonante serie in corrispondenza delle frequenze che delimitano la Banda Passante la corrente si riduce a:|0,577 x Io|0,707 x Io|1,44 x Io|0,5 x Io|1|La banda passante è delimitata dai punti a -3 dB, dove la corrente scende a 1/√2 ≈ 0,707 del valore massimo Io (la potenza si dimezza).",
+"In un alimentatore di solito qual è lo scopo del trasformatore?|Stabilizzare la tensione d'uscita|Abbassare la tensione in ingresso|Raddrizzare la tensione in ingresso|Ridurre l'ondulazione|1|Il trasformatore porta la tensione di rete (230 V) al valore richiesto dall'alimentatore e isola il circuito dalla rete. Raddrizzamento, filtraggio e stabilizzazione sono compiti di altri stadi.",
+"In un ricevitore con IF = 9 MHz quale può essere la frequenza immagine di un segnale in ingresso che ha f = 51 MHz?|60 MHz|33 MHz|51 MHz|50 MHz|1|La frequenza immagine dista 2 × IF dal segnale: 51 - 2×9 = 33 MHz (con oscillatore locale a 42 MHz). Per questo l'immagine viene attenuata dai filtri d'ingresso.",
+"In un tetrodo lo schermo a cosa serve?|A diminuire la banda passante|Ad aumentare la dissipazione anodica|A diminuire la capacità parassita tra griglia e anodo|Ad aumentare la massima tensione di griglia|2|La griglia schermo del tetrodo si interpone fra griglia di controllo e anodo e riduce la capacità parassita tra i due, limitando le autooscillazioni e migliorando il funzionamento ad alta frequenza.",
+"Tra i seguenti circuiti quale è usato per demodulare la FM?|Discriminatore Foster-Seeley|Rivelatore a prodotto|Mixer|Rivelatore a diodo|0|Il discriminatore Foster-Seeley (come il rivelatore a rapporto) trasforma le variazioni di frequenza in variazioni di tensione. Il rivelatore a prodotto serve per SSB e CW, quello a diodo per AM.",
+"L'impedenza di un circuito formato da una resistenza con in serie un induttore dipende dalla frequenza di lavoro?|Si|Solo se la reattanza è circa uguale alla resistenza|No|Solo se la resistenza è maggiore della reattanza|0|Z = √(R² + XL²) con XL = 2πfL: la reattanza induttiva cambia con la frequenza, quindi cambia anche l'impedenza.",
+"In quale dei seguenti ricevitori serve il BFO?|Ricevitore SSB|Ricevitore FM con de-enfasi|Ricevitore AM|Ricevitore FM|0|In SSB (e CW) la portante è soppressa: il BFO la reintroduce nel rivelatore per rendere intelligibile il segnale.",
+"In un ricevitore radiotelefonico a banda laterale unica di tipo supereterodina quale circuito riceve il segnale dal filtro IF e lo invia al rivelatore|Il BFO|L'amplificatore IF|Il mixer|L'oscillatore RF|1|Dopo il filtro IF il segnale passa all'amplificatore IF, che lo porta al livello adatto per il rivelatore (a prodotto, con il BFO).",
+"Che cos'è un circuito PLL (Phase Locked Loop)?|Un circuito composto da un amplificatore push-pull con ingresso differenziale.|Un circuito composto da un rivelatore di fase, un filtro passa basso ed un oscillatore controllato in tensione.|Un circuito altrimenti noto come multivibratore monostabile.|Un circuito composto da un discriminatore a rapporto, un modulatore a reattanza ed un VCO.|1|Il PLL (anello ad aggancio di fase) è formato da comparatore/rivelatore di fase, filtro passa basso e VCO: la tensione di errore corregge il VCO finché la sua fase si aggancia al riferimento.",
+"Dove può essere inserito un transistor in un alimentatore?|Sul primario del trasformatore|Nello stabilizzatore|Nel raddrizzatore|Sul secondario del trasformatore|1|Il transistor serve come elemento regolatore (serie o derivazione) nello stabilizzatore di tensione.",
+"Come si riduce l'ondulazione negli alimentatori?|Con raddrizzatori a diodi a vuoto|Mediante un piccolo condensatore in serie al primario del trasformatore|Tramite condensatori collegati in parallelo all'uscita del raddrizzatore|Con raddrizzatori a diodi Zener|2|Un condensatore di livellamento in parallelo all'uscita del raddrizzatore si carica sui picchi e si scarica sul carico, riducendo l'ondulazione (ripple).",
+"Qual è la tensione di alimentazione dei circuiti integrati TTL?|1,5 V.|5 V.|13 V.|12 V.|1|I circuiti integrati TTL si alimentano a 5 V (con tolleranza di circa ±5%).",
+"La capacità che un ricevitore ha di discriminare tra segnali di frequenze diverse ma vicine è la:|cifra di rumore|selettività|stabilità|sensibilità|1|La selettività è la capacità di separare il segnale desiderato da quelli su frequenze vicine.",
+"Gli amplificatori vengono suddivisi in base alla loro classe di funzionamento. Quale delle seguenti classi è inesistente:|Classe A.|Classe AC.|Classe B.|Classe AB.|1|Le classi di funzionamento sono A, AB, B e C (più D, E, F per i commutati). La classe AC non esiste.",
+"Quale tra i seguenti circuiti viene usato negli alimentatori?|Amplificatore lineare|Oscillatore di Colpitts|Raddrizzatore a ponte di diodi|Amplificatore invertente|2|Il raddrizzatore a ponte di diodi converte la tensione alternata del trasformatore in tensione pulsante continua.",
+"Il ponte di diodi è:|un amplificatore|un oscillatore|un raddrizzatore ad onda intera|un raddrizzatore a semionda|2|Il ponte di Graetz, a quattro diodi, raddrizza entrambe le semionde: è un raddrizzatore ad onda intera.",
+"Come si possono ottenere frequenze molto elevate (VHF ed oltre) da semplici oscillatori al quarzo?|Inserendo quarzi che oscillano a frequenze molto elevate nell'oscillatore|Inserendo filtri passa alto dentro all'oscillatore|Collegando dei moltiplicatori di frequenza in cascata all'oscillatore|Collegando degli amplificatori in classe A in cascata all'oscillatore|2|I quarzi fondamentali non arrivano a frequenze molto alte: si usano moltiplicatori di frequenza (stadi non lineari con carico accordato su una armonica) dopo l'oscillatore.",
+"L'amplificatore lineare ha il compito di:|Amplificare il segnale emesso in trasmissione, senza distorsione ed entro i limiti di legge|Amplificare il segnale in ricezione|Amplificare il segnale trasmesso, senza distorsione, fino a 1000W|Amplificare il segnale emesso in trasmissione, se questo risulta distorto|0|L'amplificatore lineare aumenta la potenza del segnale trasmesso mantenendone la forma (senza distorsione), restando entro i limiti di potenza consentiti.",
+"Il diodo tunnel entro una porzione della caratteristica tensione/corrente presenta la particolarità di avere:|Una resistenza negativa.|Una resistenza nulla.|Una resistenza infinita.|Una interruzione della conduzione.|0|Il diodo tunnel ha un tratto della caratteristica in cui aumentando la tensione la corrente diminuisce: resistenza differenziale negativa, sfruttata negli oscillatori.",
+"I filtri elimina banda attenuano solo:|le frequenze all'interno della banda del filtro|le frequenze all'esterno della banda del filtro|le frequenze maggiori della frequenza più alta della banda del filtro|la frequenza al centro della banda del filtro|0|Il filtro elimina banda (notch o a reiezione di banda) attenua le frequenze comprese nella sua banda e lascia passare le altre.",
+"Quante griglie ha il diodo?|Due.|Una.|Nessuna.|Tre.|2|Il diodo a vuoto ha solo catodo (con filamento) e anodo: nessuna griglia.",
+"Che cosa fa un resistore variabile (o potenziometro)?|Varia la propria resistenza secondo la posizione di un contatto strisciante|Varia la propria resistenza se sottoposto ad una tensione alternata|Varia la propria resistenza in funzione della temperatura|Trasforma una tensione variabile in una tensione costante|0|Nel potenziometro un cursore (contatto strisciante) si sposta su una pista resistiva, cambiando il valore della resistenza.",
+"Che cosa determina l'induttanza di una bobina?|Il diametro del nucleo, il numero di spire e il materiale con cui si realizza l'avvolgimento|Il materiale del nucleo e il suo diametro, la lunghezza della bobina e il montaggio (orizzontale o verticale)|Il materiale del nucleo e il suo diametro, la lunghezza della bobina e il numero di spire|Il materiale del nucleo, il numero di spire e la frequenza della corrente che attraversa la bobina|2|L'induttanza dipende dalle caratteristiche geometriche (diametro, lunghezza), dal numero di spire (cresce col quadrato) e dal materiale del nucleo (permeabilità).",
+"Negli amplificatori a radiofrequenza, per annullare l'effetto delle capacità interelettrodiche del componente attivo:|si usano circuiti risonanti all'ingresso e all'uscita dell'amplificatore|si usano i MOSFET a doppio gate|si collegano delle bobine di blocco per la radiofrequenza in serie al carico|si usano condensatori di accoppiamento tra ingresso ed uscita|1|Il MOSFET a doppio gate ha il secondo gate che funge da schermo e riduce molto la capacità tra gate e drain, evitando le autooscillazioni.",
+"Come deve essere la cifra di rumore di un ricevitore?|Più bassa possibile|3 dB|Più alta possibile|Proporzionale alla selettività|0|La cifra di rumore misura il rumore aggiunto dal ricevitore: più è bassa, più è sensibile.",
+"Il filtro passa basso in un trasmettitore deve avere:|La frequenza di taglio di poco superiore alla frequenza del trasmettitore|La frequenza di taglio inferiore alla frequenza del trasmettitore|La frequenza di taglio pari alla frequenza del trasmettitore|La frequenza di taglio molto superiore alla frequenza del trasmettitore|0|Deve lasciar passare la frequenza di lavoro e attenuare le armoniche: il taglio sta quindi poco sopra la frequenza del trasmettitore.",
+"Quale tra i seguenti fenomeni non è legato al sovraccarico del ricevitore?|Modulazione incrociata|Silenziamento|Emissione di armoniche e spurie|Distorsione da intermodulazione|2|Modulazione incrociata, desensibilizzazione (silenziamento) e intermodulazione sono effetti di segnali forti in ingresso. Le armoniche e le spurie sono emissioni del trasmettitore.",
+"In un ricevitore supereterodina a doppia conversione, il primo oscillatore locale:|ha frequenza variabile per poter variare la frequenza di ricezione|ha frequenza costante per evitare interferenze da canali adiacenti|ha frequenza pari a 455 kHz|ha frequenza pari a 10,7 MHz|0|Nel primo mixer l'oscillatore locale è variabile e permette di sintonizzare le varie frequenze; il secondo oscillatore è invece fisso.",
+"Quale delle seguenti affermazioni è falsa per un transistor bipolare?|L'impedenza di ingresso è estremamente elevata|La corrente di base è molto minore di quella di emettitore|La corrente di emettitore è circa uguale a quella di collettore|La corrente di collettore è molto maggiore di quella base|0|Nel bipolare la giunzione base-emettitore è polarizzata direttamente, quindi l'impedenza d'ingresso è bassa (non estremamente elevata come nei FET).",
+"Qual è la tensione al secondario di un trasformatore costituito da 500 spire se al primario, costituito da 2250 spire, è applicata la tensione di 220 V?|36.2 V|630 V|48.8 V|990 V|2|Vs = Vp × Ns/Np = 220 × 500 / 2250 ≈ 48,9 V, cioè il valore più vicino tra le risposte (48,8 V).",
+"In un quarzo la frequenza di risonanza è:|dipendente dallo spessore del quarzo stesso|dipendente dalla resistenza del circuito in cui è inserito|molto ridotta|molto elevata|0|La frequenza di risonanza meccanica del cristallo dipende dalle sue dimensioni, in particolare dallo spessore: più è sottile, più la frequenza è alta.",
+"Quale è lo scopo dei filtri passa basso?|attenuare i segnali di frequenza superiore alla frequenza di taglio|attenuare i segnali a frequenza pari alla frequenza di taglio|amplificare i segnali di frequenza inferiore alla frequenza di taglio|attenuare i segnali di frequenza inferiore alla frequenza di taglio|0|Il filtro passa basso lascia passare le frequenze sotto la frequenza di taglio e attenua quelle superiori.",
+"Quale dispositivo si usa per raccogliere suoni e trasformali in segnali elettrici?|L'altoparlante|Il microfono|L'antenna|Il filtro risonante|1|Il microfono è un trasduttore che trasforma le onde sonore in segnali elettrici.",
+"Tra le seguenti classi di amplificazione quale presenta la maggior distorsione?|A|C|AB|B|1|La classe C, in cui il dispositivo conduce per meno di mezzo periodo, è la più distorcente (e la più efficiente).",
+"Un trasformatore che abbassa la tensione da 220 V a 22 V ha un rapporto spire di:|22|10|1000|100|1|Il rapporto spire è Np/Ns = Vp/Vs = 220/22 = 10.",
+"Perché è preferibile utilizzare comunicazioni in simplex, quando è possibile, anziché utilizzare i ripetitori?|La portata dei segnali viene aumentata|Il ripetitore non deve essere impegnato senza motivo|Si evita il pagamento di costosi diritti|Si può efficacemente provare l'efficienza della propria antenna|1|Il ripetitore è una risorsa condivisa: se due stazioni possono collegarsi direttamente in simplex, conviene lasciarlo libero.",
+"Come si elimina la frequenza immagine dai ricevitori supereterodina?|Tramite l'uso di filtri passa banda e con una scelta accurata della prima IF|Tramite l'uso di antenne altamente direttive e linee di trasmissione bilanciate|Usando stadi d'ingresso e mixer a MOSFET|Usando preamplificatori molto sensibili e stabili|0|L'immagine sta a 2 × IF dal segnale utile: si attenua con filtri passa banda a monte del mixer, e scegliendo una IF abbastanza alta da allontanarla.",
+"Nei ricevitori eterodina il segnale ricevuto dall'antenna:|è convertito di frequenza una o più volte prima di essere demodulato|attraversa un modulatore bilanciato|deve essere sempre maggiore di 10 uV|non è convertito di frequenza prima di essere demodulato|0|Nel ricevitore supereterodina il segnale viene convertito a una (o più, nella doppia conversione) frequenza intermedia prima della rivelazione.",
+"Com'è l'impedenza di ingresso di un FET paragonata a quella di un transistor?|Il FET ha impedenza di ingresso alta, il transistor ha impedenza di ingresso bassa.|Il FET e il transistor hanno le stesse impedenze di ingresso.|Non possono essere confrontate senza prima conoscere la tensione di alimentazione.|Il FET ha impedenza di ingresso bassa, il transistor ha impedenza di ingresso alta.|0|Nel FET il gate è isolato o polarizzato inversamente: l'impedenza d'ingresso è altissima, mentre nel bipolare è bassa.",
+"Quale è la costante di tempo di un circuito composto da due condensatori da 100 µF e due resistenze da 470 kiloohm tutti collegati in serie?|220 secondi.|103 secondi.|47 secondi.|101,1 secondi.|2|Due condensatori da 100 µF in serie valgono 50 µF; due resistenze da 470 kΩ in serie valgono 940 kΩ. τ = R × C = 940 000 × 50·10⁻⁶ = 47 s.",
+"Quale motivo potrebbe rendere necessario l'impiego di un triodo anziché di un transistor?|Il triodo usa tensioni più basse.|Il triodo ha un rendimento maggiore|Il triodo può essere impiegato per potenze maggiori|Il triodo è più piccolo|2|I tubi possono gestire potenze molto elevate (e tensioni alte), cosa difficile per i singoli transistor.",
+"Se in un ricevitore viene prodotta una IF di 455 kHz da un segnale di ingresso a 14,255 MHz e da un oscillatore locale a 13,8 MHz, quale segnale può produrre interferenze da frequenza immagine?|14,71 MHz|15,355 MHz|13,345 MHz|10,7 MHz|2|L'oscillatore (13,8 MHz) sta sotto il segnale: l'immagine è dall'altra parte, a 13,8 - 0,455 = 13,345 MHz (cioè segnale - 2×IF = 14,255 - 0,91).",
+"In un circuito risonante parallelo con induttanza L, capacità C e resistenza Rp alla frequenza di risonanza l'impedenza è uguale a:|1/ωoC|ωoL|Rp|ωoC|2|Alla risonanza le reattanze si compensano e il circuito parallelo presenta impedenza massima e puramente resistiva, pari a Rp.",
+"Quali frequenze attraversano inalterate un filtro passa alto?|Le frequenze maggiori della frequenza di taglio|Le frequenze minori della frequenza di taglio|Le frequenze in una banda stretta attorno alla frequenza di taglio|La sola frequenza di taglio|0|Il passa alto lascia passare le frequenze superiori alla frequenza di taglio e attenua quelle inferiori.",
+"In un circuito risonante serie con resistenza R e reattanza induttiva X, il fattore di qualità vale:|X / R|R / X|R + X|R x X|0|Per il circuito serie Q = X/R (reattanza alla risonanza diviso la resistenza).",
+"Quale tra i seguenti ricevitori ha i filtri di IF più selettivi?|Ricevitore CW|Ricevitore SSB|Ricevitore FM|Ricevitore AM|0|Il CW occupa pochissima banda (poche centinaia di Hz), quindi richiede i filtri IF più stretti: circa 250-500 Hz.",
+"L'impedenza d'ingresso di uno stadio amplificatore è bene che sia alta:|per assorbire gli effetti delle capacità interelettrodiche|per attenuare i disturbi|per non caricare eccessivamente lo stadio a monte|per non caricare eccessivamente lo stadio a valle|2|Un'alta impedenza d'ingresso assorbe poca corrente e non carica (non ne abbassa il segnale) lo stadio che lo precede.",
+"Quale fattore limita la sensibilità in un ricevitore commerciale?|Il ronzio dell'alimentatore.|La distorsione di intermodulazione.|Il rumore di fondo del ricevitore.|L'impedenza di ingresso del rivelatore.|2|Il segnale minimo utilizzabile è quello che emerge dal rumore generato dal ricevitore stesso, soprattutto dai primi stadi.",
+"E' necessario il BFO nei ricevitori AM?|Solo se l'indice di modulazione supera il 70 %|Sì|No|Solo sulle onde corte|2|In AM la portante è presente nel segnale: il rivelatore a diodo basta e il BFO non serve.",
+"Un generatore trifase (alternatore) produce tre tensioni alternate della stessa ampiezza ma sfasate tra loro di:|180°|120°|45°|90°|1|In un sistema trifase le tre tensioni sono sfasate di 120° (un terzo di periodo) tra loro.",
+"Cosa accade raddoppiando la tensione del segnale all'ingresso di un amplificatore in classe B per radio frequenza?|La potenza d'uscita si dimezza, perché è inversamente proporzionale al quadrato del potenziale di griglia.|La potenza d'uscita è doppia, perché varia con il quadrato del potenziale di griglia.|La potenza d'uscita è quadruplicata, perché varia con il quadrato del potenziale di griglia.|La potenza d'uscita rimane inalterata.|2|In un amplificatore lineare in classe B la tensione d'uscita è proporzionale a quella d'ingresso e la potenza al suo quadrato: raddoppiando l'ingresso la potenza diventa quattro volte.",
+"Il filamento serve a:|scaldare la placca|raffreddare il catodo|scaldare il catodo|applicare un segnale modulante alla valvola|2|Il filamento riscalda il catodo, che così emette elettroni per effetto termoionico.",
+"Come è l'amplificazione di corrente di un transistor bipolare in configurazione a base comune?|Minore di uno|Molto alta|Molto bassa|Maggiore di uno|0|In base comune la corrente d'uscita (collettore) è leggermente inferiore a quella d'ingresso (emettitore): α < 1. Amplifica in tensione, non in corrente.",
+"Quale grado di selettività è necessario nei circuiti a frequenza intermedia di un ricevitore radiotelefonico a banda laterale unica?|2,4 kHz.|4,2 kHz.|4,8 kHz.|1 kHz.|0|Un segnale vocale SSB occupa circa 2,4-3 kHz: il filtro IF deve avere questa larghezza di banda.",
+"Se un segnale a 10 MHz viene miscelato ad un segnale a 10,455 MHz, generato da un oscillatore locale, si ottiene un segnale a:|455 kHz|10 MHz|910 kHz|9455 kHz|0|Il mixer produce somma e differenza delle frequenze: 10,455 - 10 = 0,455 MHz = 455 kHz (oltre alla somma 20,455 MHz, che si filtra).",
+"Collegando due o più diodi i parallelo per aumentare la portata di corrente di un rettificatore è bene collegare in serie a ciascun diodo una resistenza di basso valore; perché?|Per ottenere una stabilizzazione termica del sistema|Per regolare la tensione di uscita dell'alimentatore|Per evitare che un solo diodo sopporti la maggior pare della corrente|Per mantenere il rendimento entro una gamma di valori prestabilita|2|Diodi diversi hanno soglie leggermente diverse: senza resistenze di equalizzazione uno condurrebbe quasi tutta la corrente. Le resistenze in serie la ripartiscono.",
+"Un circuito risonante serie:|Può essere attraversato da corrente continua|Fa scorrere la massima corrente alla frequenza di risonanza|Fa scorrere la minima corrente alla frequenza di risonanza|Ha la massima impedenza alla frequenza di risonanza|1|Alla risonanza le reattanze si annullano: l'impedenza è minima (solo R) e la corrente è massima. In continua il condensatore blocca.",
+"Quale tra i seguenti circuiti amplificatori ha la maggior impedenza di ingresso?|A FET in classe B|A FET a gate comune|A transistor bipolare|A transistor bipolare a base comune|0|Il FET ha impedenza d'ingresso altissima. Con gate comune (o base comune) invece l'ingresso è sul source (emettitore) e l'impedenza è bassa.",
+"Quale tra le seguenti cifre rappresenta un possibile valore di sensibilità di un ricevitore?|50 ohm|2,4 kHz|0,75 uV|0,9 dB|2|La sensibilità si esprime come tensione minima in ingresso (microvolt). Ohm, kHz e dB indicano impedenza, banda e rapporti.",
+"In quale tra i seguenti circuiti solitamente non si usa il MOSFET a doppio gate?|Mixer|Raddrizzatore a singola semionda|Amplificatore|Rivelatore a prodotto per la SSB|1|Il doppio gate si usa quando servono due ingressi (mixer, rivelatore a prodotto, amplificatori con AGC). Un raddrizzatore è fatto con diodi.",
+"Quali sono i tre terminali di un FET?|Emettitore, Base 1, Base 2.|Gate, Drain, Source.|Base, Emettitore, Collettore.|Gate 1, Gate 2, Drain.|1|Il FET ha gate (porta), drain (pozzo) e source (sorgente).",
+"Quali frequenze attraversano inalterate un filtro passa basso?|Le frequenze di poco superiori alla frequenza di taglio.|Le frequenze inferiori alla frequenza di taglio.|Solo le frequenze di poco inferiori alla frequenza di taglio.|Le armoniche superiori alla frequenza di taglio.|1|Il passa basso lascia passare le frequenze sotto la frequenza di taglio.",
+"La polarizzazione del gate di un FET è data da una tensione:|negativa|maggiore di 0,7 V|nulla|positiva|0|Nel FET a giunzione (canale N) il gate è polarizzato con tensione negativa rispetto al source, che regola la corrente di drain.",
+"Perché in alcuni casi è necessario utilizzare resistori di dimensioni maggiori a parità di valore di resistenza?|Per ridurre l'impedenza del circuito|Per avere migliori tempi di risposta|Per avere una maggior potenza dissipabile|Per un maggiore guadagno di corrente|2|Un resistore più grande ha più superficie per smaltire il calore, quindi può dissipare più potenza senza danneggiarsi.",
+"Un amplificatore in classe A:|non è adatto per amplificare segnali modulati in SSB|ha elevato rendimento|ha scarso rendimento|ha elevata distorsione|2|In classe A il dispositivo conduce sempre e assorbe corrente anche senza segnale: la linearità è ottima, ma il rendimento è basso (max 25-50%).",
+"A cosa servono i resistori?|A variare nei filtri passa banda l'accoppiamento|A fissare la reattanza desiderata in un certo punto di un circuito|A fissare la corrente e la tensione desiderate in un certo punto di un circuito|A variare le frequenze di risonanza|2|I resistori limitano la corrente e, con le cadute di tensione, impostano tensioni e correnti (ad esempio per la polarizzazione).",
+"Qual è la fase del segnale di uscita rispetto al segnale di ingresso in un amplificatore operazionale collegato in configurazione invertente?|180°.|90°.|60°.|In fase.|0|Nella configurazione invertente il segnale in uscita è in opposizione di fase (180°) rispetto all'ingresso.",
+"In un circuito risonante parallelo, alla frequenza di risonanza, la corrente è:|minima|massima|media|0,707 A|0|Alla risonanza il parallelo LC ha impedenza massima: la corrente totale assorbita dal generatore è minima (circola però una forte corrente nel circuito interno).",
+"Un filtro passa banda risonante a 100 MHz con larghezza di banda di 100 kHz ha un fattore Q pari a:|1000|1|1000000|100|0|Q = f0 / B = 100 MHz / 100 kHz = 1000.",
+"Quanto tempo impiega un condensatore da 450 µF inizialmente carico a 800 V per scaricarsi fino a 294 V su una resistenza da 1 megaohm?|0,08 secondi.|450 secondi.|0,02 secondi.|1350 secondi.|1|294/800 = 0,3675 ≈ e⁻¹: la tensione scende al 36,8% in una costante di tempo, τ = R × C = 10⁶ × 450·10⁻⁶ = 450 s.",
+"Per convertire la frequenza di un segnale da 14 MHz a 455 kHz, quale può essere la frequenza dell'oscillatore locale da far battere con il segnale?|910 kHz|14455 kHz|14000 kHz|455 kHz|1|L'oscillatore locale deve differire dal segnale di 455 kHz: 14 000 + 455 = 14 455 kHz (oppure 13 545 kHz).",
+"Quale tra i seguenti circuiti è usato nei ricevitori per CW?|Discriminatore di Foster - Seeley|BFO|Invertitore di fase|Demodulatore ad inviluppo|1|Per ascoltare la telegrafia si mescola la IF con un tono generato dal BFO e si ottiene una nota udibile.",
+"Un filtro elimina banda quali frequenze elimina?|quelle interne alla banda|quelle esterne alla sua banda|solo quella al centro della banda|solo quelle maggiori della banda|0|Il filtro a reiezione di banda attenua le frequenze interne alla sua banda.",
+"Quale tra i seguenti diodi è comunemente usato come stabilizzatore di tensione negli alimentatori?|Zener|Varactor|Varicap|Schottky|0|Il diodo Zener in polarizzazione inversa mantiene ai suoi capi una tensione quasi costante (tensione di Zener).",
+"Quale scopo ha la resistenza cosiddetta 'bleeder' collegata in parallelo all'uscita dell'alimentatore?|Scarica i condensatori del circuito allo spegnimento dell'alimentatore|Migliora la regolazione di tensione|Scarica a massa le correnti parassite|Evita le sovratensioni prodotte dalle bobine|0|La resistenza di scarico (bleeder) scarica i condensatori di filtro a spegnimento avvenuto, evitando tensioni pericolose.",
+"Qual è il nome di un circuito che, confrontando la frequenza del segnale prodotto da un VCO (Voltage Controlled Oscillator) con la frequenza di un segnale di riferimento, produce una tensione di correzione che modifica la frequenza del VCO?|Miscelatore.|Amplificatore differenziale.|PLL (Phase Locked Loop).|Oscillatore a frequenza variabile.|2|È il PLL: il comparatore di fase genera la tensione di errore che corregge il VCO fino all'aggancio.",
+"Un circuito risonante serie alla frequenza f inferiore a quella di risonanza ha comportamento:|Resistivo|Induttivo|Capacitivo|Nullo|2|Sotto la risonanza la reattanza capacitiva (1/ωC) supera quella induttiva (ωL): il circuito si comporta come un condensatore.",
+"Avvolgendo una bobina di filo di rame su una bacchetta di ferrite si ottiene:|un condensatore|un trasformatore|un induttore|un resistore|2|Una singola bobina su nucleo di ferrite è un induttore (il trasformatore ne ha almeno due).",
+"La sensibilità dei ricevitori solitamente si misura in:|microvolt|microwatt|picofarad|milliwatt|0|La sensibilità si dà come tensione minima al segnale in ingresso (microvolt) per un certo rapporto segnale/rumore.",
+"Qual è il valore di tensione del livello alto in un dispositivo TTL alimentato a 5 V?|Da 2,0 V a 5,5 V.|Da -0,5 V a -2,0 V.|Da 1,0 V a 1,5 V.|Da 1,5 V a 3,0 V.|0|Nei TTL il livello logico alto va da circa 2,0 V a 5,5 V, il livello basso da 0 a 0,8 V.",
+"Il rivelatore a prodotto a MOSFET a doppio gate serve a demodulare la:|SSB|FM|FM stereo|AM|0|Il rivelatore a prodotto moltiplica il segnale per la portante generata dal BFO: serve per SSB (e CW).",
+"Quali frequenze sono attenuate da un filtro passa banda?|Quelle interne alla banda del filtro|Solo quelle molto maggiori della banda del filtro|Quelle esterne alla banda del filtro|Solo la frequenza al centro della banda|2|Il passa banda lascia passare le frequenze della sua banda e attenua quelle esterne (sia inferiori sia superiori).",
+"Un amplificatore push-pull per alte frequenze funziona in classe:|Classe A.|Classe D.|Classe C.|Classe B.|3|Il push-pull con due dispositivi che amplificano ciascuno una semionda lavora tipicamente in classe B (o AB), con buon rendimento e linearità.",
+"Quale è uno dei vantaggi derivanti dall'impiego di circuiti integrati rispetto ai tubi a vuoto?|I circuiti integrati possono funzionare a temperature più alte.|I circuiti integrati accettano segnali di ingresso di livello maggiore.|I circuiti integrati incorporano diverse funzioni in un singolo componente.|I circuiti integrati lavorano con tensioni più elevate.|2|Un circuito integrato contiene molti componenti e più funzioni in un solo chip: ingombro, consumi e costi ridotti.",
+"Che tipo di condensatore si usa di norma nella sezione di filtro degli alimentatori?|A mica|Variabile in aria|Elettrolitico|Ceramico a disco|2|Per i livellamenti servono grandi capacità: i condensatori elettrolitici (polarizzati) le offrono in poco spazio.",
+"In un modulatore SSB che cosa si usa per lasciar passare una sola delle due bande laterali?|Un amplificatore in classe C|Un filtro passa banda|Un balun|Un oscillatore di Colpitts|1|Il modulatore bilanciato elimina la portante; un filtro passa banda (a quarzo o meccanico) lascia passare una sola banda laterale.",
+"Un MOSFET è:|un tipo particolare di diodo|un tipo di transistore ad effetto di campo|un tipo di amplificatore in classe AB|un transistore bipolare|1|MOSFET significa Metal Oxide Semiconductor Field Effect Transistor: è un transistor ad effetto di campo con gate isolato.",
+"Il BFO (oscillatore a frequenza di battimento) è usato nei ricevitori per la:|PM|SSB|AM|FM|1|Il BFO ripristina la portante soppressa e permette di demodulare SSB e CW.",
+"Quale rapporto spire deve avere un trasformatore progettato per adattare un generatore con impedenza 600 ohm ad un carico con impedenza 4 ohm?|150:1|12.2:1|300:1|24.4:1|1|Il rapporto spire è la radice del rapporto delle impedenze: √(600/4) = √150 ≈ 12,2.",
+"Come varia la resistenza di un resistore a strato di carbone all'aumentare della temperatura?|Varia secondo il coefficiente di temperatura del componente|Varia in funzione del tempo|Aumenta del 20% per ogni 10 gradi di aumento di temperatura|Rimane invariata|0|La resistenza cambia con la temperatura secondo il coefficiente di temperatura proprio del componente (per il carbone è generalmente negativo).",
+"In un circuito LC, alla frequenza di risonanza:|la reattanza dell'induttore diversa da quella del condensatore|la reattanza dell'induttore è uguale a quella del condensatore|la reattanza dell'induttore è maggiore di quella del condensatore|la reattanza dell'induttore è minore di quella del condensatore|1|La risonanza si ha quando XL = XC, cioè f0 = 1/(2π√(LC)).",
+"In un circuito risonante serie con induttanza L, capacità C e resistenza Rs alla frequenza di risonanza l'impedenza è uguale a:|Valore minimo resistivo Rs|Impedenza massima Rs|ωoC|ωoL|0|Alla risonanza le reattanze si annullano e rimane solo Rs: l'impedenza è minima e puramente resistiva.",
+"Qual è la fase del segnale di uscita rispetto al segnale di ingresso in un amplificatore operazionale collegato in configurazione non invertente?|90°.|180°.|In fase.|60°.|2|Nella configurazione non invertente uscita e ingresso sono in fase.",
+"Che cosa distingue le classi (A, B …) degli amplificatori?|Il tipo di componenti utilizzati|L'angolo di conduzione del segnale in uscita|La potenza massima|Lo sfasamento tra corrente e tensione in ingresso|1|Le classi si distinguono per l'angolo di conduzione, cioè per quanta parte del ciclo il dispositivo conduce: 360° in A, 180° in B, meno di 180° in C.",
+"Quante griglie ha il tetrodo?|Due.|Una.|Nessuna.|Quattro.|0|Il tetrodo ha due griglie: la griglia di controllo e la griglia schermo.",
+"La costante di tempo di un circuito RC con R = 10 ohm e C = 0,3 mF vale:|3 ms|10 ms|3,33 ms|0,3 ms|0|τ = R × C = 10 Ω × 0,3·10⁻³ F = 3·10⁻³ s = 3 ms.",
+"Un circuito risonante parallelo alla frequenza f superiore a quella di risonanza ha comportamento:|Capacitivo|Nullo|Resistivo|Induttivo|0|Nel parallelo, sopra la risonanza prevale la corrente del condensatore (reattanza minore): il circuito appare capacitivo; sotto la risonanza è induttivo.",
+"Tra i seguenti componenti quale non è un tipo di transistor?|PNP|Zener|MESFET|NPN|1|Lo Zener è un diodo. PNP e NPN sono bipolari, il MESFET è un FET a barriera metallo-semiconduttore.",
+"Il fattore Q in un circuito risonante dipende da:|frequenza|frequenza di risonanza e larghezza di banda|corrente e tensione di picco|capacità|1|Q = f0 / B: dipende dal rapporto tra frequenza di risonanza e larghezza di banda.",
+"Una classe di amplificazione che dà scarso rendimento e bassissima distorsione è la:|classe AB|classe A|classe B|classe C|1|La classe A è la più lineare (bassissima distorsione) ma ha il rendimento più basso.",
+"Cosa può accadere al vostro ricetrasmettitore se sostituite il fusibile da 5 A bruciato con uno da 30 A?|Il ricetrasmettitore scalderà di meno durante il funzionamento|Il ricetrasmettitore potrebbe assorbire molta più corrente del dovuto e potrebbe incendiarsi|Il nuovo fusibile potrà proteggere meglio l'apparato da assorbimenti eccessivi|Il ricetrasmettitore potrebbe non fornire più la stessa potenza di uscita|1|Un fusibile sovradimensionato non interviene in caso di guasto: l'apparato può assorbire correnti pericolose, surriscaldarsi e prendere fuoco. Il fusibile va sostituito con uno dello stesso valore.",
+"In un diodo a giunzione l'effetto valanga si verifica per:|Una polarizzazione inversa pari a Vz (tensione zener)|0,2 V|Una tensione pari a Vs (tensione di soglia)|Una polarizzazione diretta pari a Vz (tensione zener)|0|Raggiunta in polarizzazione inversa la tensione di breakdown (Vz) la corrente cresce bruscamente per effetto valanga.",
+"Il valore di resistenza di un resistore a filo:|varia secondo la temperatura|varia secondo la tensione applicata|è sempre costante|non varia secondo la temperatura|0|I metalli hanno un coefficiente di temperatura: la resistenza del filo varia con la temperatura.",
+"Che cosa succede se tarate una bobina su nucleo di ferrite usando un cacciavite metallico?|L'utensile metallico fa variare l'induttanza e vi fa sbagliare la taratura.|L'utensile metallico può attirare un'energia elettrica pericolosa per l'operatore.|L'utensile metallico potrebbe magnetizzarsi al punto da diventare inservibile.|L'utensile metallico può attirare energia elettrica e diventare caldo.|0|Il metallo modifica il campo magnetico e quindi l'induttanza: la taratura risulta falsata appena si toglie l'utensile. Si usano cacciaviti di plastica o ceramica.",
+"Quale funzione hanno i circuiti cosiddetti prescaler?|Prevengono le oscillazioni parassite nei frequenzimetri.|Dividono la frequenza di un segnale HF per visualizzarla con un frequenzimetro di bassa frequenza.|Moltiplicano la frequenza di un segnale HF per visualizzarla con un frequenzimetro di bassa frequenza.|Convertono l'uscita di un flip-flop JK in RS.|1|Il prescaler è un divisore di frequenza posto prima del contatore: abbassa la frequenza di un fattore noto (10, 100...) in modo che un frequenzimetro lento possa misurarla.",
+"La tensione di soglia per un diodo al silicio vale approssimativamente:|2 V|0,6 V|0,2 V|0,02 V|1|Un diodo al silicio comincia a condurre a circa 0,6-0,7 V in polarizzazione diretta.",
+"Nei trasmettitori FM per aumentare la deviazione di frequenza prodotta dal modulatore che circuiti si utilizzano?|Modulatori bilanciati|Moltiplicatori di frequenza|Amplificatori lineari|Filtri passa banda|1|Moltiplicando la frequenza di un fattore n si moltiplica per n anche la deviazione: si usano moltiplicatori di frequenza.",
+"Dove deve essere installato un filtro per ridurre l'emissione di armoniche?|All'ingresso del microfono|Fra il trasmettitore e l'antenna|Nell'alimentatore del trasmettitore|Fra il ricevitore e il trasmettitore|1|Il filtro passa basso va posto sull'uscita del trasmettitore, prima dell'antenna, per attenuare le armoniche prima che vengano irradiate.",
+"Da quante giunzioni è formato un transistor bipolare?|Una|Due|Tre|Dipende dal tipo di semiconduttore usato|1|Il bipolare (NPN o PNP) ha due giunzioni PN: base-emettitore e base-collettore.",
+"Quali due fattori determinano la sensibilità di un ricevitore?|La distorsione di intermodulazione e la gamma dinamica.|La larghezza di banda e la figura di rumore.|Il costo e la reperibilità.|La gamma dinamica ed il livello di intermodulazione del terzo ordine.|1|Il rumore termico dipende dalla larghezza di banda, mentre la figura di rumore indica quanto rumore aggiunge il ricevitore: insieme fissano il minimo segnale rivelabile.",
+"Se un singolo stadio amplificatore non è sufficiente per ottenere un guadagno molto elevato cosa si fa?|Si collegano più stadi in cascata|Si utilizza un MOSFET a doppio gate|Si collegano più stadi in parallelo|Si abbassa la tensione di alimentazione|0|Collegando stadi in cascata i guadagni si moltiplicano (in dB si sommano).",
+"Il rivelatore a prodotto si usa per:|demodulare la SSB|demodulare la FM|demodulare la AM|rivelare le emissioni spurie|0|Il rivelatore a prodotto moltiplica il segnale IF per il segnale del BFO e serve a demodulare SSB e CW.",
+"Quale delle seguenti è la descrizione di un condensatore?|Due o più piastre conduttive separate da strati di materiale isolante|Due o più spire di filo metallico avvolte su un supporto|Due o più piastre di materiale isolante separate da strati di materiale conduttivo|Due o più strati di materiale a base di silicio separati da uno strato di materiale isolante|0|Il condensatore è formato da armature conduttive separate da un dielettrico (isolante).",
+"Quale tra i seguenti circuiti non viene usato nei ricevitori AM supereterodina?|BFO|Mixer|AGC|Amplificatore RF|0|Il BFO serve per SSB e CW; in AM la portante è già presente e il rivelatore a diodo basta.",
+"Per far lavorare in classe A un amplificatore a transistor come va scelto il punto di lavoro?|In zona di funzionamento lineare e distante da interdizione e saturazione|In zona di funzionamento lineare ma vicino all'interdizione|In zona di interdizione e sufficientemente lontano dalla zona lineare|In zona di funzionamento lineare ma vicino alla saturazione|0|In classe A il punto di riposo sta al centro della zona lineare, lontano da interdizione e saturazione, così l'onda non viene tagliata.",
+"In un circuito risonante parallelo, alla frequenza di risonanza l'impedenza è:|circa il 70% della massima|minima|massima|pari alla sola reattanza induttiva|2|Alla risonanza il circuito parallelo ha impedenza massima (resistiva).",
+"Il tipo di transistor più adatto a lavorare nella gamma delle microonde è il:|bipolare|MESFET|FET|MOSFET|1|Il MESFET (arseniuro di gallio) ha elevata mobilità e basse capacità: è il più adatto alle microonde.",
+"Un transistor NPN per condurre corrente tra collettore ed emettitore deve:|avere una tensione tra base ed emettitore nulla|avere una tensione tra base ed emettitore maggiore di 0,6 V|avere l'emettitore collegato ad una tensione positiva|avere una tensione tra base ed emettitore minore di 0,6 V|1|Il transistor al silicio conduce quando la giunzione base-emettitore è polarizzata direttamente con tensione superiore a circa 0,6 V.",
+"In un trasmettitore radiotelefonico a banda laterale unica quale circuito riceve i segnali dall'oscillatore che genera la portante e dall'amplificatore audio e li invia al filtro?|L'amplificatore IF|Il rivelatore|Il modulatore bilanciato|Il mixer|2|Il modulatore bilanciato riceve portante e audio, sopprime la portante e invia al filtro le due bande laterali.",
+"Quale stadio di un trasmettitore può cambiare un segnale di ingresso a 5,3 MHz in un segnale a 14,3 MHz?|il BFO|Un traslatore|Il mixer|Il moltiplicatore|2|Il mixer miscela il segnale con un oscillatore a 9 MHz: 5,3 + 9 = 14,3 MHz. Un moltiplicatore non potrebbe, perché 14,3/5,3 non è un numero intero.",
+"Per discriminare correttamente tra segnali di frequenze diverse ma molto vicine un ricevitore deve:|essere sensibile|avere un'elevata potenza d'uscita|essere selettivo|avere una bassa cifra di rumore|2|È la selettività a separare i segnali su frequenze vicine.",
+"Che cosa definisce la figura di rumore di un ricevitore?|L'intensità relativa di un segnale ricevuto scostato di 3 kHz dalla frequenza sintonizzata.|Il livello di rumore generato nello stadio di ingresso e negli stadi successivi del ricevitore.|La capacità di un ricevitore di eliminare segnali indesiderati a frequenze prossime a quella da ricevere.|Il livello di rumore che entra nel ricevitore attraverso l'antenna.|1|La figura di rumore indica quanto rumore il ricevitore (primo stadio e successivi) aggiunge al segnale.",
+"Come deve essere la banda passante degli stadi IF di un ricevitore in rapporto alla larghezza di banda del segnale ricevuto?|Deve essere circa quattro volte la larghezza di banda del segnale ricevuto.|Deve essere leggermente più larga della larghezza di banda del segnale ricevuto.|Deve essere circa il doppio della larghezza di banda del segnale ricevuto.|Deve essere circa la metà della larghezza di banda del segnale ricevuto.|1|Per non tagliare il segnale ma neanche far passare disturbi inutili, la banda IF deve essere appena più larga di quella del segnale.",
+"Perché molti ricevitori hanno diversi filtri IF di diversa larghezza di banda selezionabili dall'operatore?|Perché le diverse larghezze di banda aiutano a migliorare la sensibilità del ricevitore|Perché ogni tipo di emissione richiede una determinata larghezza di banda per essere ricevuto correttamente|Perché le diverse larghezze di banda aiutano a migliorare la precisione del S-meter|Perché certe bande di frequenza sono più larghe di altre|1|CW, SSB, AM e FM occupano bande diverse: per ciascuna serve un filtro con la larghezza adatta.",
+"La selettività dello stadio di ingresso di un ricevitore può essere migliorata mediante ...|... l'aggiunta di uno stadio amplificatore a frequenza intermedia.|... l'aggiunta di un preselettore.|... l'aggiunta di uno stadio amplificatore a radiofrequenza.|... l'aggiunta di un filtro di bassa frequenza.|1|Un preselettore (filtro accordato prima dell'ingresso) migliora la selettività dello stadio d'ingresso, riducendo anche immagini e segnali forti fuori banda.",
+"In un filtro passa alto quali frequenze non vengono attenuate?|Quelle minori della frequenza di taglio|Quelle maggiori della frequenza di taglio|Tutte le frequenze|Solo quelle vicine alla frequenza di taglio|1|Il passa alto lascia passare le frequenze maggiori di quella di taglio.",
+"In un circuito risonante un alto valore di Q è sinonimo di:|alta impedenza|alta selettività|alta banda passante|alta potenza|1|Q = f0/B: con Q alto la banda passante è stretta e quindi il circuito è molto selettivo.",
+"In un ricevitore radiotelefonico a banda laterale unica di tipo supereterodina quale circuito riceve i segnali dell'amplificatore RF e dell'oscillatore locale e li invia al filtro IF?|L'amplificatore IF|Il mixer|Il modulatore bilanciato|Il rivelatore|1|Il mixer combina il segnale RF con quello dell'oscillatore locale e produce la frequenza intermedia, che va al filtro IF.",
+"La resistenza equivalente di tre resistori collegati in parallelo del valore è di 8 Ω , 8 Ω , 4 Ω è:|Rp = 2 Ω|Rp = 8 Ω|Rp = 4 Ω|Rp = 6 Ω|0|1/Rp = 1/8 + 1/8 + 1/4 = 0,5 S, quindi Rp = 2 Ω.",
+"Perché si usa il cristallo di quarzo negli oscillatori?|Per la sua capacità di sopportare elevate correnti|Per la sua stabilità di frequenza|Perché non genera armoniche|Per il suo elevato rendimento|1|Il quarzo ha un Q altissimo e una frequenza molto stabile, perciò fissa con precisione la frequenza dell'oscillatore.",
+"Qual è l'impedenza di un altoparlante che necessita di un trasformatore con rapporto spire 24:1 per essere adattato ad un amplificatore con impedenza di 2 kiloohm?|83.3 ohm|3.5 ohm|576 ohm|7.0 ohm|1|Le impedenze stanno nel rapporto del quadrato del rapporto spire: Z = 2000 / 24² = 2000 / 576 ≈ 3,5 Ω.",
+"Quale dei seguenti dispositivi funziona grazie all'effetto piezoelettrico?|Il wattmetro|Il quarzo|L'altoparlante|Il trasformatore|1|Il cristallo di quarzo si deforma se sottoposto a tensione e genera tensione se deformato: effetto piezoelettrico.",
+"Quale grado di selettività è necessario nei circuiti a frequenza intermedia di un ricevitore radioamatoriale per RTTY?|6000 Hz.|300 Hz.|2400 Hz.|100 Hz.|1|L'RTTY occupa poche centinaia di Hz (shift di 170 Hz): serve una selettività di circa 300 Hz.",
+"Quale dei seguenti controlli del ricevitore va usato per correggere il timbro di voce di un segnale ricevuto in SSB quando è troppo grave o troppo acuto?|Il selettore di larghezza di banda|Il clarifier|Il controllo automatico di guadagno|Lo squelch|1|Il clarifier (RIT) sposta di poco la frequenza di ricezione: la voce SSB, se è fuori sintonia, suona troppo grave o troppo acuta.",
+"Un rettificatore a una semionda per quanti gradi di ciascun ciclo è in conduzione?|90 gradi|180 gradi|360 gradi|270 gradi|1|Il rettificatore a semionda conduce per una sola semionda, cioè 180° di ogni ciclo.",
+"Come deve essere l'impedenza di un filtro passa-basso in rapporto all'impedenza della linea di trasmissione in cui è inserito?|Pari al doppio dell'impedenza della linea di trasmissione|Circa la stessa|Più alta|Più bassa|1|Per non creare disadattamento il filtro deve avere impedenza uguale a quella della linea (ad esempio 50 Ω).",
+"Quale tra i seguenti amplificatori non è adatto a lavorare in alta frequenza?|A transistor bipolare ad emettitore comune|A tubi a griglia comune|A MOSFET a gate comune|A transistor bipolare a base comune|0|Nell'emettitore comune la capacità tra collettore e base viene moltiplicata (effetto Miller) e limita il guadagno in alta frequenza. Base o gate comune non soffrono di questo effetto.",
+"In quale dei seguenti modi può essere migliorata la selettività dei circuiti a frequenza intermedia di un ricevitore?|Impiegando filtri ad elevato Q.|Togliendo il controllo automatico di guadagno dallo stadio IF e limitandone l'azione alla sola sezione audio.|Modificando la tensione di alimentazione dell'oscillatore locale.|Sostituendo lo stadio miscelatore a FET con uno stadio miscelatore a transistor.|0|Filtri ad alto Q hanno banda passante stretta e quindi selettività elevata.",
+"In un trasformatore con tensione al primario Vp = 100 V e tensione al secondario Vs = 20 V, quanto vale il rapporto spire n = Np/Ns?|200|5|50|2000|1|n = Np/Ns = Vp/Vs = 100/20 = 5.",
+"Se l'attenuazione di un filtro non è sufficiente cosa si fa per aumentarla?|Si aggiunge una reattanza da 10 Mohm in serie al filtro|Si collegano più filtri identici in serie|Si collegano più filtri identici in parallelo|Si aggiunge un resistore da 10 Mohm in serie al filtro|1|Collegando filtri identici in cascata (serie) le attenuazioni, espresse in dB, si sommano.",
+"Un ricevitore supereterodina a doppia conversione ha la prima IF pari a 10,7 MHz e la seconda IF pari a 455 kHz. Quanto vale la frequenza del secondo oscillatore locale?|10,7 MHz|11,155 MHz|Dipende dall'AGC|Varia a seconda della frequenza su cui si sintonizza il ricevitore|1|Il secondo oscillatore è fisso: differisce dalla prima IF di 455 kHz, quindi 10,7 + 0,455 = 11,155 MHz (oppure 10,245 MHz).",
+"In un circuito risonante che lavori alla sua frequenza di risonanza, quale delle seguenti affermazioni è vera?|L'impedenza è puramente reattiva|La reattanza capacitiva è nulla|La reattanza induttiva e quella capacitiva sono uguali e pertanto si annullano a vicenda|La reattanza capacitiva è molto maggiore di quella induttiva|2|Alla risonanza XL = XC in valore assoluto: nel circuito serie le due reattanze si annullano a vicenda e l'impedenza è puramente resistiva.",
+"Quale delle seguenti corrisponde alla descrizione di un condensatore variabile?|Due gruppi di piastre isolanti, separate da un conduttore, la cui distanza può essere variata|Un gruppo di condensatori collegati in serie-parallelo|Due gruppi di piastre conduttive, separate da un isolante, la cui superficie affacciata può essere variata|Un insieme di condensatori fissi il cui collegamento può essere variato|2|Nel condensatore variabile un gruppo di lamine (rotore) ruota rispetto all'altro (statore): cambia la superficie affacciata, quindi la capacità.",
+"In un circuito risonante alla frequenza di 100 kHz con larghezza di banda 2 kHz, il fattore Q vale:|200|5000|50|100|2|Q = f0 / B = 100 kHz / 2 kHz = 50.",
+"L'altoparlante converte:|onde sonore in onde elettromagnetiche|segnali elettrici in onde sonore|onde elettromagnetiche in onde sonore|onde sonore in segnali elettrici|1|L'altoparlante trasforma il segnale elettrico in onde sonore.",
+"Se f1 e f2 sono le frequenze che delimitano la banda di un filtro a reiezione di banda, quale dovrebbe essere il suo comportamento teorico:|Attenuare le frequenze inferiori a f1.|Attenuare le frequenze comprese tra f1 e f2.|Attenuare le frequenze esterne alla banda f1-f2.|Attenuare le frequenze superiori a f2.|1|Il filtro a reiezione di banda attenua le frequenze comprese tra f1 e f2.",
+"In un trasformatore con rapporto spire n = Np / Ns = 100 e tensione al primario Vp = 1 kV, quanto vale la tensione al secondario Vs?|Vs = 1000 V|Vs = 10 V|Vs = 100 V|Vs = 100 kV|1|Vs = Vp / n = 1000 V / 100 = 10 V.",
+"Per che tipo di modulazione si usa il modulatore bilanciato ad anello?|PM|SSB|FM|AM|1|Il modulatore bilanciato elimina la portante e fornisce due bande laterali: è il primo passo della generazione del segnale SSB.",
+"Se viene inserito un nucleo di ferro in una bobina che cosa accade all'induttanza?|Diminuisce|Aumenta|Si annulla|Rimane la stessa|1|Il nucleo ferromagnetico ha permeabilità molto maggiore dell'aria: l'induttanza aumenta.",
+"Quale dei seguenti accorgimenti può essere usato per ridurre il passaggio di corrente a radiofrequenza nello schermo di un cavo audio?|Applicare un preamplificatore al segnale audio|Applicare un nucleo di ferrite sul cavo|Applicare un filtro passa-basso|Applicare un filtro passa-banda|1|Avvolgendo il cavo su un nucleo di ferrite si crea un'impedenza serie alla RF (balun/choke) che ne limita la corrente sullo schermo.",
+"Se in un ricevitore CW eterodina a singola conversione la frequenza intermedia è di 9 MHz e se si vuole ascoltare in cuffia il segnale CW mediante un tono ad 1 kHz, quanto deve valere la frequenza di oscillazione del BFO?|455 kHz|9,001 MHz|9,0007 MHz|10,701 MHz|1|Per ottenere una nota a 1 kHz il BFO deve differire dalla IF di 1 kHz: 9 MHz + 1 kHz = 9,001 MHz.",
+"Quale componente può essere usato per amplificare piccoli segnali ma necessita di tensioni elevate per funzionare?|Una batteria.|Il transistor.|La valvola termoionica.|Il condensatore elettrolitico.|2|Le valvole amplificano ma lavorano con tensioni anodiche di centinaia di volt.",
+"La costante di tempo di un circuito RC è il tempo:|impiegato dal condensatore per caricarsi fino al 100% della tensione di alimentazione|impiegato dal condensatore per caricarsi fino al 63% della tensione di alimentazione|impiegato dal resistore per raggiungere una temperatura costante|impiegato dal condensatore per caricarsi fino al 50% della tensione di alimentazione|1|Dopo un tempo τ = R·C il condensatore raggiunge il 63,2% della tensione di alimentazione (non arriva mai al 100% in tempo finito).",
+"Quale circuito utilizza un limitatore e un discriminatore di frequenza per produrre un segnale udibile?|Un oscillatore a frequenza variabile|Un ricevitore FM|Un ricevitore supereterodina|Un ricevitore a doppia conversione|1|Il ricevitore FM usa un limitatore (elimina le variazioni di ampiezza) seguito da un discriminatore (trasforma frequenza in tensione).",
+"La costante di tempo T di un circuito costituito da una resistenza R ed un condensatore C vale:|T = R x C|T = R - C|1/T = 1/R + 1/C|T = R / C|0|Costante di tempo del circuito RC: τ = R × C.",
+"Come viene polarizzato tipicamente il diodo Zener?|Inversamente|Con circa -3,3V|Direttamente|Con più di 0,7V|0|Lo Zener funziona come stabilizzatore in polarizzazione inversa, nella zona di breakdown.",
+"Che cosa rappresenta la tensione inversa di picco caratteristica di un rettificatore?|La tensione inversa massima che il rettificatore può sopportare senza subire danni|3,73 volte la tensione alternata applicata al rettificatore|La massima tensione diretta del rettificatore|0.707 volte la tensione alternata applicabile al rettificatore|0|La PIV (peak inverse voltage) è la massima tensione inversa che il diodo può sopportare senza andare in breakdown.",
+"Per quale scopo vengono impiegati i ripetitori?|Per impiegare meno potenza, e consumare meno, utilizzando la maggior potenza del ripetitore|Per comunicare con stazioni appartenenti a servizi diversi da quello d'amatore|Per facilitare i collegamenti alle stazioni mobili ed a quelle di bassa potenza estendendone la portata|Per trasmettere segnali ed osservarne la propagazione|2|Il ripetitore, in posizione elevata, ritrasmette i segnali e amplia la portata di mobili e portatili.",
+"Per un quarzo, quale delle seguenti affermazioni è vera?|La frequenza di oscillazione varia fortemente|Il fattore Q è molto basso|Il fattore Q è molto alto|La potenza dissipata per effetto Joule è molto elevata|2|Il cristallo di quarzo ha un fattore di merito altissimo (decine di migliaia): per questo è molto stabile e selettivo.",
+"Parlando di cifra di rumore di un ricevitore quale è il valore migliore:|15 dB.|-128 dBm.|5 dB.|9 dB.|2|Più è bassa la cifra di rumore, meglio è. Tra i valori in dB il minore è 5 dB (i -128 dBm sono un livello di potenza, non una cifra di rumore).",
+"Un diodo Zener può essere usato come:|amplificatore in classe A|stabilizzatore di tensione in un alimentatore|elemento attivo di un modulatore|reattanza induttiva in un circuito risonante|1|Lo Zener mantiene ai suoi capi una tensione costante e si usa come stabilizzatore di tensione.",
+"Nel pentodo cosa si usa per riscaldare il catodo?|Il filamento|Lo schermo|La griglia|Il soppressore|0|Il filamento riscalda il catodo per l'emissione termoionica.",
+"Nei trasmettitori SSB perché è presente un filtro passa banda all'uscita del modulatore bilanciato?|Per ridurre la portante|Per eliminare una delle due bande laterali|Per aumentare la deviazione di frequenza|Per aumentare la sensibilità|1|Il modulatore bilanciato elimina la portante ma lascia due bande laterali; il filtro ne tiene una sola.",
+"Cosa significa la sigla CMOS?|Common Mode Oscillating System.|Complementary Metal Oxide Semiconductor.|Complementary Metal Oxide Substrate.|Complementary Mica Oxide Silicon.|1|CMOS = Complementary Metal Oxide Semiconductor: logica con MOSFET complementari (N e P), a bassissimo consumo.",
+"In un filtro passa alto con frequenza di taglio pari a 500 MHz quali frequenze vengono attenuate?|Quelle tra 600 MHz ed 1 GHz|Quelle inferiori a 500 MHz|Quelle tra 500 e 600 MHz|Quelle superiori a 500 MHz|1|Il passa alto attenua le frequenze inferiori a quella di taglio.",
+"In un tipico trasmettitore radiotelefonico a banda laterale unica quale circuito si trova tra il modulatore bilanciato e il mixer?|L'amplificatore RF|Un filtro|L'oscillatore che genera la portante|L'amplificatore IF|1|Dopo il modulatore bilanciato c'è il filtro che elimina una banda laterale; poi il mixer porta il segnale alla frequenza finale.",
+"Quale è la formula che permette di calcolare la costante di tempo in un circuito LR?|T = L / R|T = L - R|T = L x R 2|T = L x R|0|Nel circuito LR la costante di tempo è τ = L / R.",
+"Come deve essere la resistenza in un circuito risonante parallelo per avere la massima selettività?|Deve essere la massima possibile|Deve essere media|Deve essere la minima possibile|La selettività non dipende dalla resistenza|0|Nel parallelo Q = Rp / X: più la resistenza di parallelo è alta, minori sono le perdite, più alto è il Q e più stretta la banda.",
+"In un trasformatore con corrente al primario Ip = 1 A e corrente al secondario Is = 20 A, quanto vale il rapporto spire n = Np/Ns?|10|20|50|2|1|Le correnti stanno nel rapporto inverso delle spire: n = Np/Ns = Is/Ip = 20/1 = 20.",
+"La tecnica della preenfasi è utilizzata nei:|trasmettitori AM|trasmettitori FM|trasmettitori CW|trasmettitori SSB|1|Nei trasmettitori FM si esaltano le alte frequenze audio prima della modulazione (preenfasi); il ricevitore le riporta al livello corretto con la de-enfasi, riducendo il rumore.",
+"Un circuito risonante serie ha reattanza induttiva X = 10 kohm e resistenza R = 10 ohm ha un fattore Q pari a:|10000|1000|100000|0,1|1|Q = X / R = 10 000 / 10 = 1000.",
+"La selettività di un circuito risonante è definita come:|rapporto larghezza di banda / frequenza di risonanza|prodotto tra frequenza di risonanza e impedenza|rapporto frequenza di risonanza / larghezza di banda|prodotto frequenza di risonanza per larghezza di banda|2|La selettività corrisponde al fattore di merito Q = f0 / B: più è alto, più il circuito è selettivo.",
+"A cosa serve l'elettrodo soppressore del pentodo?|Ad eliminare disturbi a radiofrequenza|A diminuire la dissipazione anodica|A sopprimere la corrente inversa da placca a schermo|A sopprimere la capacità tra griglia e schermo|2|Il soppressore, collegato al catodo, respinge gli elettroni secondari emessi dalla placca impedendo che raggiungano lo schermo.",
+"Che cosa accade al segnale di un trasmettitore radiotelefonico a banda laterale unica o a doppia banda laterale quando la profondità di modulazione supera il 100%?|Il segnale occupa una larghezza di banda inferiore ma si ha una perdita delle frequenze più alte del segnale audio|Il segnale audio diventa più intenso, senza altri effetti|Il segnale diventa distorto ed occupa una maggiore larghezza di banda|Si ottiene una più alta fedeltà e si migliora il rapporto segnale/disturbo|2|La sovramodulazione (splatter) distorce il segnale e genera componenti fuori dal canale: la banda occupata aumenta.",
+"Se due circuiti risonanti mutuamente accoppiati si allontanano, il coefficiente di accoppiamento:|diminuisce|aumenta|resta costante|raddoppia|0|Allontanando le bobine diminuisce il flusso concatenato e quindi anche il coefficiente di accoppiamento.",
+"In un trasformatore con tensione al primario Vp = 30 V e tensione al secondario Vs = 5 V, quanto vale il rapporto spire?|220|6|35|150|1|Rapporto spire = Vp/Vs = 30/5 = 6.",
+"Aumentando la resistenza in un circuito risonante serie:|il fattore di qualità Q aumenta|il fattore di qualità Q diminuisce|la frequenza di risonanza varia|la reattanza induttiva si annulla|1|Nel serie Q = X/R: aumentando R il fattore di merito diminuisce e la banda si allarga. La frequenza di risonanza dipende solo da L e C.",
+"Quale tra i seguenti circuiti è usato per demodulare la FM?|BFO|Discriminatore|Supereterodina|Rivelatore d'inviluppo|1|Il discriminatore trasforma le variazioni di frequenza in tensione audio. Il rivelatore d'inviluppo è per AM, il BFO per SSB e CW.",
+"Quale livello logico assume un ingresso TTL se viene lasciato aperto?|Livello basso.|Il dispositivo TTL non è in grado di assumere un livello stabile.|Livello alto.|L'ingresso aperto in un dispositivo TTL non è considerato.|2|In un TTL un ingresso lasciato scollegato si porta spontaneamente a livello alto (anche se è buona regola collegarlo). Nei CMOS invece sarebbe indefinito.",
+"Nei ricevitori SSB con un'ultima IF di 455 kHz la frequenza del BFO quale è?|910 kHz|455,7 kHz|455 kHz|10,7 MHz|1|Il BFO sta vicinissimo alla IF (qui 455 kHz), con un piccolo scarto (ad esempio 455,7 kHz) per ripristinare la portante: la differenza dà il tono voce.",
+"Quale circuito combina il segnale di uscita dell'amplificatore IF con quello del BFO per produrre un segnale udibile?|L'alimentatore|Il VFO|Il rivelatore|L'AGC|2|Il rivelatore a prodotto miscela IF e BFO e fornisce il segnale audio.",
+"L'impedenza d'ingresso di un amplificatore a catodo comune è:|media|dipendente dall'impedenza di carico|elevata|bassa|2|La griglia di un tubo è polarizzata negativamente e non assorbe corrente: l'impedenza d'ingresso è elevata.",
+"Quale tra i seguenti componenti è più adatto a lavorare ad altissime frequenze?|MESFET|FET|Transistor bipolare|Tetrodo|0|Il MESFET ha elevata velocità di commutazione e basse capacità, adatto a microonde e altissime frequenze.",
+"Qual è il principale vantaggio dei circuito CMOS rispetto agli altri circuiti logici?|Maggiore facilità di progettazione dei circuiti.|Dimensione ridotte.|Consumo ridotto.|Costo inferiore.|2|La logica CMOS assorbe corrente quasi solo durante le commutazioni: ha consumi molto bassi.",
+"Qual è il valore di tensione del livello basso in un dispositivo TTL alimentato a 5 V?|Da -2,0 V a -5,5 V.|Da 2,0 V a 5,5 V.|Da 0,0 V a 0,8 V.|Da -0,8 V a 0,4 V.|2|Nei TTL il livello basso è tra 0 e 0,8 V; il livello alto da 2,0 a 5,5 V.",
+"Che cosa è il LED?|Un diodo usato in polarizzazione inversa|Un diodo a vuoto|Un diodo che emette luce|Un transistore adatto ad amplificare microonde|2|LED = Light Emitting Diode: un diodo che emette luce quando è percorso da corrente in polarizzazione diretta.",
+"Un ricevitore è sintonizzato a 200 MHz ed ha una frequenza intermedia di 9 MHz. Quale, tra le seguenti, è la frequenza immagine che può disturbare il ricevitore?|9 MHz|218 MHz|409 MHz|18 MHz|1|L'immagine dista 2 × IF dal segnale: 200 + 18 = 218 MHz (se l'oscillatore è a 209 MHz).",
+"Quale tra i seguenti amplificatori di potenza garantisce alto rendimento e bassa distorsione?|Amplificatore in classe A|Amplificatore push-pull|Amplificatore a MESFET|Amplificatore in classe C|1|Il push-pull (classe B/AB) unisce buon rendimento e bassa distorsione, perché cancella le armoniche pari.",
+"La cifra di rumore in un ricevitore dipende:|Dalle scariche atmosferiche.|Dal tipo di antenna.|Dall'agitazione termica dei componenti.|Dalla rumorosità dell'altoparlante.|2|Il rumore interno ha origine soprattutto dall'agitazione termica dei portatori di carica nei componenti.",
+"Per polarizzare direttamente un diodo al silicio si collega:|una tensione positiva all'anodo|una tensione negativa all'anodo|una tensione positiva e maggiore di 0,6 V all'anodo|una tensione positiva al catodo|0|Polarizzazione diretta significa anodo positivo rispetto al catodo (il diodo conduce poi oltre circa 0,6 V).",
+"Una giunzione PN è:|un diodo|un MOSFET|un transistor PNP|un transistor NPN|0|Una sola giunzione tra semiconduttore P e N costituisce un diodo.",
+"Quali sono i carichi accettati da un tubo termoionico?|Possono essere costituiti solo da impedenze.|Possono essere una resistenza, un condensatore oppure un trasformatore.|Possono essere costituiti solo da resistenze.|Possono essere costituiti solo da condensatori.|1|Il carico anodico di un tubo può essere una resistenza, un circuito accordato o un trasformatore; non è limitato a un solo tipo.",
+"Un diodo Zener quanti elettrodi ha?|Uno|Due|Tre|Due più altri due relativi al filamento|1|Il diodo Zener, come ogni diodo a semiconduttore, ha due elettrodi: anodo e catodo.",
+"Quale è la costante di tempo di un circuito composto da due condensatori da 220 µF e due resistenze da 1 megaohm tutti collegati in parallelo?|101,1 secondi.|220 secondi.|47 secondi.|103 secondi.|1|Due capacità in parallelo si sommano (440 µF) e due resistenze in parallelo si dimezzano (0,5 MΩ): τ = 0,5·10⁶ × 440·10⁻⁶ = 220 s.",
+"Un circuito risonante con fattore Q = 500 e banda passante B = 2 kHz ha una frequenza di risonanza pari a:|1 kHz|1 MHz|250 kHz|100 kHz|1|f0 = Q × B = 500 × 2 kHz = 1000 kHz = 1 MHz.",
+"In un ricevitore con frequenza IF di 455 kHz, se si riceve un segnale di frequenza fp = 4 MHz, quanto vale la frequenza immagine?|455 kHz|4,91 MHz|4,455 MHz|900 kHz|1|L'immagine è a 2 × IF dal segnale: 4 + 2×0,455 = 4,91 MHz.",
+"Quale tra i seguenti condensatori, collegato in serie ad una resistenza di 10 megaohm, si carica in minor tempo: 1 µF, 1 mF, 10 pF o 100 pF?|1 µF|10 pF|100 pF|1 mF|1|Il tempo di carica dipende da τ = R·C: è minimo con la capacità più piccola, 10 pF.",
+"In un trasmettitore il primo stadio BF per amplificare il segnale microfonico funziona in classe:|Classe D.|Classe A.|Classe B.|Classe C.|1|Il segnale microfonico, debole, va amplificato con la massima linearità: si usa la classe A.",
+"Tra i seguenti circuiti, quale è usato solitamente come raddrizzatore ad onda intera?|Inseguitore catodico|Ponte di Wheatstone|Ponte di diodi|Circuito risonante serie|2|Il ponte di diodi (ponte di Graetz) raddrizza entrambe le semionde. Il ponte di Wheatstone è un circuito di misura.",
+"Negli alimentatori si inseriscono dei condensatori in parallelo all'uscita del raddrizzatore per:|per abbassare la tensione d'uscita|per alzare la tensione d'uscita|per filtrare la tensione e quindi ridurne l'ondulazione|aumentare la corrente di picco erogata dall'alimentatore|2|Il condensatore di filtro livella la tensione pulsante riducendo l'ondulazione (ripple).",
+"Un ricevitore adeguato a ricevere in bande affollate di segnali deve avere:|elevata selettività|elevata potenza|elevata sensibilità|scarsa selettività|0|In bande affollate serve separare segnali vicini: serve elevata selettività.",
+"La larghezza di banda d'un filtro di IF per un ricevitore CW di solito è pari a:|12 kHz|2,3 kHz|250 Hz|6 kHz|2|La telegrafia occupa pochissima banda: un filtro IF di circa 250-500 Hz è tipico.",
+"Volendo trasferire la frequenza d'un segnale da 3500 kHz a 455 kHz, qual è la frequenza dell'oscillatore locale da inserire nel mixer assieme al segnale?|910 kHz|3955 kHz|3500 kHz|455 kHz|1|La frequenza dell'oscillatore locale è il segnale più la IF: 3500 + 455 = 3955 kHz (o 3045 kHz).",
+"Un circuito formato da un resistore da 20 kiloohm ed un condensatore da 3 µF collegati in serie ha una costante tempo di:|0,3 ms|60 ms|30 ms|300 ms|1|τ = R × C = 20 000 Ω × 3·10⁻⁶ F = 0,06 s = 60 ms.",
+"Come è chiamato brevemente il circuito che provoca il passaggio automatico dalla ricezione alla trasmissione quando l'operatore parla nel microfono?|VFO|VOX|VXO|VCO|1|VOX (Voice Operated eXchange) commuta in trasmissione quando rileva la voce nel microfono.",
+"Per far funzionare un tubo a vuoto si deve:|riscaldare l'anodo|raffreddare il catodo|riscaldare il catodo|riscaldare il tubo stesso|2|Il catodo va riscaldato (dal filamento) per emettere elettroni per effetto termoionico.",
+"A cosa serve la griglia?|A bloccare lo scorrimento di corrente|A diminuire la capacità parassita tra griglia e catodo|A controllare la capacità tra anodo e catodo|A controllare la corrente che scorre tra anodo a catodo|3|La griglia di controllo regola, con la sua tensione, la corrente elettronica fra catodo e anodo.",
+"Qual è la particolarità dei diodi hot-carrier?|Essere molto rumorosi|Avere una giunzione tra germanio e silicio|Avere una giunzione tra metallo e semiconduttore|Avere una capacità variabile controllabile tramite la tensione di polarizzazione|2|I diodi hot-carrier (Schottky) hanno una giunzione metallo-semiconduttore: soglia bassa e velocità elevata, adatti all'alta frequenza.",
+"Un circuito formato da un induttore da 3,3 mH collegato in serie ad una resistenza da 1000 ohm ha una costante tempo pari a:|330 µs|3,3 ms|3,3 µs|3,3 s|2|τ = L / R = 3,3·10⁻³ H / 1000 Ω = 3,3·10⁻⁶ s = 3,3 µs.",
+"Se in un mixer entrano due segnali rispettivamente di frequenza 10 MHz e 25 MHz, quali potranno essere le frequenze d'uscita?|10 o 20 MHz|15 o 35 MHz|25 o 40 MHz|15 o 25 MHz|1|Il mixer produce somma e differenza: 25 - 10 = 15 MHz e 25 + 10 = 35 MHz.",
+"La capacità equivalente di tre condensatori collegati in serie del valore di 2mF, 4mF, 8mF è:|Cs = 6 mF|Cs < 2 mF|Cs = 14 mF|Cs = 2,5 mF|1|In serie 1/Cs = 1/2 + 1/4 + 1/8 = 0,875, quindi Cs ≈ 1,14 mF: minore del condensatore più piccolo (2 mF).",
+"Di quanto deve risultare attenuata la portante rispetto alla potenza di picco erogata da un buon trasmettitore a banda laterale unica?|Non oltre 20 dB|Almeno 40 dB|Almeno 60 dB|Non oltre 30 dB|1|In SSB la portante deve essere soppressa di almeno 40 dB rispetto alla potenza di picco.",
+"Un induttore da 3,3 µH collegato in serie ad un resistore da 2 kiloohm produce una costante di tempo di:|16,5 µs|1,65 ns|1,65 µs|6,6 ms|1|τ = L / R = 3,3·10⁻⁶ / 2000 = 1,65·10⁻⁹ s = 1,65 ns.",
+"Quali sono le caratteristiche principali degli amplificatori push-pull?|Alto rendimento e bassa distorsione|Rendimento medio ed alta distorsione|Elevata frequenza di taglio|Alta dissipazione anodica|0|Nel push-pull due dispositivi lavorano a turno sulle semionde: buon rendimento e, grazie alla cancellazione delle armoniche pari, bassa distorsione.",
+"Quale stadio di un trasmettitore VHF a modulazione di frequenza seleziona ed amplifica una armonica del segnale modulato per produrre la frequenza di trasmissione desiderata?|Il moltiplicatore|La rete di preenfasi|Il modulatore a reattanza|Il mixer|0|Il moltiplicatore di frequenza seleziona un'armonica (ad esempio la 12ª) e ne moltiplica frequenza e deviazione.",
+"Che componente si usa di solito per modificare la frequenza di un oscillatore a frequenza variabile?|Un diodo varactor|Un diodo varicap|Un MESFET a doppio gate|Una resistenza variabile|1|Il diodo varicap (varactor) cambia capacità al variare della tensione inversa e accorda l'oscillatore. Tra le risposte è quella indicata come soluzione.",
+"Aumentando la resistenza in un circuito RLC risonante parallelo:|la reattanza induttiva si annulla|il fattore di qualità Q aumenta|la frequenza di risonanza varia|il fattore di qualità Q diminuisce|1|Nel circuito parallelo Q = R / X: aumentando la resistenza di parallelo le perdite diminuiscono e il fattore di merito aumenta.",
+"Il microfono converte:|onde elettromagnetiche in onde sonore|onde sonore in segnali elettrici|onde sonore in calore|segnali elettrici in onde sonore|1|Il microfono trasforma le onde sonore in segnali elettrici.",
+"Come si collega la resistenza cosiddetta 'bleeder' negli alimentatori?|In parallelo all'uscita|In parallelo alla bobina di filtro|In parallelo all'ingresso|Tra il primario e il secondario del trasformatore|0|La resistenza bleeder va in parallelo all'uscita (ai condensatori di filtro) per scaricarli allo spegnimento.",
+"Il pentodo, oltre ai due elettrodi del filamento, quanti elettrodi ha?|Cinque|Due|Quattro|Tre|0|Catodo, tre griglie (controllo, schermo, soppressore) e anodo: cinque elettrodi oltre al filamento.",
+"Un circuito risonante con fattore Q = 100 e banda passante B = 1 kHz, che frequenza di risonanza ha?|100 kHz|1 kHz|10 Hz|100 Hz|0|f0 = Q × B = 100 × 1 kHz = 100 kHz.",
+"Quali vantaggi presenta il push-pull in classe A per B.F.?|La cancellazione delle armoniche pari.|La cancellazione delle armoniche dispari.|Un altissimo rendimento.|La cancellazione della terza armonica.|0|Nel push-pull le componenti pari delle due metà si compensano nel trasformatore d'uscita: le armoniche pari vengono cancellate.",
+"In un filtro elimina banda con frequenza di taglio superiore fs = 100 MHz e frequenza di taglio inferiore fi = 50 MHz, quale tra le seguenti frequenze viene attenuata?|f = 70 MHz|f = 108 MHz|f = 120 MHz|f = 40 MHz|0|Il filtro attenua le frequenze comprese tra 50 e 100 MHz: l'unica compresa è 70 MHz.",
+"In che tipo di ricevitori si usa la de-enfasi?|Ricevitori FM|Ricevitori AM|Ricevitori CW|Ricevitori SSB|0|La de-enfasi compensa la preenfasi del trasmettitore FM e riduce il rumore sulle alte frequenze audio.",
+"Cosa si intende per gamma dinamica di un ricevitore?|Il rapporto fra l'intensità del minimo segnale intelligibile e l'intensità del massimo segnale tollerabile in ingresso.|La differenza in kHz fra la minima e la massima frequenza sintonizzabile.|La massima potenza di uscita audio indistorta, riferita a 1 mW.|La differenza fra la più bassa e a più alta frequenza ricevibili senza muovere la manopola di sintonia.|0|La gamma dinamica è l'intervallo (in dB) fra il segnale più debole rivelabile e il più forte che il ricevitore sopporta senza distorsione.",
+"In un circuito RC quale è il tempo necessario per caricare il condensatore al 63,2% della tensione di alimentazione?|E' pari al doppio della costante di tempo.|E' pari alla costante di tempo.|E' pari all'inverso della costante di tempo.|E' pari alla metà della costante di tempo.|1|Per t = τ = R·C la tensione sul condensatore vale 1 - e⁻¹ ≈ 63,2% del valore finale.",
+"Quale stadio di un ricevitore mescola un segnale di ingresso a 14,25 MHz con un segnale interno a 13,795 MHz per ottenere un segnale a 455 kHz?|Il moltiplicatore|Il mixer|Il VFO|Il BFO|1|Il mixer, miscelando segnale e oscillatore locale, fornisce la differenza: 14,25 - 13,795 = 0,455 MHz.",
+"In un ricevitore per CW con IF = 9 MHz quale può essere la frequenza del BFO?|9 MHz|9,0007 MHz|455 kHz|700 Hz|1|Il BFO differisce dalla IF di qualche centinaio di Hz (qui 700 Hz) per produrre il tono udibile: 9,0007 MHz.",
+"Quanto tempo impiega un condensatore da 0,01 µF inizialmente carico a 20 V per scaricarsi fino a 0,37 V su una resistenza da 2 megaohm?|0,02 secondi.|0,08 secondi.|1350 secondi.|450 secondi.|1|τ = 2·10⁶ × 10⁻⁸ = 0,02 s. 0,37/20 ≈ 1,8% ≈ e⁻⁴: servono 4τ = 0,08 s.",
+"Quale delle seguenti è la descrizione dell'offset di un ripetitore?|La massima deviazione ammessa per il segnale d'ingresso del ripetitore|La differenza fra la frequenza di trasmissione e quella di ricezione del ripetitore|La distanza fra l'antenna ricevente e l'antenna trasmittente del ripetitore|Il ritardo con cui il ripetitore passa in stand-by|1|L'offset (shift) è la differenza tra la frequenza di ingresso e quella di uscita del ripetitore.",
+"Il circuito raddrizzatore di un alimentatore è formato da:|transistor|diodi|trasformatore e fusibile|condensatori|1|I diodi lasciano passare la corrente in un solo verso e costituiscono il raddrizzatore.",
+"La placca è anche detta:|griglia|anodo|schermo|catodo|1|La placca (o piastra) del tubo è l'anodo.",
+"Quale delle seguenti liste di tipi di emissione è in ordine crescente di larghezza di banda?|CW, telefonia SSB, RTTY, telefonia FM|CW, telefonia FM, RTTY, telefonia SSB|CW, RTTY, telefonia SSB, telefonia FM|RTTY, CW, telefonia SSB, telefonia FM|2|In ordine crescente: CW (circa 150-500 Hz), RTTY (circa 300-500 Hz), SSB (2,4-3 kHz), FM (10-16 kHz).",
+"Quale caduta di tensione si ha in un normale diodo al silicio?|0,2V.|1,7V.|0,7V.|3,5V.|2|Un diodo al silicio in conduzione ha una caduta di circa 0,6-0,7 V.",
+"Quale circuito trova applicazione in tutti i tipi di ricevitori?|Il BFO|L'amplificatore RF|Il rivelatore|Il filtro audio|2|Qualunque ricevitore deve demodulare il segnale: il rivelatore è sempre presente (di tipo diverso).",
+"La larghezza di banda d'un filtro di IF per un ricevitore SSB deve essere circa di:|5 -- MHz|10 -- 20 kHz|2 -- 3 kHz|100 -- 500 Hz|2|Il segnale SSB occupa circa 2-3 kHz.",
+"Quante griglie ha il pentodo?|Una.|Due.|Tre.|Cinque.|2|Il pentodo ha tre griglie: controllo, schermo e soppressore.",
+"Qual è la forma d'onda in uscita ad un rettificatore a doppia semionda connesso ad un carico resistivo?|Una serie di impulsi a frequenza doppia della frequenza di alimentazione|Una serie di impulsi alla stessa frequenza di alimentazione|Un'onda sinusoidale a frequenza pari alla metà di quella di alimentazione|Una tensione continua|0|Entrambe le semionde diventano positive: gli impulsi sono due per ciclo, cioè a frequenza doppia di quella di rete (100 Hz con 50 Hz).",
+"Quale è la costante di tempo di un circuito composto da un condensatore da 220 µF in serie con una resistenza da 470 kiloohm?|220 secondi.|47 secondi.|103,4 secondi.|80 secondi.|2|τ = R × C = 470 000 × 220·10⁻⁶ = 103,4 s.",
+"Un filtro passa basso con frequenza di taglio pari a 20 MHz, quale delle seguenti frequenze attenua?|30 MHz|10 MHz|12 MHz|30 kHz|0|Il passa basso attenua le frequenze superiori a quella di taglio: tra le risposte solo 30 MHz.",
+"Gli amplificatori compensati sono:|Quelli che hanno una banda entro 3 dB.|Quelli utilizzati nella televisione.|Quelli impiegati nei ricetrasmettitori per ponte radio FM a banda stretta.|Quelli a banda stretta.|0|Negli amplificatori compensati la risposta in frequenza è mantenuta piatta, entro 3 dB, sulla banda utile.",
+"Quale tra i seguenti dispositivi non si utilizza per amplificare segnali?|FET|diodo|transistor|MOS-FET|1|Il diodo è un componente a due terminali che raddrizza o stabilizza, ma non amplifica.",
+"Un filtro passa banda:|non attenua i segnali di frequenza maggiore della sua banda|attenua i segnali di frequenza esterna alla sua banda|non attenua i segnali di frequenza minore della sua banda|attenua i segnali di frequenza compresa nella sua banda|1|Il passa banda lascia passare le frequenze della sua banda e attenua quelle esterne.",
+"Quanti terminali ha il transistor?|Quattro.|Due.|Tre.|Otto.|2|Il transistor ha tre terminali: base, collettore ed emettitore (gate, drain, source nel FET).",
+"A cosa servono i mixer?|A sommare più segnali|Ad aumentare la profondità di modulazione della AM|A convertire la frequenza di un segnale|A modulare un segnale in FM|2|Il mixer miscela due segnali e produce somma e differenza: serve a convertire la frequenza di un segnale.",
+"La frequenza di risonanza di un circuito dipende da:|temperatura dei resistori|induttanza del circuito|induttanza e capacità del circuito|rapporto spire|2|f0 = 1/(2π√(LC)): dipende da L e da C.",
+"Gli amplificatori con minore distorsione sono quelli:|a FET|a valvole|di classe A|di classe C|2|La classe A, con conduzione su tutto il ciclo, è la più lineare.",
+"In un circuito risonante per frequenze maggiori della frequenza di risonanza:|la reattanza capacitiva ed induttiva si annullano a vicenda|la reattanza capacitiva è minore di quella induttiva|la reattanza capacitiva è uguale alla resistenza|la reattanza capacitiva è maggiore di quella induttiva|1|Sopra la risonanza la reattanza induttiva (ωL) cresce e quella capacitiva (1/ωC) diminuisce: XC < XL.",
+"Confrontando due circuiti risonanti, quello più selettivo avrà Banda Passante:|Uguale|Minore|Maggiore|Resistiva|1|Maggiore selettività significa Q più alto e banda passante più stretta.",
+"Cosa si intende per sovraccarico del ricevitore?|Corrente di alimentazione troppo elevata.|Interferenze causate da segnali troppo intensi.|Interferenze causate dall'aver alzato troppo il volume.|Tensione di alimentazione troppo elevata.|1|Il sovraccarico si ha quando un segnale molto forte satura gli stadi d'ingresso, causando intermodulazione, desensibilizzazione e interferenze.",
+"Quale tra i seguenti amplificatori viene tipicamente usato per amplificare segnali in CW?|Amplificatore in classe AB a FET|Amplificatore in classe C|Amplificatore in classe A|Amplificatore push-pull|1|Il segnale CW ha ampiezza costante (on-off) e non richiede linearità: l'amplificatore in classe C, più efficiente, è adatto.",
+"E' presente lo squelch in un circuito trasmittente?|In caso di apparati portatili può essere presente|No, perchè è un circuito di ricezione|Si, fa parte dei circuiti di alimentazione|Solo su apparati per VHF|1|Lo squelch silenzia l'audio del ricevitore in assenza di segnale: è un circuito di ricezione.",
+"Per ottenere un'impedenza di ingresso alta in che configurazione si collegano i transistor bipolari?|In base comune|In emettitore comune|In collettore comune|In configurazione Darlington|2|Il collettore comune (inseguitore di emettitore) ha impedenza d'ingresso elevata e impedenza d'uscita bassa.",
+"Quale separazione si usa di solito tra frequenza di ingresso e frequenza di uscita nei ripetitori per la banda dei 70 cm?|5,0 MHz|1,6 MHz|600 kHz|1,0 MHz|1|Nella banda dei 70 cm i ripetitori usano di solito una separazione (shift) di 1,6 MHz.",
+"Che tipo di filtro viene utilizzato nella sezione IF dei ricevitori per bloccare i segnali al di fuori di una certa gamma di frequenze?|Un filtro passa-alto|Un filtro passa-basso|Un filtro passa-banda|Un filtro di ingresso|2|Il filtro passa banda della IF lascia passare solo la gamma di frequenze del segnale utile.",
+"Un filtro passa banda con frequenza centrale f = 100 MHz e larghezza di banda B = 20 MHz, non attenua un segnale di frequenza pari a:|95 MHz|70 MHz|130 MHz|100 kHz|0|La banda passante va da 90 a 110 MHz: il segnale a 95 MHz è dentro e non viene attenuato.",
+"In un ricevitore, la minima tensione in ingresso che riesce a produrre un segnale d'uscita chiaramente distinguibile dal rumore generato dal ricevitore stesso è detta:|sensibilità|preamplifica|selettività|stabilità di frequenza|0|È la definizione di sensibilità del ricevitore.",
+"Quanti elettrodi ha un pentodo?|Nove|Quattro|Sette|Cinque|2|Due elettrodi del filamento, catodo, tre griglie e anodo: sette elettrodi in tutto.",
+"Che cos'è un amplificatore operazionale?|Un amplificatore differenziale le cui caratteristiche sono determinate da componenti esterni all'amplificatore.|Un amplificatore audio le cui caratteristiche sono determinate da componenti esterni all'amplificatore.|Un programma di calcolo del guadagno di un amplificatore a radiofrequenza.|Un amplificatore usato per aumentare il livello di uscita di una trasmissione radio a modulazione di frequenza.|0|L'amplificatore operazionale è un amplificatore differenziale ad alto guadagno: le sue prestazioni sono fissate dalla rete di reazione esterna (resistenze e condensatori).",
+"Il circuito che mantiene costante il livello d'uscita audio di un ricevitore anche se varia il livello dei segnali in ingresso a RF è detto:|controllo automatico di guadagno|BFO|demodulatore bilanciato|controllo automatico di frequenza|0|Il controllo automatico di guadagno (AGC/CAG) regola il guadagno degli stadi in funzione del livello del segnale, tenendo costante l'uscita.",
+"Quanto tempo impiega un condensatore da 0,01 µF inizialmente carico a 20 V per scaricarsi fino a 7,36 V su una resistenza da 2 megaohm?|0,02 secondi.|450 secondi.|0,08 secondi.|1350 secondi.|0|7,36/20 = 0,368 = e⁻¹: dopo una costante di tempo τ = R·C = 2·10⁶ × 10⁻⁸ = 0,02 s.",
+"Nei ricevitori per riuscire a riprodurre sia segnali deboli, sia segnali forti con lo stesso livello audio d'uscita che circuito si utilizza?|Modulatore bilanciato|Supereterodina|Controllo automatico di guadagno|Mixer a MOSFET|2|Il controllo automatico di guadagno compensa le differenze di intensità tra i segnali, mantenendo costante il volume.",
+"Quanti elettrodi ha un diodo al silicio?|tre|due|quattro|uno|1|Un diodo a semiconduttore ha due elettrodi: anodo e catodo.",
+"Quali sono le caratteristiche dell'amplificatore operazionale ideale?|Impedenza di ingresso bassissima, impedenza di uscita altissima, guadagno infinito, linearità in frequenza.|Impedenza di ingresso bassissima, impedenza di uscita bassissima, guadagno infinito, linearità in frequenza.|Impedenza di ingresso altissima, impedenza di uscita bassissima, guadagno infinito, linearità in frequenza.|Impedenza di ingresso altissima, impedenza di uscita altissima, guadagno infinito, linearità in frequenza.|2|L'operazionale ideale ha impedenza d'ingresso infinita, impedenza d'uscita nulla, guadagno infinito e banda infinita (risposta piatta).",
+"I tubi a vuoto sono particolarmente indicati per:|i ricetrasmettitori portatili|i circuiti ad altissima potenza o ad altissima frequenza|i circuiti a bassa potenza|i circuiti integrati|1|Le valvole reggono potenze e tensioni molto elevate: sono ancora usate negli amplificatori di grande potenza e in alcuni circuiti a frequenze molto alte.",
+"Se ad un circuito risonante parallelo si pone sempre in parallelo una resistenza di alto valore il fattore Q di merito di tale circuito:|Rimane invariato.|Diminuisce.|Si annulla.|Aumenta.|1|Una resistenza aggiuntiva in parallelo riduce la resistenza equivalente di parallelo e quindi diminuisce il fattore Q (anche se di poco, se il valore è alto).",
+"Quale tra i seguenti circuiti si presta ad essere usato come moltiplicatore di frequenza?|Oscillatore di Colpitts|Amplificatore in classe A|Amplificatore in classe C|Oscillatore di Hartley|2|Lo stadio in classe C è non lineare e ricco di armoniche: con un carico accordato sull'armonica desiderata moltiplica la frequenza.",
+"Perché in molti dispositivi MOSFET è incorporato un diodo zener di protezione del gate?|Per proteggere l'isolamento del gate da perforazioni dovute a piccole cariche statiche o a sovratensioni.|Per mantenere la tensione di gate nei limiti imposti dal costruttore evitando surriscaldamenti.|Per produrre una tensione di riferimento per la polarizzazione inversa del gate.|Per proteggere il substrato da tensioni eccessive.|0|Il gate è separato dal canale da uno strato di ossido sottilissimo che cariche statiche o sovratensioni possono perforare: lo Zener limita la tensione.",
+"Che cosa è il diodo varicap?|Un diodo a capacità variabile|Un diodo costruito per distorcere i segnali ed ottenerne armoniche|Un diodo con una corrente variabile|Un diodo che emette luce|0|Il varicap (o varactor) è un diodo che in polarizzazione inversa cambia capacità al variare della tensione applicata.",
+"Un rettificatore a doppia semionda per quanti gradi di ciascun ciclo conduce?|360 gradi|270 gradi|90 gradi|180 gradi|0|Il raddrizzatore a doppia semionda utilizza entrambe le semionde: conduce per tutto il ciclo (360°), con diodi diversi.",
+"Date due frequenze in ingresso ad un mixer, f1 = 100 kHz ed f2 = 80 kHz, prendendo come frequenza in uscita f3 = f1 - f2 = 20 kHz quale può essere la frequenza immagine di f1?|180 kHz|80 kHz|60 kHz|20 kHz|2|La frequenza immagine dà la stessa differenza dall'altra parte dell'oscillatore: f2 - f3 = 80 - 20 = 60 kHz (80 - 60 = 20 kHz).",
+"In un modulatore FM la frequenza della portante tipicamente viene variata tramite un:|quarzo a reattanza variabile|MESFET a doppio gate|diodo varicap|diodo Zener|2|Il diodo varicap, polarizzato con il segnale audio, varia la capacità del circuito oscillante e quindi la frequenza della portante.",
+"Di solito in un ricevitore qual è il primo circuito che si trova collegato direttamente all'antenna?|Mixer|Amplificatore RF/filtro passa banda|BFO|Amplificatore IF|1|All'ingresso si trova di solito un filtro passa banda con amplificatore RF (preselettore).",
+"Cosa succede ai segnali elettrici quando sono applicati ad un altoparlante?|Vengono immagazzinati sotto forma di campo elettrico|Vengono trasformati in onde sonore|Vengono trasformati in onde elettro magnetiche|Vengono dissipati per effetto Joule|1|L'altoparlante converte il segnale elettrico in onde sonore.",
+"Quali componenti si usano nei filtri di alimentazione?|Quarzi|Diodi|Condensatori e induttanze|Trasformatori e transistor|2|I filtri di alimentazione sono reti LC: condensatori e induttanze livellano la tensione raddrizzata.",
+"In un circuito formato da pure reattanze:|la potenza attiva è circa uguale a quella apparente|la potenza attiva è nulla e quella apparente è massima|la potenza attiva è massima e quella apparente è nulla|viene trasformata energia elettrica in calore|1|Con sole reattanze la corrente è sfasata di 90°: cosφ = 0, quindi potenza attiva nulla; resta solo potenza reattiva (apparente = reattiva).",
+"Se state comunicando con un'altra stazione attraverso un ripetitore come potreste fare per verificare se è possibile comunicare anche in simplex?|Verificando se è possibile ricevere il proprio interlocutore su una frequenza più bassa|Verificando se è possibile ricevere il proprio interlocutore sulla frequenza di ingresso del ripetitore|Verificando se è possibile ricevere un ripetitore più lontano|Verificando se una terza stazione può ricevere entrambe le vostre stazioni|1|Se si sente la stazione sulla frequenza di ingresso del ripetitore (dove lei trasmette), significa che il collegamento diretto è possibile.",
+"Se si vuole ottenere un alto rendimento e non si hanno vincoli sulla distorsione, che tipo di amplificatore si usa?|Un amplificatore a transistor in classe B|Un amplificatore in classe C|Un amplificatore a MOSFET in classe AB|Un amplificatore in classe B|1|La classe C ha il rendimento più alto ma distorce molto: va bene se la linearità non serve.",
+"Quale campo di valori è possibile riscontrare in un resistore da 100 ohm avente tolleranza del 10%?|Da 10 ohm a 100 ohm|Da 80 ohm a 120 ohm|Da 90 ohm a 110 ohm|Da 90 ohm a 100 ohm|2|Una tolleranza del 10% su 100 Ω vale ±10 Ω: il valore reale è compreso tra 90 e 110 Ω.",
+"Volendo traslare la frequenza di un segnale da 455 kHz a 10 MHz che frequenza può avere un oscillatore locale?|9,545 MHz|10 MHz|10,545 MHz|455 kHz|0|L'oscillatore locale e il segnale devono dare per somma o differenza 10 MHz: 9,545 + 0,455 = 10 MHz (oppure 10,455 - 0,455).",
+"Per migliorare la selettività di un ricevitore:|bisogna usare finali di potenza a MOSFET|si usano filtri IF il più possibile selettivi|serve una bassa cifra di rumore|si usano antenne sbilanciate|1|La selettività dipende soprattutto dai filtri della frequenza intermedia: più sono stretti e ripidi, meglio si separano i segnali vicini.",
+"Un diodo polarizzato inversamente ha:|tensione tra anodo e catodo maggiore di 0,6 V|tensione al catodo maggiore di quella all'anodo|tensione al catodo minore di quella all'anodo|corrente tra anodo e catodo molto elevata|1|In polarizzazione inversa il catodo è più positivo dell'anodo: il diodo non conduce.",
+"Quale separazione si usa di solito tra frequenza di ingresso e frequenza di uscita nei ripetitori per la banda dei 2 metri?|5,0 MHz|600 kHz|1,0 MHz|1,6 MHz|1|Nella banda dei 2 metri i ripetitori usano di solito uno shift di 600 kHz.",
+"Un circuito formato da una resistenza di valore R ed un'induttanza di valore L raggiunge il 63% della corrente massima di regime in un tempo T pari a:|T = L / R|T = L x R|T = R / L|T = L + R|0|La costante di tempo del circuito RL è τ = L/R: dopo un tempo τ la corrente raggiunge il 63,2% del valore di regime.",
+"Quale dispositivo permette di utilizzare una antenna su una banda diversa da quella per la quale è stata progettata?|Un filtro passa-basso.|Un accordatore d'antenna.|Un rosmetro.|Un filtro passa alto.|1|L'accordatore d'antenna adatta l'impedenza dell'antenna a quella del trasmettitore, permettendone l'uso fuori dalla banda di progetto.",
+"Un circuito con frequenza di risonanza pari a 20 kHz e larghezza di banda pari a 5 kHz ha un fattore di qualità Q pari a:|0,25|4|20000|5000|1|Q = f0 / B = 20 kHz / 5 kHz = 4.",
+"L'impedenza di un circuito formato da una resistenza con in parallelo un condensatore dipende dalla frequenza di lavoro?|No|Si|Solo se la resistenza ha lo stesso segno della reattanza|Solo se la reattanza è circa uguale alla resistenza|1|La reattanza del condensatore cambia con la frequenza (XC = 1/2πfC): cambia quindi anche l'impedenza del parallelo."
+];
+
+const QUIZ = [];
+[RAW1, RAW2].forEach((raw, si) => raw.forEach((s, i) => {
+  const p = s.split("|");
+  QUIZ.push({
+    sec: SECTIONS[si].sec, theme: SECTIONS[si].theme, id: i + 1,
+    q: p[0], o: p.slice(1, 5), c: parseInt(p[5], 10), e: p.slice(6).join("|")
+  });
+}));
+const TOTAL = QUIZ.length;
+const SIM_COUNT = 50;
+const SIM_MINUTES = 60;
+const LETTERS = ["A", "B", "C", "D"];
+const typo = s => s.replace(/'/g, "\u2019");
+const $ = id => document.getElementById(id);
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+const pdfOrder = () => QUIZ.map((_, i) => i);
+const pct = (n, t) => t ? Math.round(n / t * 100) : 0;
+const fmt = ms => {
+  const s = Math.max(0, Math.ceil(ms / 1000));
+  return String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+};
+
+$("ver").textContent = "v" + VERSION;
+$("menuVer").textContent = "Versione " + VERSION;
+
+let mode = "study";           // study | sim | result
+let order = pdfOrder();       // ordine delle domande in modalità studio (default: ordine del PDF)
+const answers = new Map();    // studio: indice domanda -> opzione scelta
+let sim = null;
+let lastQuestionIdx = null, lastFocus = null, dlgCancel = null;
+
+const quizEl = $("quiz"), overlay = $("overlay"), modal = $("modal"), dlgOverlay = $("dlgOverlay");
+
+/* ====================== Utilità modali ====================== */
+function syncLock() {
+  document.body.classList.toggle("modal-open", !overlay.hidden || !dlgOverlay.hidden || !$("menuOverlay").hidden);
+}
+
+function openDialog({ title, body, actions, onCancel }) {
+  $("dlgTitle").textContent = title;
+  $("dlgBody").innerHTML = body;
+  const box = $("dlgActions");
+  box.textContent = "";
+  let primary = null;
+  actions.forEach(a => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "btn" + (a.primary ? " btn-primary" : "");
+    b.textContent = a.label;
+    b.addEventListener("click", () => { closeDialog(); a.onClick && a.onClick(); });
+    box.appendChild(b);
+    if (a.primary) primary = b;
+  });
+  dlgCancel = onCancel || null;
+  lastFocus = document.activeElement;
+  dlgOverlay.hidden = false;
+  syncLock();
+  $("dlgOverlay").firstElementChild.scrollTop = 0;
+  (primary || box.firstChild).focus();
+}
+
+function closeDialog() {
+  dlgOverlay.hidden = true;
+  syncLock();
+}
+
+/* ====================== MODALITÀ STUDIO ====================== */
+function updateCounters() {
+  let ok = 0;
+  answers.forEach((sel, qi) => { if (sel === QUIZ[qi].c) ok++; });
+  const tot = answers.size, ko = tot - ok;
+  $("cTotal").innerHTML = tot + "<small>/" + TOTAL + "</small>";
+  $("cOk").innerHTML = ok + "<small>" + pct(ok, tot) + "%</small>";
+  $("cKo").innerHTML = ko + "<small>" + pct(ko, tot) + "%</small>";
+  $("bar").style.width = (tot / TOTAL * 100) + "%";
+}
+
+function paintCard(card, qi) {
+  const q = QUIZ[qi], sel = answers.get(qi), done = sel !== undefined;
+  card.querySelectorAll(".opt").forEach((btn, k) => {
+    btn.disabled = done;
+    btn.classList.toggle("is-correct", done && k === q.c);
+    btn.classList.toggle("is-wrong", done && k === sel && sel !== q.c);
+    if (done) btn.setAttribute("aria-disabled", "true"); else btn.removeAttribute("aria-disabled");
+  });
+}
+
+function themeEl(q) {
+  const d = document.createElement("div");
+  d.className = "theme-row";
+  const s = document.createElement("span");
+  s.className = "theme";
+  s.textContent = q.theme;
+  d.appendChild(s);
+  return d;
+}
+
+function optionButton(text, k) {
+  const b = document.createElement("button");
+  b.type = "button";
+  b.className = "opt";
+  b.dataset.k = k;
+  b.innerHTML = '<span class="opt-letter"></span><span class="opt-text"></span>';
+  b.children[0].textContent = LETTERS[k];
+  b.children[1].textContent = typo(text);
+  return b;
+}
+
+function render() {
+  quizEl.textContent = "";
+  const frag = document.createDocumentFragment();
+  order.forEach((qi, pos) => {
+    const q = QUIZ[qi];
+    const card = document.createElement("article");
+    card.className = "card";
+    card.id = "q-" + qi;
+    card.dataset.qi = qi;
+
+    const meta = document.createElement("div");
+    meta.className = "card-meta";
+    meta.innerHTML = "<span>Domanda " + (pos + 1) + " di " + TOTAL + "</span><span>Radiotecnica " + q.sec + ", n. " + q.id + "</span>";
+
+    const h = document.createElement("h2");
+    h.textContent = typo(q.q);
+
+    const ul = document.createElement("ul");
+    ul.className = "options";
+    q.o.forEach((text, k) => {
+      const li = document.createElement("li");
+      li.appendChild(optionButton(text, k));
+      ul.appendChild(li);
+    });
+
+    card.append(meta, themeEl(q), h, ul);
+    paintCard(card, qi);
+    frag.appendChild(card);
+  });
+
+  const sum = document.createElement("section");
+  sum.className = "summary";
+  sum.id = "summary";
+  sum.hidden = true;
+  sum.innerHTML = "<h2>Quiz completato</h2><p id=\"sumText\"></p><button class=\"btn btn-primary\" type=\"button\" id=\"sumReset\">Ricomincia</button>";
+  frag.appendChild(sum);
+  quizEl.appendChild(frag);
+  $("sumReset").addEventListener("click", resetQuiz);
+  updateSummary();
+}
+
+function updateSummary() {
+  const sum = $("summary");
+  if (!sum) return;
+  const done = answers.size === TOTAL;
+  sum.hidden = !done;
+  if (done) {
+    let ok = 0; answers.forEach((s, qi) => { if (s === QUIZ[qi].c) ok++; });
+    $("sumText").textContent = "Corrette: " + ok + " su " + TOTAL + " (" + pct(ok, TOTAL) + "%). Errate: " + (TOTAL - ok) + " (" + pct(TOTAL - ok, TOTAL) + "%).";
+  }
+}
+
+quizEl.addEventListener("click", e => {
+  const btn = e.target.closest(".opt");
+  if (!btn || btn.disabled) return;
+  const card = btn.closest(".card");
+  const qi = +card.dataset.qi;
+  if (answers.has(qi)) return;
+  const k = +btn.dataset.k;
+  answers.set(qi, k);
+  paintCard(card, qi);
+  updateCounters();
+  updateSummary();
+  openModal(qi, k);
+});
+
+function openModal(qi, sel) {
+  const q = QUIZ[qi], right = sel === q.c;
+  lastQuestionIdx = qi;
+  modal.classList.toggle("ok", right);
+  modal.classList.toggle("ko", !right);
+  $("mIcon").textContent = right ? "\u2713" : "\u2715";
+  $("mTitle").textContent = right ? "Corretta" : "Errata";
+  $("mAnswer").textContent = LETTERS[q.c] + ") " + typo(q.o[q.c]);
+  $("mExplain").textContent = typo(q.e);
+  lastFocus = document.activeElement;
+  overlay.hidden = false;
+  syncLock();
+  modal.scrollTop = 0;
+  $("mNext").focus();
+}
+
+function closeModal() {
+  if (overlay.hidden) return;
+  overlay.hidden = true;
+  syncLock();
+  const pos = order.indexOf(lastQuestionIdx);
+  let target = null;
+  for (let i = pos + 1; i < order.length; i++) {
+    if (!answers.has(order[i])) { target = order[i]; break; }
+  }
+  if (target !== null) {
+    const el = $("q-" + target);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  } else if (lastFocus && lastFocus.focus) {
+    lastFocus.focus({ preventScroll: true });
+  }
+}
+
+$("mNext").addEventListener("click", closeModal);
+overlay.addEventListener("click", e => { if (e.target === overlay) closeModal(); });
+
+/* Reset: azzera tutto e torna all'ordine del PDF */
+function resetQuiz() {
+  overlay.hidden = true; syncLock();
+  answers.clear();
+  order = pdfOrder();
+  render();
+  updateCounters();
+  window.scrollTo(0, 0);
+}
+/* Mischia: nuovo ordine casuale, le risposte già date restano bloccate */
+function shuffleQuiz() {
+  order = shuffle(pdfOrder());
+  render();
+  window.scrollTo(0, 0);
+}
+/* ====================== Menu ====================== */
+const menuOverlay = $("menuOverlay");
+function openMenu() {
+  menuOverlay.hidden = false;
+  $("btnMenu").setAttribute("aria-expanded", "true");
+  syncLock();
+  $("btnMenuClose").focus();
+}
+function closeMenu(refocus = true) {
+  if (menuOverlay.hidden) return;
+  menuOverlay.hidden = true;
+  $("btnMenu").setAttribute("aria-expanded", "false");
+  syncLock();
+  if (refocus) $("btnMenu").focus({ preventScroll: true });
+}
+$("btnMenu").addEventListener("click", openMenu);
+$("btnMenuClose").addEventListener("click", () => closeMenu());
+menuOverlay.addEventListener("click", e => { if (e.target === menuOverlay) closeMenu(); });
+$("btnReset").addEventListener("click", () => { closeMenu(false); resetQuiz(); });
+$("btnShuffle").addEventListener("click", () => { closeMenu(false); shuffleQuiz(); });
+
+/* ====================== MODALITÀ SIMULAZIONE ====================== */
+function setMode(m) {
+  mode = m;
+  $("study").hidden = m !== "study";
+  $("simView").hidden = m === "study";
+  $("barStudy").hidden = m !== "study";
+  $("barSim").hidden = m === "study";
+  $("simTimer").hidden = m !== "sim";
+  $("btnAbandon").textContent = m === "sim" ? "Abbandona" : "Chiudi";
+  if (m === "study") updateCounters();
+}
+
+function openIntro() {
+  openDialog({
+    title: "Simulazione d’esame",
+    body:
+      "<p>Come funziona:</p><ul>" +
+      "<li>Ricevi <strong>" + SIM_COUNT + " domande</strong> scelte a caso tra tutte le " + TOTAL + ".</li>" +
+      "<li>Hai <strong>" + SIM_MINUTES + " minuti</strong>. Il timer parte quando premi “Inizia” e <strong>non si può mettere in pausa</strong>.</li>" +
+      "<li>Vedi una domanda alla volta. Appena rispondi si passa alla successiva, senza sapere se la risposta è giusta, e non si può tornare indietro.</li>" +
+      "<li>Il risultato con la spiegazione di ogni risposta compare alla fine: quando finisci le domande, quando scade il tempo o se abbandoni.</li>" +
+      "</ul>",
+    actions: [
+      { label: "Inizia", primary: true, onClick: startSim },
+      { label: "Annulla" }
+    ],
+    onCancel: () => {}
+  });
+}
+
+function startSim() {
+  const now = Date.now();
+  sim = {
+    qs: shuffle(pdfOrder()).slice(0, SIM_COUNT),
+    ans: new Array(SIM_COUNT).fill(null),
+    idx: 0, locked: false, finished: false,
+    start: now, end: now + SIM_MINUTES * 60000, timer: null
+  };
+  setMode("sim");
+  renderSimQuestion();
+  tick();
+  sim.timer = setInterval(tick, 250);
+  window.scrollTo(0, 0);
+}
+
+function tick() {
+  if (!sim || sim.finished) return;
+  const left = sim.end - Date.now();
+  if (left <= 0) { $("simTimer").textContent = "00:00"; finishSim("timeout"); return; }
+  const t = $("simTimer");
+  t.textContent = fmt(left);
+  t.classList.toggle("warn", left <= 5 * 60000);
+}
+
+function renderSimQuestion() {
+  const qi = sim.qs[sim.idx], q = QUIZ[qi];
+  $("simTitle").innerHTML = (sim.idx + 1) + "<small>/" + SIM_COUNT + "</small>";
+  $("bar").style.width = (sim.idx / SIM_COUNT * 100) + "%";
+  const box = $("simContent");
+  box.textContent = "";
+  const card = document.createElement("article");
+  card.className = "card sim-card";
+  const meta = document.createElement("div");
+  meta.className = "card-meta";
+  meta.innerHTML = "<span>Domanda " + (sim.idx + 1) + " di " + SIM_COUNT + "</span>";
+  const h = document.createElement("h2");
+  h.textContent = typo(q.q);
+  const ul = document.createElement("ul");
+  ul.className = "options";
+  q.o.forEach((text, k) => {
+    const li = document.createElement("li");
+    li.appendChild(optionButton(text, k));
+    ul.appendChild(li);
+  });
+  card.append(meta, themeEl(q), h, ul);
+  const hint = document.createElement("p");
+  hint.className = "sim-hint";
+  hint.textContent = "Dopo la risposta si passa subito alla domanda successiva.";
+  box.append(card, hint);
+  sim.locked = false;
+}
+
+$("simContent").addEventListener("click", e => {
+  const btn = e.target.closest(".opt");
+  if (!btn || !sim || sim.finished || sim.locked || mode !== "sim") return;
+  sim.locked = true;
+  const k = +btn.dataset.k;
+  sim.ans[sim.idx] = k;
+  $("simContent").querySelectorAll(".opt").forEach((b, i) => {
+    b.disabled = true;
+    b.classList.toggle("is-picked", i === k);
+  });
+  setTimeout(() => {
+    if (!sim || sim.finished) return;
+    sim.idx++;
+    if (sim.idx >= SIM_COUNT) finishSim("done");
+    else { renderSimQuestion(); window.scrollTo(0, 0); }
+  }, 220);
+});
+
+function confirmAbandon() {
+  openDialog({
+    title: "Abbandonare la simulazione?",
+    body: "<p>La sessione termina subito e vedrai il riepilogo: le domande senza risposta contano come non risposte. Il timer continua a scorrere finché non scegli.</p>",
+    actions: [
+      { label: "Continua la simulazione", primary: true },
+      { label: "Abbandona e vedi il riepilogo", onClick: () => finishSim("abandon") }
+    ],
+    onCancel: () => {}
+  });
+}
+
+function finishSim(reason) {
+  if (!sim || sim.finished) return;
+  sim.finished = true;
+  clearInterval(sim.timer);
+  sim.elapsed = Math.min(Date.now(), sim.end) - sim.start;
+  sim.reason = reason;
+  closeDialog();
+  setMode("result");
+  $("simTitle").textContent = "Riepilogo";
+  $("bar").style.width = "100%";
+  renderResults();
+  window.scrollTo(0, 0);
+}
+
+function renderResults() {
+  let ok = 0, ko = 0, na = 0;
+  sim.qs.forEach((qi, i) => {
+    const a = sim.ans[i];
+    if (a === null) na++; else if (a === QUIZ[qi].c) ok++; else ko++;
+  });
+  const reasons = {
+    done: "Hai risposto a tutte le domande.",
+    timeout: "Il tempo è scaduto.",
+    abandon: "Hai abbandonato la simulazione."
+  };
+  const box = $("simContent");
+  box.textContent = "";
+
+  const head = document.createElement("section");
+  head.className = "result-head";
+  head.innerHTML =
+    "<h2>Simulazione conclusa</h2><p class=\"reason\">" + reasons[sim.reason] + "</p>" +
+    "<div class=\"score\">" + ok + "<small> su " + SIM_COUNT + " corrette</small></div>" +
+    "<p class=\"score-pct\">Risposte giuste " + pct(ok, SIM_COUNT) + "%, sbagliate " + pct(ko, SIM_COUNT) + "%, non risposte " + pct(na, SIM_COUNT) + "% (sul totale di " + SIM_COUNT + " domande).</p>" +
+    "<div class=\"stats4\">" +
+      "<div class=\"stat-box ok\"><div class=\"n\">" + ok + "<small>" + pct(ok, SIM_COUNT) + "%</small></div><div class=\"l\">Corrette</div></div>" +
+      "<div class=\"stat-box ko\"><div class=\"n\">" + ko + "<small>" + pct(ko, SIM_COUNT) + "%</small></div><div class=\"l\">Errate</div></div>" +
+      "<div class=\"stat-box na\"><div class=\"n\">" + na + "<small>" + pct(na, SIM_COUNT) + "%</small></div><div class=\"l\">Non risposte</div></div>" +
+      "<div class=\"stat-box\"><div class=\"n\">" + fmt(sim.elapsed) + "</div><div class=\"l\">Tempo usato</div></div>" +
+    "</div>";
+  head.appendChild(resultActions());
+  box.appendChild(head);
+
+  sim.qs.forEach((qi, i) => {
+    const q = QUIZ[qi], a = sim.ans[i];
+    const state = a === null ? "na" : (a === q.c ? "ok" : "ko");
+    const label = { ok: "Corretta", ko: "Errata", na: "Non risposta" }[state];
+
+    const card = document.createElement("article");
+    card.className = "card res";
+    const meta = document.createElement("div");
+    meta.className = "card-meta";
+    meta.innerHTML = "<span>Domanda " + (i + 1) + " di " + SIM_COUNT + " (Radiotecnica " + q.sec + ", n. " + q.id + ")</span><span class=\"badge " + state + "\">" + label + "</span>";
+    const h = document.createElement("h3");
+    h.textContent = typo(q.q);
+    const ul = document.createElement("ul");
+    ul.className = "options";
+    q.o.forEach((text, k) => {
+      const li = document.createElement("li");
+      const d = document.createElement("div");
+      d.className = "opt" + (k === q.c ? " is-correct" : "") + (k === a && a !== q.c ? " is-wrong" : "");
+      d.innerHTML = '<span class="opt-letter"></span><span class="opt-text"><span class="txt"></span></span>';
+      d.querySelector(".opt-letter").textContent = LETTERS[k];
+      d.querySelector(".txt").textContent = typo(text);
+      let tag = "";
+      if (k === q.c && k === a) tag = "La tua risposta, esatta";
+      else if (k === q.c) tag = "Risposta esatta";
+      else if (k === a) tag = "La tua risposta";
+      if (tag) {
+        const t = document.createElement("span");
+        t.className = "tag";
+        t.textContent = tag;
+        d.querySelector(".opt-text").appendChild(t);
+      }
+      li.appendChild(d);
+      ul.appendChild(li);
+    });
+    const ex = document.createElement("div");
+    ex.className = "res-expl";
+    ex.innerHTML = "<p class=\"t\">Spiegazione della risposta corretta</p><p></p>";
+    ex.querySelector("p:last-child").textContent = typo(q.e);
+    card.append(meta, themeEl(q), h, ul, ex);
+    box.appendChild(card);
+  });
+
+  const bottom = document.createElement("section");
+  bottom.className = "result-head";
+  bottom.appendChild(resultActions());
+  box.appendChild(bottom);
+}
+
+function resultActions() {
+  const wrap = document.createElement("div");
+  wrap.className = "actions";
+  const a = document.createElement("button");
+  a.type = "button"; a.className = "btn btn-primary"; a.textContent = "Nuova simulazione";
+  a.addEventListener("click", openIntro);
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "btn"; b.textContent = "Torna allo studio";
+  b.addEventListener("click", backToStudy);
+  wrap.append(a, b);
+  return wrap;
+}
+
+function backToStudy() {
+  if (sim) { clearInterval(sim.timer); }
+  sim = null;
+  $("simContent").textContent = "";
+  setMode("study");
+  window.scrollTo(0, 0);
+}
+
+$("btnSim").addEventListener("click", () => { closeMenu(false); openIntro(); });
+$("btnAbandon").addEventListener("click", () => {
+  if (mode === "sim") confirmAbandon(); else backToStudy();
+});
+
+window.addEventListener("beforeunload", e => {
+  if (sim && !sim.finished) { e.preventDefault(); e.returnValue = ""; }
+});
+
+/* ====================== Tastiera e focus ====================== */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    if (!dlgOverlay.hidden) { if (dlgCancel) closeDialog(); }
+    else if (!menuOverlay.hidden) closeMenu();
+    else closeModal();
+    return;
+  }
+  if (e.key === "Tab") {
+    const ov = !dlgOverlay.hidden ? dlgOverlay : (!overlay.hidden ? overlay : (!menuOverlay.hidden ? menuOverlay : null));
+    if (!ov) return;
+    const f = [...ov.querySelectorAll("button:not([disabled]), a[href]")];
+    if (!f.length) return;
+    const i = f.indexOf(document.activeElement);
+    e.preventDefault();
+    f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+  }
+});
+
+/* ====================== Avvio ====================== */
+render();
+updateCounters();
+setMode("study");
+</script>
+</body>
+</html>
