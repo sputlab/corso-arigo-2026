@@ -38,7 +38,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Corso Base di Elettronica e Radiotecnica — v1.10.0</title>
+<title>Corso Base di Elettronica e Radiotecnica — v1.11.0</title>
 <style>
     /* ===== RESET E VARIABILI ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -857,6 +857,15 @@
     }
     @media (min-width: 901px) { .menu-toggle { display: none; } #sidebar-overlay { display: none !important; } }
 
+    /* INDICE DEL DOCUMENTO */
+    .toc-module { border-bottom: 1px solid var(--border, #ddd); padding: 6px 0; }
+    .toc-module > summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+    .toc ul { list-style: none; margin: 2px 0 2px 0; padding-left: 18px; }
+    .toc > details > ul { padding-left: 4px; }
+    .toc li { margin: 2px 0; font-size: 0.95rem; }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    @media print { .toc-module:not([open]) > ul { display: block; } }
     html { scroll-behavior: smooth; scroll-padding-top: 20px; }
     body.no-scroll { overflow: hidden; }
 
@@ -884,7 +893,7 @@
         <h1>Corso Base di Elettronica e Radiotecnica
             <span>Dispense per aspiranti radioamatori — corso organizzato dalla sezione ARI Gorizia IQ3GO</span>
         </h1>
-        <span class="version-badge">v1.10.0</span>
+        <span class="version-badge">v1.11.0</span>
     </div>
     <div class="sidebar-tools">
         <div class="sidebar-search">
@@ -897,6 +906,7 @@
             <a href="#intro">Perché questo corso</a>
             <a href="#metodo">Come studiare</a>
             <a href="#versioning">Versioning</a>
+            <a href="#indice">Indice</a>
         </div>
         <div class="nav-section">
             <div class="nav-section-title">Modulo 1 — Elettrotecnica</div>
@@ -1037,7 +1047,7 @@
             <div class="nav-section-title">Appendici</div>
             <a href="#glossario">Glossario</a>
             <a href="#quiz-finale">Quiz finale (100)</a>
-            <a href="quiz-radiotecnica.html" target="_blank" rel="noopener">Collezione quiz ↗</a>
+            <a href="https://www.sputlab.com/websites/quiz-arigo-2026/" target="_blank" rel="noopener">Collezione quiz ↗</a>
             <a href="#changelog">Changelog</a>
         </div>
     </div>
@@ -1111,7 +1121,58 @@
             <li><strong>PATCH</strong> — cambia quando vengono fatte correzioni di errori, refusi o piccole migliorie.</li>
         </ul>
         <div class="remember">
-            <p>Versione attuale: <strong>1.10.0</strong> — nuovo link <strong>Collezione quiz</strong> nel menu laterale. Novità della 1.9.1: titoli dei moduli più evidenti nel menu laterale. Novità della 1.9.0: nuova sezione <strong>Propagazione</strong> nel Modulo 9, che diventa «Antenne e propagazione», e logo del corso. Novità della 1.8.0: nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+            <p>Versione attuale: <strong>1.11.0</strong> — nuovo <strong>Indice</strong> di sezioni e sottosezioni sotto il riquadro versioning e link <strong>Collezione quiz</strong> aggiornato. Novità della 1.10.0: nuovo link <strong>Collezione quiz</strong> nel menu laterale. Novità della 1.9.1: titoli dei moduli più evidenti nel menu laterale. Novità della 1.9.0: nuova sezione <strong>Propagazione</strong> nel Modulo 9, che diventa «Antenne e propagazione», e logo del corso. Novità della 1.8.0: nuova sezione <strong>Riepilogo essenziale</strong> dopo il Modulo 12. Novità della 1.7.0: nuova sezione sulle classi di emissione nel Modulo 6. Novità della 1.6.1: migliorata la lettura su smartphone e aggiunto il link Changelog nel menu. Novità della 1.6.0: due nuovi moduli: <strong>Linee di trasmissione</strong> (Modulo 8) e <strong>Antenne</strong> (Modulo 9), ciascuno con il proprio quiz da 20 domande; il quiz finale passa da 80 a 100 domande. Strumenti di misura, Normativa e Pratica operativa diventano Moduli 10, 11 e 12. Novità della 1.5.0: tre nuovi moduli (Trasmettitori, Ricevitori, Strumenti di misura) e quiz finale portato da 50 a 80 domande; le immagini sono in formato JPG nella cartella <code>assets/images/</code>.</p>
+        </div>
+    </div>
+</section>
+
+<section id="indice">
+    <div class="card">
+        <h3>Indice del documento</h3>
+        <p>Elenco di tutte le sezioni e sottosezioni: clicca su una voce per saltare direttamente al punto del corso.</p>
+        <div class="toc">
+        <details class="toc-module"><summary><a href="#intro">Introduzione</a></summary>
+            <ul><li><a href="#intro">Perché questo corso</a></li><li><a href="#metodo">Come studiare</a></li><li><a href="#versioning">Versioning del documento</a></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo1">Modulo 1 — Elettrotecnica di base</a></summary>
+            <ul><li><a href="#grandezze">Grandezze elettriche</a><ul><li><a href="#grandezze-1">Le quattro grandezze fondamentali</a><ul><li><a href="#grandezze-2">Tensione (V)</a></li><li><a href="#grandezze-3">Corrente (I)</a></li><li><a href="#grandezze-4">Resistenza (R)</a></li><li><a href="#grandezze-5">Potenza (P)</a></li></ul></li></ul></li><li><a href="#ohm">Legge di Ohm</a><ul><li><a href="#ohm-6">Perché funziona così</a></li><li><a href="#ohm-7">Esempio numerico</a></li></ul></li><li><a href="#potenza">Potenza ed energia</a><ul><li><a href="#potenza-8">Perché è importante</a></li><li><a href="#potenza-9">Esempio numerico</a></li></ul></li><li><a href="#serie-parallelo">Collegamenti in serie e in parallelo</a><ul><li><a href="#serie-parallelo-10">Resistenze in serie</a></li><li><a href="#serie-parallelo-11">Resistenze in parallelo</a></li><li><a href="#serie-parallelo-12">Condensatori e induttanze</a></li><li><a href="#serie-parallelo-13">Esempio numerico</a></li></ul></li><li><a href="#partitori">Partitore di tensione</a></li><li><a href="#kirchhoff">Leggi di Kirchhoff</a><ul><li><a href="#kirchhoff-14">Prima legge (legge dei nodi)</a></li><li><a href="#kirchhoff-15">Seconda legge (legge delle maglie)</a></li></ul></li><li><a href="#teoremi">Teoremi fondamentali di rete</a><ul><li><a href="#teoremi-16">Teorema di Thévenin</a></li><li><a href="#teoremi-17">Teorema di Millman</a></li><li><a href="#teoremi-18">Principio di sovrapposizione degli effetti</a></li></ul></li><li><a href="#corrente-alternata">Corrente alternata</a><ul><li><a href="#corrente-alternata-19">Periodo e frequenza</a></li><li><a href="#corrente-alternata-20">Valore di picco, medio ed efficace</a></li></ul></li><li><a href="#reattanza">Reattanza e impedenza</a><ul><li><a href="#reattanza-21">Reattanza capacitiva</a></li><li><a href="#reattanza-22">Reattanza induttiva</a></li><li><a href="#reattanza-23">Impedenza</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo2">Modulo 2 — Componenti elettronici</a></summary>
+            <ul><li><a href="#resistori">Resistori</a><ul><li><a href="#resistori-24">Simbolo e tipi costruttivi</a><ul><li><a href="#resistori-25">Potenza dissipata</a></li><li><a href="#resistori-26">Codice colori</a></li><li><a href="#resistori-27">Tipi di resistori</a></li></ul></li></ul></li><li><a href="#condensatori">Condensatori</a><ul><li><a href="#condensatori-28">Simbolo e struttura</a><ul><li><a href="#condensatori-29">Capacità</a></li><li><a href="#condensatori-30">Energia accumulata</a></li><li><a href="#condensatori-31">Comportamento in corrente alternata</a></li><li><a href="#condensatori-32">Tipi di condensatori</a></li></ul></li></ul></li><li><a href="#induttori">Induttori</a><ul><li><a href="#induttori-33">Induttanza</a></li><li><a href="#induttori-34">Reattanza induttiva</a></li></ul></li><li><a href="#trasformatori">Trasformatori</a><ul><li><a href="#trasformatori-35">Rapporto di trasformazione</a></li></ul></li><li><a href="#diodi">Diodi</a><ul><li><a href="#diodi-36">Polarizzazione</a></li><li><a href="#diodi-37">Tipi di diodi</a></li></ul></li><li><a href="#bjt">Transistor BJT (Bipolar Junction Transistor)</a><ul><li><a href="#bjt-38">Funzionamento</a></li><li><a href="#bjt-39">Zone di funzionamento</a></li><li><a href="#bjt-40">Polarizzazione e stabilizzazione termica</a></li></ul></li><li><a href="#jfet">Transistor JFET (Junction Field Effect Transistor)</a><ul><li><a href="#jfet-41">Funzionamento</a></li></ul></li><li><a href="#mosfet">Transistor MOSFET</a><ul><li><a href="#mosfet-42">Tipi</a></li></ul></li><li><a href="#fototransistor">Fototransistor</a></li><li><a href="#commutazione">Dispositivi a commutazione</a></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo3">Modulo 3 — Amplificatori</a></summary>
+            <ul><li><a href="#amplificatori">Amplificatori per piccoli segnali</a><ul><li><a href="#amplificatori-43">Concetti fondamentali</a><ul><li><a href="#amplificatori-44">Guadagno</a></li><li><a href="#amplificatori-45">Impedenza di ingresso e uscita</a></li><li><a href="#amplificatori-46">Banda passante</a></li><li><a href="#amplificatori-47">Distorsione</a></li></ul></li></ul></li><li><a href="#punto-lavoro">Punto di lavoro</a><ul><li><a href="#punto-lavoro-48">Retta di carico</a></li><li><a href="#punto-lavoro-49">Scelta del punto di lavoro</a></li></ul></li><li><a href="#classi">Classi di amplificazione</a></li><li><a href="#configurazioni">Configurazioni fondamentali: CE, CB, CC</a></li><li><a href="#operazionali">Amplificatori operazionali</a><ul><li><a href="#operazionali-50">Da dove viene: il nodo di confronto</a></li><li><a href="#operazionali-51">Caratteristiche ideali</a></li><li><a href="#operazionali-52">Il principio della retroazione negativa</a></li><li><a href="#operazionali-53">Configurazioni base</a></li><li><a href="#operazionali-54">Il sommatore pesato</a></li><li><a href="#operazionali-55">L'amplificatore differenziale</a></li><li><a href="#operazionali-56">Generatori ideali di tensione e di corrente</a></li><li><a href="#operazionali-57">Integratore e derivatore di segnale</a></li><li><a href="#operazionali-58">Comparatore e comparatore con isteresi</a></li><li><a href="#operazionali-59">Il diodo ideale</a></li></ul></li><li><a href="#potenza-2">Amplificatori di potenza</a><ul><li><a href="#potenza-2-60">Rendimento e figura di merito</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo4">Modulo 4 — Oscillatori</a></summary>
+            <ul><li><a href="#osc-generalita">Oscillatori</a><ul><li><a href="#osc-generalita-61">Generalità e criterio di Barkhausen</a><ul><li><a href="#osc-generalita-62">Il criterio di Barkhausen</a></li></ul></li></ul></li><li><a href="#osc-bassa-frequenza">Oscillatori sinusoidali a bassa frequenza</a><ul><li><a href="#osc-bassa-frequenza-63">Oscillatore (a mezzo ponte) di Wien</a></li><li><a href="#osc-bassa-frequenza-64">Oscillatore a ponte di Wien</a></li><li><a href="#osc-bassa-frequenza-65">Oscillatore a sfasamento</a></li><li><a href="#osc-bassa-frequenza-66">Oscillatore a T e doppio T</a></li></ul></li><li><a href="#osc-alta-frequenza">Oscillatori sinusoidali ad alta frequenza</a><ul><li><a href="#osc-alta-frequenza-67">Oscillatore Meissner</a></li><li><a href="#osc-alta-frequenza-68">Oscillatori a "tre punti"</a></li><li><a href="#osc-alta-frequenza-69">Oscillatore Colpitts</a></li><li><a href="#osc-alta-frequenza-70">Variante Clapp</a></li><li><a href="#osc-alta-frequenza-71">Oscillatore Hartley</a></li></ul></li><li><a href="#osc-quarzo">Stabilizzazione della frequenza e oscillatori a quarzo</a><ul><li><a href="#osc-quarzo-72">Il cristallo di quarzo</a></li><li><a href="#osc-quarzo-73">Oscillatore Pierce</a></li><li><a href="#osc-quarzo-74">Oscillatore Clapp quarzato</a></li></ul></li><li><a href="#osc-rilassamento">Oscillatori a rilassamento</a></li><li><a href="#osc-vfo-vco">Oscillatori a frequenza variabile (VFO/VCO)</a></li><li><a href="#osc-sintesi">Sintesi di frequenza: PLL e DDS</a><ul><li><a href="#osc-sintesi-75">Il PLL (Phase-Locked Loop)</a></li><li><a href="#osc-sintesi-76">La sintesi diretta digitale (DDS)</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo5">Modulo 5 — Filtri e risonanza</a></summary>
+            <ul><li><a href="#filtri">Filtri RC-RL</a><ul><li><a href="#filtri-77">Filtro passa-basso RC</a></li><li><a href="#filtri-78">Filtro passa-alto RC</a></li><li><a href="#filtri-79">Filtri RL</a></li></ul></li><li><a href="#passa-banda">Filtro passa-banda RCL</a><ul><li><a href="#passa-banda-80">Serie</a></li><li><a href="#passa-banda-81">Parallelo</a></li></ul></li><li><a href="#risonanza">Risonanza</a><ul><li><a href="#risonanza-82">Fattore di merito Q</a></li><li><a href="#risonanza-83">Tensione di risonanza</a></li></ul></li><li><a href="#quarzi">Quarzi e risonatori ceramici</a></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo-tx">Modulo 6 — Trasmettitori</a></summary>
+            <ul><li><a href="#tx-generalita">Trasmettitori</a><ul><li><a href="#tx-generalita-84">Codifica, modulazione e portante</a><ul><li><a href="#tx-generalita-85">La radiotelegrafia</a></li><li><a href="#tx-generalita-86">I microfoni</a></li></ul></li></ul></li><li><a href="#tx-modulazioni">Modulazione e occupazione di banda</a><ul><li><a href="#tx-modulazioni-87">La fonia digitale</a></li><li><a href="#tx-modulazioni-88">Il prodotto di due sinusoidi</a></li><li><a href="#tx-modulazioni-89">Occupazione di banda</a></li><li><a href="#tx-modulazioni-90">Distorsione e intermodulazione</a></li></ul></li><li><a href="#tx-am">Modulazione di ampiezza (AM) e trasmettitori AM</a><ul><li><a href="#tx-am-91">Indice di modulazione</a></li><li><a href="#tx-am-92">La potenza di picco (PEP)</a></li><li><a href="#tx-am-93">Lo spettro di un segnale AM</a></li><li><a href="#tx-am-94">I tipi di trasmissione in ampiezza</a></li><li><a href="#tx-am-95">Struttura di un trasmettitore AM</a></li></ul></li><li><a href="#tx-ssb">Il mixer e la banda laterale unica (SSB)</a><ul><li><a href="#tx-ssb-96">Il mixer</a></li><li><a href="#tx-ssb-97">Dalla AM alla SSB</a></li><li><a href="#tx-ssb-98">Struttura di un trasmettitore SSB</a></li></ul></li><li><a href="#tx-fm">Modulazione di frequenza (FM) e modulazioni digitali angolari</a><ul><li><a href="#tx-fm-99">La modulazione d'angolo</a></li><li><a href="#tx-fm-100">Banda occupata: la regola di Carson</a></li><li><a href="#tx-fm-101">Le modulazioni digitali angolari</a></li><li><a href="#tx-fm-102">Il trasmettitore FM</a></li><li><a href="#tx-fm-103">L'amplificatore in classe E</a></li></ul></li><li><a href="#tx-classi-emissione">Classi di emissione</a><ul><li><a href="#tx-classi-emissione-104">Prefisso: larghezza di banda necessaria</a></li><li><a href="#tx-classi-emissione-105">Primo simbolo: tipo di modulazione della portante</a></li><li><a href="#tx-classi-emissione-106">Secondo simbolo: natura del segnale modulante</a></li><li><a href="#tx-classi-emissione-107">Terzo simbolo: tipo di informazione da trasmettere</a></li><li><a href="#tx-classi-emissione-108">Esempi completi</a></li><li><a href="#tx-classi-emissione-109">Le denominazioni abbreviate più usate</a></li></ul></li><li><a href="#tx-frequenza">Metodi per aumentare la frequenza di un trasmettitore</a><ul><li><a href="#tx-frequenza-110">La conversione di frequenza</a></li><li><a href="#tx-frequenza-111">La moltiplicazione di frequenza</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo-rx">Modulo 7 — Ricevitori</a></summary>
+            <ul><li><a href="#rx-caratteristiche">Ricevitori</a><ul><li><a href="#rx-caratteristiche-112">Altoparlante, cuffie e caratteristiche del ricevitore</a><ul><li><a href="#rx-caratteristiche-113">L'altoparlante</a></li><li><a href="#rx-caratteristiche-114">Le cuffie</a></li><li><a href="#rx-caratteristiche-115">Le tre caratteristiche fondamentali</a></li></ul></li></ul></li><li><a href="#rx-sensibilita-rumore">Sensibilità e rumore</a><ul><li><a href="#rx-sensibilita-rumore-116">Il rumore termico</a></li><li><a href="#rx-sensibilita-rumore-117">Le altre sorgenti di rumore</a></li><li><a href="#rx-sensibilita-rumore-118">La cifra di rumore</a></li><li><a href="#rx-sensibilita-rumore-119">Ridurre il rumore impulsivo e i disturbi</a></li></ul></li><li><a href="#rx-dinamica-selettivita">Dinamica, intermodulazione e selettività</a><ul><li><a href="#rx-dinamica-selettivita-120">La dinamica e il controllo del guadagno</a></li><li><a href="#rx-dinamica-selettivita-121">L'intermodulazione</a></li><li><a href="#rx-dinamica-selettivita-122">La selettività</a></li></ul></li><li><a href="#rx-struttura">Struttura di un ricevitore radio</a><ul><li><a href="#rx-struttura-123">Il front-end</a></li><li><a href="#rx-struttura-124">La sintonia</a></li><li><a href="#rx-struttura-125">La bassa frequenza</a></li></ul></li><li><a href="#rx-demodulazione">La demodulazione dei segnali</a><ul><li><a href="#rx-demodulazione-126">Il rivelatore AM</a></li><li><a href="#rx-demodulazione-127">La demodulazione SSB</a></li><li><a href="#rx-demodulazione-128">La demodulazione FM</a></li><li><a href="#rx-demodulazione-129">La demodulazione PSK e dei modi digitali</a></li></ul></li><li><a href="#rx-tipologie">I tipi di ricevitore</a><ul><li><a href="#rx-tipologie-130">Il ricevitore a cristallo</a></li><li><a href="#rx-tipologie-131">Il ricevitore a conversione diretta</a></li><li><a href="#rx-tipologie-132">Il ricevitore supereterodina</a></li><li><a href="#rx-tipologie-133">Doppia e tripla conversione</a></li><li><a href="#rx-tipologie-134">Lo squelch</a></li><li><a href="#rx-tipologie-135">Il ricevitore FM</a></li></ul></li><li><a href="#rx-dsp-sdr">DSP, modulatori I/Q, SDR e ricetrasmettitori</a><ul><li><a href="#rx-dsp-sdr-136">Il Digital Signal Processing (DSP)</a></li><li><a href="#rx-dsp-sdr-137">Modulatori e demodulatori I/Q</a></li><li><a href="#rx-dsp-sdr-138">Il ricevitore a reiezione di immagine</a></li><li><a href="#rx-dsp-sdr-139">La Software Defined Radio (SDR)</a></li><li><a href="#rx-dsp-sdr-140">I ricetrasmettitori</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo-linee">Modulo 8 — Linee di trasmissione</a></summary>
+            <ul><li><a href="#lt-generalita">Le linee di trasmissione</a><ul><li><a href="#lt-generalita-141">Che cos'è una linea di trasmissione</a><ul><li><a href="#lt-generalita-142">Le linee bifilari</a></li></ul></li></ul></li><li><a href="#lt-coassiali">Cavi coassiali, linee sul circuito stampato e connettori</a><ul><li><a href="#lt-coassiali-143">I cavi coassiali</a></li><li><a href="#lt-coassiali-144">Linee sui circuiti stampati</a></li><li><a href="#lt-coassiali-145">Guide d'onda e fibre ottiche</a></li><li><a href="#lt-coassiali-146">I connettori coassiali</a></li></ul></li><li><a href="#lt-parametri">Fattore di velocità, lunghezza d'onda e impedenza caratteristica</a><ul><li><a href="#lt-parametri-147">Il fattore di velocità</a></li><li><a href="#lt-parametri-148">La lunghezza d'onda</a></li><li><a href="#lt-parametri-149">L'impedenza caratteristica</a></li></ul></li><li><a href="#lt-adattamento">L'adattamento di impedenza</a><ul><li><a href="#lt-adattamento-150">Adattamento con trasformatore</a></li><li><a href="#lt-adattamento-151">Adattamento con quadripolo reattivo</a></li><li><a href="#lt-adattamento-152">Adattamento di una linea</a></li><li><a href="#lt-adattamento-153">La carta di Smith</a></li></ul></li><li><a href="#lt-onde-stazionarie">Coefficiente di riflessione, onde stazionarie e ROS</a><ul><li><a href="#lt-onde-stazionarie-154">Il coefficiente di riflessione</a></li><li><a href="#lt-onde-stazionarie-155">Le onde stazionarie nei casi limite</a></li><li><a href="#lt-onde-stazionarie-156">Il rapporto di onde stazionarie (ROS)</a></li><li><a href="#lt-onde-stazionarie-157">Il return loss</a></li><li><a href="#lt-onde-stazionarie-158">Riepilogo</a></li></ul></li><li><a href="#lt-perdite">Attenuazione, perdite ed effetto pelle</a><ul><li><a href="#lt-perdite-159">Linee con perdite e ROS</a></li><li><a href="#lt-perdite-160">L'effetto pelle</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo-antenne">Modulo 9 — Antenne e propagazione</a></summary>
+            <ul><li><a href="#ant-generalita">Le antenne</a><ul><li><a href="#ant-generalita-161">Definizione, reciprocità e link RF</a><ul><li><a href="#ant-generalita-162">Reciprocità</a></li><li><a href="#ant-generalita-163">Il link RF</a></li><li><a href="#ant-generalita-164">Campo elettromagnetico e polarizzazione</a></li><li><a href="#ant-generalita-165">Tipi di antenne</a></li></ul></li></ul></li><li><a href="#ant-radiazione">Densità di radiazione, diagramma e direttività</a><ul><li><a href="#ant-radiazione-166">La densità di radiazione</a></li><li><a href="#ant-radiazione-167">Il diagramma di radiazione</a></li><li><a href="#ant-radiazione-168">I lobi</a></li><li><a href="#ant-radiazione-169">Gli spazi di radiazione</a></li><li><a href="#ant-radiazione-170">La direttività</a></li></ul></li><li><a href="#ant-risonanza">Come funziona un'antenna: risonanza e onda progressiva</a><ul><li><a href="#ant-risonanza-171">Le antenne risonanti</a></li><li><a href="#ant-risonanza-172">L'onda stazionaria di corrente</a></li><li><a href="#ant-risonanza-173">Le antenne ad onda progressiva</a></li></ul></li><li><a href="#ant-parametri">Caratteristiche delle antenne</a><ul><li><a href="#ant-parametri-174">Calcolo delle dimensioni</a></li><li><a href="#ant-parametri-175">Guadagno ed efficienza</a></li><li><a href="#ant-parametri-176">Apertura efficace</a></li><li><a href="#ant-parametri-177">Banda passante</a></li><li><a href="#ant-parametri-178">Resistenza di radiazione</a></li><li><a href="#ant-parametri-179">ERP ed EIRP</a></li><li><a href="#ant-parametri-180">Impedenza dello spazio libero e fattore di antenna</a></li><li><a href="#ant-parametri-181">Effetto del suolo e ground plane</a></li></ul></li><li><a href="#ant-polarizzazione">La polarizzazione</a><ul><li><a href="#ant-polarizzazione-182">Polarizzazione lineare</a></li><li><a href="#ant-polarizzazione-183">Polarizzazione circolare ed ellittica</a></li><li><a href="#ant-polarizzazione-184">Uso della polarizzazione</a></li></ul></li><li><a href="#ant-tipi">Dipolo, loop e long wire</a><ul><li><a href="#ant-tipi-185">Il dipolo a mezz'onda</a></li><li><a href="#ant-tipi-186">Il dipolo ripiegato</a></li><li><a href="#ant-tipi-187">La long wire</a></li><li><a href="#ant-tipi-188">La loop</a></li></ul></li><li><a href="#ant-verticali">Antenne verticali: monopolo, antenna caricata e ground plane</a><ul><li><a href="#ant-verticali-189">Il monopolo verticale</a></li><li><a href="#ant-verticali-190">L'antenna caricata</a></li><li><a href="#ant-verticali-191">La ground plane</a></li></ul></li><li><a href="#ant-direttive">Antenne direttive: Yagi, parabola e Beverage</a><ul><li><a href="#ant-direttive-192">La Yagi</a></li><li><a href="#ant-direttive-193">L'antenna parabolica</a></li><li><a href="#ant-direttive-194">La Beverage</a></li></ul></li><li><a href="#ant-adattamento">Adattare l'antenna alla linea</a><ul><li><a href="#ant-adattamento-195">Il trasformatore a quarto d'onda</a></li><li><a href="#ant-adattamento-196">Lo stub</a></li><li><a href="#ant-adattamento-197">Hair Pin</a></li><li><a href="#ant-adattamento-198">Delta match e T-match</a></li><li><a href="#ant-adattamento-199">Gamma match, Omega match e J-Pole</a></li><li><a href="#ant-adattamento-200">Adattamento con autotrasformatore</a></li></ul></li><li><a href="#ant-balun">Il balun e l'accordatore di antenna</a><ul><li><a href="#ant-balun-201">Il balun</a></li><li><a href="#ant-balun-202">L'accordatore di antenna</a></li></ul></li><li><a href="#prop-generalita">La propagazione dei segnali radio</a><ul><li><a href="#prop-generalita-203">Le grandezze del campo e il mezzo ideale</a><ul><li><a href="#prop-generalita-204">I tipi di propagazione</a></li></ul></li></ul></li><li><a href="#prop-terra-diretta">Onda di terra, guida d'onda e onda diretta</a><ul><li><a href="#prop-terra-diretta-205">Onda di terra (o di superficie)</a></li><li><a href="#prop-terra-diretta-206">Guida d'onda Terra / Ionosfera</a></li><li><a href="#prop-terra-diretta-207">Onda diretta e orizzonte radio</a></li><li><a href="#prop-terra-diretta-208">Scatter terrestre e multipath fading</a></li><li><a href="#prop-terra-diretta-209">Zona di Fresnel e diffrazione a lama di coltello</a></li><li><a href="#prop-terra-diretta-210">Link budget e formula di Friis</a></li></ul></li><li><a href="#prop-troposfera">Propagazione troposferica</a><ul><li><a href="#prop-troposfera-211">Inversione di temperatura</a></li><li><a href="#prop-troposfera-212">Duct troposferico</a></li><li><a href="#prop-troposfera-213">Tropo-scatter e altre forme di scatter</a></li></ul></li><li><a href="#prop-ionosfera">Propagazione ionosferica</a><ul><li><a href="#prop-ionosfera-214">Ionizzazione e ricombinazione</a></li><li><a href="#prop-ionosfera-215">Gli strati</a></li><li><a href="#prop-ionosfera-216">Cicli solari</a></li><li><a href="#prop-ionosfera-217">LUF, MUF, frequenza critica e frequenza ottimale</a></li><li><a href="#prop-ionosfera-218">Angolo d'irradiazione e zona d'ombra (skip)</a></li><li><a href="#prop-ionosfera-219">Le bande HF, una per una</a></li></ul></li><li><a href="#prop-altri-modi">Altri modi di propagazione</a><ul><li><a href="#prop-altri-modi-220">Strato E sporadico (Es)</a></li><li><a href="#prop-altri-modi-221">Meteor scatter</a></li><li><a href="#prop-altri-modi-222">Magnetosfera e propagazione aurorale</a></li><li><a href="#prop-altri-modi-223">Propagazione transequatoriale (TEP)</a></li><li><a href="#prop-altri-modi-224">Collegamenti spaziali</a></li></ul></li><li><a href="#prop-disturbi-previsioni">Disturbi, indici solari e previsioni</a><ul><li><a href="#prop-disturbi-previsioni-225">Disturbi della propagazione</a></li><li><a href="#prop-disturbi-previsioni-226">Indici dell'attività solare</a></li><li><a href="#prop-disturbi-previsioni-227">Beacon e strumenti di previsione</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo-strumenti">Modulo 10 — Strumenti di misura</a></summary>
+            <ul><li><a href="#str-frequenza">Strumenti per la misura dei segnali</a><ul><li><a href="#str-frequenza-228">Le misure di frequenza e il frequenzimetro</a><ul><li><a href="#str-frequenza-229">Un po' di storia: l'ondametro</a></li><li><a href="#str-frequenza-230">I contatori di tipo digitale</a></li><li><a href="#str-frequenza-231">Il frequenzimetro</a></li></ul></li></ul></li><li><a href="#str-oscilloscopio">L'oscilloscopio</a><ul><li><a href="#str-oscilloscopio-232">Un po' di storia: il tubo a raggi catodici</a></li><li><a href="#str-oscilloscopio-233">L'oscilloscopio moderno</a></li><li><a href="#str-oscilloscopio-234">Le funzioni principali</a></li><li><a href="#str-oscilloscopio-235">Il puntale</a></li></ul></li><li><a href="#str-spettro">L'analizzatore di spettro</a><ul><li><a href="#str-spettro-236">Le funzioni principali</a></li><li><a href="#str-spettro-237">Una versione economica: il dongle RTL-SDR</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo6">Modulo 11 — Normativa</a></summary>
+            <ul><li><a href="#itu">ITU e Radio Regulations</a><ul><li><a href="#itu-238">Le Radio Regulations</a><ul><li><a href="#itu-239">Regioni ITU</a></li></ul></li></ul></li><li><a href="#cept">Raccomandazioni CEPT</a><ul><li><a href="#cept-240">TR 61-01</a></li><li><a href="#cept-241">TR 61-02 (HAREC)</a></li></ul></li><li><a href="#codice">Codice delle Comunicazioni Elettroniche</a></li><li><a href="#patente">Patente e nominativi</a><ul><li><a href="#patente-242">Il nominativo</a></li><li><a href="#patente-243">Suffissi speciali</a></li></ul></li><li><a href="#bande">Bande di frequenza</a><ul><li><a href="#bande-244">Relazione frequenza-lunghezza d'onda</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo7">Modulo 12 — Pratica operativa</a></summary>
+            <ul><li><a href="#codici">Codici e abbreviazioni</a><ul><li><a href="#codici-245">Alfabeto fonetico ICAO</a></li><li><a href="#codici-246">Codice Q</a></li><li><a href="#codici-247">Codice RST</a></li></ul></li><li><a href="#logbook">Logbook</a><ul><li><a href="#logbook-248">Campi principali</a></li></ul></li><li><a href="#qsl">QSL</a></li><li><a href="#comportamento">Comportamento e codice del radioamatore</a><ul><li><a href="#comportamento-249">Il Codice del Radioamatore</a></li><li><a href="#comportamento-250">Codice di condotta del DX'er</a></li></ul></li><li><a href="#emergenza">Radiocomunicazioni di emergenza</a><ul><li><a href="#emergenza-251">Segnali di soccorso</a></li><li><a href="#emergenza-252">Frequenze di emergenza in Italia</a></li></ul></li></ul>
+        </details>
+        <details class="toc-module"><summary><a href="#modulo-riepilogo">Riepilogo essenziale</a></summary>
+            <ul><li><a href="#riep-intro">Il bignami per l'esame</a></li><li><a href="#riep-elettrotecnica">1. Elettrotecnica di base</a><ul><li><a href="#riep-elettrotecnica-253">Le formule da conoscere</a></li><li><a href="#riep-elettrotecnica-254">Corrente alternata</a></li></ul></li><li><a href="#riep-componenti">2. Componenti elettronici</a><ul><li><a href="#riep-componenti-255">Resistori e codice colori</a></li><li><a href="#riep-componenti-256">Condensatori, induttori, trasformatori</a></li><li><a href="#riep-componenti-257">Semiconduttori</a></li></ul></li><li><a href="#riep-amplificatori">3. Amplificatori e oscillatori</a><ul><li><a href="#riep-amplificatori-258">Decibel</a></li><li><a href="#riep-amplificatori-259">Classi di amplificazione</a></li><li><a href="#riep-amplificatori-260">Configurazioni del BJT e operazionale</a></li><li><a href="#riep-amplificatori-261">Oscillatori</a></li></ul></li><li><a href="#riep-filtri">4. Filtri e risonanza</a></li><li><a href="#riep-tx-rx">5. Trasmettitori e ricevitori</a><ul><li><a href="#riep-tx-rx-262">Modulazioni</a></li><li><a href="#riep-tx-rx-263">Schema di un trasmettitore</a></li><li><a href="#riep-tx-rx-264">Classi di emissione (ITU)</a></li><li><a href="#riep-tx-rx-265">Ricevitori</a></li></ul></li><li><a href="#riep-linee-antenne">6. Linee di trasmissione e antenne</a><ul><li><a href="#riep-linee-antenne-266">Onde e lunghezza d'onda</a></li><li><a href="#riep-linee-antenne-267">Linee</a></li><li><a href="#riep-linee-antenne-268">Adattamento, ROS, return loss</a></li><li><a href="#riep-linee-antenne-269">Antenne</a></li></ul></li><li><a href="#riep-propagazione">7. Propagazione</a></li><li><a href="#riep-strumenti">8. Strumenti di misura</a></li><li><a href="#riep-normativa">9. Normativa</a><ul><li><a href="#riep-normativa-270">Bande di frequenza</a></li></ul></li><li><a href="#riep-pratica">10. Pratica operativa</a></li><li><a href="#glossario">Glossario</a></li><li><a href="#quiz-finale">Quiz finale — 100 domande</a></li></ul>
+        </details>
         </div>
     </div>
 </section>
@@ -1138,9 +1199,9 @@
     </div>
 
     <div class="card">
-        <h3>Le quattro grandezze fondamentali</h3>
+        <h3 id="grandezze-1">Le quattro grandezze fondamentali</h3>
 
-        <h4>Tensione (V)</h4>
+        <h4 id="grandezze-2">Tensione (V)</h4>
         <p>
             La <strong>tensione</strong>, o differenza di potenziale (d.d.p.), è la "spinta" che
             mette in movimento le cariche. Nasce da uno squilibrio di cariche: dove ci sono più
@@ -1153,7 +1214,7 @@
             voltmetro ha due puntali.
         </p>
 
-        <h4>Corrente (I)</h4>
+        <h4 id="grandezze-3">Corrente (I)</h4>
         <p>
             La <strong>corrente</strong> è il flusso di cariche che attraversa una sezione del
             conduttore in un secondo. Si misura in <strong>Ampere [A]</strong>. Per convenzione
@@ -1161,7 +1222,7 @@
             anche se in realtà nei metalli si muovono gli elettroni, che hanno carica negativa.
         </p>
 
-        <h4>Resistenza (R)</h4>
+        <h4 id="grandezze-4">Resistenza (R)</h4>
         <p>
             La <strong>resistenza</strong> è l'attitudine di un materiale a opporsi al passaggio
             della corrente. Dipende dal materiale, dalla sua geometria e dalla temperatura. Si misura
@@ -1169,7 +1230,7 @@
             vetro ha resistenza altissima.
         </p>
 
-        <h4>Potenza (P)</h4>
+        <h4 id="grandezze-5">Potenza (P)</h4>
         <p>
             La <strong>potenza</strong> è l'energia trasferita o dissipata nell'unità di tempo. Si
             misura in <strong>Watt [W]</strong>. Un resistore da 1 W dissipa 1 joule al secondo sotto
@@ -1478,14 +1539,14 @@
             I = V / R &nbsp;&nbsp;&nbsp;&nbsp; R = V / I
         </div>
 
-        <h4>Perché funziona così</h4>
+        <h4 id="ohm-6">Perché funziona così</h4>
         <p>
             Immagina di aumentare la tensione mantenendo la resistenza costante: la "spinta" aumenta
             e quindi la corrente cresce in proporzione. Se invece aumenti la resistenza mantenendo
             la tensione costante, il passaggio è più difficile e la corrente diminuisce.
         </p>
 
-        <h4>Esempio numerico</h4>
+        <h4 id="ohm-7">Esempio numerico</h4>
         <p>
             Un resistore da 220 Ω è collegato a una pila da 9 V. Qual è la corrente?
         </p>
@@ -1523,7 +1584,7 @@
             P = V² / R &nbsp;&nbsp;&nbsp;&nbsp; P = R × I²
         </div>
 
-        <h4>Perché è importante</h4>
+        <h4 id="potenza-8">Perché è importante</h4>
         <p>
             Ogni componente elettronico ha una <strong>potenza massima dissipabile</strong>. Se la
             superi, si surriscalda e si danneggia. Quando scegli un resistore, non basta calcolare
@@ -1531,7 +1592,7 @@
             nominale.
         </p>
 
-        <h4>Esempio numerico</h4>
+        <h4 id="potenza-9">Esempio numerico</h4>
         <p>
             Un resistore da 100 Ω attraversato da 50 mA dissipa:
         </p>
@@ -1573,7 +1634,7 @@
             con più percorsi alternativi).
         </p>
 
-        <h4>Resistenze in serie</h4>
+        <h4 id="serie-parallelo-10">Resistenze in serie</h4>
         <p>
             In un collegamento in serie la corrente che attraversa tutti i componenti è la stessa,
             mentre la tensione si distribuisce ai capi di ciascuno. La resistenza equivalente è la
@@ -1587,7 +1648,7 @@
             del circuito.
         </p>
 
-        <h4>Resistenze in parallelo</h4>
+        <h4 id="serie-parallelo-11">Resistenze in parallelo</h4>
         <p>
             In un collegamento in parallelo la tensione ai capi di tutti i componenti è la stessa,
             mentre la corrente si distribuisce tra i vari rami. La resistenza equivalente è:
@@ -1604,7 +1665,7 @@
             del circuito.
         </p>
 
-        <h4>Condensatori e induttanze</h4>
+        <h4 id="serie-parallelo-12">Condensatori e induttanze</h4>
         <p>
             Attenzione: condensatori e induttanze si comportano <em>al contrario</em> rispetto alle
             resistenze.
@@ -1638,7 +1699,7 @@
             <p>La resistenza equivalente in parallelo è sempre minore della più piccola.</p>
         </div>
 
-        <h4>Esempio numerico</h4>
+        <h4 id="serie-parallelo-13">Esempio numerico</h4>
         <p>
             Due resistenze, R₁ = 100 Ω e R₂ = 220 Ω.
         </p>
@@ -1947,7 +2008,7 @@
             dell'energia.
         </p>
 
-        <h4>Prima legge (legge dei nodi)</h4>
+        <h4 id="kirchhoff-14">Prima legge (legge dei nodi)</h4>
         <p>
             In un nodo, la somma delle correnti entranti è uguale alla somma delle correnti uscenti.
             In altre parole, la carica non si accumula in un nodo: quello che entra deve anche uscire.
@@ -1956,7 +2017,7 @@
             Σ I<sub>entranti</sub> = Σ I<sub>uscenti</sub>
         </div>
 
-        <h4>Seconda legge (legge delle maglie)</h4>
+        <h4 id="kirchhoff-15">Seconda legge (legge delle maglie)</h4>
         <p>
             Lungo una maglia chiusa, la somma algebrica delle tensioni è zero. In altre parole, se
             percorri un anello chiuso e torni al punto di partenza, il potenziale deve essere lo stesso.
@@ -1988,7 +2049,7 @@
             semplice equivalente.
         </p>
 
-        <h4>Teorema di Thévenin</h4>
+        <h4 id="teoremi-16">Teorema di Thévenin</h4>
         <p>
             Qualsiasi rete lineare, vista da due terminali, può essere sostituita da un generatore
             equivalente E<sub>eq</sub> in serie a una resistenza equivalente R<sub>eq</sub>.
@@ -1999,7 +2060,7 @@
             generatori spenti (tensioni cortocircuitate, correnti aperte).</p>
         </div>
 
-        <h4>Teorema di Millman</h4>
+        <h4 id="teoremi-17">Teorema di Millman</h4>
         <p>
             La tensione tra due nodi di una rete con più rami in parallelo è data dalla somma dei
             prodotti delle f.e.m. per le rispettive conduttanze, divisa per la somma delle conduttanze.
@@ -2008,7 +2069,7 @@
             V = (Σ E<sub>i</sub> × G<sub>i</sub>) / (Σ G<sub>i</sub>)
         </div>
 
-        <h4>Principio di sovrapposizione degli effetti</h4>
+        <h4 id="teoremi-18">Principio di sovrapposizione degli effetti</h4>
         <p>
             In una rete lineare con più generatori, la corrente in un ramo è la somma algebrica delle
             correnti prodotte da ciascun generatore considerato singolarmente, con gli altri spenti.
@@ -2044,7 +2105,7 @@
             <div class="diagram-caption">Andamento di una tensione alternata sinusoidale nel tempo.</div>
         </div>
 
-        <h4>Periodo e frequenza</h4>
+        <h4 id="corrente-alternata-19">Periodo e frequenza</h4>
         <p>
             Il <strong>periodo</strong> T è il tempo impiegato per completare un ciclo, misurato in
             secondi. La <strong>frequenza</strong> f è il numero di cicli al secondo, misurata in
@@ -2054,7 +2115,7 @@
             f = 1 / T
         </div>
 
-        <h4>Valore di picco, medio ed efficace</h4>
+        <h4 id="corrente-alternata-20">Valore di picco, medio ed efficace</h4>
         <p>
             Di un segnale sinusoidale si possono definire diversi valori:
         </p>
@@ -2092,7 +2153,7 @@
             al passaggio della corrente dipende dalla frequenza.
         </p>
 
-        <h4>Reattanza capacitiva</h4>
+        <h4 id="reattanza-21">Reattanza capacitiva</h4>
         <div class="formula">
             X<sub>C</sub> = 1 / (2π × f × C)
         </div>
@@ -2103,7 +2164,7 @@
             come un cortocircuito.
         </p>
 
-        <h4>Reattanza induttiva</h4>
+        <h4 id="reattanza-22">Reattanza induttiva</h4>
         <div class="formula">
             X<sub>L</sub> = 2π × f × L
         </div>
@@ -2113,7 +2174,7 @@
             alta frequenza, X<sub>L</sub> tende a infinito: l'induttore blocca la corrente.
         </p>
 
-        <h4>Impedenza</h4>
+        <h4 id="reattanza-23">Impedenza</h4>
         <p>
             Quando un circuito contiene sia resistenze che reattanze, si usa il concetto di
             <strong>impedenza</strong> Z, che è una grandezza complessa:
@@ -2417,13 +2478,13 @@
     </div>
 
     <div class="card">
-        <h3>Simbolo e tipi costruttivi</h3>
+        <h3 id="resistori-24">Simbolo e tipi costruttivi</h3>
         <div class="diagram">
             <img class="diagram-img" src="assets/images/simbolo-resistore.jpg" alt="Simbolo del resistore (rettangolo IEC e zig-zag americano) e principali tipi costruttivi." loading="lazy">
             <div class="diagram-caption">Simbolo del resistore (rettangolo IEC/europeo e zig-zag americano) e i principali tipi costruttivi: assiale, SMD, a filo.</div>
         </div>
 
-        <h4>Potenza dissipata</h4>
+        <h4 id="resistori-25">Potenza dissipata</h4>
         <p>
             L'energia dissipata nell'unità di tempo si calcola con le formule di potenza già viste nel
             Modulo 1, tutte equivalenti tra loro grazie alla legge di Ohm:
@@ -2439,7 +2500,7 @@
             alette di raffreddamento.
         </p>
 
-        <h4>Codice colori</h4>
+        <h4 id="resistori-26">Codice colori</h4>
         <p>
             Sui resistori a impasto/film (assiali) il valore non è scritto in cifre ma codificato con
             <strong>anelli colorati</strong>. Nel formato a 4 fasce: le prime due indicano le cifre
@@ -2487,7 +2548,7 @@
             nominale si scalda e può cambiare leggermente valore, oltre a essere a rischio di guasto.</p>
         </div>
 
-        <h4>Tipi di resistori</h4>
+        <h4 id="resistori-27">Tipi di resistori</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -2525,13 +2586,13 @@
     </div>
 
     <div class="card">
-        <h3>Simbolo e struttura</h3>
+        <h3 id="condensatori-28">Simbolo e struttura</h3>
         <div class="diagram">
             <img class="diagram-img" src="assets/images/condensatore-struttura.jpg" alt="Simbolo del condensatore e struttura fisica." loading="lazy">
             <div class="diagram-caption">Simbolo del condensatore e struttura fisica.</div>
         </div>
 
-        <h4>Capacità</h4>
+        <h4 id="condensatori-29">Capacità</h4>
         <p>
             La capacità C è definita come il rapporto tra la carica Q immagazzinata e la tensione V
             applicata:
@@ -2552,12 +2613,12 @@
             (d minore), e dipende dal tipo di dielettrico (ε).
         </p>
 
-        <h4>Energia accumulata</h4>
+        <h4 id="condensatori-30">Energia accumulata</h4>
         <div class="formula">
             W = ½ × C × V²
         </div>
 
-        <h4>Comportamento in corrente alternata</h4>
+        <h4 id="condensatori-31">Comportamento in corrente alternata</h4>
         <p>
             In corrente alternata il condensatore introduce una reattanza capacitiva:
         </p>
@@ -2576,7 +2637,7 @@
             <p>La tensione di lavoro è un parametro critico: va scelta almeno il 20-30% superiore alla tensione massima del circuito.</p>
         </div>
 
-        <h4>Tipi di condensatori</h4>
+        <h4 id="condensatori-32">Tipi di condensatori</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -2613,7 +2674,7 @@
             <div class="diagram-caption">Simbolo dell'induttore (bobina).</div>
         </div>
 
-        <h4>Induttanza</h4>
+        <h4 id="induttori-33">Induttanza</h4>
         <p>
             L'induttanza L misura la capacità di un componente di immagazzinare energia magnetica.
             Si misura in <strong>Henry [H]</strong> ed è definita come:
@@ -2630,7 +2691,7 @@
             <span class="label">µ = permeabilità, N = numero spire, A = sezione, l = lunghezza</span>
         </div>
 
-        <h4>Reattanza induttiva</h4>
+        <h4 id="induttori-34">Reattanza induttiva</h4>
         <div class="formula">
             X<sub>L</sub> = 2π × f × L
         </div>
@@ -2671,7 +2732,7 @@
             <div class="diagram-caption">Schema di un trasformatore: primario e secondario su nucleo comune.</div>
         </div>
 
-        <h4>Rapporto di trasformazione</h4>
+        <h4 id="trasformatori-35">Rapporto di trasformazione</h4>
         <div class="formula">
             V<sub>p</sub> / V<sub>s</sub> = N<sub>p</sub> / N<sub>s</sub> = k
         </div>
@@ -2705,7 +2766,7 @@
             <div class="diagram-caption">Simbolo del diodo: la freccia indica il verso convenzionale della corrente.</div>
         </div>
 
-        <h4>Polarizzazione</h4>
+        <h4 id="diodi-36">Polarizzazione</h4>
         <ul>
             <li><strong>Diretta:</strong> anodo al positivo, catodo al negativo. Il diodo conduce,
             con una caduta di tensione di circa 0,7 V (silicio) o 0,3 V (germanio).</li>
@@ -2718,7 +2779,7 @@
             <p>La tensione inversa massima (V<sub>RRM</sub>) non va mai superata, altrimenti il diodo si distrugge.</p>
         </div>
 
-        <h4>Tipi di diodi</h4>
+        <h4 id="diodi-37">Tipi di diodi</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -3005,7 +3066,7 @@
             <div class="diagram-caption">Simboli del BJT NPN e PNP. La freccia sull'emettitore indica il verso della corrente.</div>
         </div>
 
-        <h4>Funzionamento</h4>
+        <h4 id="bjt-38">Funzionamento</h4>
         <p>
             Per funzionare come amplificatore, il BJT deve avere:
         </p>
@@ -3028,7 +3089,7 @@
             I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub>
         </div>
 
-        <h4>Zone di funzionamento</h4>
+        <h4 id="bjt-39">Zone di funzionamento</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -3049,7 +3110,7 @@
             <p>V<sub>BE</sub> ≈ 0,6-0,7 V per far condurre un BJT al silicio.</p>
         </div>
 
-        <h4>Polarizzazione e stabilizzazione termica</h4>
+        <h4 id="bjt-40">Polarizzazione e stabilizzazione termica</h4>
         <p>
             Il BJT è sensibile alla temperatura: β e V<sub>BE</sub> variano con il calore. Per
             mantenere stabile il punto di lavoro si usa un <strong>partitore di base</strong>
@@ -3096,7 +3157,7 @@
             <div class="diagram-caption">Struttura del JFET a canale N.</div>
         </div>
 
-        <h4>Funzionamento</h4>
+        <h4 id="jfet-41">Funzionamento</h4>
         <p>
             Nel JFET a canale N, il gate è formato da due regioni P+ che circondano il canale N.
             Applicando una tensione negativa tra gate e source (V<sub>GS</sub> &lt; 0), la giunzione
@@ -3134,7 +3195,7 @@
             <div class="diagram-caption">Struttura del MOSFET a canale N.</div>
         </div>
 
-        <h4>Tipi</h4>
+        <h4 id="mosfet-42">Tipi</h4>
         <ul>
             <li><strong>MOSFET a svuotamento (depletion):</strong> il canale esiste già; V<sub>GS</sub> negativa lo riduce.</li>
             <li><strong>MOSFET a riempimento (enhancement):</strong> il canale si forma con V<sub>GS</sub> &gt; V<sub>T</sub> (tensione di soglia).</li>
@@ -3474,9 +3535,9 @@
     </div>
 
     <div class="card">
-        <h3>Concetti fondamentali</h3>
+        <h3 id="amplificatori-43">Concetti fondamentali</h3>
 
-        <h4>Guadagno</h4>
+        <h4 id="amplificatori-44">Guadagno</h4>
         <p>
             Il guadagno è il rapporto tra il segnale di uscita e quello di ingresso. Può essere
             espresso in tensione, corrente o potenza.
@@ -3494,7 +3555,7 @@
             numeri piccoli. Un guadagno di 1000 in tensione corrisponde a 60 dB.
         </p>
 
-        <h4>Impedenza di ingresso e uscita</h4>
+        <h4 id="amplificatori-45">Impedenza di ingresso e uscita</h4>
         <p>
             L'<strong>impedenza di ingresso</strong> Z<sub>i</sub> è l'impedenza che l'amplificatore
             presenta alla sorgente. L'<strong>impedenza di uscita</strong> Z<sub>o</sub> è quella
@@ -3505,7 +3566,7 @@
             <li>Z<sub>o</sub> deve essere <strong>bassa</strong> per pilotare il carico senza perdite.</li>
         </ul>
 
-        <h4>Banda passante</h4>
+        <h4 id="amplificatori-46">Banda passante</h4>
         <p>
             La banda passante è l'intervallo di frequenze in cui l'amplificatore amplifica in modo
             uniforme. Ai bordi della banda il guadagno scende di 3 dB (cioè a 0,707 del valore massimo).
@@ -3523,7 +3584,7 @@
             <p><strong>+20 dB</strong> = ×10 in tensione, ×100 in potenza.</p>
         </div>
 
-        <h4>Distorsione</h4>
+        <h4 id="amplificatori-47">Distorsione</h4>
         <p>
             La distorsione è qualsiasi alterazione della forma del segnale. Si distinguono:
         </p>
@@ -3555,7 +3616,7 @@
             <div class="diagram-caption">Retta di carico e punto di lavoro Q sulle curve caratteristiche del BJT.</div>
         </div>
 
-        <h4>Retta di carico</h4>
+        <h4 id="punto-lavoro-48">Retta di carico</h4>
         <p>
             La retta di carico è il luogo dei punti in cui può trovarsi il punto di lavoro. Si
             ricava dalla maglia di uscita:
@@ -3568,7 +3629,7 @@
             delle ascisse in V<sub>CE</sub> = E<sub>CC</sub>.
         </p>
 
-        <h4>Scelta del punto di lavoro</h4>
+        <h4 id="punto-lavoro-49">Scelta del punto di lavoro</h4>
         <p>
             Il punto di lavoro deve stare nella <strong>zona attiva</strong>, lontano da saturazione
             e interdizione, in modo che il segnale possa oscillare senza "toccare" i limiti.
@@ -3745,7 +3806,7 @@
             <div class="diagram-caption">Simbolo dell'amplificatore operazionale.</div>
         </div>
 
-        <h4>Da dove viene: il nodo di confronto</h4>
+        <h4 id="operazionali-50">Da dove viene: il nodo di confronto</h4>
         <p>
             In una reazione negativa, il nodo di confronto deve fare la <strong>differenza tra due
             segnali</strong>: quello di ingresso e quello di reazione. Questo nodo viene di solito
@@ -3756,7 +3817,7 @@
             lavorano in corrente anziché in tensione (<strong>amplificatori di Norton</strong>).
         </p>
 
-        <h4>Caratteristiche ideali</h4>
+        <h4 id="operazionali-51">Caratteristiche ideali</h4>
         <ul>
             <li>Guadagno infinito (A<sub>OL</sub> = ∞)</li>
             <li>Impedenza di ingresso infinita (Z<sub>i</sub> = ∞)</li>
@@ -3771,7 +3832,7 @@
             l'uscita può raggiungere i valori massimo e minimo della tensione di alimentazione.
         </p>
 
-        <h4>Il principio della retroazione negativa</h4>
+        <h4 id="operazionali-52">Il principio della retroazione negativa</h4>
         <p>
             L'op-amp reale ha guadagno molto alto (10⁵-10⁶), ma non lineare. Per usarlo come
             amplificatore lineare si applica una <strong>retroazione negativa</strong>: una parte
@@ -3779,7 +3840,7 @@
             diventa determinato solo dai componenti esterni.
         </p>
 
-        <h4>Configurazioni base</h4>
+        <h4 id="operazionali-53">Configurazioni base</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -3798,7 +3859,7 @@
             da quello successivo senza introdurre sfasamento né attenuazione.
         </p>
 
-        <h4>Il sommatore pesato</h4>
+        <h4 id="operazionali-54">Il sommatore pesato</h4>
         <p>
             Il circuito sommatore più semplice è un nodo dove confluiscono più segnali, ma i blocchi
             collegati così interagiscono tra loro. Se il nodo è invece <strong>virtualmente a
@@ -3815,7 +3876,7 @@
             <div class="diagram-caption">Sommatore pesato: più segnali in ingresso (V₁, V₂, V₃...) vengono sommati, pesati dal rapporto tra resistenze, nel nodo virtualmente a massa dell'ingresso invertente.</div>
         </div>
 
-        <h4>L'amplificatore differenziale</h4>
+        <h4 id="operazionali-55">L'amplificatore differenziale</h4>
         <p>
             Un amplificatore differenziale "a nodo" ha difetti: scarso disaccoppiamento tra gli
             ingressi, bassa impedenza di ingresso, basso CMRR (reiezione di modo comune) e alta
@@ -3828,7 +3889,7 @@
             <div class="diagram-caption">Amplificatore differenziale: l'uscita è proporzionale alla differenza pesata tra i due segnali di ingresso.</div>
         </div>
 
-        <h4>Generatori ideali di tensione e di corrente</h4>
+        <h4 id="operazionali-56">Generatori ideali di tensione e di corrente</h4>
         <p>
             Un <strong>generatore ideale di tensione</strong> (impedenza di uscita nulla, indipendente
             dal carico) si può ottenere da un generatore reale di corrente seguito da un buffer
@@ -3842,7 +3903,7 @@
             <div class="diagram-caption">A sinistra: generatore ideale di tensione da un generatore reale di corrente. A destra: generatore ideale di corrente da un generatore reale di tensione.</div>
         </div>
 
-        <h4>Integratore e derivatore di segnale</h4>
+        <h4 id="operazionali-57">Integratore e derivatore di segnale</h4>
         <p>
             Sostituendo i soli resistori dei filtri RC con un operazionale, se ne migliorano le
             caratteristiche. Il <strong>filtro passa-basso</strong> diventa un integratore:
@@ -3861,7 +3922,7 @@
             <div class="diagram-caption">A sinistra: l'integratore trasforma un'onda quadra in un'onda triangolare. A destra: il derivatore trasforma una rampa in un'onda quadra.</div>
         </div>
 
-        <h4>Comparatore e comparatore con isteresi</h4>
+        <h4 id="operazionali-58">Comparatore e comparatore con isteresi</h4>
         <p>
             Il <strong>comparatore di tensione</strong> ha due segnali analogici ai suoi ingressi:
             l'uscita è alta (verso V+) o bassa (verso massa) a seconda di quale dei due ingressi è più
@@ -3875,7 +3936,7 @@
             <div class="diagram-caption">In alto: senza isteresi il rumore attorno alla soglia genera commutazioni multiple ("chatter"). In basso: con isteresi l'uscita commuta in modo pulito.</div>
         </div>
 
-        <h4>Il diodo ideale</h4>
+        <h4 id="operazionali-59">Il diodo ideale</h4>
         <p>
             Un diodo reale, da solo, non è un raddrizzatore ideale: ha una soglia di accensione
             (~0,6 V) che "arrotonda" i segnali piccoli. Ponendo un diodo reale nel ramo di reazione di
@@ -3907,7 +3968,7 @@
             correnti e tensioni elevate.
         </p>
 
-        <h4>Rendimento e figura di merito</h4>
+        <h4 id="potenza-2-60">Rendimento e figura di merito</h4>
         <div class="formula">
             η = P<sub>u</sub> / P<sub>CC</sub>
             <span class="label">Rendimento = potenza utile / potenza assorbita</span>
@@ -4212,7 +4273,7 @@
     </div>
 
     <div class="card">
-        <h3>Generalità e criterio di Barkhausen</h3>
+        <h3 id="osc-generalita-61">Generalità e criterio di Barkhausen</h3>
         <p>
             Storicamente, per generare un segnale a radiofrequenza si usavano macchine rotanti (gli
             <strong>alternatori</strong>), che tramite un trasformatore ad altissima tensione
@@ -4230,7 +4291,7 @@
             rilassamento).
         </p>
 
-        <h4>Il criterio di Barkhausen</h4>
+        <h4 id="osc-generalita-62">Il criterio di Barkhausen</h4>
         <p>
             Si applichi un segnale sinusoidale X a una rete lineare formata da due quadripoli in
             cascata, di funzioni di trasferimento A (l'amplificatore) e β (la rete di reazione):
@@ -4280,7 +4341,7 @@
             un amplificatore a larga banda più una rete passiva, a sua volta invertente o non invertente.
         </p>
 
-        <h4>Oscillatore (a mezzo ponte) di Wien</h4>
+        <h4 id="osc-bassa-frequenza-63">Oscillatore (a mezzo ponte) di Wien</h4>
         <p>
             È il più semplice oscillatore a retroazione: un amplificatore <strong>non invertente</strong>
             con un'opportuna rete di reazione R-C.
@@ -4293,7 +4354,7 @@
             <div class="diagram-caption">Oscillatore a mezzo ponte di Wien: amplificatore non invertente con rete di reazione R-C.</div>
         </div>
 
-        <h4>Oscillatore a ponte di Wien</h4>
+        <h4 id="osc-bassa-frequenza-64">Oscillatore a ponte di Wien</h4>
         <p>
             Deriva dal precedente: la rete di reazione realizza un vero e proprio <strong>ponte</strong>,
             dove lo squilibrio tra le tensioni viene applicato a un amplificatore differenziale.
@@ -4307,7 +4368,7 @@
             <div class="diagram-caption">Oscillatore a ponte di Wien: lo squilibrio del ponte R-C viene applicato a un amplificatore differenziale.</div>
         </div>
 
-        <h4>Oscillatore a sfasamento</h4>
+        <h4 id="osc-bassa-frequenza-65">Oscillatore a sfasamento</h4>
         <p>
             Se l'amplificatore è <strong>invertente</strong>, serve riportare in fase ingresso e uscita:
             si usano almeno <strong>tre celle R-C</strong>, perché lo sfasamento di ogni singola cella è
@@ -4321,7 +4382,7 @@
             <div class="diagram-caption">Oscillatore a sfasamento: tre celle R-C in cascata riportano in fase un amplificatore invertente.</div>
         </div>
 
-        <h4>Oscillatore a T e doppio T</h4>
+        <h4 id="osc-bassa-frequenza-66">Oscillatore a T e doppio T</h4>
         <p>
             La rete selettiva a doppio T (o <strong>rete di Scott</strong>) è particolarmente
             conveniente in bassa frequenza. Se l'amplificazione compensa esattamente l'attenuazione
@@ -4346,7 +4407,7 @@
             reattivi</strong> (reattanze X₁, X₂, X₃), di cui due uguali e uno diverso.
         </p>
 
-        <h4>Oscillatore Meissner</h4>
+        <h4 id="osc-alta-frequenza-67">Oscillatore Meissner</h4>
         <p>
             È il più semplice generatore per alta frequenza: la reazione avviene tramite un
             <strong>accoppiamento induttivo</strong> (un trasformatore) tra uscita e ingresso. Viene
@@ -4357,7 +4418,7 @@
             <div class="diagram-caption">Oscillatore Meissner: reazione tramite accoppiamento induttivo (trasformatore) tra uscita e ingresso.</div>
         </div>
 
-        <h4>Oscillatori a "tre punti"</h4>
+        <h4 id="osc-alta-frequenza-68">Oscillatori a "tre punti"</h4>
         <p>
             Gli oscillatori con elementi reattivi di tipo diverso si possono ricondurre a uno schema
             generale, in cui l'amplificatore deve essere <strong>invertente e unidirezionale</strong>,
@@ -4373,7 +4434,7 @@
             <div class="diagram-caption">Schema generale degli oscillatori a "tre punti": Z₁, Z₂ comprendono anche le impedenze di ingresso/uscita dell'amplificatore.</div>
         </div>
 
-        <h4>Oscillatore Colpitts</h4>
+        <h4 id="osc-alta-frequenza-69">Oscillatore Colpitts</h4>
         <p>
             Se X₃ è <strong>induttiva</strong> e X₁, X₂ sono <strong>capacitive</strong> (due
             condensatori e un'induttanza — "C" come Colpitts e come condensatore), si ottiene
@@ -4388,7 +4449,7 @@
             <div class="diagram-caption">Oscillatore Colpitts: due condensatori (C₁, C₂) e un'induttanza L.</div>
         </div>
 
-        <h4>Variante Clapp</h4>
+        <h4 id="osc-alta-frequenza-70">Variante Clapp</h4>
         <p>
             L'oscillatore Clapp usa un induttore e <strong>tre condensatori</strong>: è spesso
             disegnato come un Colpitts con un condensatore aggiuntivo C₀ in serie all'induttore. I
@@ -4403,7 +4464,7 @@
             <div class="diagram-caption">Variante Clapp: un condensatore C₀ aggiuntivo in serie all'induttore stabilisce la frequenza insieme a L.</div>
         </div>
 
-        <h4>Oscillatore Hartley</h4>
+        <h4 id="osc-alta-frequenza-71">Oscillatore Hartley</h4>
         <p>
             Se X₃ è <strong>capacitiva</strong> e X₁, X₂ sono <strong>induttive</strong> (due
             induttanze e un condensatore — "H" come Hartley e come Henry, l'unità di misura delle
@@ -4442,7 +4503,7 @@
             buffer tra uscita e carico.
         </p>
 
-        <h4>Il cristallo di quarzo</h4>
+        <h4 id="osc-quarzo-72">Il cristallo di quarzo</h4>
         <p>
             Un cristallo piezoelettrico eccitato con un segnale elettrico variabile è sede di
             oscillazioni meccaniche. Se lo smorzamento è sufficientemente piccolo, il cristallo si
@@ -4466,7 +4527,7 @@
             L-C nell'oscillatore.
         </p>
 
-        <h4>Oscillatore Pierce</h4>
+        <h4 id="osc-quarzo-73">Oscillatore Pierce</h4>
         <p>
             Tra le due frequenze di risonanza la reattanza del quarzo è <strong>induttiva</strong>,
             mentre all'esterno di questo intervallo è capacitiva. Sostituendo la bobina di un
@@ -4479,7 +4540,7 @@
             <div class="diagram-caption">Oscillatore Pierce: un cristallo di quarzo sostituisce la bobina di un Colpitts.</div>
         </div>
 
-        <h4>Oscillatore Clapp quarzato</h4>
+        <h4 id="osc-quarzo-74">Oscillatore Clapp quarzato</h4>
         <p>
             La configurazione Clapp si può usare anche con oscillatori quarzati: è il più semplice (e
             stabile) oscillatore realizzabile partendo da un Colpitts. A seconda del tipo di quarzo
@@ -4561,7 +4622,7 @@
             conversione numerica tramite DAC.
         </p>
 
-        <h4>Il PLL (Phase-Locked Loop)</h4>
+        <h4 id="osc-sintesi-75">Il PLL (Phase-Locked Loop)</h4>
         <p>
             Il PLL si basa sul controllo, tramite reazionamento negativo, dell'oscillazione di un
             generatore. Il blocco di <strong>riferimento</strong> è un oscillatore quarzato molto
@@ -4582,7 +4643,7 @@
             <div class="diagram-caption">Schema a blocchi di un PLL: oscillatore di riferimento, rivelatore di fase, filtro d'anello, VCO e divisore di retroazione.</div>
         </div>
 
-        <h4>La sintesi diretta digitale (DDS)</h4>
+        <h4 id="osc-sintesi-76">La sintesi diretta digitale (DDS)</h4>
         <p>
             L'oscillatore a sintesi diretta digitale (DDS) è composto da un oscillatore fisso molto
             stabile (la base dei tempi, un oscillatore quarzato che determina il clock di sistema), da
@@ -4873,7 +4934,7 @@
     </div>
 
     <div class="card">
-        <h3>Filtro passa-basso RC</h3>
+        <h3 id="filtri-77">Filtro passa-basso RC</h3>
         <p>
             Lascia passare le frequenze basse e attenua quelle alte. È formato da una resistenza
             in serie e un condensatore in parallelo all'uscita.
@@ -4894,7 +4955,7 @@
             taglio il segnale passa quasi inalterato; sopra, viene attenuato di 20 dB per decade.
         </p>
 
-        <h3>Filtro passa-alto RC</h3>
+        <h3 id="filtri-78">Filtro passa-alto RC</h3>
         <p>
             Lascia passare le frequenze alte e attenua quelle basse. È formato da un condensatore
             in serie e una resistenza in parallelo all'uscita.
@@ -4905,7 +4966,7 @@
             <div class="diagram-caption">Filtro passa-alto RC: C in serie, R in parallelo all'uscita.</div>
         </div>
 
-        <h3>Filtri RL</h3>
+        <h3 id="filtri-79">Filtri RL</h3>
         <p>
             Lo stesso comportamento si ottiene sostituendo il condensatore con un'induttore. Il
             filtro passa-basso RL ha l'induttore in serie e la resistenza in parallelo; il passa-alto
@@ -4940,13 +5001,13 @@
             lascia passare solo un intervallo di frequenze attorno alla risonanza.
         </p>
 
-        <h4>Serie</h4>
+        <h4 id="passa-banda-80">Serie</h4>
         <div class="diagram">
             <img class="diagram-img" src="assets/images/filtro-rcl-serie.jpg" alt="Filtro RCL serie: l'uscita è ai capi di R." loading="lazy">
             <div class="diagram-caption">Filtro RCL serie: l'uscita è ai capi di R.</div>
         </div>
 
-        <h4>Parallelo</h4>
+        <h4 id="passa-banda-81">Parallelo</h4>
         <div class="diagram">
             <img class="diagram-img" src="assets/images/filtro-rcl-parallelo.jpg" alt="Filtro RCL parallelo." loading="lazy">
             <div class="diagram-caption">Filtro RCL parallelo.</div>
@@ -4981,7 +5042,7 @@
             f₀ = 1 / (2π × √(LC))
         </div>
 
-        <h4>Fattore di merito Q</h4>
+        <h4 id="risonanza-82">Fattore di merito Q</h4>
         <p>
             Il fattore di merito Q misura la selettività del circuito risonante:
         </p>
@@ -4994,7 +5055,7 @@
             una banda larga.
         </p>
 
-        <h4>Tensione di risonanza</h4>
+        <h4 id="risonanza-83">Tensione di risonanza</h4>
         <p>
             Alla risonanza, la tensione ai capi di L e C può essere <strong>molto più grande</strong>
             della tensione applicata:
@@ -5313,13 +5374,13 @@
         </div>
     </div>
     <div class="card">
-        <h3>Codifica, modulazione e portante</h3>
+        <h3 id="tx-generalita-84">Codifica, modulazione e portante</h3>
         <ul>
             <li><strong>Codifica</strong> (analogica o digitale): il modo in cui viene preparata l'informazione da trasmettere.</li>
             <li><strong>Modulazione</strong> (analogica o digitale): il modo di trasferire alla portante l'informazione.</li>
             <li><strong>Portante</strong>: il segnale (con la potenza necessaria) per mezzo del quale l'informazione viene trasmessa.</li>
         </ul>
-        <h4>La radiotelegrafia</h4>
+        <h4 id="tx-generalita-85">La radiotelegrafia</h4>
         <p>
             Il metodo più semplice per inviare un'informazione via radio, e storicamente il primo impiegato, è il <strong>codice telegrafico Morse</strong> applicato alla radio. Si parte da un'onda radio continua (<strong>CW</strong>, Continuous Wave) che, tramite un interruttore (il tasto telegrafico), viene interrotta in adeguate sequenze: segnale radio SÌ / segnale radio NO. Variando la durata degli intervalli SÌ si trasmettono le sequenze di punti e linee del codice Morse.
         </p>
@@ -5330,7 +5391,7 @@
             <img class="diagram-img" src="assets/images/tx-radiotelegrafia-cw.jpg" alt="Trasmissione radiotelegrafica in CW" loading="lazy">
             <div class="diagram-caption">Portante continua (CW) interrotta dal tasto: la sequenza di segnale SÌ / segnale NO forma i punti e le linee del codice Morse.</div>
         </div>
-        <h4>I microfoni</h4>
+        <h4 id="tx-generalita-86">I microfoni</h4>
         <p>
             Il modo più semplice di codificare un segnale audio in forma analogica è usare un <strong>trasduttore</strong>: il microfono trasforma le onde sonore (il parlato) in segnali elettrici. Oggi si usano tre tipi di microfoni; quelli piezoelettrici e a carbone sono ormai in disuso.
         </p>
@@ -5379,11 +5440,11 @@
                 </tbody>
             </table>
         </div>
-        <h4>La fonia digitale</h4>
+        <h4 id="tx-modulazioni-87">La fonia digitale</h4>
         <p>
             Esistono anche sistemi di trasmissione della voce in modo digitale: la codifica avviene tramite un ADC e il segnale viene trasformato in una sequenza numerica. I più comuni sono, per le HF, <strong>DRM</strong> (Digital Radio Mondiale) e <strong>FDMDV</strong>; per le VHF e superiori <strong>C4FM</strong>, <strong>DMR</strong> e <strong>D-Star</strong>. Le modulazioni audio digitali non sono approfondite in questo corso.
         </p>
-        <h4>Il prodotto di due sinusoidi</h4>
+        <h4 id="tx-modulazioni-88">Il prodotto di due sinusoidi</h4>
         <p>
             Se si moltiplicano due funzioni sinusoidali A(t) = A·sen(ω<sub>A</sub>t) e B(t) = B·sen(ω<sub>B</sub>t), il prodotto è:
         </p>
@@ -5398,7 +5459,7 @@
             <img class="diagram-img" src="assets/images/tx-prodotto-sinusoidi-spettro.jpg" alt="Spettro del prodotto di due sinusoidi" loading="lazy">
             <div class="diagram-caption">Prodotto di due segnali sinusoidali (10 MHz e 1 kHz): oltre alla portante compaiono due componenti, alla somma e alla differenza delle frequenze.</div>
         </div>
-        <h4>Occupazione di banda</h4>
+        <h4 id="tx-modulazioni-89">Occupazione di banda</h4>
         <p>
             Lo spettro radio è limitato: per far convivere molte trasmissioni si restringe l'occupazione di banda di ciascun trasmettitore. La <strong>larghezza di banda occupata (OBW)</strong> è l'area in cui cade il <strong>99%</strong> della potenza media trasmessa. Minore è la banda occupata, migliore è l'efficienza spettrale. Per un canale di 12,5 kHz è tipica un'occupazione di 8,5 kHz. La OBW si misura con una funzione dell'<a href="#str-spettro">analizzatore di spettro</a>.
         </p>
@@ -5409,7 +5470,7 @@
             <img class="diagram-img" src="assets/images/tx-occupazione-banda-obw.jpg" alt="Occupazione di banda (OBW)" loading="lazy">
             <div class="diagram-caption">La banda occupata (OBW) contiene il 99% della potenza trasmessa; l'1% restante cade fuori canale e disturba i canali adiacenti (ACP).</div>
         </div>
-        <h4>Distorsione e intermodulazione</h4>
+        <h4 id="tx-modulazioni-90">Distorsione e intermodulazione</h4>
         <p>
             In un circuito analogico <strong>lineare</strong>, qualsiasi variazione di ampiezza o di fase di tutte le componenti sinusoidali del segnale è una distorsione lineare (esempio classico: un filtro): non vengono prodotte nuove componenti. Un amplificatore in <strong>classe C</strong>, invece, lavora in zona di interdizione e applica una distorsione <strong>non lineare</strong>: con più componenti sinusoidali presenti compare il fenomeno dell'<strong>intermodulazione (IMD)</strong>.
         </p>
@@ -5444,7 +5505,7 @@
         <p>
             È stato il primo modo di trasmissione in fonia. Il concetto è semplice: il valore massimo di tensione del segnale fornito da un amplificatore di potenza è approssimativamente uguale alla sua tensione di alimentazione; variando la tensione di alimentazione proporzionalmente alla modulazione si ottiene una portante modulata in ampiezza.
         </p>
-        <h4>Indice di modulazione</h4>
+        <h4 id="tx-am-91">Indice di modulazione</h4>
         <p>
             L'<strong>indice di modulazione</strong> è il rapporto, in percentuale, tra il valore picco-picco del segnale modulante e quello della portante. Varia dallo 0% (nessuna modulazione) al 100% (massima modulazione); valori superiori al 100% indicano <strong>sovramodulazione</strong>, che distorce il segnale: per evitarla il segnale modulante non deve far saturare lo stadio amplificatore.
         </p>
@@ -5452,14 +5513,14 @@
             <img class="diagram-img" src="assets/images/tx-am-forma-donda-indice-modulazione.jpg" alt="Forma d'onda AM e indice di modulazione" loading="lazy">
             <div class="diagram-caption">Portante modulata in ampiezza con indice di modulazione al 50%, al 100% e in sovramodulazione (oltre il 100%).</div>
         </div>
-        <h4>La potenza di picco (PEP)</h4>
+        <h4 id="tx-am-92">La potenza di picco (PEP)</h4>
         <p>
             La <strong>Peak Envelope Power (PEP)</strong> è la potenza media di un ciclo RF, espressa in watt, trasferita a un'antenna artificiale (carico fittizio) dal trasmettitore durante un picco massimo dell'inviluppo della modulazione. In pratica si misura il valore di picco V della tensione su un carico R<sub>L</sub> (tipicamente 50 Ω) e si applica:
         </p>
         <div class="formula">
             PEP = V<sub>picco</sub>² / (2 · R<sub>L</sub>) &nbsp; [W]
         </div>
-        <h4>Lo spettro di un segnale AM</h4>
+        <h4 id="tx-am-93">Lo spettro di un segnale AM</h4>
         <p>
             Nel dominio della frequenza un segnale AM è formato da una <strong>portante</strong> e da <strong>due bande laterali</strong>. Con indice di modulazione del 100%, la PEP di ogni banda laterale è pari a un quarto di quella della portante, cioè si trova a <strong>−6 dBc</strong>. Come occupazione di banda, un segnale AM occupa il <strong>doppio</strong> della massima frequenza del segnale modulante: modulando con 3 kHz al massimo si occupano 6 kHz.
         </p>
@@ -5467,7 +5528,7 @@
             <img class="diagram-img" src="assets/images/tx-am-spettro-portante-bande-laterali.jpg" alt="Spettro di un segnale AM" loading="lazy">
             <div class="diagram-caption">Spettro di un segnale AM: portante centrale e due bande laterali (LSB e USB) a −6 dBc con modulazione al 100%.</div>
         </div>
-        <h4>I tipi di trasmissione in ampiezza</h4>
+        <h4 id="tx-am-94">I tipi di trasmissione in ampiezza</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -5480,7 +5541,7 @@
                 </tbody>
             </table>
         </div>
-        <h4>Struttura di un trasmettitore AM</h4>
+        <h4 id="tx-am-95">Struttura di un trasmettitore AM</h4>
         <p>
             La parte principale di un trasmettitore è quella che genera e amplifica la corrente oscillante ad alta frequenza con cui alimentare l'antenna; segue, per importanza, la parte che amplifica la bassa frequenza. Non devono mai mancare il <strong>filtraggio</strong> e l'<strong>adattamento di impedenza</strong> in uscita, perché lo stadio finale ha sempre un notevole contenuto di armoniche e non è mai a 50 Ω. Completano il trasmettitore l'alimentazione e il microcontrollore.
         </p>
@@ -5518,7 +5579,7 @@
 <section id="tx-ssb">
     <div class="card">
         <h3>Il mixer e la banda laterale unica (SSB)</h3>
-        <h4>Il mixer</h4>
+        <h4 id="tx-ssb-96">Il mixer</h4>
         <p>
             Il <strong>mixer</strong> è un circuito che, a partire da due ingressi sinusoidali a frequenza ben distinta, ottiene in uscita la moltiplicazione dei due segnali: la <strong>somma</strong> e la <strong>differenza</strong> delle frequenze (le bande laterali). Permette quindi di trasformare in frequenza un segnale (<em>conversione di frequenza</em>) oppure di modularlo.
         </p>
@@ -5535,7 +5596,7 @@
             <img class="diagram-img" src="assets/images/tx-mixer-modulatore-bilanciato-anello.jpg" alt="Modulatore bilanciato ad anello" loading="lazy">
             <div class="diagram-caption">Mixer (modulatore bilanciato ad anello) a ponte di diodi: dalla moltiplicazione dei due ingressi si ottengono somma e differenza delle frequenze.</div>
         </div>
-        <h4>Dalla AM alla SSB</h4>
+        <h4 id="tx-ssb-97">Dalla AM alla SSB</h4>
         <p>
             Per superare gli inconvenienti della AM (rendimento, occupazione di banda, alcuni effetti della propagazione) si sopprimono sia la <strong>portante</strong>, che non porta informazione, sia una <strong>banda laterale</strong>, che contiene un'informazione speculare. Si realizza così la modulazione a <strong>singola banda laterale</strong> (<strong>SSB</strong>, Single Side Band). La soppressione avviene con opportuni filtri: un modulatore bilanciato per la portante e un filtro a quarzi per la banda laterale.
         </p>
@@ -5563,7 +5624,7 @@
             <img class="diagram-img" src="assets/images/tx-ssb-spettro-usb-lsb.jpg" alt="Spettro AM, DSB, LSB e USB a confronto" loading="lazy">
             <div class="diagram-caption">Confronto tra gli spettri AM, DSB, LSB e USB: la SSB occupa metà banda e non spreca potenza sulla portante.</div>
         </div>
-        <h4>Struttura di un trasmettitore SSB</h4>
+        <h4 id="tx-ssb-98">Struttura di un trasmettitore SSB</h4>
         <p>
             La struttura comprende la parte di preamplificazione audio (già vista per la AM), il <strong>modulatore bilanciato</strong>, il <strong>filtro a quarzi</strong> che seleziona la banda laterale, un preamplificatore a media frequenza (IF), una conversione di frequenza per portarsi alla frequenza voluta, un pre-filtraggio e l'amplificazione di potenza, oltre al solito adattamento e filtraggio di antenna.
         </p>
@@ -5603,7 +5664,7 @@
 <section id="tx-fm">
     <div class="card">
         <h3>Modulazione di frequenza (FM) e modulazioni digitali angolari</h3>
-        <h4>La modulazione d'angolo</h4>
+        <h4 id="tx-fm-99">La modulazione d'angolo</h4>
         <p>
             Mantenendo costante l'ampiezza della portante e variandone la <strong>fase</strong> (PM) o la <strong>frequenza</strong> (FM) in proporzione alla modulazione si parla di <strong>modulazione d'angolo</strong>. Variare la fase produce quasi lo stesso effetto che variare la frequenza: ai fini della trasmissione e della ricezione cambia solo il valore della banda passante, maggiore nella PM. Di fatto un circuito integratore (de-enfasi) prima del modulatore trasforma una PM in una FM. Per contenere la distorsione si effettua una compressione di dinamica del segnale modulante.
         </p>
@@ -5629,7 +5690,7 @@
             <img class="diagram-img" src="assets/images/tx-fm-forma-donda-deviazione.jpg" alt="Forma d'onda FM e deviazione di frequenza" loading="lazy">
             <div class="diagram-caption">Portante modulata in frequenza: ampiezza costante, frequenza che si addensa e si dirada seguendo il segnale modulante (deviazione ±Δf).</div>
         </div>
-        <h4>Banda occupata: la regola di Carson</h4>
+        <h4 id="tx-fm-100">Banda occupata: la regola di Carson</h4>
         <p>
             Con <strong>NarrowBand FM</strong> si intende una deviazione massima di ±3 kHz; con <strong>WideBand FM</strong> una deviazione superiore a ±3 kHz. Generalmente la deviazione massima di un apparato VHF in WideBand FM è di ±5 kHz. In teoria lo spettro di una FM/PM si estende all'infinito; come regola empirica circa il 98% dell'energia è contenuto nella banda di trasmissione, data dalla <strong>regola di Carson</strong>:
         </p>
@@ -5640,7 +5701,7 @@
         <p>
             Diversamente dalla AM, la modulazione d'angolo non è lineare: la banda occupata non dipende solo dalla massima frequenza modulante, ma anche dalla massima deviazione, proporzionale all'ampiezza del segnale modulante. Modulando in AM con 3 kHz al massimo si occupano 6 kHz; modulando in FM con 3 kHz e deviazione massima ±5 kHz si occupano 2 × (3 + 5) = <strong>16 kHz</strong>.
         </p>
-        <h4>Le modulazioni digitali angolari</h4>
+        <h4 id="tx-fm-101">Le modulazioni digitali angolari</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -5662,7 +5723,7 @@
             <img class="diagram-img" src="assets/images/tx-fsk-afsk-psk.jpg" alt="Modulazioni digitali FSK, AFSK e PSK" loading="lazy">
             <div class="diagram-caption">Confronto tra una portante modulata 2-FSK (due frequenze), AFSK (due toni audio) e BPSK (inversioni di fase di 180°).</div>
         </div>
-        <h4>Il trasmettitore FM</h4>
+        <h4 id="tx-fm-102">Il trasmettitore FM</h4>
         <p>
             La fonia in modulazione di frequenza si usa soprattutto sopra i <strong>30 MHz</strong>, per ovvi problemi di occupazione di banda. Fa eccezione la banda dei 10 metri, dove i ponti radio (29520 - 29700 kHz) possono usare la FM. Nei trasmettitori VHF e UHF si usa un modulatore di fase. Gli stadi principali sono:
         </p>
@@ -5678,7 +5739,7 @@
             <img class="diagram-img" src="assets/images/tx-fm-schema-blocchi.jpg" alt="Schema a blocchi di un trasmettitore FM" loading="lazy">
             <div class="diagram-caption">Schema a blocchi di un trasmettitore FM: condizionamento audio con pre-enfasi, modulatore di fase, moltiplicatore, limitatore, mixer con VFO e amplificatore in classe C.</div>
         </div>
-        <h4>L'amplificatore in classe E</h4>
+        <h4 id="tx-fm-103">L'amplificatore in classe E</h4>
         <p>
             Per migliorare l'efficienza dei consumi di un trasmettitore si possono adottare diverse strategie (alimentatori switching, poco raccomandabili a radiofrequenza, oppure sistemi che mettono in stand-by l'elettronica non in uso). L'<strong>amplificatore in classe E</strong> è un amplificatore di potenza selettivo ad alta efficienza, usato dalle VHF in su. Usa un solo elemento di commutazione e una rete reattiva selettiva tra lo switch e il carico; ottiene alta efficienza solo se l'elemento commuta a corrente nulla (da on a off) o a tensione nulla (da off a on), minimizzando la perdita di potenza. Essendo non lineare, richiede un filtraggio accurato, in particolare l'eliminazione della seconda armonica con un <strong>filtro notch</strong>, e si presta a trasmettitori a portante costante (FM, PM).
         </p>
@@ -5715,7 +5776,7 @@
             <div class="diagram-caption">Anatomia della designazione 2K70J3E: banda necessaria (2,7 kHz), tipo di modulazione (J), natura del segnale modulante (3) e tipo di informazione (E).</div>
         </div>
 
-        <h4>Prefisso: larghezza di banda necessaria</h4>
+        <h4 id="tx-classi-emissione-104">Prefisso: larghezza di banda necessaria</h4>
         <p>
             La larghezza di banda necessaria è quella appena sufficiente a trasmettere l'informazione alla velocità e con la qualità richieste. Si scrive con <strong>tre cifre e una lettera</strong>; la lettera occupa il posto della <strong>virgola decimale</strong> e indica l'unità di misura: <strong>H</strong> = Hz, <strong>K</strong> = kHz, <strong>M</strong> = MHz, <strong>G</strong> = GHz.
         </p>
@@ -5738,7 +5799,7 @@
             <div class="diagram-caption">La lettera H, K, M o G sostituisce la virgola decimale: 2,7 kHz diventa 2K70, 12,5 MHz diventa 12M5.</div>
         </div>
 
-        <h4>Primo simbolo: tipo di modulazione della portante</h4>
+        <h4 id="tx-classi-emissione-105">Primo simbolo: tipo di modulazione della portante</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -5760,7 +5821,7 @@
             </table>
         </div>
 
-        <h4>Secondo simbolo: natura del segnale modulante</h4>
+        <h4 id="tx-classi-emissione-106">Secondo simbolo: natura del segnale modulante</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -5779,7 +5840,7 @@
             </table>
         </div>
 
-        <h4>Terzo simbolo: tipo di informazione da trasmettere</h4>
+        <h4 id="tx-classi-emissione-107">Terzo simbolo: tipo di informazione da trasmettere</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -5801,7 +5862,7 @@
             I simboli in grassetto sono quelli che il radioamatore incontra più spesso. L'Appendice 1 delle Radio Regulations prevede anche, come opzione, un <strong>quarto simbolo</strong> (dettagli del segnale) e un <strong>quinto simbolo</strong> (natura del multiplexing) per descrivere meglio l'emissione.
         </p>
 
-        <h4>Esempi completi</h4>
+        <h4 id="tx-classi-emissione-108">Esempi completi</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -5819,7 +5880,7 @@
             </table>
         </div>
 
-        <h4>Le denominazioni abbreviate più usate</h4>
+        <h4 id="tx-classi-emissione-109">Le denominazioni abbreviate più usate</h4>
         <p>Nell'uso corrente si omette la banda e si indicano solo i tre simboli:</p>
         <div class="table-wrapper">
             <table>
@@ -5858,7 +5919,7 @@
         <p>
             Spesso occorre arrivare a una certa frequenza di trasmissione partendo da un segnale a frequenza molto più bassa. I metodi usati sono sostanzialmente due: la <strong>conversione di frequenza</strong> e la <strong>moltiplicazione di frequenza</strong>.
         </p>
-        <h4>La conversione di frequenza</h4>
+        <h4 id="tx-frequenza-110">La conversione di frequenza</h4>
         <p>
             Consiste nel moltiplicare il segnale sinusoidale di partenza per un altro di frequenza adeguata, sfruttando la creazione di due nuovi segnali: uno di frequenza pari alla <strong>differenza</strong> delle due frequenze e uno pari alla <strong>somma</strong>. Un filtro passa-banda isola il segnale desiderato.
         </p>
@@ -5872,7 +5933,7 @@
             <img class="diagram-img" src="assets/images/tx-conversione-frequenza.jpg" alt="Conversione di frequenza con mixer e filtro passa-banda" loading="lazy">
             <div class="diagram-caption">Conversione di frequenza: un mixer moltiplica 20 MHz per 30 MHz; il filtro passa-banda centrato a 50 MHz scarta la componente a 10 MHz.</div>
         </div>
-        <h4>La moltiplicazione di frequenza</h4>
+        <h4 id="tx-frequenza-111">La moltiplicazione di frequenza</h4>
         <p>
             Si basa sul principio di <strong>Fourier</strong>: un qualsiasi segnale periodico è scomponibile in una somma di sinusoidi di frequenza <em>multipla</em> di quella del segnale stesso (le armoniche), con ampiezze e fasi diverse. Partendo da un segnale sinusoidale lo si fa volutamente distorcere (per esempio "tosandolo" con un diodo, in modo da "squadrarlo"), generando una serie di sinusoidi multiple della frequenza di partenza. Un filtro passa-banda isola poi quella che interessa.
         </p>
@@ -6202,15 +6263,15 @@
         </div>
     </div>
     <div class="card">
-        <h3>Altoparlante, cuffie e caratteristiche del ricevitore</h3>
+        <h3 id="rx-caratteristiche-112">Altoparlante, cuffie e caratteristiche del ricevitore</h3>
         <p>
             Per trasformare il segnale analogico in onde sonore basta un trasduttore come l'altoparlante o le cuffie.
         </p>
-        <h4>L'altoparlante</h4>
+        <h4 id="rx-caratteristiche-113">L'altoparlante</h4>
         <p>
             È un trasduttore acustico che trasforma un segnale elettrico in onde sonore: è l'"alter ego" del microfono e completa la catena audio di trasmissione e ricezione. È composto da una membrana mobile (il cono) collegata a una <strong>bobina mobile</strong> immersa in un campo magnetico, che si muove spinta dalle correnti del segnale e genera onde sonore. Ha generalmente un'impedenza di <strong>4 o 8 Ω</strong>, una banda passante che per i nostri scopi va da <strong>100 a 5000 Hz</strong> e una potenza massima di qualche watt. Esistono altoparlanti esterni con controlli supplementari, come DSP ed equalizzazione.
         </p>
-        <h4>Le cuffie</h4>
+        <h4 id="rx-caratteristiche-114">Le cuffie</h4>
         <p>
             Per ascoltare senza disturbare né essere disturbati. Hanno generalmente due altoparlanti, un cavo di collegamento di un paio di metri e un connettore jack audio da 3,5 o 6,3 mm. Possono essere anche wireless (Wi-Fi o Bluetooth) e spesso incorporano il microfono.
         </p>
@@ -6218,7 +6279,7 @@
             <img class="diagram-img" src="assets/images/rx-altoparlante-cuffie.jpg" alt="Altoparlante e cuffie" loading="lazy">
             <div class="diagram-caption">Struttura di un altoparlante (cono, bobina mobile, magnete) e cuffie con connettore jack.</div>
         </div>
-        <h4>Le tre caratteristiche fondamentali</h4>
+        <h4 id="rx-caratteristiche-115">Le tre caratteristiche fondamentali</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -6251,7 +6312,7 @@
         <p>
             Si può migliorare aggiungendo stadi amplificatori e filtri di banda (larghi quanto la banda da ricevere) tra l'ingresso e il preamplificatore di antenna. È però limitata da: <strong>rumore</strong>, <strong>frequenza immagine</strong>, <strong>dinamica di canale</strong>, <strong>desensibilizzazione</strong> (blocking) e <strong>intermodulazione</strong>.
         </p>
-        <h4>Il rumore termico</h4>
+        <h4 id="rx-sensibilita-rumore-116">Il rumore termico</h4>
         <p>
             È prodotto principalmente dall'agitazione termica degli elettroni: è casuale, ha valor medio nullo e si estende su tutte le frequenze. Esiste una proporzionalità tra banda passante e rumore:
         </p>
@@ -6262,7 +6323,7 @@
         <p>
             Minore è la banda passante, minore è il contributo di rumore e migliore è il rapporto S/N.
         </p>
-        <h4>Le altre sorgenti di rumore</h4>
+        <h4 id="rx-sensibilita-rumore-117">Le altre sorgenti di rumore</h4>
         <ul>
             <li><strong>Rumore atmosferico</strong>: generato dai fulmini in tutto il globo; localmente dipende dall'attività temporalesca.</li>
             <li><strong>Rumore solare</strong>: prodotto dall'attività del Sole.</li>
@@ -6270,7 +6331,7 @@
             <li><strong>Rumore galattico</strong>: prodotto da sorgenti naturali fuori della nostra atmosfera.</li>
             <li><strong>Rumore di fase</strong> negli oscillatori.</li>
         </ul>
-        <h4>La cifra di rumore</h4>
+        <h4 id="rx-sensibilita-rumore-118">La cifra di rumore</h4>
         <p>
             La <strong>cifra di rumore</strong> F (noise figure o noise factor) di un sistema ricevente è il contributo di rumore dovuto agli stadi di amplificazione:
         </p>
@@ -6280,7 +6341,7 @@
         <p>
             Si determina confrontando la rumorosità del circuito con quella di un riferimento, in genere la resistenza che adatta in potenza la porta di ingresso, assunta a 290 K (17 °C). Se F = 1 (NF = 0 dB) il circuito sarebbe privo di rumore, il che nella pratica non esiste. Valori di NF tra 0,5 e 10 dB sono comuni nei preamplificatori RF.
         </p>
-        <h4>Ridurre il rumore impulsivo e i disturbi</h4>
+        <h4 id="rx-sensibilita-rumore-119">Ridurre il rumore impulsivo e i disturbi</h4>
         <ul>
             <li><strong>ANL</strong> (Automatic Noise Limiter, <em>clipper</em>): limita il rumore impulsivo "tagliando" i picchi che superano il segnale utile.</li>
             <li><strong>Noise blanker (NB)</strong>: limita il rumore impulsivo agendo sull'amplificazione, escludendola in corrispondenza dell'impulso.</li>
@@ -6302,7 +6363,7 @@
 <section id="rx-dinamica-selettivita">
     <div class="card">
         <h3>Dinamica, intermodulazione e selettività</h3>
-        <h4>La dinamica e il controllo del guadagno</h4>
+        <h4 id="rx-dinamica-selettivita-120">La dinamica e il controllo del guadagno</h4>
         <p>
             Considerando come segnale massimo il livello che non satura l'amplificatore e come segnale minimo quello che determina la sensibilità (S/N = 12 dB), la <strong>dinamica</strong> è il rapporto tra il massimo e il minimo segnale ricevibile in modo non distorto.
         </p>
@@ -6313,7 +6374,7 @@
             <img class="diagram-img" src="assets/images/rx-dinamica-agc.jpg" alt="Dinamica del ricevitore e AGC" loading="lazy">
             <div class="diagram-caption">Dinamica del ricevitore (dal livello minimo di sensibilità al livello di saturazione) e azione dell'AGC sul segnale ricevuto.</div>
         </div>
-        <h4>L'intermodulazione</h4>
+        <h4 id="rx-dinamica-selettivita-121">L'intermodulazione</h4>
         <p>
             La presenza di più segnali in banda provoca il disturbo noto come <strong>intermodulazione (IMD)</strong>. Il rapporto in dB tra il livello dei segnali in banda presenti all'ingresso dello stadio e il risultato dell'intermodulazione presente in uscita è definito <em>prodotto di intermodulazione</em>. Per ogni dB di aumento dei segnali interferenti, nell'IMD di <strong>terzo ordine</strong> i prodotti di intermodulazione aumentano di <strong>3 dB</strong>. Il <strong>punto di intercetta</strong> è il livello al quale i prodotti di intermodulazione, prolungati idealmente, raggiungerebbero il livello dei segnali interferenti in ingresso; in pratica interviene prima la saturazione dell'amplificatore.
         </p>
@@ -6321,7 +6382,7 @@
             <img class="diagram-img" src="assets/images/rx-intermodulazione-punto-intercetta.jpg" alt="Punto di intercetta di terzo ordine" loading="lazy">
             <div class="diagram-caption">Punto di intercetta di terzo ordine: la retta del segnale utile (1 dB/dB) e quella dei prodotti di intermodulazione (3 dB/dB) si incontrano al punto di intercetta.</div>
         </div>
-        <h4>La selettività</h4>
+        <h4 id="rx-dinamica-selettivita-122">La selettività</h4>
         <p>
             La <strong>selettività</strong> è la capacità di un ricevitore di sintonizzarsi su uno stretto intervallo di frequenze (canale, OBW), definito dalla banda passante del segnale desiderato. Il ricevitore deve inoltre essere insensibile, entro certi limiti, ai segnali forti fuori banda. Si può ottenere negli stadi del front-end, ma è preferibile agire a livello di <strong>media frequenza</strong>, dove la frequenza del segnale da amplificare è fissa: i filtri sono di solito ceramici o a quarzi e gli amplificatori sono di tipo accordato.
         </p>
@@ -6374,15 +6435,15 @@
             <img class="diagram-img" src="assets/images/rx-schema-blocchi-ricevitore.jpg" alt="Schema a blocchi generale di un ricevitore" loading="lazy">
             <div class="diagram-caption">Schema a blocchi generale: antenna, front-end (filtro di banda e preamplificatore RF), sintonia, demodulatore, amplificatore di bassa frequenza e altoparlante.</div>
         </div>
-        <h4>Il front-end</h4>
+        <h4 id="rx-struttura-123">Il front-end</h4>
         <p>
             È il circuito che si occupa del trattamento iniziale del segnale proveniente dall'antenna: deve "prepararlo" con l'<strong>adattamento di impedenza</strong>, il <strong>filtraggio</strong> (filtro di banda) e la <strong>preamplificazione</strong> (preamplificatore RF). Senza front-end un ricevitore avrebbe caratteristiche scadenti di sensibilità, selettività e reiezione.
         </p>
-        <h4>La sintonia</h4>
+        <h4 id="rx-struttura-124">La sintonia</h4>
         <p>
             Nei ricevitori di un tempo si agiva su un filtro passa-banda messo in risonanza sul segnale da ricevere (circuito di sintonia L-C). Oggi si agisce sull'<strong>oscillatore locale</strong>, traslando in media frequenza il segnale da ricevere con un VFO e un mixer, e regolando la selettività sui filtri di media.
         </p>
-        <h4>La bassa frequenza</h4>
+        <h4 id="rx-struttura-125">La bassa frequenza</h4>
         <p>
             Il segnale demodulato deve essere amplificato per comandare un altoparlante o le cuffie. Sono presenti una regolazione del volume, un'equalizzazione del segnale e l'eliminazione dei disturbi (DSP, NL, NB). Gli amplificatori sono lineari, in classe A, AB o B.
         </p>
@@ -6400,7 +6461,7 @@
         <p>
             Nel segnale a radiofrequenza è contenuta la modulazione. Il <strong>demodulatore</strong> ricostruisce il segnale modulante e lo fornisce ai circuiti in banda base (bassa frequenza). Ogni tipo di modulazione ha il suo demodulatore, quindi è importante conoscere il tipo di modulazione prima di mettersi in ascolto. La demodulazione, come la modulazione, si svolge in circuiti <strong>non lineari</strong>; il più semplice demodulatore è il diodo in configurazione di rettificatore a semionda.
         </p>
-        <h4>Il rivelatore AM</h4>
+        <h4 id="rx-demodulazione-126">Il rivelatore AM</h4>
         <p>
             Un segnale modulato in ampiezza, con portante e due bande laterali, si demodula con un semplice <strong>rettificatore a diodo</strong> (un rivelatore al germanio o un diodo Schottky). Dal segnale modulato a radiofrequenza viene estratto <strong>l'inviluppo</strong> della modulazione: il diodo lascia passare solo le semionde positive, ottenendo sia la componente audio sia quella a RF (portante), con in più un offset in continua. Un condensatore di filtro in parallelo (passa-basso) elimina la componente RF, mentre un condensatore di disaccoppiamento in serie elimina l'offset DC. Talvolta la demodulazione avviene sulla semionda negativa.
         </p>
@@ -6408,7 +6469,7 @@
             <img class="diagram-img" src="assets/images/rx-rivelatore-am-diodo.jpg" alt="Rivelatore AM a diodo" loading="lazy">
             <div class="diagram-caption">Rivelatore AM: diodo rettificatore, condensatore di filtro (elimina la RF) e condensatore di disaccoppiamento (elimina l'offset continuo).</div>
         </div>
-        <h4>La demodulazione SSB</h4>
+        <h4 id="rx-demodulazione-127">La demodulazione SSB</h4>
         <p>
             Un segnale modulato in ampiezza senza portante e con una sola banda laterale si può demodulare aggiungendo, prima del rivelatore a diodo, un segnale che ricostruisce la portante, fornito da un oscillatore detto <strong>BFO</strong> (oscillatore a battimento); oggi si usa solo in semplici ricevitori HF. Lo stesso risultato si ottiene in un mixer bilanciato, il <strong>rivelatore a prodotto</strong>: dalla moltiplicazione del segnale SSB (f<sub>iSSB</sub>) per quello di un oscillatore locale fisso (f<sub>osc</sub>) si ottengono sia la bassa frequenza sia il segnale somma f<sub>osc</sub> + f<sub>iSSB</sub>; filtrando la parte in alta frequenza rimane solo la BF.
         </p>
@@ -6416,7 +6477,7 @@
             <img class="diagram-img" src="assets/images/rx-rivelatore-ssb-prodotto.jpg" alt="Rivelatore a prodotto per SSB" loading="lazy">
             <div class="diagram-caption">Rivelatore a prodotto: un mixer bilanciato moltiplica il segnale SSB per l'oscillatore locale (BFO) e un filtro passa-basso lascia solo la bassa frequenza.</div>
         </div>
-        <h4>La demodulazione FM</h4>
+        <h4 id="rx-demodulazione-128">La demodulazione FM</h4>
         <p>
             Storicamente si sono usati il <strong>rivelatore a pendenza</strong>, il <strong>discriminatore di fase</strong> (o di Foster-Seeley) e il <strong>rivelatore a rapporto</strong>; oggi si usano il <strong>rivelatore in quadratura</strong> e il <strong>demodulatore a PLL</strong>.
         </p>
@@ -6442,7 +6503,7 @@
             <img class="diagram-img" src="assets/images/rx-rivelatore-quadratura-pll.jpg" alt="Rivelatore in quadratura e demodulatore a PLL" loading="lazy">
             <div class="diagram-caption">Rivelatore FM in quadratura (mixer bilanciato e filtro passa-basso) e demodulatore a PLL (rivelatore di fase, filtro d'anello e VCO).</div>
         </div>
-        <h4>La demodulazione PSK e dei modi digitali</h4>
+        <h4 id="rx-demodulazione-129">La demodulazione PSK e dei modi digitali</h4>
         <p>
             Un segnale digitale modulato in fase (PSK) si demodula valutando le differenze di fase: se si integra il segnale prodotto da un mixer si ottengono variazioni di tensione corrispondenti alla modulazione. La demodulazione dei modi digitali è oggi demandata a un <strong>software</strong> installato su un computer: l'audio, demodulato da un circuito SSB, viene acquisito dalla scheda audio (MIC in o stereo in) ed elaborato da programmi come <strong>FLDigi</strong>, <strong>WSJT-X</strong> o <strong>MultiPSK</strong>. Qualsiasi modulazione digitale può così essere (de)modulata semplicemente aggiornando il programma in uso.
         </p>
@@ -6458,7 +6519,7 @@
 <section id="rx-tipologie">
     <div class="card">
         <h3>I tipi di ricevitore</h3>
-        <h4>Il ricevitore a cristallo</h4>
+        <h4 id="rx-tipologie-130">Il ricevitore a cristallo</h4>
         <p>
             Il modo più semplice per demodulare segnali radio è il ricevitore a cristallo, versione moderna del ricevitore a galena. La sintonia è classica, con condensatore variabile; la rivelazione è diretta con un diodo al germanio e il segnale prodotto è applicato a una cuffia ad alta impedenza. Scarsa sensibilità, selettività e amplificazione sono i difetti principali.
         </p>
@@ -6466,7 +6527,7 @@
             <img class="diagram-img" src="assets/images/rx-ricevitore-cristallo.jpg" alt="Ricevitore a cristallo" loading="lazy">
             <div class="diagram-caption">Ricevitore a cristallo: antenna, circuito di sintonia L-C con condensatore variabile, diodo al germanio e cuffia ad alta impedenza.</div>
         </div>
-        <h4>Il ricevitore a conversione diretta</h4>
+        <h4 id="rx-tipologie-131">Il ricevitore a conversione diretta</h4>
         <p>
             Alcuni difetti si risolvono con stadi amplificatori e separatori, sia in alta sia in bassa frequenza; la sintonia può avvenire anche negli stadi RF, con tre o quattro preselettori. Un notevole miglioramento si ottiene con la <strong>conversione diretta</strong> (eterodina): mescolando il segnale ricevuto con quello di un oscillatore locale che lavora alla <em>stessa frequenza</em> del segnale da ricevere, si ottiene per battimento la corrispondente bassa frequenza. Lo stadio RF può avere un circuito preselettore o un filtro passa-banda largo quanto serve a far passare la banda voluta.
         </p>
@@ -6474,7 +6535,7 @@
             <img class="diagram-img" src="assets/images/rx-conversione-diretta.jpg" alt="Ricevitore a conversione diretta" loading="lazy">
             <div class="diagram-caption">Ricevitore a conversione diretta: filtro di banda, mixer con oscillatore locale alla stessa frequenza del segnale, filtro passa-basso e amplificatore BF.</div>
         </div>
-        <h4>Il ricevitore supereterodina</h4>
+        <h4 id="rx-tipologie-132">Il ricevitore supereterodina</h4>
         <p>
             Una miglioria ulteriore è la traslazione dei segnali ad alta frequenza a una <strong>frequenza intermedia (IF) fissa</strong>. Essendo fissa, la frequenza si può filtrare con minore difficoltà, aumentando selettività e sensibilità, e si controlla più facilmente l'amplificazione. La frequenza dell'oscillatore locale è generalmente maggiore di quella del segnale da convertire.
         </p>
@@ -6501,15 +6562,15 @@
             <img class="diagram-img" src="assets/images/rx-frequenza-immagine.jpg" alt="Frequenza immagine" loading="lazy">
             <div class="diagram-caption">Frequenza immagine: il segnale desiderato e la frequenza immagine si trovano ai lati dell'oscillatore locale, alla stessa distanza pari alla IF.</div>
         </div>
-        <h4>Doppia e tripla conversione</h4>
+        <h4 id="rx-tipologie-133">Doppia e tripla conversione</h4>
         <p>
             I ricevitori professionali adottano una <strong>doppia o tripla conversione</strong>. La <strong>prima IF</strong> ha un valore elevato, di solito tra 9 e 50 MHz: avviene un primo filtraggio (<em>roofing</em>) con banda passante da 5 a 20 kHz, che attenua i segnali fuori banda che potrebbero introdurre intermodulazione nella conversione successiva. In ricezione si può variare la frequenza rispetto a quella di trasmissione agendo sul VFO con il <strong>RIT</strong> (Receiver Incremental Tuning). La <strong>seconda IF</strong> ha un valore più basso, dell'ordine di 455-470 kHz: qui si ha un'ulteriore amplificazione e filtraggio con filtri di banda stretti, da 100 a 5000 Hz.
         </p>
-        <h4>Lo squelch</h4>
+        <h4 id="rx-tipologie-134">Lo squelch</h4>
         <p>
             Lo <strong>squelch</strong> è una soppressione del rumore di fondo, utile soprattutto nell'ascolto di trasmissioni in modulazione di frequenza o ogni volta che il rumore di fondo è fastidioso. È inserito nel circuito a bassa frequenza: è in sostanza un <strong>comparatore di livello</strong> che, superata una soglia impostabile con un potenziometro, attiva l'amplificazione del segnale.
         </p>
-        <h4>Il ricevitore FM</h4>
+        <h4 id="rx-tipologie-135">Il ricevitore FM</h4>
         <p>
             Un ricevitore FM ha alcune differenze rispetto a uno AM. Si compone di: front-end (preamplificazione e filtraggio RF), conversione IF, filtraggio IF, <strong>limitatore</strong> (elimina le variazioni di ampiezza del segnale ricevuto e convertito in IF), demodulazione e amplificazione a bassa frequenza.
         </p>
@@ -6530,11 +6591,11 @@
 <section id="rx-dsp-sdr">
     <div class="card">
         <h3>DSP, modulatori I/Q, SDR e ricetrasmettitori</h3>
-        <h4>Il Digital Signal Processing (DSP)</h4>
+        <h4 id="rx-dsp-sdr-136">Il Digital Signal Processing (DSP)</h4>
         <p>
             Nei moderni ricevitori una notevole semplificazione dei circuiti si ottiene con il <strong>DSP</strong>. Un tipico sistema DSP è concettualmente molto semplice e consiste di sole tre sezioni: un <strong>convertitore A/D</strong>, il <strong>processo digitale del segnale</strong> e un <strong>convertitore D/A</strong>. Con DSP si intende comunemente un microprocessore speciale con un'architettura ottimizzata per l'elaborazione dei segnali.
         </p>
-        <h4>Modulatori e demodulatori I/Q</h4>
+        <h4 id="rx-dsp-sdr-137">Modulatori e demodulatori I/Q</h4>
         <p>
             Un'onda sinusoidale di ampiezza e fase arbitrarie può essere rappresentata dalla somma pesata di un'onda seno e una coseno:
         </p>
@@ -6548,11 +6609,11 @@
             <img class="diagram-img" src="assets/images/rx-modulatore-demodulatore-iq.jpg" alt="Modulatore e demodulatore I/Q" loading="lazy">
             <div class="diagram-caption">Modulatore I/Q (due mixer in quadratura e un sommatore) e rappresentazione polare dei vettori I e Q sfasati di 90°.</div>
         </div>
-        <h4>Il ricevitore a reiezione di immagine</h4>
+        <h4 id="rx-dsp-sdr-138">Il ricevitore a reiezione di immagine</h4>
         <p>
             Un metodo per eliminare la frequenza immagine è combinare un front-end tradizionale con una conversione a media frequenza <strong>in quadratura</strong>. I segnali vengono poi digitalizzati e demodulati da un DSP o da una FPGA. La frequenza intermedia può così essere molto bassa, ai limiti della banda passante del segnale modulante. Il segnale demodulato è digitale: si può convertire in analogico con un DAC o sottoporre a ulteriore elaborazione (eliminazione della frequenza immagine, decodifica, visualizzazione su monitor).
         </p>
-        <h4>La Software Defined Radio (SDR)</h4>
+        <h4 id="rx-dsp-sdr-139">La Software Defined Radio (SDR)</h4>
         <p>
             È un ricetrasmettitore in cui il trattamento del segnale (filtraggio, demodulazione, amplificazione) avviene per mezzo di un <strong>software</strong>. Alcune SDR incorporano un vero PC; possono avere i comandi tradizionali e un display LCD, e funzionalmente somigliano a un transceiver tradizionale, ma implementano tutte le (de)modulazioni e (de)codifiche, semplificandone l'uso. I primi SDR non avevano display né comandi, demandando le funzioni a un programma su PC e basandosi su una scheda audio, interna o esterna: avevano prestazioni limitate, anche perché il computer doveva essere molto potente. Gli SDR odierni si basano su <strong>ASIC</strong> e <strong>FPGA</strong>, moduli che integrano DSP, conversioni e microprocessori.
         </p>
@@ -6560,7 +6621,7 @@
             <img class="diagram-img" src="assets/images/rx-sdr-schema.jpg" alt="Schema a blocchi di una SDR" loading="lazy">
             <div class="diagram-caption">Schema a blocchi di una SDR: antenna, front-end, convertitore A/D, elaborazione digitale (FPGA/DSP/PC), convertitore D/A e audio.</div>
         </div>
-        <h4>I ricetrasmettitori</h4>
+        <h4 id="rx-dsp-sdr-140">I ricetrasmettitori</h4>
         <p>
             I ricetrasmettitori (RTX o <em>transceiver</em>) si dividono in <strong>da base</strong> (installazione fissa presso un'abitazione), <strong>veicolari</strong> (installati su un veicolo) e <strong>portatili</strong>. I primi due, per funzionare, hanno bisogno di un'alimentazione e di un'antenna esterne; il portatile ha sia l'alimentazione sia l'antenna incorporate e si può usare senza collegarlo a nulla di fisso.
         </p>
@@ -6840,7 +6901,7 @@
         </div>
     </div>
     <div class="card">
-        <h3>Che cos'è una linea di trasmissione</h3>
+        <h3 id="lt-generalita-141">Che cos'è una linea di trasmissione</h3>
         <p>
             Per trasferire un segnale a radiofrequenza tra due punti di un circuito serve un <strong>collegamento elettrico</strong>. A differenza dei segnali a bassa frequenza e delle correnti continue o di alimentazione, i segnali RF si propagano non solo come <strong>correnti</strong> ma anche sotto forma di <strong>onde elettromagnetiche</strong>: dove ci sono cariche in movimento (campo elettrico) si genera inevitabilmente anche un corrispondente campo magnetico. Il circuito di collegamento prende il nome di <strong>linea di trasmissione</strong>.
         </p>
@@ -6857,7 +6918,7 @@
         <p>
             Nel campo radio si usano soprattutto le <strong>linee bifilari</strong> e i <strong>cavi coassiali</strong>; sui circuiti stampati le <strong>microstrip</strong>, le <strong>guide d'onda coplanari</strong> e le <strong>stripline</strong>. Nei collegamenti tra circuiti si adoperano <strong>linee corte</strong>, per evitare un irraggiamento apprezzabile. Il campo di lavoro va praticamente dalla corrente continua a circa <strong>30 GHz</strong>.
         </p>
-        <h4>Le linee bifilari</h4>
+        <h4 id="lt-generalita-142">Le linee bifilari</h4>
         <p>
             Una <strong>linea bifilare</strong> (piattina o scaletta) è composta da due conduttori paralleli tenuti assieme da un supporto isolante. Il campo elettromagnetico di un conduttore è bilanciato da quello del secondo, quindi il campo emesso nello spazio circostante è nullo. La <strong>distanza tra i conduttori deve essere la più piccola possibile</strong> (in pratica non oltre l'<strong>1%</strong> della massima lunghezza d'onda impiegata); il valore reale dipende dal dielettrico, dalla frequenza e dal diametro dei conduttori.
         </p>
@@ -6888,7 +6949,7 @@
 <section id="lt-coassiali">
     <div class="card">
         <h3>Cavi coassiali, linee sul circuito stampato e connettori</h3>
-        <h4>I cavi coassiali</h4>
+        <h4 id="lt-coassiali-143">I cavi coassiali</h4>
         <p>
             La <strong>linea coassiale</strong> (o concentrica, più comunemente <strong>cavo coassiale</strong>) è il tipo di linea più diffuso. È formata da un <strong>conduttore isolato</strong> racchiuso in uno <strong>schermo</strong> a calza. La corrente che scorre nel conduttore interno è controbilanciata da una corrente uguale e opposta che scorre nella calza esterna. I cavi coassiali di oggi hanno quasi tutti una <strong>doppia schermatura</strong>: calza, foglio di alluminio oppure metallo rigido (rame).
         </p>
@@ -6918,7 +6979,7 @@
         <p>
             In generale, più il cavo è sottile e più la frequenza è alta, maggiore è l'attenuazione: per le linee lunghe o per le frequenze elevate conviene un cavo più grosso (RG-213 al posto di RG-58, o addirittura <em>hardline</em>).
         </p>
-        <h4>Linee sui circuiti stampati</h4>
+        <h4 id="lt-coassiali-144">Linee sui circuiti stampati</h4>
         <p>
             Nei circuiti stampati la linea è realizzata con una <strong>pista di rame</strong> la cui larghezza, lo spessore e la costante dielettrica del supporto fissano l'impedenza. Le tre forme più comuni sono la <strong>microstrip</strong> (pista sopra il dielettrico con il piano di massa sotto), la <strong>guida d'onda coplanare</strong> (pista centrale con due piste di massa sullo stesso lato) e la <strong>stripline</strong> (pista inglobata tra due piani di massa).
         </p>
@@ -6926,11 +6987,11 @@
             <img class="diagram-img" src="assets/images/lt-linee-circuiti-stampati.jpg" alt="Microstrip, guida d'onda coplanare e stripline" loading="lazy">
             <div class="diagram-caption">Linee sui circuiti stampati: microstrip, guida d'onda coplanare e stripline, con le grandezze geometriche che ne determinano l'impedenza (W larghezza, H spessore, εr).</div>
         </div>
-        <h4>Guide d'onda e fibre ottiche</h4>
+        <h4 id="lt-coassiali-145">Guide d'onda e fibre ottiche</h4>
         <p>
             La <strong>guida d'onda</strong> è un mezzo fisico che usa delimitatori in materiale conduttore per guidare i segnali elettromagnetici. Per il suo particolare modo di propagazione è utilizzabile solo ad <strong>altissime frequenze</strong>, indicativamente oltre i 3 GHz. Nel campo delle frequenze ottiche una guida d'onda è spesso una <strong>guida dielettrica</strong> in un materiale trasparente (per esempio il quarzo): ne sono un esempio le <strong>fibre ottiche</strong>.
         </p>
-        <h4>I connettori coassiali</h4>
+        <h4 id="lt-coassiali-146">I connettori coassiali</h4>
         <p>
             La terminazione delle linee avviene con <strong>connettori</strong> di dimensioni adatte al cavo. Anche il connettore ha una <strong>impedenza caratteristica</strong>, uguale a quella del cavo corrispondente.
         </p>
@@ -6963,7 +7024,7 @@
 <section id="lt-parametri">
     <div class="card">
         <h3>Fattore di velocità, lunghezza d'onda e impedenza caratteristica</h3>
-        <h4>Il fattore di velocità</h4>
+        <h4 id="lt-parametri-147">Il fattore di velocità</h4>
         <p>
             I campi elettrici e magnetici generati in una linea non si localizzano nello spazio in modo istantaneo ma si propagano a una <strong>velocità ben definita</strong>. Nell'aria è all'incirca quella della luce nello spazio libero (300000 km/s); in una linea di trasmissione è <strong>inferiore</strong> e dipende dai materiali che circondano i conduttori, principalmente dalla <strong>costante dielettrica</strong> dell'isolante.
         </p>
@@ -6974,7 +7035,7 @@
             VF = 1 / √ε
             <span class="label">ε = costante dielettrica relativa dell'isolante; nel vuoto ε = 1 e VF = 1</span>
         </div>
-        <h4>La lunghezza d'onda</h4>
+        <h4 id="lt-parametri-148">La lunghezza d'onda</h4>
         <p>
             La lunghezza d'onda nello spazio libero è:
         </p>
@@ -7001,7 +7062,7 @@
         <p>
             Si può immaginare la linea come una <strong>serie di induttanze e capacità distribuite</strong> lungo tutta la sua lunghezza: un impulso, per raggiungere il carico, deve caricare in sequenza tutte le capacità attraversando le induttanze, e ciò richiede tempo.
         </p>
-        <h4>L'impedenza caratteristica</h4>
+        <h4 id="lt-parametri-149">L'impedenza caratteristica</h4>
         <p>
             In una linea priva di perdite l'<strong>impedenza caratteristica</strong> Z<sub>0</sub> è la radice quadrata del rapporto tra l'induttanza complessiva e la capacità, prese su una lunghezza unitaria:
         </p>
@@ -7043,7 +7104,7 @@
         <p>
             Si può considerare l'adattamento come <strong>accoppiamento</strong> (riferito al segnale) o <strong>disaccoppiamento</strong> (riferito all'alimentazione). L'<strong>adattatore</strong> è il circuito che permette il collegamento tra due circuiti con perdite trascurabili: la sua impedenza di ingresso è uguale a quella di uscita del blocco che lo precede e quella di uscita è uguale a quella di ingresso del blocco che lo segue. È di tipo <strong>attivo</strong> se guadagna in potenza, <strong>passivo</strong> se attenua il segnale.
         </p>
-        <h4>Adattamento con trasformatore</h4>
+        <h4 id="lt-adattamento-150">Adattamento con trasformatore</h4>
         <p>
             Un trasformatore mette in relazione le impedenze viste ai suoi terminali secondo il <strong>quadrato del rapporto spire</strong>:
         </p>
@@ -7057,7 +7118,7 @@
             <img class="diagram-img" src="assets/images/lt-adattamento-trasformatore.jpg" alt="Adattamento di impedenza con trasformatore" loading="lazy">
             <div class="diagram-caption">Un trasformatore adatta le impedenze secondo il quadrato del rapporto spire (Z1 = Z2 · (N1/N2)²); la risposta in frequenza ha una gobba dovuta alla risonanza.</div>
         </div>
-        <h4>Adattamento con quadripolo reattivo</h4>
+        <h4 id="lt-adattamento-151">Adattamento con quadripolo reattivo</h4>
         <p>
             Se si adatta con componenti passivi <strong>resistivi</strong> si ha una perdita di potenza (almeno circa 6 dB); si usano quindi componenti <strong>reattivi</strong> (capacità e induttanze), che in teoria non dissipano. Una rete simmetrica richiede almeno <strong>tre componenti</strong>.
         </p>
@@ -7076,11 +7137,11 @@
             <img class="diagram-img" src="assets/images/lt-adattamento-reti-t-pi.jpg" alt="Reti di adattamento a T e a pi greco" loading="lazy">
             <div class="diagram-caption">Quadripoli reattivi di adattamento: rete a T (due elementi in serie e uno in parallelo) e rete a π (due in parallelo e uno in serie), con induttanze e condensatori.</div>
         </div>
-        <h4>Adattamento di una linea</h4>
+        <h4 id="lt-adattamento-152">Adattamento di una linea</h4>
         <p>
             Se la linea è terminata su un carico di impedenza uguale a Z<sub>0</sub> la <strong>linea è adattata</strong>: non c'è nessuna riflessione di potenza e il rapporto tensione/corrente lungo la linea vale ovunque Z<sub>0</sub> = V/I. Grazie a questa proprietà il carico viene "visto" dal generatore senza perdite, <strong>qualunque sia la lunghezza della linea</strong> (a meno dell'attenuazione del cavo).
         </p>
-        <h4>La carta di Smith</h4>
+        <h4 id="lt-adattamento-153">La carta di Smith</h4>
         <p>
             La <strong>carta di Smith</strong> è un <strong>sistema grafico</strong> per il calcolo delle impedenze. È di particolare aiuto nello studio degli adattamenti perché consente di leggere a colpo d'occhio i valori di <strong>resistenza, reattanza, ROS e return loss</strong>. Programmi di simulazione RF come RFSim99 e JJSmith ne fanno ampio uso.
         </p>
@@ -7112,7 +7173,7 @@
 <section id="lt-onde-stazionarie">
     <div class="card">
         <h3>Coefficiente di riflessione, onde stazionarie e ROS</h3>
-        <h4>Il coefficiente di riflessione</h4>
+        <h4 id="lt-onde-stazionarie-154">Il coefficiente di riflessione</h4>
         <p>
             Se il carico <strong>non è uguale a Z<sub>0</sub></strong>, parte della potenza trasmessa viene riflessa verso il generatore: il carico richiede un nuovo valore di V/I e, quanto più differisce da Z<sub>0</sub>, tanto maggiore è la riflessione. Si definisce <strong>coefficiente di riflessione Γ</strong> (gamma) il rapporto tra la tensione riflessa V<sub>R</sub> e la tensione diretta V<sub>F</sub>, ovvero il rapporto tra la differenza e la somma delle impedenze di carico e di linea:
         </p>
@@ -7122,7 +7183,7 @@
         <p>
             Il modulo di Γ va da 0 (adattamento perfetto) a 1 (riflessione totale). La frazione di <strong>potenza riflessa</strong> è Γ<sup>2</sup>.
         </p>
-        <h4>Le onde stazionarie nei casi limite</h4>
+        <h4 id="lt-onde-stazionarie-155">Le onde stazionarie nei casi limite</h4>
         <p>
             Per studiare l'andamento di tensione e corrente in una linea non adattata si esaminano i <strong>casi limite</strong>: linea in corto circuito, linea aperta, carico resistivo, carico reattivo.
         </p>
@@ -7169,7 +7230,7 @@
         <p>
             <strong>Carico reattivo.</strong> Una reattanza pura riflette <strong>tutta</strong> la potenza (lo sfasamento tra corrente e tensione impedisce l'assorbimento). Un carico con componente reattiva produce in generale <strong>più onde stazionarie</strong> di un carico puramente resistivo di pari modulo.
         </p>
-        <h4>Il rapporto di onde stazionarie (ROS)</h4>
+        <h4 id="lt-onde-stazionarie-156">Il rapporto di onde stazionarie (ROS)</h4>
         <p>
             Il <strong>ROS</strong> (in inglese <strong>SWR</strong>, Standing Wave Ratio) è il rapporto tra la tensione massima V<sub>MAX</sub> e quella minima V<sub>MIN</sub> presenti lungo una linea non adattata:
         </p>
@@ -7216,7 +7277,7 @@
             <img class="diagram-img" src="assets/images/lt-smith-carichi-notevoli.jpg" alt="Posizione sulla carta di Smith di carichi notevoli" loading="lazy">
             <div class="diagram-caption">Sulla carta di Smith: un carico resistivo diverso da Z0 descrive un cerchio di ROS costante, un carico reattivo (es. 50 + j30 Ω) un cerchio che non passa dal centro; corto e aperto stanno sul bordo.</div>
         </div>
-        <h4>Il return loss</h4>
+        <h4 id="lt-onde-stazionarie-157">Il return loss</h4>
         <p>
             Il <strong>return loss</strong> (perdita di ritorno) è l'<strong>attenuazione, in dB, del segnale riflesso</strong> da una linea o da un quadripolo:
         </p>
@@ -7226,7 +7287,7 @@
         <p>
             Un <strong>buon adattamento</strong> ha un return loss <strong>alto</strong>: valori ottimi sono 20 o 30 dB (corrispondono a un ROS di circa 1,2 e 1,06).
         </p>
-        <h4>Riepilogo</h4>
+        <h4 id="lt-onde-stazionarie-158">Riepilogo</h4>
         <ul>
             <li>Con carico puramente resistivo <strong>uguale a Z<sub>0</sub></strong> tensione e corrente viaggiano lungo la linea e si ha la massima dissipazione di potenza sul carico.</li>
             <li>Se il carico <strong>differisce da Z<sub>0</sub></strong> la potenza è in parte riflessa, tensione e corrente variano lungo la linea (onde stazionarie) e il carico dissipa meno potenza.</li>
@@ -7274,11 +7335,11 @@
                 </tbody>
             </table>
         </div>
-        <h4>Linee con perdite e ROS</h4>
+        <h4 id="lt-perdite-159">Linee con perdite e ROS</h4>
         <p>
             In una linea a basse perdite l'impedenza vista dal generatore cambia di poco con la lunghezza; in una linea con alte perdite è fortemente alterata. Poiché la potenza riflessa deve percorrere la linea due volte, in una linea con perdite elevate la parte che ritorna al generatore è <strong>ridotta</strong>: il ROS <strong>cambia lungo la linea</strong> ed è <strong>più alto al carico</strong> che al generatore. Una linea lunga e con forte attenuazione si comporta quindi come se l'adattamento al carico fosse <strong>migliore di quello che è realmente</strong>: per giudicare un'antenna conviene misurare il ROS il più vicino possibile all'antenna.
         </p>
-        <h4>L'effetto pelle</h4>
+        <h4 id="lt-perdite-160">L'effetto pelle</h4>
         <p>
             Quando in un conduttore scorre una corrente alternata, il flusso magnetico generato induce una <strong>forza elettromotrice</strong> che fa <strong>diminuire la densità di corrente all'interno</strong> del conduttore e la fa aumentare all'esterno. Questo fenomeno, detto <strong>effetto pelle</strong>, diventa più importante <strong>al crescere della frequenza</strong> (nel rame a 1 MHz lo strato utile è spesso circa 0,07 mm).
         </p>
@@ -7559,7 +7620,7 @@
         </div>
     </div>
     <div class="card">
-        <h3>Definizione, reciprocità e link RF</h3>
+        <h3 id="ant-generalita-161">Definizione, reciprocità e link RF</h3>
         <p>
             L'antenna è definita dall'<strong>IEEE Standard Definitions of Terms for Antennas</strong> (IEEE STD 145-1983) come <em>"un mezzo per trasmettere e ricevere onde radio"</em>.
         </p>
@@ -7567,11 +7628,11 @@
             <li>Un'antenna <strong>trasmittente</strong> è un <strong>trasduttore</strong> che collega i circuiti radio allo spazio libero, convertendo un segnale presente in una linea di trasmissione in un'<strong>onda elettromagnetica</strong> che si propaga nello spazio libero.</li>
             <li>Un'antenna <strong>ricevente</strong> converte un'onda EM dallo spazio libero in un segnale su una linea di trasmissione e quindi nel circuito di ricezione.</li>
         </ul>
-        <h4>Reciprocità</h4>
+        <h4 id="ant-generalita-162">Reciprocità</h4>
         <p>
             Per il principio di <strong>reciprocità</strong> un'antenna funziona ugualmente bene in <strong>trasmissione e in ricezione</strong>. Un'antenna trasmittente si comporta da <strong>carico</strong>, un'antenna ricevente da <strong>generatore</strong>. In entrambi i casi, per funzionare al meglio, le rispettive <strong>impedenze devono essere adattate</strong> alla linea di trasmissione.
         </p>
-        <h4>Il link RF</h4>
+        <h4 id="ant-generalita-163">Il link RF</h4>
         <p>
             Le antenne di trasmissione e ricezione fanno parte del <strong>link RF</strong>, cioè il percorso tra l'uscita del circuito trasmittente e l'ingresso del circuito ricevente. Di solito include: il cavo dal trasmettitore all'antenna, l'antenna di trasmissione, il percorso di propagazione, l'antenna di ricezione e la linea che collega l'antenna di ricezione al ricevitore.
         </p>
@@ -7582,7 +7643,7 @@
         <p>
             Il segnale ricevuto è <strong>molto più piccolo</strong> di quello trasmesso. La stragrande maggioranza della perdita avviene nel <strong>percorso di propagazione</strong>, perché il segnale si diffonde, diffrange, si riflette ed è parzialmente bloccato da oggetti come colline ed edifici.
         </p>
-        <h4>Campo elettromagnetico e polarizzazione</h4>
+        <h4 id="ant-generalita-164">Campo elettromagnetico e polarizzazione</h4>
         <p>
             Il campo EM prodotto da un conduttore è composto da una <strong>componente elettrica</strong> e da una <strong>componente magnetica</strong>. Essendo vettori, sono <strong>ortogonali</strong> tra loro e alla direzione di propagazione.
         </p>
@@ -7590,7 +7651,7 @@
             <img class="diagram-img" src="assets/images/ant-onda-elettromagnetica-e-h.jpg" alt="Campo elettrico e magnetico di un'onda elettromagnetica" loading="lazy">
             <div class="diagram-caption">Onda elettromagnetica: i vettori del campo elettrico E e del campo magnetico H sono ortogonali tra loro e alla direzione di propagazione.</div>
         </div>
-        <h4>Tipi di antenne</h4>
+        <h4 id="ant-generalita-165">Tipi di antenne</h4>
         <p>
             Le antenne sono di due tipi fondamentali:
         </p>
@@ -7614,7 +7675,7 @@
 <section id="ant-radiazione">
     <div class="card">
         <h3>Densità di radiazione, diagramma e direttività</h3>
-        <h4>La densità di radiazione</h4>
+        <h4 id="ant-radiazione-166">La densità di radiazione</h4>
         <p>
             Le antenne <strong>non irradiano ugualmente in tutte le direzioni</strong>: concentrano la potenza irradiata lungo il <strong>lobo principale</strong>. Questo effetto di focalizzazione è la <strong>direttività</strong>. La potenza in una certa direzione è caratterizzata dalla <strong>densità di radiazione</strong> S<sub>r</sub>, cioè la <strong>potenza per unità di area</strong>, espressa in W/m<sup>2</sup> e massima nel lobo principale:
         </p>
@@ -7626,7 +7687,7 @@
             <img class="diagram-img" src="assets/images/ant-densita-radiazione.jpg" alt="Densità di radiazione" loading="lazy">
             <div class="diagram-caption">Densità di radiazione Sr: potenza per unità di area, in W/m². Sr = E × H e diminuisce con il quadrato della distanza.</div>
         </div>
-        <h4>Il diagramma di radiazione</h4>
+        <h4 id="ant-radiazione-167">Il diagramma di radiazione</h4>
         <p>
             Il <strong>diagramma di radiazione</strong> (<em>radiation pattern</em>) è la rappresentazione grafica di come un'antenna irradia il suo segnale. Esistono tre tipi di radiatori:
         </p>
@@ -7649,7 +7710,7 @@
         <p>
             Per l'antenna isotropica, che non ha perdite, la potenza assorbita è uguale a quella irradiata (P<sub>r</sub> = P<sub>IN</sub>) e S<sub>r</sub> dipende solo dalla distanza r.
         </p>
-        <h4>I lobi</h4>
+        <h4 id="ant-radiazione-168">I lobi</h4>
         <p>
             I <strong>lobi di radiazione</strong> sono porzioni del diagramma formate da aree di intensità omogenea:
         </p>
@@ -7666,7 +7727,7 @@
             <img class="diagram-img" src="assets/images/ant-lobi-radiazione.jpg" alt="Lobi del diagramma di radiazione" loading="lazy">
             <div class="diagram-caption">Diagramma di radiazione: lobo principale, lobi laterali, lobo posteriore e lobi minori; larghezza di fascio a metà potenza (HPBW) e tra i primi nulli (FNBW).</div>
         </div>
-        <h4>Gli spazi di radiazione</h4>
+        <h4 id="ant-radiazione-169">Gli spazi di radiazione</h4>
         <p>
             Lo spazio attorno all'antenna si suddivide in tre regioni, perché la struttura del campo cambia allontanandosi dal radiatore:
         </p>
@@ -7682,7 +7743,7 @@
             <img class="diagram-img" src="assets/images/ant-regioni-di-campo.jpg" alt="Regioni di campo attorno a un'antenna" loading="lazy">
             <div class="diagram-caption">Le tre regioni attorno all'antenna: campo vicino reattivo, campo vicino radiante (zona di Fresnel) e campo lontano (zona di Fraunhofer).</div>
         </div>
-        <h4>La direttività</h4>
+        <h4 id="ant-radiazione-170">La direttività</h4>
         <p>
             La <strong>direttività</strong> è il rapporto tra l'<strong>intensità di radiazione in una data direzione</strong> e l'<strong>intensità di radiazione media</strong> in tutte le direzioni; quest'ultima è la potenza totale irradiata divisa per 4π (irraggiamento sferico). Nella pratica si considera la direzione di maggiore irradiazione, cioè quella del lobo principale.
         </p>
@@ -7702,7 +7763,7 @@
 <section id="ant-risonanza">
     <div class="card">
         <h3>Come funziona un'antenna: risonanza e onda progressiva</h3>
-        <h4>Le antenne risonanti</h4>
+        <h4 id="ant-risonanza-171">Le antenne risonanti</h4>
         <p>
             Quando si applica una <strong>tensione sinusoidale</strong> al conduttore di un'antenna, le cariche (gli elettroni liberi) <strong>accelerano e decelerano</strong> sotto l'influenza della sorgente, che in genere arriva da una linea di trasmissione. Accelerando producono un <strong>campo EM</strong> che si irradia lontano dall'antenna. In ogni punto dell'antenna c'è quindi una <strong>corrente sinusoidale</strong> nel tempo e l'accelerazione delle cariche, anch'essa sinusoidale, ha ampiezza proporzionale a quella della corrente.
         </p>
@@ -7716,7 +7777,7 @@
         <p>
             Considerando i contributi di piccoli tratti dz di antenna, il campo emesso da un filo risulta dalla <strong>somma vettoriale</strong> dei singoli contributi, che crea "pieni" e "vuoti" attorno al filo. Questa propagazione avviene nel <strong>campo vicino</strong>.
         </p>
-        <h4>L'onda stazionaria di corrente</h4>
+        <h4 id="ant-risonanza-172">L'onda stazionaria di corrente</h4>
         <p>
             Per avere un'antenna risonante <strong>efficiente</strong> tutta la corrente dovrebbe andare nella <strong>stessa direzione</strong> in un dato istante. Lo si ottiene stabilendo un'<strong>onda stazionaria</strong>: all'estremità aperta, per riflessione, la corrente totale è <strong>nulla</strong>; le onde di corrente diretta e riflessa si combinano formando l'onda stazionaria. Se l'antenna è abbastanza corta tutta la corrente totale va nello stesso verso: la lunghezza ottimale è di circa <strong>mezza lunghezza d'onda</strong>. Se il filo è più lungo, i contributi dei segmenti con corrente opposta si annullano in parte. Antenne lunghe multipli di λ/2 sono dette <strong>antenne risonanti in armonica</strong>.
         </p>
@@ -7724,7 +7785,7 @@
             <img class="diagram-img" src="assets/images/ant-onda-stazionaria-corrente.jpg" alt="Onde stazionarie di corrente su un'antenna a mezz'onda e su un filo lungo" loading="lazy">
             <div class="diagram-caption">Corrente diretta, riflessa e totale: nell'antenna da λ/2 la corrente totale ha un solo verso e il campo irradiato si somma; in un filo lungo i tratti con corrente opposta annullano il campo.</div>
         </div>
-        <h4>Le antenne ad onda progressiva</h4>
+        <h4 id="ant-risonanza-173">Le antenne ad onda progressiva</h4>
         <p>
             Hanno <strong>ampia larghezza di banda</strong> e <strong>grandi dimensioni</strong>. Iniziano come una struttura di linea di trasmissione che <strong>si allarga lentamente</strong>, offrendo una transizione a <strong>bassa riflessione</strong> dalla linea allo spazio libero: la larghezza di banda dipende soprattutto dalla gradualità della transizione. Esempi sono la <strong>tromba</strong> e la <strong>Beverage</strong>, un filo lungo diverse λ con resistenza di terminazione.
         </p>
@@ -7750,7 +7811,7 @@
 <section id="ant-parametri">
     <div class="card">
         <h3>Caratteristiche delle antenne</h3>
-        <h4>Calcolo delle dimensioni</h4>
+        <h4 id="ant-parametri-174">Calcolo delle dimensioni</h4>
         <p>
             In un'antenna, come nelle linee di trasmissione, induttanza, capacità e resistenza sono <strong>distribuite quasi uniformemente</strong> lungo il filo. Supponendo che il segnale si propaghi alla velocità della luce, la distanza percorsa in un ciclo è la <strong>lunghezza d'onda</strong>:
         </p>
@@ -7779,11 +7840,11 @@
                 <strong>Esempio.</strong> Dipolo per i 40 m a 7,1 MHz: l = 143/7,1 ≈ <strong>20,1 m</strong> in totale, cioè circa 10 m per ramo. Per i 2 m (145 MHz) un monopolo a quarto d'onda è lungo 71,5/145 ≈ 49 cm.
             </p>
         </div>
-        <h4>Guadagno ed efficienza</h4>
+        <h4 id="ant-parametri-175">Guadagno ed efficienza</h4>
         <p>
             Il <strong>guadagno</strong> di un'antenna è di solito definito come <strong>guadagno assoluto</strong>, riferito al radiatore isotropico (dBi), in una data direzione; il massimo corrisponde al lobo principale. Nelle misure è spesso riferito a un'<strong>antenna di riferimento</strong> con caratteristiche note, come il dipolo (dBd). L'<strong>efficienza</strong> tiene conto anche delle <strong>perdite</strong> (disadattamento con la linea, materiali impiegati).
         </p>
-        <h4>Apertura efficace</h4>
+        <h4 id="ant-parametri-176">Apertura efficace</h4>
         <p>
             Un'antenna ha una dimensione effettiva <strong>maggiore</strong> di quella fisica, perché influenza i campi EM che la circondano. L'<strong>apertura efficace</strong> (<em>effective aperture size</em>) è l'area che cattura tutta la potenza che la attraversa e la fornisce ai terminali di uscita. Per un'antenna ricevente è legata al guadagno G<sub>R</sub>; nota la densità di potenza P<sub>D</sub>, la potenza ricevuta è P<sub>R</sub>:
         </p>
@@ -7794,11 +7855,11 @@
             <img class="diagram-img" src="assets/images/ant-apertura-efficace.jpg" alt="Apertura efficace di un'antenna ricevente" loading="lazy">
             <div class="diagram-caption">L'area efficace AR è la superficie che cattura la potenza dall'onda incidente: AR = GR·λ²/4π e PR = PD·AR.</div>
         </div>
-        <h4>Banda passante</h4>
+        <h4 id="ant-parametri-177">Banda passante</h4>
         <p>
             Le antenne filari hanno una <strong>banda passante ridotta</strong> a causa della risonanza. La banda passante è l'intervallo di frequenze in cui le caratteristiche dell'antenna non si degradano in modo sostanziale. Poiché dipende da molti fattori (impedenza, diagramma, polarizzazione, guadagno, efficienza, dimensioni) si definisce come <strong>funzione della variazione dell'impedenza di ingresso</strong>: in pratica è l'intervallo in cui il <strong>ROS è minore di 2:1</strong>.
         </p>
-        <h4>Resistenza di radiazione</h4>
+        <h4 id="ant-parametri-178">Resistenza di radiazione</h4>
         <p>
             L'energia fornita a un'antenna si dissipa in parte sotto forma di <strong>onda elettromagnetica</strong>, in parte come <strong>calore</strong>. In entrambi i casi la potenza è P = I<sup>2</sup>R: nelle perdite R è una resistenza reale, nell'irradiazione è una resistenza <strong>fittizia</strong>, la <strong>resistenza di radiazione</strong> R<sub>0</sub>. La potenza totale è
         </p>
@@ -7806,7 +7867,7 @@
             P = I<sup>2</sup> · (R<sub>0</sub> + R<sub>l</sub>)
             <span class="label">R<sub>0</sub> = resistenza di radiazione, R<sub>l</sub> = resistenza di perdita; l'efficienza è R<sub>0</sub> / (R<sub>0</sub> + R<sub>l</sub>): riducendo R<sub>l</sub> aumenta la potenza irradiata</span>
         </div>
-        <h4>ERP ed EIRP</h4>
+        <h4 id="ant-parametri-179">ERP ed EIRP</h4>
         <p>
             La <strong>ERP</strong> (Effective Radiated Power, potenza effettiva irradiata) è la potenza che dovrebbe irradiare un <strong>dipolo</strong> per avere, nella direzione di massimo campo, lo stesso campo misurato per l'antenna in prova. Si calcola partendo dalla potenza del trasmettitore (PEP), <strong>aggiungendo il guadagno</strong> d'antenna e <strong>sottraendo le perdite</strong> del sistema (linea, connettori, filtri):
         </p>
@@ -7822,11 +7883,11 @@
                 <strong>Esempio.</strong> Trasmettitore da 100 W (50 dBm), cavo con 2 dB di perdita, antenna Yagi con 8 dBd. ERP = 50 - 2 + 8 = 56 dBm ≈ 400 W; EIRP = 56 + 2,15 ≈ 58,2 dBm.
             </p>
         </div>
-        <h4>Impedenza dello spazio libero e fattore di antenna</h4>
+        <h4 id="ant-parametri-180">Impedenza dello spazio libero e fattore di antenna</h4>
         <p>
             Il rapporto tra campo elettrico E e campo magnetico H in un'onda nello spazio libero è una costante, l'<strong>impedenza dello spazio libero</strong>: <strong>377 Ω</strong>. Il <strong>fattore di antenna</strong> (<em>Antenna Factor</em>, AF) è il rapporto tra il campo elettrico E e la tensione V ai morsetti dell'antenna; si misura in <strong>m<sup>-1</sup></strong>. Conoscendo AF e la tensione si risale al campo (E = AF · V), usato nelle misure di campo.
         </p>
-        <h4>Effetto del suolo e ground plane</h4>
+        <h4 id="ant-parametri-181">Effetto del suolo e ground plane</h4>
         <p>
             Le prestazioni di un'antenna sono modificate in modo considerevole dal <strong>terreno sottostante</strong>, che si comporta da <strong>immenso riflettore</strong>: le onde riflesse si combinano con quelle dirette in modo diverso secondo l'orientamento dell'antenna, la sua altezza e le caratteristiche del terreno. Si immagina un'<strong>antenna immagine</strong> speculare sotto il suolo. Poiché il suolo non è un buon conduttore, si può simulare un terreno perfettamente conduttore con una <strong>superficie metallica</strong> (una griglia o una serie di fili a raggiera): il <strong>piano di terra</strong> (<em>ground plane</em>).
         </p>
@@ -7850,7 +7911,7 @@
         <p>
             La <strong>polarizzazione</strong> di un'antenna in una data direzione coincide con la polarizzazione del <strong>campo elettromagnetico emesso</strong>, riferita al lobo principale. In pratica coincide con il <strong>piano che contiene il campo elettrico</strong>, parallelo al piano contenente il dipolo; il campo magnetico è <strong>ortogonale</strong> (a 90°) a quello elettrico. A distanze sufficienti (campo lontano, onde piane) il campo elettrico ha la direzione del <strong>conduttore dell'antenna</strong>: la polarizzazione coincide quindi con la posizione del campo elettrico rispetto al suolo.
         </p>
-        <h4>Polarizzazione lineare</h4>
+        <h4 id="ant-polarizzazione-182">Polarizzazione lineare</h4>
         <p>
             Esistono tre tipi: <strong>lineare</strong>, <strong>circolare</strong> ed <strong>ellittica</strong>. La polarizzazione lineare comprende quella <strong>orizzontale</strong> e quella <strong>verticale</strong>: in campo lontano il piano del campo elettrico non cambia.
         </p>
@@ -7858,7 +7919,7 @@
             <img class="diagram-img" src="assets/images/ant-polarizzazione-lineare.jpg" alt="Polarizzazione lineare orizzontale e verticale" loading="lazy">
             <div class="diagram-caption">La polarizzazione coincide con il piano del campo elettrico, parallelo al conduttore: verticale per un'antenna verticale, orizzontale per un dipolo orizzontale.</div>
         </div>
-        <h4>Polarizzazione circolare ed ellittica</h4>
+        <h4 id="ant-polarizzazione-183">Polarizzazione circolare ed ellittica</h4>
         <p>
             Combinando <strong>due dipoli incrociati</strong> alimentati con uno <strong>sfasamento di 90°</strong>, il campo elettrico <strong>ruota</strong> rispetto al suolo, in senso destrorso o sinistrorso: è la <strong>polarizzazione circolare</strong>. Se l'ampiezza dei due campi incrociati non è uguale si ha la <strong>polarizzazione ellittica</strong>.
         </p>
@@ -7866,7 +7927,7 @@
             <img class="diagram-img" src="assets/images/ant-polarizzazione-circolare.jpg" alt="Polarizzazione circolare con due dipoli incrociati" loading="lazy">
             <div class="diagram-caption">Due dipoli incrociati alimentati con sfasamento di 90° generano un campo elettrico che ruota: polarizzazione circolare (ellittica se le ampiezze sono diverse).</div>
         </div>
-        <h4>Uso della polarizzazione</h4>
+        <h4 id="ant-polarizzazione-184">Uso della polarizzazione</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -7891,7 +7952,7 @@
 <section id="ant-tipi">
     <div class="card">
         <h3>Dipolo, loop e long wire</h3>
-        <h4>Il dipolo a mezz'onda</h4>
+        <h4 id="ant-tipi-185">Il dipolo a mezz'onda</h4>
         <p>
             Alimentando al centro un filo lungo <strong>mezz'onda</strong> si ottiene alla risonanza il <strong>dipolo a mezz'onda</strong>, composto da due rami uguali. La sua resistenza di radiazione dipende da vari fattori: la <strong>posizione rispetto al suolo</strong>, il rapporto lunghezza/diametro del conduttore, la lunghezza del filo (fuori risonanza compare anche una reattanza e la resistenza aumenta). Teoricamente l'impedenza in risonanza è di circa <strong>73 Ω</strong>.
         </p>
@@ -7905,7 +7966,7 @@
         <p>
             L'intensità di radiazione è <strong>maggiore nelle direzioni ad angolo retto con il conduttore</strong>: nel piano di polarizzazione il diagramma è un "<strong>otto</strong>", nello spazio una "<strong>ciambella</strong>". Il guadagno rispetto all'isotropico è di <strong>2,15 dBi</strong> (la "i" indica il riferimento isotropico).
         </p>
-        <h4>Il dipolo ripiegato</h4>
+        <h4 id="ant-tipi-186">Il dipolo ripiegato</h4>
         <p>
             Sono due fili paralleli e distanziati, uniti alle estremità, uno dei quali è un dipolo tradizionale. Nel tratto che unisce i due estremi la corrente circola in modo invertito rispetto al dipolo, come in una linea di trasmissione. L'impedenza risulta di circa <strong>300 Ω</strong> (quattro volte quella del dipolo semplice); il diagramma di radiazione è lo stesso.
         </p>
@@ -7913,7 +7974,7 @@
             <img class="diagram-img" src="assets/images/ant-dipolo-ripiegato.jpg" alt="Dipolo a mezz'onda ripiegato" loading="lazy">
             <div class="diagram-caption">Dipolo ripiegato: due fili paralleli uniti alle estremità; l'impedenza vale circa 300 Ω (quattro volte quella del dipolo semplice) e il diagramma è lo stesso.</div>
         </div>
-        <h4>La long wire</h4>
+        <h4 id="ant-tipi-187">La long wire</h4>
         <p>
             È un <strong>filo di lunghezza qualunque</strong>, steso in orizzontale o in verticale; per ottenere buoni risultati dovrebbe essere lungo almeno <strong>quattro o cinque lunghezze d'onda</strong>. Servono un <strong>ottimo piano di terra</strong> e un <strong>accordatore</strong>. L'impedenza può variare da pochi ohm a <strong>3-4 kΩ</strong>; il punto di alimentazione è generalmente collegato a un <strong>trasformatore di impedenza 9:1</strong>. Ha una certa direttività e quindi un discreto guadagno ed è il tipo di antenna più semplice da costruire.
         </p>
@@ -7921,7 +7982,7 @@
             <img class="diagram-img" src="assets/images/ant-long-wire.jpg" alt="Antenna long wire e diagramma di radiazione" loading="lazy">
             <div class="diagram-caption">Long wire: filo lungo almeno alcune lunghezze d'onda, con un buon piano di terra e un accordatore; il diagramma ha più lobi, uno più forte nella direzione del filo.</div>
         </div>
-        <h4>La loop</h4>
+        <h4 id="ant-tipi-188">La loop</h4>
         <p>
             La <strong>loop</strong> è un'antenna a <strong>circuito chiuso</strong>: il conduttore è disposto in una o più spire in modo che le due estremità siano vicine. Può essere molto più piccola della lunghezza d'onda, realizzata con più spire, oppure avere il <strong>perimetro uguale alla lunghezza d'onda</strong>. L'impedenza delle loop a onda intera è di circa <strong>100 Ω</strong>.
         </p>
@@ -7940,7 +8001,7 @@
 <section id="ant-verticali">
     <div class="card">
         <h3>Antenne verticali: monopolo, antenna caricata e ground plane</h3>
-        <h4>Il monopolo verticale</h4>
+        <h4 id="ant-verticali-189">Il monopolo verticale</h4>
         <p>
             Per realizzare un monopolo verticale basta mettere in verticale un dipolo, utilizzandone <strong>solo la metà superiore</strong>. Se il dipolo è posto a terra, o su un <strong>piano di terra artificiale</strong>, la metà superiore crea un'<strong>immagine</strong> inferiore nel piano di terra che rende superflua la metà inferiore. L'antenna misura così <strong>λ/4</strong>; la resistenza di radiazione è di circa <strong>30-36 Ω</strong> (metà di quella del dipolo). Il diagramma di radiazione è <strong>circolare nel piano orizzontale</strong> e schiacciato nel piano verticale.
         </p>
@@ -7948,7 +8009,7 @@
             <img class="diagram-img" src="assets/images/ant-monopolo-verticale.jpg" alt="Monopolo verticale con piano di terra" loading="lazy">
             <div class="diagram-caption">Monopolo verticale: metà di un dipolo su un piano di terra; l'antenna immagine sotto il piano completa il dipolo. Lunghezza λ/4, resistenza di radiazione circa 30-36 Ω, diagramma circolare in orizzontale e schiacciato in verticale.</div>
         </div>
-        <h4>L'antenna caricata</h4>
+        <h4 id="ant-verticali-190">L'antenna caricata</h4>
         <p>
             Se il monopolo è <strong>più corto</strong> (o più lungo) della risonanza, si riporta il sistema in risonanza aggiungendo una <strong>reattanza in serie</strong> al conduttore: un'antenna più corta ha reattanza <strong>capacitiva</strong>, quindi si compensa con una <strong>bobina</strong>; una più lunga ha reattanza induttiva. Per il minore rendimento ha però un <strong>guadagno minore</strong> del quarto d'onda corrispondente; il diagramma è simile a quello del monopolo.
         </p>
@@ -7956,7 +8017,7 @@
             <img class="diagram-img" src="assets/images/ant-antenna-caricata.jpg" alt="Antenna verticale caricata con bobina" loading="lazy">
             <div class="diagram-caption">Antenna caricata: un monopolo più corto di λ/4 viene riportato in risonanza con una bobina in serie; l'andamento di corrente e tensione cambia ma il diagramma è simile.</div>
         </div>
-        <h4>La ground plane</h4>
+        <h4 id="ant-verticali-191">La ground plane</h4>
         <p>
             Un piano di terra poco efficiente può essere sostituito da un <strong>sistema di fili</strong> lunghi λ/4 collegati alla base, parte integrante dell'antenna: si ottiene la <strong>ground plane</strong>. Si usa nella parte più alta delle onde corte e dalle <strong>VHF alle UHF</strong>. L'impedenza dipende dall'inclinazione dei radiali: a <strong>90°</strong> rispetto al radiatore è circa <strong>30 Ω</strong>; per avere <strong>50 Ω</strong> l'angolo tra radiatore e radiali deve essere di <strong>120°</strong> (radiali inclinati verso il basso).
         </p>
@@ -7975,7 +8036,7 @@
 <section id="ant-direttive">
     <div class="card">
         <h3>Antenne direttive: Yagi, parabola e Beverage</h3>
-        <h4>La Yagi</h4>
+        <h4 id="ant-direttive-192">La Yagi</h4>
         <p>
             Per aumentare la <strong>direttività</strong> (e quindi il guadagno) di un dipolo si aggiungono <strong>elementi parassiti</strong> davanti e dietro. I <strong>direttori</strong> sono gli elementi <strong>più corti</strong> posti <strong>davanti</strong> al dipolo e aumentano il lobo principale in avanti; il <strong>riflettore</strong> è l'elemento <strong>più lungo</strong> posto <strong>dietro</strong>: riflette il segnale verso il dipolo, sommandolo a quello irradiato, aumenta il lobo principale e riduce quello posteriore.
         </p>
@@ -7993,7 +8054,7 @@
             <img class="diagram-img" src="assets/images/ant-yagi-diagramma.jpg" alt="Diagramma di radiazione di una Yagi" loading="lazy">
             <div class="diagram-caption">Confronto tra il diagramma di un dipolo e di una Yagi a 6 elementi: lobo principale più stretto e più alto, rapporto avanti-retro e avanti-fianco migliori.</div>
         </div>
-        <h4>L'antenna parabolica</h4>
+        <h4 id="ant-direttive-193">L'antenna parabolica</h4>
         <p>
             Un'<strong>antenna parabolica</strong> è costituita da un <strong>elemento attivo</strong>, il <strong>feeder</strong> o <strong>illuminatore</strong>, e da una <strong>superficie riflettente</strong> a sezione di paraboloide. L'illuminatore è la sorgente primaria: invia la potenza verso il riflettore che la riflette nella direzione voluta (e, in ricezione, concentra nel fuoco i segnali). Maggiore è la dimensione del riflettore, <strong>maggiore è il guadagno</strong>; si ottiene un'<strong>elevata direttività</strong>.
         </p>
@@ -8005,7 +8066,7 @@
             <img class="diagram-img" src="assets/images/ant-parabola-offset-prime-focus.jpg" alt="Antenna parabolica offset e prime focus" loading="lazy">
             <div class="diagram-caption">Parabola: illuminatore (feeder) e riflettore parabolico. Nella versione prime focus il feeder è sul fuoco e ostruisce parte del fascio; nella versione offset l'illuminatore è spostato e non ostruisce.</div>
         </div>
-        <h4>La Beverage</h4>
+        <h4 id="ant-direttive-194">La Beverage</h4>
         <p>
             Come esempio di antenna ad onda progressiva c'è la <strong>Beverage</strong>, una <strong>long wire</strong> usata in HF soprattutto per l'<strong>ascolto</strong>. Deve essere lunga <strong>diverse lunghezze d'onda</strong> e va <strong>terminata su un carico</strong> (resistenza di terminazione, riportata al valore della linea, in genere 50 Ω, tramite un trasformatore 9:1); per funzionare bene richiede un <strong>ottimo piano di terra</strong>.
         </p>
@@ -8028,7 +8089,7 @@
         <p>
             Nella pratica ci si trova spesso a collegare trasmettitore, linea e antenna con <strong>impedenze diverse</strong>. Senza accorgimenti si generano <strong>onde stazionarie</strong> che, nel caso peggiore, si dissipano negli stadi finali del trasmettitore <strong>danneggiandolo</strong>. Si inseriscono quindi circuiti che fanno "vedere" alla linea l'impedenza giusta.
         </p>
-        <h4>Il trasformatore a quarto d'onda</h4>
+        <h4 id="ant-adattamento-195">Il trasformatore a quarto d'onda</h4>
         <p>
             Una sezione di linea a <strong>bassa perdita lunga un quarto d'onda</strong> agisce da <strong>invertitore di impedenza</strong>: Z<sub>0</sub> = √(Z<sub>R</sub> · Z<sub>S</sub>), dove Z<sub>S</sub> è l'impedenza vista all'ingresso, Z<sub>0</sub> quella dello spezzone e Z<sub>R</sub> quella del carico. Se lo spezzone è più corto di λ/4, all'altra estremità si vede anche una componente <strong>reattiva</strong>.
         </p>
@@ -8040,7 +8101,7 @@
                 <strong>Esempio.</strong> Per adattare una loop da 100 Ω a un cavo da 50 Ω serve uno spezzone λ/4 (elettrico, cioè accorciato con il fattore di velocità) con Z<sub>0</sub> = √(100 · 50) ≈ <strong>71 Ω</strong>, in pratica un cavo da 75 Ω.
             </p>
         </div>
-        <h4>Lo stub</h4>
+        <h4 id="ant-adattamento-196">Lo stub</h4>
         <p>
             Un'antenna non adattata ha una parte reattiva che può essere cancellata da quella di uno <strong>stub</strong> collegato in <strong>parallelo</strong> all'alimentazione. La lunghezza dello stub è inferiore a λ/4 e viene terminato in <strong>corto circuito</strong> o <strong>aperto</strong> secondo che si voglia una reattanza induttiva o capacitiva.
         </p>
@@ -8048,7 +8109,7 @@
             <img class="diagram-img" src="assets/images/ant-trasformatore-quarto-onda-stub.jpg" alt="Trasformatore a quarto d'onda e stub" loading="lazy">
             <div class="diagram-caption">Uno spezzone di linea λ/4 è un invertitore di impedenza (Z0 = √(ZR·ZS)); uno stub aperto o in corto, in parallelo, annulla la parte reattiva.</div>
         </div>
-        <h4>Hair Pin</h4>
+        <h4 id="ant-adattamento-197">Hair Pin</h4>
         <p>
             L'<strong>Hair Pin</strong> è uno <strong>stub in corto circuito collegato direttamente all'alimentazione del dipolo</strong>, realizzato con un collegamento a U tra i morsetti dell'antenna. Il punto più distante è elettricamente a <strong>potenziale zero</strong>.
         </p>
@@ -8056,7 +8117,7 @@
             <img class="diagram-img" src="assets/images/ant-hairpin.jpg" alt="Adattamento Hair Pin" loading="lazy">
             <div class="diagram-caption">Hair Pin: stub in corto circuito, a forma di U, collegato direttamente ai morsetti del dipolo; il punto più lontano è a potenziale zero.</div>
         </div>
-        <h4>Delta match e T-match</h4>
+        <h4 id="ant-adattamento-198">Delta match e T-match</h4>
         <p>
             Nel <strong>delta match</strong> si aumenta la distanza tra i punti di alimentazione del dipolo: la presa fuori dal centro presenta un'impedenza diversa; maggiore è la separazione, maggiore è l'impedenza (resistiva se in risonanza). Il <strong>T-match</strong> equivale a uno <strong>stub in corto circuito in serie</strong> all'elemento radiante, lungo meno di λ/4: essendo la parte di linea induttiva, l'adattamento si ottiene <strong>accorciando il dipolo</strong>, che diventa capacitivo. Entrambi si usano per accoppiare un dipolo (circa 75 Ω) a una <strong>linea bilanciata</strong> da 300-600 Ω.
         </p>
@@ -8064,7 +8125,7 @@
             <img class="diagram-img" src="assets/images/ant-delta-t-match.jpg" alt="Delta match e T-match" loading="lazy">
             <div class="diagram-caption">Delta match (collegamento a V alla linea bilanciata) e T-match (stub in corto in serie): adattano un dipolo di circa 75 Ω a una linea bilanciata da 300-600 Ω.</div>
         </div>
-        <h4>Gamma match, Omega match e J-Pole</h4>
+        <h4 id="ant-adattamento-199">Gamma match, Omega match e J-Pole</h4>
         <p>
             Il <strong>gamma match</strong> è una variante del T-match: lo stub, lungo meno di λ/4, viene accordato con un <strong>condensatore variabile</strong>; ne esistono versioni <strong>bilanciata</strong> e <strong>sbilanciata</strong>. Tipico uso in VHF, con antenne in <strong>tubi di rame</strong> saldati. Nell'<strong>omega match</strong> si aggiunge un secondo condensatore variabile <strong>in parallelo</strong> che annulla la parte induttiva dello stub: lo stub può essere più corto e la regolazione è più agevole. Una variante è l'<strong>antenna J-Pole</strong>, usata soprattutto in VHF con <strong>polarizzazione verticale</strong>.
         </p>
@@ -8072,7 +8133,7 @@
             <img class="diagram-img" src="assets/images/ant-gamma-omega-match.jpg" alt="Gamma match, Omega match e J-Pole" loading="lazy">
             <div class="diagram-caption">Gamma match (stub con condensatore variabile), Omega match (con un secondo condensatore in parallelo) e antenna J-Pole in tubi di rame per le VHF.</div>
         </div>
-        <h4>Adattamento con autotrasformatore</h4>
+        <h4 id="ant-adattamento-200">Adattamento con autotrasformatore</h4>
         <p>
             Con i <strong>radiatori verticali</strong> l'alimentazione si collega a un <strong>autotrasformatore</strong>: l'impedenza vista dal trasmettitore dipende dalla <strong>presa</strong> sull'avvolgimento (con la presa a metà, Z<sub>2</sub> = 4·Z<sub>1</sub>).
         </p>
@@ -8092,7 +8153,7 @@
 <section id="ant-balun">
     <div class="card">
         <h3>Il balun e l'accordatore di antenna</h3>
-        <h4>Il balun</h4>
+        <h4 id="ant-balun-201">Il balun</h4>
         <p>
             Un dipolo, per essere alimentato, richiede una <strong>linea bilanciata</strong>; la linea bilanciata classica è la piattina (linea bifilare). Volendolo alimentare con un <strong>cavo coassiale</strong> si hanno le <strong>correnti di modo comune</strong> del dipolo che scorrono lungo l'esterno della calza e <strong>irradiano energia</strong>. Il motivo è che il cavo schermato è una <strong>linea sbilanciata</strong>. Per rimediare si interpone tra dipolo e cavo un circuito detto <strong>balun</strong> (da <strong>bal</strong>anced - <strong>un</strong>balanced).
         </p>
@@ -8103,7 +8164,7 @@
         <p>
             Il balun può essere realizzato avvolgendo alcune <strong>spire di cavo coassiale</strong> (<em>choke</em>), con un <strong>trasformatore bifilare</strong> (spesso su toroide di ferrite) o con spezzoni di linea. Oltre a bilanciare, può anche <strong>trasformare l'impedenza</strong> (1:1, 4:1, 9:1).
         </p>
-        <h4>L'accordatore di antenna</h4>
+        <h4 id="ant-balun-202">L'accordatore di antenna</h4>
         <p>
             Dal lato del trasmettitore si usa generalmente un <strong>accordatore</strong> costruito con <strong>condensatori e induttori variabili</strong>, di solito configurato a <strong>T o a pi greco</strong>. Va collegato <strong>tra il ricetrasmettitore e la linea di trasmissione</strong>. Il <strong>rosmetro</strong> per misurare le onde stazionarie va collegato <strong>tra la radio e l'accordatore</strong>. Si regola l'accordatore fino al <strong>minimo ROS</strong>, tenendo conto che si sta adattando la <strong>radio al sistema linea + antenna</strong>: l'antenna dovrà essere già portata in risonanza, o meglio al massimo rendimento, agendo su di essa.
         </p>
@@ -8138,7 +8199,7 @@
     </div>
 
     <div class="card">
-        <h3>Le grandezze del campo e il mezzo ideale</h3>
+        <h3 id="prop-generalita-203">Le grandezze del campo e il mezzo ideale</h3>
         <p>Il campo elettromagnetico irradiato ha cinque caratteristiche: <strong>ampiezza</strong> (la forza del campo),
         <strong>direzione</strong>, <strong>lunghezza d'onda</strong>, <strong>polarizzazione</strong> e <strong>velocità</strong>.</p>
         <p>
@@ -8151,7 +8212,7 @@
             dei segnali, che interagiscono con molecole d'aria, pulviscolo, montagne, alberi, costruzioni e fenomeni atmosferici.
         </p>
 
-        <h4>I tipi di propagazione</h4>
+        <h4 id="prop-generalita-204">I tipi di propagazione</h4>
         <p>Per un collegamento riuscito servono due cose: la <strong>frequenza di lavoro</strong> e la <strong>natura del mezzo</strong>
         attraversato. Non esiste un mezzo generico, e i radioamatori hanno bande da 137 kHz a 250 GHz.</p>
         <ul>
@@ -8176,7 +8237,7 @@
     <div class="card">
         <h3>Onda di terra, guida d'onda e onda diretta</h3>
 
-        <h4>Onda di terra (o di superficie)</h4>
+        <h4 id="prop-terra-diretta-205">Onda di terra (o di superficie)</h4>
         <p>
             Fu Marconi a scoprirne le potenzialità, collegando una stazione costiera con una nave oltre l'orizzonte ottico.
             Funziona bene alle <strong>frequenze basse o medie</strong>, difficilmente oltre <strong>3-5 MHz</strong>, per brevi o medie distanze;
@@ -8190,7 +8251,7 @@
             suolo con <strong>buona conducibilità</strong>.
         </p>
 
-        <h4>Guida d'onda Terra / Ionosfera</h4>
+        <h4 id="prop-terra-diretta-206">Guida d'onda Terra / Ionosfera</h4>
         <p>
             Usata soprattutto in <strong>ELF</strong> (3-30 kHz) e <strong>VLF</strong> (30-300 kHz): servono due superfici riflettenti affacciate, qui la
             <strong>crosta terrestre</strong> e la <strong>base della ionosfera</strong> (distanza circa 90 km, corrispondente a 3 kHz). La copertura teorica è
@@ -8199,7 +8260,7 @@
             causare disturbi ai servizi sopra tale frequenza.
         </p>
 
-        <h4>Onda diretta e orizzonte radio</h4>
+        <h4 id="prop-terra-diretta-207">Onda diretta e orizzonte radio</h4>
         <p>
             Oltre l'orizzonte ottico i segnali vengono diffratti: la portata è circa il <strong>15% maggiore</strong> di quella della luce.
             Alzando le antenne aumenta la portata:
@@ -8209,13 +8270,13 @@
             <span class="label">d<sub>r</sub> in km, altezze h delle due antenne in metri</span>
         </div>
 
-        <h4>Scatter terrestre e multipath fading</h4>
+        <h4 id="prop-terra-diretta-208">Scatter terrestre e multipath fading</h4>
         <p>
             Dalle VHF in su gli ostacoli riflettono i segnali in modo caotico: <strong>minore la lunghezza d'onda, maggiore la riflessione</strong>.
             I percorsi multipli, sommandosi vettorialmente al ricevitore, causano <strong>evanescenze e distorsioni</strong> (<em>multipath fading</em>).
         </p>
 
-        <h4>Zona di Fresnel e diffrazione a lama di coltello</h4>
+        <h4 id="prop-terra-diretta-209">Zona di Fresnel e diffrazione a lama di coltello</h4>
         <p>
             Tra le antenne e nelle loro vicinanze non devono esserci ostacoli: si definisce <strong>zona di Fresnel</strong> quella in cui le riflessioni non disturbano la propagazione.
             Il suo raggio è
@@ -8229,7 +8290,7 @@
             una zona di possibile ricezione, anche se gran parte del segnale si perde.
         </p>
 
-        <h4>Link budget e formula di Friis</h4>
+        <h4 id="prop-terra-diretta-210">Link budget e formula di Friis</h4>
         <p>
             Per dimensionare un collegamento in portata ottica servono apparati, linee, antenne e percorso in aria.
             Il <strong>link budget</strong> è la differenza in dB tra la potenza massima trasmessa e la sensibilità del ricevitore, antenne e cavi compresi:
@@ -8261,7 +8322,7 @@
             Se l'aria è ben mescolata, temperatura e umidità diminuiscono regolarmente con la quota, ma è una situazione rara.
         </p>
 
-        <h4>Inversione di temperatura</h4>
+        <h4 id="prop-troposfera-211">Inversione di temperatura</h4>
         <p>
             Con <strong>alta pressione</strong> (belle giornate, poco vento) aria più calda, asciutta e leggera si dispone sopra aria più fresca, umida e pesante.
             Nella zona di contatto temperatura e umidità cambiano di colpo: è l'<strong>inversione di temperatura</strong>.
@@ -8274,14 +8335,14 @@
             <li>Portata teorica circa 800 km, in pratica raramente oltre 300 km, ma bastano <strong>1 W</strong>, antenne poco direttive e un ricevitore semplice. Si riconosce da una <strong>evanescenza lenta e poco profonda</strong>.</li>
         </ul>
 
-        <h4>Duct troposferico</h4>
+        <h4 id="prop-troposfera-212">Duct troposferico</h4>
         <p>
             Con inversioni molto estese (soprattutto su <strong>mari e grandi laghi</strong>) avvengono rifrazioni multiple dell'inversione e riflessioni multiple della superficie: i segnali viaggiano in un
             <strong>canale (duct)</strong>, a salto doppio o multiplo. Serve un'altezza tra inversione e suolo di almeno <strong>50 volte la lunghezza d'onda</strong> (100 m o più per i 2 m).
             Si superano <strong>1000 km, fin oltre 2000 km</strong>, ma servono potenze elevate, antenne molto direttive e ricevitori molto sensibili.
         </p>
 
-        <h4>Tropo-scatter e altre forme di scatter</h4>
+        <h4 id="prop-troposfera-213">Tropo-scatter e altre forme di scatter</h4>
         <p>
             Il <strong>tropo-scatter</strong> è dovuto a turbolenze al limite superiore della troposfera che generano continue inversioni: è possibile <strong>in qualsiasi momento</strong>,
             con buone apparecchiature e antenne efficaci. Portate fino a <strong>300 km</strong> (a volte il doppio o il triplo), frequenze circa <strong>100-500 MHz</strong>,
@@ -8305,7 +8366,7 @@
             La ionosfera si estende da circa <strong>40 km a 1600 km</strong> di altezza; l'aria è rarefattissima (la parte più bassa è un milione di volte meno densa di quella che respiriamo).
         </p>
 
-        <h4>Ionizzazione e ricombinazione</h4>
+        <h4 id="prop-ionosfera-214">Ionizzazione e ricombinazione</h4>
         <p>
             Le radiazioni solari ionizzanti (ultravioletti, X, gamma) staccano elettroni dalle molecole d'aria (ioni) e vengono assorbite prima di raggiungerci.
             In un ambiente così rarefatto gli elettroni si ricombinano poco: nasce un ambiente <strong>ricco di elettroni liberi</strong> che riflette le onde.
@@ -8313,7 +8374,7 @@
             Il tasso di ionizzazione dipende da ora, stagione e attività solare (macchie solari e flusso solare).
         </p>
 
-        <h4>Gli strati</h4>
+        <h4 id="prop-ionosfera-215">Gli strati</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Strato</th><th>Altezza</th><th>Comportamento</th></tr></thead>
@@ -8330,13 +8391,13 @@
             <div class="diagram-caption">Strati della ionosfera: di giorno D, E, F1 e F2; di notte resta sostanzialmente lo strato F (F1 e F2 si fondono).</div>
         </div>
 
-        <h4>Cicli solari</h4>
+        <h4 id="prop-ionosfera-216">Cicli solari</h4>
         <p>
             L'efficacia degli strati segue il ciclo delle macchie solari, di circa <strong>11 anni</strong> (9-13). Gli anni di <strong>massimo di macchie</strong> sono i migliori per il DX in HF alta;
             il numero relativo di macchie R aumenta → aumentano le possibilità di DX. Dal 1750 si sono registrati cicli successivi; oggi siamo nel <strong>25° ciclo</strong>.
         </p>
 
-        <h4>LUF, MUF, frequenza critica e frequenza ottimale</h4>
+        <h4 id="prop-ionosfera-217">LUF, MUF, frequenza critica e frequenza ottimale</h4>
         <ul>
             <li><strong>LUF</strong> (<em>Lowest Usable Frequency</em>): sotto questa frequenza i segnali non vengono rifratti al suolo ma si perdono (assorbiti dallo strato D o dispersi). Esiste solo di giorno; può valere 10-15 MHz e si abbassa aumentando la potenza (con ~100 W circa 5-8 MHz). Sotto la LUF resta solo l'onda di terra, oppure si sale di frequenza.</li>
             <li><strong>MUF</strong> (<em>Maximum Usable Frequency</em>): la frequenza più alta che viene ancora rifratta, per un dato angolo di incidenza. Oltre la MUF i segnali attraversano lo strato e vanno nello spazio.</li>
@@ -8345,7 +8406,7 @@
         </ul>
         <p>Il collegamento DX sicuro è possibile nell'intervallo <strong>LUF-MUF</strong>: frequenze che attraversano due volte lo strato D, vengono riflesse da E o F e arrivano con intensità sufficiente.</p>
 
-        <h4>Angolo d'irradiazione e zona d'ombra (skip)</h4>
+        <h4 id="prop-ionosfera-218">Angolo d'irradiazione e zona d'ombra (skip)</h4>
         <p>
             Abbassando l'angolo di emissione la MUF cresce: con angoli prossimi a zero può arrivare a <strong>3-5 volte</strong> la frequenza critica; più piatto è l'angolo, più alta può essere la frequenza di esercizio.
             Lo svantaggio è la <strong>zona d'ombra (skip)</strong> attorno al trasmettitore, dove il segnale non si riceve: cresce con la frequenza e corrisponde pressappoco alla portata del salto.
@@ -8364,7 +8425,7 @@
             <strong>2500 km</strong>; per distanze maggiori servono salti multipli. Per ricevere il segnale riflesso l'angolo dell'antenna ricevente deve essere simile a quello della trasmittente.
         </p>
 
-        <h4>Le bande HF, una per una</h4>
+        <h4 id="prop-ionosfera-219">Le bande HF, una per una</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Banda</th><th>Comportamento</th></tr></thead>
@@ -8391,7 +8452,7 @@
     <div class="card">
         <h3>Altri modi di propagazione</h3>
 
-        <h4>Strato E sporadico (Es)</h4>
+        <h4 id="prop-altri-modi-220">Strato E sporadico (Es)</h4>
         <p>
             Attorno ai 100 km, occasionalmente e in uno spazio limitato, si forma uno strato che riflette frequenze fino a circa <strong>200 MHz</strong>.
             Non è correlato al ciclo delle macchie solari ma sembra legato agli <strong>sciami meteorici</strong>; ha massimi nei mesi <strong>maggio-luglio</strong> (e dicembre-gennaio), nella tarda mattinata e nelle prime ore serali.
@@ -8399,26 +8460,26 @@
             e spostando i punti di riflessione, che a volte però permettono di collegare punti normalmente in zona d'ombra.
         </p>
 
-        <h4>Meteor scatter</h4>
+        <h4 id="prop-altri-modi-221">Meteor scatter</h4>
         <p>
             Ogni anno circa 50.000 tonnellate di meteore entrano nell'atmosfera, a velocità altissima. Ognuna lascia una <strong>scia di gas ionizzati</strong>, soprattutto all'altezza dello strato E,
             che riflette segnali nelle bande <strong>10, 6 e 2 metri</strong>. La ricombinazione è veloce: il collegamento dura da pochi secondi a qualche minuto.
         </p>
 
-        <h4>Magnetosfera e propagazione aurorale</h4>
+        <h4 id="prop-altri-modi-222">Magnetosfera e propagazione aurorale</h4>
         <p>
             La Terra è un enorme magnete: le sue linee di forza sono perturbate dal <strong>vento solare</strong>. In quiete poche particelle (protoni ed elettroni) penetrano e vengono catturate dai poli;
             con forte attività solare il vento è più veloce e numeroso, la magnetosfera cambia forma aprendo un <em>cusp</em> dove vengono catturate molte particelle, che il campo elettrico terrestre accelera generando le <strong>aurore polari</strong>.
             La ionosfera polare, ricca di elettroni, <strong>cancella i segnali HF</strong> sui percorsi sopra i poli, mentre per frequenze da <strong>6 a 2 metri</strong> offre una intensa riflessione: collegamenti oltre <strong>1000 km</strong>.
         </p>
 
-        <h4>Propagazione transequatoriale (TEP)</h4>
+        <h4 id="prop-altri-modi-223">Propagazione transequatoriale (TEP)</h4>
         <p>
             Collega località a medie latitudini, circa alla stessa distanza nord-sud dall'equatore (magnetico, non coincidente con quello geografico). Si verifica nel <strong>tardo pomeriggio e in serata</strong>,
             è massima nei <strong>massimi solari</strong>, sui <strong>6 metri</strong> (la sera anche 2 m e 70 cm), con portate da 300 a 7500 km. I meccanismi non sono del tutto noti.
         </p>
 
-        <h4>Collegamenti spaziali</h4>
+        <h4 id="prop-altri-modi-224">Collegamenti spaziali</h4>
         <p>
             Usano come riflettore i <strong>satelliti amatoriali (AMSAT)</strong> e la <strong>Luna</strong> (EME): il collegamento avviene a vista del mezzo, la portata dipende dall'altezza del riflettore.
             I segnali attraversano due volte l'atmosfera: oltre all'attenuazione di tratta si hanno <strong>rotazioni di fase</strong> (da cui la polarizzazione circolare), <strong>ritardi</strong> ed <strong>effetto Doppler</strong>.
@@ -8438,7 +8499,7 @@
     <div class="card">
         <h3>Disturbi, indici solari e previsioni</h3>
 
-        <h4>Disturbi della propagazione</h4>
+        <h4 id="prop-disturbi-previsioni-225">Disturbi della propagazione</h4>
         <ul>
             <li><strong>SID</strong> (<em>Sudden Ionospheric Disturbance</em>): aumento improvviso dell'attenuazione dello strato D, solo sull'<strong>emisfero illuminato</strong> e ovunque contemporaneamente; da minuti a ore, inizio rapido e fine lenta; colpisce soprattutto onde medio-corte e corte basse; frequente nei massimi di macchie.</li>
             <li><strong>Polar Blackout</strong> (due tipi): il primo, raro, nei massimi di macchie e per diversi giorni; il secondo, più frequente, con le fasi principali delle aurore (marzo e settembre), da ore a giorni. Interrompono i collegamenti che attraversano latitudini di 60° e oltre.</li>
@@ -8446,7 +8507,7 @@
             <li>Scale NOAA di intensità: <strong>R</strong> (<em>radio blackout</em>), <strong>S</strong> (<em>solar radiation storms</em>), <strong>G</strong> (<em>geomagnetic storm</em>), da 1 a 5.</li>
         </ul>
 
-        <h4>Indici dell'attività solare</h4>
+        <h4 id="prop-disturbi-previsioni-226">Indici dell'attività solare</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Indice</th><th>Significato</th></tr></thead>
@@ -8461,7 +8522,7 @@
         </table>
         </div>
 
-        <h4>Beacon e strumenti di previsione</h4>
+        <h4 id="prop-disturbi-previsioni-227">Beacon e strumenti di previsione</h4>
         <ul>
             <li><strong>Beacon NCDXF/IARU</strong>: rete di <strong>18 trasmettitori</strong> nel mondo, tutti sulle stesse frequenze (<strong>14100, 18110, 21150, 24930, 28200 kHz</strong>), coordinati a rotazione: nominativo in Morse e quattro toni da 1 secondo a 100, 10, 1 e 0,1 W.</li>
             <li><strong>Reverse Beacon</strong> (stazioni che riportano sul web come ricevono il nostro Morse), <strong>WebSDR</strong> (ricevitori in streaming) e <strong>PSKReporter</strong> (rapporti FT8 su mappa) mostrano dove arriva il proprio segnale.</li>
@@ -8786,8 +8847,8 @@
         </div>
     </div>
     <div class="card">
-        <h3>Le misure di frequenza e il frequenzimetro</h3>
-        <h4>Un po' di storia: l'ondametro</h4>
+        <h3 id="str-frequenza-228">Le misure di frequenza e il frequenzimetro</h3>
+        <h4 id="str-frequenza-229">Un po' di storia: l'ondametro</h4>
         <p>
             Per conoscere la frequenza di un segnale si sono usati nel tempo strumenti analogici dapprima e digitali poi. Un metodo semplice è quello dell'<strong>ondametro</strong> (o frequenzimetro) <strong>ad assorbimento</strong>, oggi parte della storia della radiotecnica. Il suo funzionamento si basava sull'<strong>accoppiamento dell'induttanza di sintonia</strong> di un oscillatore variabile L-C che, quando veniva accoppiato a un circuito risonante alla sua stessa frequenza, <em>spegneva</em> l'oscillatore. La frequenza si leggeva su una scala graduata ed era segnalata da un brusco "<strong>dip</strong>" dell'indicatore posto sotto la scala (<strong>Grid-Dip meter</strong>).
         </p>
@@ -8798,7 +8859,7 @@
             <img class="diagram-img" src="assets/images/str-ondametro-grid-dip.jpg" alt="Ondametro ad assorbimento (grid-dip meter)" loading="lazy">
             <div class="diagram-caption">Ondametro ad assorbimento (grid-dip meter): oscillatore L-C variabile con bobine intercambiabili e indicatore che segnala il "dip" in risonanza.</div>
         </div>
-        <h4>I contatori di tipo digitale</h4>
+        <h4 id="str-frequenza-230">I contatori di tipo digitale</h4>
         <p>
             Gli strumenti digitali visualizzano il risultato mediante <strong>numeri</strong>, anziché con lo spostamento di un indice o la lettura su una scala. La lettura numerica offre diversi vantaggi:
         </p>
@@ -8815,7 +8876,7 @@
             <img class="diagram-img" src="assets/images/str-contatore-flip-flop.jpg" alt="Contatore con flip-flop in cascata" loading="lazy">
             <div class="diagram-caption">Contatore digitale: una serie di flip-flop collegati in cascata con ingresso di clock; ogni stadio divide per due la frequenza.</div>
         </div>
-        <h4>Il frequenzimetro</h4>
+        <h4 id="str-frequenza-231">Il frequenzimetro</h4>
         <p>
             Per misurare la frequenza di un segnale periodico, uno strumento deve valutare il <strong>numero di periodi</strong> del segnale contenuti nell'unità di tempo (1 s). Il tempo di conteggio (<strong>base dei tempi</strong>, TB) deve essere fisso e stabile; lo strumento ha un sistema di apertura e chiusura del conteggio (<em>gate</em>), con comando elettronico ad elevata stabilità in frequenza.
         </p>
@@ -8860,7 +8921,7 @@
         <p>
             Per conoscere il comportamento di un segnale in un intervallo di tempo, nel quale subisce delle modifiche, si usa l'<strong>oscilloscopio</strong>: uno strumento per l'analisi di una forma d'onda nel <strong>dominio del tempo</strong>.
         </p>
-        <h4>Un po' di storia: il tubo a raggi catodici</h4>
+        <h4 id="str-oscilloscopio-232">Un po' di storia: il tubo a raggi catodici</h4>
         <p>
             Elemento fondamentale dei primi oscilloscopi era il <strong>tubo a raggi catodici (CRT)</strong>, che consentiva di visualizzare il segnale svolgendo la funzione di attuatore elettro-ottico. I suoi componenti erano:
         </p>
@@ -8874,7 +8935,7 @@
             <img class="diagram-img" src="assets/images/str-oscilloscopio-crt.jpg" alt="Tubo a raggi catodici (CRT)" loading="lazy">
             <div class="diagram-caption">Tubo a raggi catodici: cannone elettronico, focalizzazione e accelerazione, placche di deflessione orizzontali e verticali, schermo fluorescente.</div>
         </div>
-        <h4>L'oscilloscopio moderno</h4>
+        <h4 id="str-oscilloscopio-233">L'oscilloscopio moderno</h4>
         <p>
             I moderni oscilloscopi usano un <strong>display LCD a colori</strong> che, oltre al segnale, mostra ulteriori informazioni sulla misura, e mantengono i comandi tradizionali pur con un'elettronica sostanzialmente diversa. Dispongono di due o più <strong>canali</strong>; fondamentalmente hanno un <strong>attenuatore di ingresso</strong> e un <strong>preamplificatore a larga banda</strong>, mentre la funzionalità di trigger e la visualizzazione sono demandate a un <strong>DSP</strong> e a un <strong>microcontrollore</strong>.
         </p>
@@ -8886,7 +8947,7 @@
             <img class="diagram-img" src="assets/images/str-oscilloscopio-pannello.jpg" alt="Pannello di un oscilloscopio digitale" loading="lazy">
             <div class="diagram-caption">Oscilloscopio digitale a due canali: display, comandi verticali (sensibilità), orizzontali (base dei tempi) e di trigger, ingressi con puntali.</div>
         </div>
-        <h4>Le funzioni principali</h4>
+        <h4 id="str-oscilloscopio-234">Le funzioni principali</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -8905,7 +8966,7 @@
         <p>
             Da considerare la <strong>banda passante massima</strong>, da 50 MHz in su, e la <strong>frequenza di campionamento</strong>, generalmente da 1 Gsa/s in su.
         </p>
-        <h4>Il puntale</h4>
+        <h4 id="str-oscilloscopio-235">Il puntale</h4>
         <p>
             Parte importante della misura è il <strong>puntale</strong>: è costituito da una <strong>sonda</strong> collegata allo strumento da un <strong>cavo coassiale ad alta impedenza</strong> e possiede un <strong>clip a coccodrillo</strong> per il collegamento a massa. Ha una selezione di attenuazione <strong>1:1</strong> oppure <strong>10:1</strong>: la posizione 1:1 aumenta la sensibilità dello strumento, con la possibilità di introdurre meno rumore nella misura; la 10:1 attenua il segnale di dieci volte, ma carica meno il circuito in prova.
         </p>
@@ -8938,7 +8999,7 @@
             <img class="diagram-img" src="assets/images/str-analizzatore-spettro-schema.jpg" alt="Schema a blocchi di un analizzatore di spettro" loading="lazy">
             <div class="diagram-caption">Analizzatore di spettro: circuiti di ingresso, miscelatore, oscillatore sweep comandato da un generatore a dente di sega, filtro selettivo, rivelatore e schermo.</div>
         </div>
-        <h4>Le funzioni principali</h4>
+        <h4 id="str-spettro-236">Le funzioni principali</h4>
         <ul>
             <li>selezione della <strong>frequenza centrale</strong>, oppure dei limiti di <em>start</em> e <em>stop frequency</em>;</li>
             <li><strong>span</strong> di frequenze da visualizzare;</li>
@@ -8952,7 +9013,7 @@
             <img class="diagram-img" src="assets/images/str-analizzatore-spettro-pannello.jpg" alt="Analizzatore di spettro da laboratorio" loading="lazy">
             <div class="diagram-caption">Analizzatore di spettro da laboratorio che visualizza un segnale a 14,2 MHz con marker, affiancato a un generatore di segnali.</div>
         </div>
-        <h4>Una versione economica: il dongle RTL-SDR</h4>
+        <h4 id="str-spettro-237">Una versione economica: il dongle RTL-SDR</h4>
         <p>
             Una versione economica dell'analizzatore di spettro è il <strong>dongle RTL-SDR</strong>. Con appositi software, come <strong>SDR#</strong> o <strong>Spectrum Lab</strong>, permette di visualizzare su PC i segnali nel dominio della frequenza. Download: <a href="https://airspy.com/download/" target="_blank" rel="noopener">SDR#</a> · <a href="https://www.qsl.net/dl4yhf/spectra1.html" target="_blank" rel="noopener">Spectrum Lab</a>.
         </p>
@@ -9246,7 +9307,7 @@
     </div>
 
     <div class="card">
-        <h3>Le Radio Regulations</h3>
+        <h3 id="itu-238">Le Radio Regulations</h3>
         <p>
             Le <strong>Radio Regulations</strong> (RR) sono una raccolta di 4 volumi che contiene
             tutte le norme sulle radiocomunicazioni: definizioni tecniche, suddivisione delle
@@ -9257,7 +9318,7 @@
             (WRC), che si tengono ogni 3-4 anni.
         </p>
 
-        <h4>Regioni ITU</h4>
+        <h4 id="itu-239">Regioni ITU</h4>
         <p>L'ITU divide il mondo in tre Regioni per il traffico radio:</p>
         <ul>
             <li><strong>Regione 1:</strong> Europa, Africa, Russia asiatica, Mongolia.</li>
@@ -9287,13 +9348,13 @@
             raccomandazioni per armonizzare le norme in Europa.
         </p>
 
-        <h4>TR 61-01</h4>
+        <h4 id="cept-240">TR 61-01</h4>
         <p>
             Permette ai radioamatori dei paesi CEPT di operare temporaneamente in altri paesi CEPT
             senza licenza aggiuntiva. La licenza CEPT è inclusa nella licenza nazionale.
         </p>
 
-        <h4>TR 61-02 (HAREC)</h4>
+        <h4 id="cept-241">TR 61-02 (HAREC)</h4>
         <p>
             Istituisce un <strong>certificato di esame armonizzato</strong> per radioamatori,
             riconosciuto in tutti i paesi aderenti. Chi ha l'HAREC può ottenere una licenza
@@ -9377,7 +9438,7 @@
             essere cambiata rispetto a quando è stato scritto questo testo.
         </p>
 
-        <h4>Il nominativo</h4>
+        <h4 id="patente-242">Il nominativo</h4>
         <p>Il nominativo italiano è formato da:</p>
         <ul>
             <li><strong>Prefisso:</strong> I (Italia) + una lettera (es. IK, IZ, IU, IW).</li>
@@ -9386,7 +9447,7 @@
         </ul>
         <p>Esempio: <strong>IK3XYZ</strong> — I = Italia, K = tipo di licenza, 3 = Veneto, XYZ = suffisso.</p>
 
-        <h4>Suffissi speciali</h4>
+        <h4 id="patente-243">Suffissi speciali</h4>
         <ul>
             <li><strong>/P</strong> = portatile (da una postazione temporanea).</li>
             <li><strong>/M</strong> = mobile (da un veicolo).</li>
@@ -9433,7 +9494,7 @@
             </table>
         </div>
 
-        <h4>Relazione frequenza-lunghezza d'onda</h4>
+        <h4 id="bande-244">Relazione frequenza-lunghezza d'onda</h4>
         <div class="formula">
             λ = 300 / f<sub>MHz</sub>
             <span class="label">λ in metri, f in MHz</span>
@@ -9715,7 +9776,7 @@
     </div>
 
     <div class="card">
-        <h3>Alfabeto fonetico ICAO</h3>
+        <h3 id="codici-245">Alfabeto fonetico ICAO</h3>
         <p>
             Per fare lo spelling delle parole si usa l'alfabeto fonetico internazionale. È nato per
             le comunicazioni aeronautiche ed è considerato <strong>sicuro</strong> anche in caso di
@@ -9758,7 +9819,7 @@
             </table>
         </div>
 
-        <h3>Codice Q</h3>
+        <h3 id="codici-246">Codice Q</h3>
         <p>
             Il codice Q è un insieme di abbreviazioni di tre lettere che iniziano con Q. Ogni
             codifica vale come domanda (se preceduta da "?") o come affermazione.
@@ -9789,7 +9850,7 @@
             </table>
         </div>
 
-        <h3>Codice RST</h3>
+        <h3 id="codici-247">Codice RST</h3>
         <p>Il codice RST valuta la qualità del segnale ricevuto:</p>
         <ul>
             <li><strong>R</strong> = Comprensibilità (1-5)</li>
@@ -9821,7 +9882,7 @@
             consultabile in caso di controllo.
         </p>
 
-        <h4>Campi principali</h4>
+        <h4 id="logbook-248">Campi principali</h4>
         <ul>
             <li><strong>Data e ora</strong> (UTC)</li>
             <li><strong>Frequenza</strong> (kHz o MHz)</li>
@@ -9875,7 +9936,7 @@
             Il codice fu formulato nel 1928 da Paul M. Segal (W9EEA).
         </p>
 
-        <h4>Il Codice del Radioamatore</h4>
+        <h4 id="comportamento-249">Il Codice del Radioamatore</h4>
         <ul>
             <li><strong>Gentiluomo:</strong> non usa la radio per il proprio piacere a scapito degli altri.</li>
             <li><strong>Leale:</strong> sostiene il servizio di radioamatore e i colleghi.</li>
@@ -9885,7 +9946,7 @@
             <li><strong>Altruista:</strong> la sua abilità è a disposizione del paese e della comunità.</li>
         </ul>
 
-        <h4>Codice di condotta del DX'er</h4>
+        <h4 id="comportamento-250">Codice di condotta del DX'er</h4>
         <ul>
             <li>Ascolta, ascolta e ascolta ancora prima di chiamare.</li>
             <li>Chiama solo se hai ascoltato correttamente il nominativo.</li>
@@ -9924,14 +9985,14 @@
             internazionale delle bande radioamatoriali in caso di catastrofe.
         </p>
 
-        <h4>Segnali di soccorso</h4>
+        <h4 id="emergenza-251">Segnali di soccorso</h4>
         <ul>
             <li><strong>May Day</strong> (fonia)</li>
             <li><strong>S.O.S.</strong> (telegrafia)</li>
         </ul>
         <p>L'uso improprio di questi segnali è vietato e sanzionato (arresto fino a 6 mesi o ammenda).</p>
 
-        <h4>Frequenze di emergenza in Italia</h4>
+        <h4 id="emergenza-252">Frequenze di emergenza in Italia</h4>
         <div class="table-wrapper">
             <table>
                 <thead>
@@ -10233,7 +10294,7 @@
     <div class="card">
         <h3>1. Elettrotecnica di base</h3>
 
-        <h4>Le formule da conoscere</h4>
+        <h4 id="riep-elettrotecnica-253">Le formule da conoscere</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Cosa</th><th>Formula</th><th>Note</th></tr></thead>
@@ -10260,7 +10321,7 @@
             <div class="diagram-caption">Triangolo della potenza: P = V × I, con le due forme derivate.</div>
         </div>
 
-        <h4>Corrente alternata</h4>
+        <h4 id="riep-elettrotecnica-254">Corrente alternata</h4>
         <ul>
             <li>Frequenza e periodo: <strong>f = 1/T</strong> (Hz = cicli al secondo).</li>
             <li>Valore efficace: <strong>V<sub>eff</sub> = V<sub>p</sub>/√2 ≈ 0,707 × V<sub>p</sub></strong>; picco-picco V<sub>pp</sub> = 2·V<sub>p</sub>; valore medio ≈ 0,636 × V<sub>p</sub>.</li>
@@ -10282,7 +10343,7 @@
     <div class="card">
         <h3>2. Componenti elettronici</h3>
 
-        <h4>Resistori e codice colori</h4>
+        <h4 id="riep-componenti-255">Resistori e codice colori</h4>
         <p>
             Nero 0 · marrone 1 · rosso 2 · arancio 3 · giallo 4 · verde 5 · blu 6 · viola 7 · grigio 8 · bianco 9.
             Le prime fasce sono le cifre, la penultima il moltiplicatore, l'ultima la tolleranza
@@ -10294,14 +10355,14 @@
             <div class="diagram-caption">Codice colori dei resistori: cifre, moltiplicatore e tolleranza.</div>
         </div>
 
-        <h4>Condensatori, induttori, trasformatori</h4>
+        <h4 id="riep-componenti-256">Condensatori, induttori, trasformatori</h4>
         <ul>
             <li><strong>Condensatore</strong>: C = Q/V (farad); energia ½CV²; i <em>elettrolitici sono polarizzati</em> (invertire la polarità li distrugge). Tensione di lavoro 20-30% sopra quella massima del circuito.</li>
             <li><strong>Induttore</strong>: L in henry; energia ½LI²; il nucleo di ferrite aumenta l'induttanza.</li>
             <li><strong>Trasformatore</strong> (solo in CA): V<sub>p</sub>/V<sub>s</sub> = N<sub>p</sub>/N<sub>s</sub>; potenza conservata V<sub>p</sub>·I<sub>p</sub> = V<sub>s</sub>·I<sub>s</sub>; elevatore se N<sub>s</sub> &gt; N<sub>p</sub> (tensione sale, corrente scende). Rapporto di impedenze = (N<sub>1</sub>/N<sub>2</sub>)².</li>
         </ul>
 
-        <h4>Semiconduttori</h4>
+        <h4 id="riep-componenti-257">Semiconduttori</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Componente</th><th>Da ricordare</th></tr></thead>
@@ -10336,7 +10397,7 @@
     <div class="card">
         <h3>3. Amplificatori e oscillatori</h3>
 
-        <h4>Decibel</h4>
+        <h4 id="riep-amplificatori-258">Decibel</h4>
         <div class="formula">
             dB = 10·log₁₀(P₂/P₁) &nbsp;&nbsp; dB = 20·log₁₀(V₂/V₁)
         </div>
@@ -10357,7 +10418,7 @@
             <div class="diagram-caption">I dB più comuni con il relativo fattore in tensione e in potenza.</div>
         </div>
 
-        <h4>Classi di amplificazione</h4>
+        <h4 id="riep-amplificatori-259">Classi di amplificazione</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Classe</th><th>Conduzione</th><th>Rendimento</th><th>Uso</th></tr></thead>
@@ -10374,7 +10435,7 @@
             <div class="diagram-caption">Forme d'onda delle classi A, AB, B e C.</div>
         </div>
 
-        <h4>Configurazioni del BJT e operazionale</h4>
+        <h4 id="riep-amplificatori-260">Configurazioni del BJT e operazionale</h4>
         <ul>
             <li><strong>Emettitore comune (CE)</strong>: la più usata, amplifica tensione e corrente, sfasa di 180°.</li>
             <li><strong>Base comune (CB)</strong>: per l'RF, non sfasa, guadagno in corrente ≈ 1, Z<sub>in</sub> molto bassa.</li>
@@ -10387,7 +10448,7 @@
             <div class="diagram-caption">Le tre configurazioni del BJT a confronto.</div>
         </div>
 
-        <h4>Oscillatori</h4>
+        <h4 id="riep-amplificatori-261">Oscillatori</h4>
         <ul>
             <li><strong>Criterio di Barkhausen</strong>: retroazione <em>positiva</em>, sfasamento nullo e guadagno d'anello Aβ = 1 (per innescare, Aβ &gt; 1).</li>
             <li>Bassa frequenza (reti R-C): Wien (A<sub>V</sub> = 3, ω = 1/RC), sfasamento (3 celle RC), doppio T.</li>
@@ -10426,7 +10487,7 @@
     <div class="card">
         <h3>5. Trasmettitori e ricevitori</h3>
 
-        <h4>Modulazioni</h4>
+        <h4 id="riep-tx-rx-262">Modulazioni</h4>
         <ul>
             <li>Di una portante si possono variare solo <strong>ampiezza (AM), frequenza (FM) e fase (PM)</strong>. CW = portante interrotta dal tasto.</li>
             <li>Il prodotto di due sinusoidi genera <strong>somma e differenza</strong> delle frequenze: è il principio del <strong>mixer</strong> (modulatore bilanciato ad anello a diodi).</li>
@@ -10441,7 +10502,7 @@
             <div class="diagram-caption">Spettro AM: portante e due bande laterali (−6 dBc al 100% di modulazione).</div>
         </div>
 
-        <h4>Schema di un trasmettitore</h4>
+        <h4 id="riep-tx-rx-263">Schema di un trasmettitore</h4>
         <p>
             Microfono → preamplificatore BF (banda 300-2700 Hz) → modulatore → oscillatore (VFO/PLL) →
             moltiplicatore/mixer → amplificatore RF di potenza → <strong>filtro passa-basso</strong> (elimina le armoniche)
@@ -10449,7 +10510,7 @@
             oppure <strong>moltiplicazione</strong> (distorsione + filtro sull'armonica: 10 MHz × 5 = 50 MHz).
         </p>
 
-        <h4>Classi di emissione (ITU)</h4>
+        <h4 id="riep-tx-rx-264">Classi di emissione (ITU)</h4>
         <p>
             Designazione = banda necessaria + <strong>lettera – numero – lettera</strong>. Nella banda la lettera
             H/K/M/G prende il posto della virgola (2,7 kHz = 2K70; 12,5 MHz = 12M5).
@@ -10474,7 +10535,7 @@
             <div class="diagram-caption">Anatomia della designazione 2K70J3E.</div>
         </div>
 
-        <h4>Ricevitori</h4>
+        <h4 id="riep-tx-rx-265">Ricevitori</h4>
         <ul>
             <li>Qualità: <strong>sensibilità</strong> (S/N 12 dB, SINAD), <strong>selettività</strong>, <strong>dinamica</strong>. Impedenza d'ingresso 50 Ω.</li>
             <li>Rumore termico V<sub>N</sub> = √(4kTBR): ridurre la banda riduce il rumore. Cifra di rumore NF = 10·log₁₀(F); NF = 0 dB è l'ideale.</li>
@@ -10502,13 +10563,13 @@
     <div class="card">
         <h3>6. Linee di trasmissione e antenne</h3>
 
-        <h4>Onde e lunghezza d'onda</h4>
+        <h4 id="riep-linee-antenne-266">Onde e lunghezza d'onda</h4>
         <div class="formula">
             λ = c / f &nbsp;&nbsp; λ[m] = 300 / f[MHz] &nbsp;&nbsp; c = 300 000 km/s
             <span class="label">es.: 20 MHz → 15 m; 145 MHz → 2,07 m</span>
         </div>
 
-        <h4>Linee</h4>
+        <h4 id="riep-linee-antenne-267">Linee</h4>
         <ul>
             <li>Due conduttori con correnti opposte → campi che si compensano (irraggiamento nullo). Coassiale: 50 o 75 Ω; bifilare: 300-600 Ω.</li>
             <li><strong>Z₀ = √(L/C)</strong>: dipende da geometria e dielettrico, <em>non dalla lunghezza</em> e non si misura col tester.</li>
@@ -10517,7 +10578,7 @@
             <li>Connettori: <strong>PL-259 (UHF)</strong> per HF, <strong>N</strong> fino a 18 GHz, BNC e SMA per bassa potenza.</li>
         </ul>
 
-        <h4>Adattamento, ROS, return loss</h4>
+        <h4 id="riep-linee-antenne-268">Adattamento, ROS, return loss</h4>
         <div class="formula">
             Γ = (Z<sub>L</sub> − Z₀)/(Z<sub>L</sub> + Z₀) &nbsp;&nbsp; ROS = (1+|Γ|)/(1−|Γ|) = V<sub>MAX</sub>/V<sub>MIN</sub> &nbsp;&nbsp; RL = −20·log|Γ|
         </div>
@@ -10534,7 +10595,7 @@
             <div class="diagram-caption">ROS = V<sub>MAX</sub>/V<sub>MIN</sub> con V<sub>MAX</sub> = V<sub>F</sub> + V<sub>R</sub> e V<sub>MIN</sub> = V<sub>F</sub> − V<sub>R</sub>.</div>
         </div>
 
-        <h4>Antenne</h4>
+        <h4 id="riep-linee-antenne-269">Antenne</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Antenna</th><th>Caratteristiche chiave</th></tr></thead>
@@ -10646,7 +10707,7 @@
             <div class="diagram-caption">Prefisso, cifra di regione e suffisso di un nominativo italiano.</div>
         </div>
 
-        <h4>Bande di frequenza</h4>
+        <h4 id="riep-normativa-270">Bande di frequenza</h4>
         <div class="table-wrapper">
         <table>
             <thead><tr><th>Banda</th><th>Frequenza</th><th>Lunghezza d'onda</th></tr></thead>
@@ -12223,12 +12284,13 @@
 
 <!-- ===================== FOOTER ===================== -->
 <div class="footer" id="changelog">
-    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.9.1</p>
+    <p><strong>Corso Base di Elettronica e Radiotecnica</strong> — v1.11.0</p>
     <p>Dispense semplificate per aspiranti radioamatori per il corso organizzato dalla sezione ARI Gorizia IQ3GO anno 2026</p>
     <p>Ringraziamenti: <a href="https://www.arigorizia.org/" target="_blank">Sezione ARI di Gorizia IQ3GO</a> - <a href="https://iv3onz.blogspot.it/" target="_blank">IV3ONZ: iv3onz.blogspot.it</a> - <a href="https://www.sputlab.com/" target="_blank">Sputlab.com</a></p>
 
     <div class="changelog">
         <h4>Changelog</h4>
+        <p><strong>v1.11.0</strong> — Nuovo <strong>Indice del documento</strong> sotto il riquadro Versioning, con tutte le sezioni e sottosezioni raggruppate per modulo e collegate ai relativi punti del corso (voce <strong>Indice</strong> anche nel menu laterale). Il pulsante <strong>Collezione quiz</strong> ora punta a https://www.sputlab.com/websites/quiz-arigo-2026/.</p>
         <p><strong>v1.10.0</strong> — <strong>Menu laterale</strong>: nuovo pulsante <strong>Collezione quiz</strong>, sotto Quiz finale, che apre in una nuova scheda la pagina con la collezione di quiz di radiotecnica.</p>
         <p><strong>v1.9.1</strong> — <strong>Menu laterale</strong>: i titoli dei moduli sono ora molto più evidenti (testo più grande e bianco, in grassetto, su una fascia evidenziata con barra arancione a sinistra) e le sezioni sono meglio distanziate.</p>
         <p><strong>v1.9.0</strong> — Integrata la lezione sulla <strong>propagazione dei segnali radio</strong> (IV3ONZ Andrea / A.R.I.) nel Modulo 9, che diventa <strong>Antenne e propagazione</strong>: sei nuove sezioni (tipi di propagazione, onda di terra, guida d'onda e onda diretta con orizzonte radio, zona di Fresnel, link budget e formula di Friis; propagazione troposferica; ionosfera, strati, LUF/MUF, zona d'ombra e bande HF; Es, meteor scatter, aurorale, TEP e collegamenti spaziali; disturbi, indici solari, beacon e previsioni), quattro schemi (<code>prop-*.jpg</code>), quattro quesiti (il quiz del Modulo 9 passa a 24 domande) e dieci voci di glossario. Il <strong>Riepilogo essenziale</strong> ha ora anche la sottosezione Propagazione. Aggiunto il <strong>logo del corso</strong> (sidebar, favicon, README).</p>
